@@ -18,7 +18,7 @@ export class ItemsComponent {
     lastLoadedDate: Date = new Date(); // today
     dateToLoad: string;
 
-    direction: boolean;
+    direction: boolean; // true means going to Prevous date; false means going to Next date
 
     constructor(private apodService: ApodService, private page: Page) {
         this.page.actionBarHidden = true;
