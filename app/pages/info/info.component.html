@@ -1,4 +1,31 @@
-<StackLayout>
-    <Label text="INFO PAGE" textWrap="true"></Label>
-    
-</StackLayout>
+<ScrollView>
+    <StackLayout class="m-8">
+        <GridLayout rows="*, *, *" columns="*" class="p-8">
+            <Label row="0" text="Powered by" textWrap="true"></Label>
+            <Label row="1" text="NativeScript" textWrap="true" ></Label>
+            <Label row="2" text="NASA Open APIs" textWrap="true"></Label>
+        </GridLayout>
+
+        <GridLayout rows="auto, auto, auto, auto, auto, auto, auto" columns="auto, *">
+            <Label row="0" col="0" colSpan="2" editable="false" text="Astronomical Photo of the Day" textWrap="true" class="p-l-16 p-t-8 text-left"></Label>
+            <Label row="1" col="0" colSpan="2" text="Icons legend" fontSize="10" color="gray" class="p-l-16  text-left" textWrap="true" ></Label>
+
+            <Button row="2" col="0" text="&#xf053;" width="50" height="50" class="fa btn nav text-center"></Button>
+            <TextView row="2" col="1" editable="false" text="go to previous data (or swipe right)" ></TextView>
+
+            <Button row="3" col="0" text="&#xf019;" width="50" height="50" class="fa btn nav text-center"></Button>
+            <TextView row="3" col="1" editable="false" text="downolad and save HD image"></TextView>
+
+            <Button row="4" col="0" text="&#xf108;" width="50" height="50" class="fa btn nav text-center"></Button>
+            <TextView row="4" col="1" editable="false" text="set HD photo as wallpaper"></TextView>
+
+            <Button row="5" col="0" text="&#xf1e0;" width="50" height="50" class="fa btn nav text-center"></Button>     
+            <TextView row="5" col="1" editable="false" text="share HD photo"></TextView>
+
+            <Button row="6" col="0" text="&#xf054;" width="50" height="50" class="fa btn nav text-center"></Button>
+            <TextView row="6" col="1" editable="false" text="go to next date (or swipe left)"></TextView>
+        </GridLayout>
+
+         <Label text="Created by NickIliev" textWrap="true" class="p-8"></Label>
+    </StackLayout>
+</ScrollView>

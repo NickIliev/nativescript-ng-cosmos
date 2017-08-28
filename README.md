@@ -1,5 +1,5 @@
 # nativescript-ng-cosmos
-POC application powered by NativeScript + Angular-2 and using Angular HTTP
+POC application powered by NativeScript + Angular-2 and using Angular HTTP and NASA API.
 
 ## Requirements
 - NativeScript 3.x.x
