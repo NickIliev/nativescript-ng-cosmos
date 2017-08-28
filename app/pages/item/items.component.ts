@@ -18,6 +18,8 @@ export class ItemsComponent {
     lastLoadedDate: Date = new Date(); // today
     dateToLoad: string;
 
+    direction: boolean;
+
     constructor(private apodService: ApodService, private page: Page) {
         this.page.actionBarHidden = true;
 
@@ -32,14 +34,25 @@ export class ItemsComponent {
     private extractData(date: string) {
         this.apodService.getDataWithCustomDate(date)
             .subscribe((result) => {
-                this.item = new ApodItem(result["copyright"],
-                    result["date"],
-                    result["explanation"],
-                    result["hdurl"],
-                    result["media_type"],
-                    result["service_version"],
-                    result["title"],
-                    result["url"]);
+                console.log(result["media_type"]);
+                if (result["media_type"] === "image") {
+                    this.item = new ApodItem(result["copyright"],
+                        result["date"],
+                        result["explanation"],
+                        result["hdurl"],
+                        result["media_type"],
+                        result["service_version"],
+                        result["title"],
+                        result["url"]);
+                } else if (result["media_type"] !== "image" && this.direction) {
+                    this.goToPrevousDay();
+                    // return; // implement the logic for YouTube videos here
+                } else if (result["media_type"] !== "image" && !this.direction) {
+                    this.goToNextDay();
+                    // return; // implement the logic for YouTube videos here
+                } else {
+                    return;
+                }
 
             }, (error) => {
                 console.log(error);
@@ -48,18 +61,20 @@ export class ItemsComponent {
 
     goToPrevousDay() {
         this.lastLoadedDate.setDate(this.lastLoadedDate.getDate() - 1); // previous day
+        this.direction = true;
 
         this.extractData(this.dateToString(this.lastLoadedDate)); // load prevous day
     }
 
     goToNextDay() {
         this.lastLoadedDate.setDate(this.lastLoadedDate.getDate() + 1); // next day - TODO: implement logic to prevent looking for photos in the future
+        this.direction = false;
 
         this.extractData(this.dateToString(this.lastLoadedDate)); // load prevous day
     }
 
     navToInfo(args) {
-        
+
     }
 
     // onHide(args) {
