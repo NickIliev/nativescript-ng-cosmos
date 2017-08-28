@@ -1,0 +1,16 @@
+.DS_Store
+lib/
+node_modules/
+platforms/*
+hooks/*
+
+/app/**/*.js
+/app/**/*.map
+
+/keystore/
+*.apk
+*.ipa
+
+native-nick-release-key.jks
+my-release-key.jks
+google-services.json

@@ -1,0 +1,31 @@
+.date {
+    horizontal-align: center;
+    font-size: 12;
+    opacity: 0.8;
+}
+
+.title {
+    horizontal-align: center;
+    font-size: 16;
+}
+
+.description {
+    font-size: 14;
+    text-align: left;
+}
+
+.dock {
+    border-width: 2 0 0 0;
+    border-color: gray;
+}
+
+.dock .dock-btn {
+    font-size: 12;
+    background-color: gray;
+    color: white;
+}
+
+.dock .dock-btn:highlighted {
+    background-color: black;
+    color: white;
+}
