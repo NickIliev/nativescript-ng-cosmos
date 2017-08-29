@@ -2,13 +2,18 @@ import { NgModule } from "@angular/core";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
 import { Routes } from "@angular/router";
 
-import { ItemsComponent } from "./pages/item/items.component";
+import { ApodComponent } from "./pages/apod/apod.component";
 import { InfoComponent } from "./pages/info/info.component";
+import { MainComponent } from "./pages/main/main.component";
 
 const routes: Routes = [
-    { path: "", redirectTo: "/items", pathMatch: "full" },
-    { path: "items", component: ItemsComponent },
-    { path: "info", component: InfoComponent }
+    { path: "", redirectTo: "/main", pathMatch: "full" },
+    { path: "main", component: MainComponent },
+    { path: "info", component: InfoComponent },
+    {
+        path: "apod",
+        loadChildren: "./pages/apod/apod.module#ApodModule",
+    }
 ];
 
 @NgModule({
