@@ -1,7 +1,31 @@
 @import 'nativescript-theme-core/css/core.light.css';
 
-Page, GridLayout, Label {
+Page, GridLayout {
     font-family: "Nasalization";    
     background-color: #343838;   
     color: white;
 }
+
+ActionBar {
+    font-family: "Nasalization";
+    background-color: #343838;   
+    color: #BCBCBC;
+}
+
+.cardview {
+    background-color: #343838;
+    color: #BCBCBC;
+    font-size:14;
+}
+
+/*
+http://www.colourlovers.com/palette/482774/dream_magnet
+#343838 (main gray)  
+#1b1d1d (darkest gray)  
+#282a2a (not so dark border/toolbar gray) 
+#BCBCBC (very light gray)
+#005F6B
+#008C9E
+#00B4CC
+#00DFFC
+*/

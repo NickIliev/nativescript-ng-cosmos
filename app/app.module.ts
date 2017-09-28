@@ -6,7 +6,6 @@ import { AppComponent } from "./app.component";
 import { ApodService } from "./services/apod.service";
 
 import { ApodComponent } from "./pages/apod/apod.component";
-import { InfoComponent } from "./pages/info/info.component";
 import { MainComponent } from "./pages/main/main.component";
 
 import { NativeScriptUISideDrawerModule } from "nativescript-telerik-ui-pro/sidedrawer/angular";
@@ -15,6 +14,9 @@ import { NativeScriptUIListViewModule } from "nativescript-telerik-ui-pro/listvi
 import { NativeScriptFormsModule } from "nativescript-angular/forms";
 import { NativeScriptHttpModule } from "nativescript-angular/http";
 import { NativeScriptRouterModule, NSModuleFactoryLoader } from "nativescript-angular/router";
+
+import * as elementRegistryModule from 'nativescript-angular/element-registry';
+elementRegistryModule.registerElement("CardView", () => require("nativescript-cardview").CardView);
 
 @NgModule({
     bootstrap: [
@@ -31,7 +33,6 @@ import { NativeScriptRouterModule, NSModuleFactoryLoader } from "nativescript-an
     ],
     declarations: [
         AppComponent,
-        InfoComponent,
         MainComponent
     ],
     providers: [

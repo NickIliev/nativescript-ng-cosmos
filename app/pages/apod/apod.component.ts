@@ -1,8 +1,8 @@
 import { Page } from "ui/page";
 import { Label } from "ui/label";
 import { DockLayout } from "ui/layouts/dock-layout";
+import { alert } from "ui/dialogs";
 import { Component, OnInit, Input } from "@angular/core";
-
 import { ApodItem } from "../../models/apod-model";
 import { ApodService } from "../../services/apod.service";
 
@@ -14,14 +14,12 @@ import { ApodService } from "../../services/apod.service";
 })
 export class ApodComponent {
     item: ApodItem = new ApodItem("", "", "", "", "", "", "", "");
-
     lastLoadedDate: Date = new Date(); // today
-    dateToLoad: string;
-
+    dateToLoad: string; // API string represenation of the currently loaded date
     direction: boolean; // true means going to Prevous date; false means going to Next date
 
     constructor(private apodService: ApodService, private page: Page) {
-        // this.page.actionBarHidden = true;
+        this.page.actionBarHidden = true;
 
         this.dateToLoad = this.dateToString(this.lastLoadedDate);
         this.extractData(this.dateToLoad); // initially load TODAY's pic
@@ -34,45 +32,45 @@ export class ApodComponent {
     private extractData(date: string) {
         this.apodService.getDataWithCustomDate(date)
             .subscribe((result) => {
-                console.log(result["media_type"]);
-                if (result["media_type"] === "image") {
-                    this.item = new ApodItem(result["copyright"],
-                        result["date"],
-                        result["explanation"],
-                        result["hdurl"],
-                        result["media_type"],
-                        result["service_version"],
-                        result["title"],
-                        result["url"]);
-                } else if (result["media_type"] !== "image" && this.direction) {
+                if (result.media_type === "image") {
+                    this.item = new ApodItem(result.copyright, result.date, result.explanation, result.hdurl, result.media_type, result.service_version, result.title, result.url);
+                } else if (result.media_type !== "image" && this.direction) {
+                    // return; // implement the logic for YouTube videos here
                     this.goToPrevousDay();
+                } else if (result.media_type !== "image" && !this.direction) {
                     // return; // implement the logic for YouTube videos here
-                } else if (result["media_type"] !== "image" && !this.direction) {
                     this.goToNextDay();
-                    // return; // implement the logic for YouTube videos here
                 } else {
                     return;
                 }
-
             }, (error) => {
                 console.log(error);
             });
     }
 
     goToPrevousDay() {
-        console.log("goToPrevousDay");
-
         this.lastLoadedDate.setDate(this.lastLoadedDate.getDate() - 1); // previous day
-        this.direction = true; 
+        this.direction = true;
 
         this.extractData(this.dateToString(this.lastLoadedDate)); // load prevous day
     }
 
     goToNextDay() {
-        console.log("goToNextDay");
+        if (this.lastLoadedDate.getDate() + 1 <= new Date().getDate()) {
+            this.lastLoadedDate.setDate(this.lastLoadedDate.getDate() + 1); // next day - TODO: implement logic to prevent looking for photos in the future
+            this.direction = false;
+        } else {
+            let options = {
+                title: "No Photo Available!",
+                message: "Future date requested - returning to today's pic.",
+                okButtonText: "OK"
+            };
 
-        this.lastLoadedDate.setDate(this.lastLoadedDate.getDate() + 1); // next day - TODO: implement logic to prevent looking for photos in the future
-        this.direction = false;
+            // show warnig if the user request photos from future date - perhaps disable the next button here
+            alert(options).then(() => {
+                console.log("No photos abailable");
+            });
+        }
 
         this.extractData(this.dateToString(this.lastLoadedDate)); // load prevous day
     }
@@ -86,5 +84,4 @@ export class ApodComponent {
     //     let dock = <DockLayout>label.parent;
     //     dock.visibility = "collapse";
     // }
-
 }

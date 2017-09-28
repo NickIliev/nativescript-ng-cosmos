@@ -1,20 +1,46 @@
+<ActionBar title="COSMOS Databank">
+</ActionBar>
+
 <RadSideDrawer tkExampleTitle tkToggleNavButton showOverNavigation="true">
-    <StackLayout tkDrawerContent class="sideStackLayout">
+    <StackLayout tkDrawerContent class="sideStackLayout m-r-20">
         <StackLayout class="sideTitleStackLayout">
-            <Label text="Navigation Menu"></Label>
+            <Label text="Cosmos Databank Menu" class="sideTitleStackLabel" textWrap="true"></Label>
         </StackLayout>
         <StackLayout class="sideStackLayout">
-            <Label text="Primary" class="sideLabel sideLightGrayLabel"></Label>
-            <Label text="Photo of the Day" [nsRouterLink]="['/apod']" class="sideLabel" ></Label>
-            <Label text="Labels" class="sideLabel sideLightGrayLabel"></Label>
-            <Label text="Photo of the Day" [nsRouterLink]="['/apod']" class="sideLabel" ></Label>
-            <Label text="Photo of the Day" [nsRouterLink]="['/apod']" class="sideLabel" ></Label>
-            <Label text="Photo of the Day" [nsRouterLink]="['/apod']" class="sideLabel" ></Label> <!-- -Navigating with pageTransition="fade"  will freee the app on iOS!!!-->
+            <Button text="Home" (tap)="toggleDrawer()" class="btn btn-primary btn-active sideButton"></Button>
+            <Button text="Photo of the Day" [nsRouterLink]="['/apod']" class="btn btn-primary btn-active sideButton"></Button>
+            <Button text="Details" [nsRouterLink]="['/info']" class="btn btn-primary btn-active sideButton"></Button>
+            <!-- -Navigating with pageTransition="fade"  will freee the app on iOS!!!-->
         </StackLayout>
-        <Label text="Close Drawer" color="lightgray" padding="10" style="horizontal-align: center" (tap)="onCloseDrawerTap()"></Label>
     </StackLayout>
-    <StackLayout tkMainContent>
-        <Label [text]="mainContentText" textWrap="true" class="drawerContentText"></Label>
-        <Button text="OPEN DRAWER" (tap)="openDrawer()" class="drawerContentButton"></Button>
-    </StackLayout>
+
+    <ScrollView tkMainContent class="sideContent">
+        <StackLayout>
+            <CardView elevation="40" radius="40" margin="10">
+                <GridLayout rows="160" columns="3*, 4*" [nsRouterLink]="['/apod']" class="sideContentCard">
+                    <Image row="0" col="1" src="~/images/cosmos.jpg" stretch="aspectFill"></Image>
+                    <Label row="0" col="0" [text]="apodTitle" textWrap="true" class="h3 text-right p-l-8 p-r-8" verticalAlignment="center"></Label>
+                </GridLayout>
+            </CardView>
+            <CardView elevation="40" radius="40" margin="10">
+                <GridLayout rows="160" columns="4*, 3*" class="sideContentCard">
+                    <Image row="0" col="0" src="~/images/aste.jpg" stretch="aspectFill"></Image>
+                    <Label row="0" col="1" [text]="asteroidTitle" textWrap="true" class="h3 text-left p-l-16" verticalAlignment="center"></Label>
+                </GridLayout>
+            </CardView>
+            <CardView elevation="40" radius="40" margin="10">
+                <GridLayout rows="160" columns="3*, 4*" class="sideContentCard">
+                    <Image row="0" col="1" src="~/images/rover.jpg" stretch="aspectFill"></Image>
+                    <Label row="0" col="0" [text]="roversTitle" textWrap="true" class="h3 text-right p-l-8 p-r-8" verticalAlignment="center"></Label>
+                </GridLayout>
+            </CardView>
+            <CardView elevation="40" radius="40" margin="10">
+                <GridLayout rows="160" columns="4*, 3*" [nsRouterLink]="['/info']" class="sideContentCard">
+                    <Image row="0" col="0" src="res://logo" stretch="aspectFill"></Image>
+                    <Label row="0" col="1" [text]="detailsTitle" textWrap="true" class="h3 text-right p-l-8 p-r-8" verticalAlignment="center"></Label>
+                </GridLayout>
+            </CardView>
+        </StackLayout>
+    </ScrollView>
+
 </RadSideDrawer>

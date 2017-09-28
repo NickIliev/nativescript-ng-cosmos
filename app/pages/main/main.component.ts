@@ -12,37 +12,31 @@ import { RadSideDrawer } from 'nativescript-telerik-ui-pro/sidedrawer';
     styleUrls: ['main.component.css']
 })
 export class MainComponent {
+    apodTitle: string;
+    asteroidTitle: string;
+    roversTitle: string;
+    detailsTitle: string;
 
-    private _mainContentText: string;
+    constructor(private _changeDetectionRef: ChangeDetectorRef) {
+        this.apodTitle = "Astronomical \nPhoto \nof the Day";
+        this.asteroidTitle = "Asteroids\n Proximity\n Checker";
+        this.roversTitle = "Mars Rovers\n Photos\n Databank";
+        this.detailsTitle = "About\n Cosmos Databank\n Application";
+    }
+
+    @ViewChild(RadSideDrawerComponent) public drawerComponent: RadSideDrawerComponent;
+    private drawer: RadSideDrawer;
+
+    ngAfterViewInit() {
+        this.drawer = this.drawerComponent.sideDrawer;
+        this._changeDetectionRef.detectChanges();
+    }
     
-        constructor(private _changeDetectionRef: ChangeDetectorRef) {
-        }
-    
-        @ViewChild(RadSideDrawerComponent) public drawerComponent: RadSideDrawerComponent;
-        private drawer: RadSideDrawer;
-    
-        ngAfterViewInit() {
-            this.drawer = this.drawerComponent.sideDrawer;
-            this._changeDetectionRef.detectChanges();
-        }
-    
-        ngOnInit() {
-            this.mainContentText = "SideDrawer for NativeScript can be easily setup in the HTML definition of your page by defining tkDrawerContent and tkMainContent. The component has a default transition and position and also exposes notifications related to changes in its state. Swipe from left to open side drawer.";
-        }
-    
-        get mainContentText() {
-            return this._mainContentText;
-        }
-    
-        set mainContentText(value: string) {
-            this._mainContentText = value;
-        }
-    
-        public openDrawer() {
-            this.drawer.showDrawer();
-        }
-    
-        public onCloseDrawerTap() {
-           this.drawer.closeDrawer();
-        }
+    public toggleDrawer() {
+        this.drawer.toggleDrawerState();
+    }
+
+    public goBack() {
+        
+    }
 }

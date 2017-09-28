@@ -9,7 +9,10 @@ import { MainComponent } from "./pages/main/main.component";
 const routes: Routes = [
     { path: "", redirectTo: "/main", pathMatch: "full" },
     { path: "main", component: MainComponent },
-    { path: "info", component: InfoComponent },
+    { 
+        path: "info", 
+        loadChildren: "./pages/info/info.module#InfoModule" 
+    },
     {
         path: "apod",
         loadChildren: "./pages/apod/apod.module#ApodModule",

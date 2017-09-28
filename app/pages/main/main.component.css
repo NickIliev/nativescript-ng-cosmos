@@ -1,32 +1,36 @@
-Button {
-    font-size: 15;
-    horizontal-align: center;
-}
-
-.drawerContentText {
-    font-size: 13;
-    padding: 10;
-}
-
-.drawerContentButton {
-    margin: 10;
-    horizontal-align: left;
+.nasa {
+    font-family: "Nasalization";
 }
 
 .sideStackLayout {
-    background-color: gray;
+    background-color: #343838;
 }
 
-.sideTitleStackLayout {
-    height: 56;
-    text-align: center;
-    vertical-align: center;
+sideTitleStackLayout {
+    background-color: black;
 }
 
-.sideLabel {
-    padding: 10;
+.sideTitleStackLabel {
+    font-family: "Nasalization";
+    margin: 0 16 0 16;
+    padding: 16;
+    text-align:center;
 }
 
-.sideLightGrayLabel {
-    background-color: lightgray;
+.sideButton {
+    background-color: #3489db;
+    font-family: "Nasalization";
+    margin: 0 16 0 16;
+    padding: 16;
+}
+
+.sideContent {
+    font-family: "Nasalization";  
+    background-color: #343838;
+    color: #BCBCBC;
+}
+
+.sideContentCard {
+    background-color: #3489db;
+    color: #BCBCBC;
 }
