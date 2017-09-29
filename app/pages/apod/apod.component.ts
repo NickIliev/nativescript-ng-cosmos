@@ -5,6 +5,10 @@ import { alert } from "ui/dialogs";
 import { Component, OnInit, Input } from "@angular/core";
 import { ApodItem } from "../../models/apod-model";
 import { ApodService } from "../../services/apod.service";
+import { isAndroid, isIOS } from "platform";
+import { ad } from "utils/utils";
+import { shareImage, shareText, shareUrl } from "nativescript-social-share";
+import { ImageSource, fromUrl } from "image-source";
 
 @Component({
     selector: "ns-items",
@@ -75,8 +79,31 @@ export class ApodComponent {
         this.extractData(this.dateToString(this.lastLoadedDate)); // load prevous day
     }
 
-    navToInfo(args) {
+    onShare() {
+        fromUrl(this.item.hdurl).then(image => {
+            console.log(image);
 
+            if (isAndroid) {
+                shareImage(image, this.item.title);
+            } else if (isIOS) {
+                shareImage(image);
+            }
+        })
+    }
+
+    onSetWallpaper() {
+        fromUrl(this.item.hdurl).then(image => {
+            if (isAndroid) {
+                let wallpaperManager = android.app.WallpaperManager.getInstance(ad.getApplicationContext());
+                try {
+                    wallpaperManager.setBitmap(image.android);
+                } catch (error) {
+                    console.log(error);
+                }
+            } else if (isIOS) {
+                // TODO
+            }
+        })
     }
 
     // onHide(args) {

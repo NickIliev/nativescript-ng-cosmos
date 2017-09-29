@@ -19,13 +19,15 @@
     border-color: gray;
 }
 
-.dock .dock-btn {
-    font-size: 12;
-    background-color: gray;
-    color: white;
+.dock Button {
+    width: 50;
+    height: 50;
+    border-radius: 25;
+    background-color:#1b1d1d;
+    color: #E8EAEB;
 }
 
-.dock .dock-btn:highlighted {
-    background-color: black;
-    color: white;
+.dock Button:highlighted {
+    background-color:#E8EAEB;
+    color: #1b1d1d;
 }
