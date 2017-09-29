@@ -5,6 +5,8 @@ import { Observable } from "data/observable";
 import { RadSideDrawerComponent, SideDrawerType } from "nativescript-telerik-ui-pro/sidedrawer/angular";
 import { RadSideDrawer } from 'nativescript-telerik-ui-pro/sidedrawer';
 
+import { ios, android } from "application";
+
 @Component({
     selector: "ns-details",
     moduleId: module.id,
@@ -16,12 +18,23 @@ export class MainComponent {
     asteroidTitle: string;
     roversTitle: string;
     detailsTitle: string;
+    
+    public isAndroid: boolean;
+    public isIos: boolean;
 
     constructor(private _changeDetectionRef: ChangeDetectorRef) {
         this.apodTitle = "Astronomical \nPhoto \nof the Day";
         this.asteroidTitle = "Asteroids\n Proximity\n Checker";
         this.roversTitle = "Mars Rovers\n Photos\n Databank";
         this.detailsTitle = "About\n Cosmos Databank\n Application";
+
+        if (ios) {
+            this.isAndroid = false;
+            this.isIos = true;
+        } else if (android) {
+            this.isAndroid = true;
+            this.isIos = false;
+        }
     }
 
     @ViewChild(RadSideDrawerComponent) public drawerComponent: RadSideDrawerComponent;
@@ -34,9 +47,5 @@ export class MainComponent {
     
     public toggleDrawer() {
         this.drawer.toggleDrawerState();
-    }
-
-    public goBack() {
-        
     }
 }

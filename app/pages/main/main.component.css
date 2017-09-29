@@ -1,20 +1,21 @@
-.nasa {
-    font-family: "Nasalization";
-}
-
 .sideStackLayout {
     background-color: #343838;
 }
 
-sideTitleStackLayout {
-    background-color: black;
+
+.cardview {
+    background-color: #343838;
 }
 
-.sideTitleStackLabel {
+.cardview Label {
+    color: #BCBCBC;
+    font-size:14;
+}
+
+.titleStackLabel {
     font-family: "Nasalization";
-    margin: 0 16 0 16;
-    padding: 16;
-    text-align:center;
+    color: #BCBCBC;
+    text-align: center;
 }
 
 .sideButton {
@@ -25,12 +26,10 @@ sideTitleStackLayout {
 }
 
 .sideContent {
-    font-family: "Nasalization";  
-    background-color: #343838;
-    color: #BCBCBC;
+    background-color: #282a2a;
 }
 
-.sideContentCard {
+/* .sideContentCard {
     background-color: #3489db;
     color: #BCBCBC;
-}
+} */

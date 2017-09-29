@@ -1,10 +1,35 @@
-<ActionBar title="COSMOS Databank">
+<!-- Using @next on nativescript-angular to resilve 'more than one Conten View' error -->
+<ActionBar *ngIf="isAndroid">
+    <ActionBar.titleView>
+        <StackLayout class="p-8">
+            <Label text="COSMOS Databank" class="h3 titleStackLabel"></Label>
+        </StackLayout>
+    </ActionBar.titleView>
+    <ActionItem ios.position="right" (tap)="toggleDrawer()">
+        <StackLayout>
+            <Image src="res://ic_menu" class="m-r-16" stretch="aspectFlll"></Image>
+        </StackLayout>
+    </ActionItem>
+</ActionBar>
+
+<!-- The iOS ActionBar titleView is crashing with 3.2.x-->
+<ActionBar *ngIf="isIos">
+    <ActionItem ios.position="left" >
+        <StackLayout >
+            <Label text="COSMOS Databank" class="h3 m-t-8 m-b-8 m-l-8 titleStackLabel"></Label>
+        </StackLayout>
+    </ActionItem>
+    <ActionItem ios.position="right" (tap)="toggleDrawer()">
+        <StackLayout>
+            <Image src="res://ic_menu" class="m-t-8 m-b-8" width="30" height="30" stretch="aspectFit"></Image>
+        </StackLayout>
+    </ActionItem>
 </ActionBar>
 
 <RadSideDrawer tkExampleTitle tkToggleNavButton showOverNavigation="true">
     <StackLayout tkDrawerContent class="sideStackLayout m-r-20">
-        <StackLayout class="sideTitleStackLayout">
-            <Label text="Cosmos Databank Menu" class="sideTitleStackLabel" textWrap="true"></Label>
+        <StackLayout>
+            <Label text="Cosmos Databank Menu" class="titleStackLabel" textWrap="true"></Label>
         </StackLayout>
         <StackLayout class="sideStackLayout">
             <Button text="Home" (tap)="toggleDrawer()" class="btn btn-primary btn-active sideButton"></Button>
@@ -17,25 +42,25 @@
     <ScrollView tkMainContent class="sideContent">
         <StackLayout>
             <CardView elevation="40" radius="40" margin="10">
-                <GridLayout rows="160" columns="3*, 4*" [nsRouterLink]="['/apod']" class="sideContentCard">
+                <GridLayout rows="160" columns="3*, 4*" [nsRouterLink]="['/apod']" class="cardview">
                     <Image row="0" col="1" src="~/images/cosmos.jpg" stretch="aspectFill"></Image>
-                    <Label row="0" col="0" [text]="apodTitle" textWrap="true" class="h3 text-right p-l-8 p-r-8" verticalAlignment="center"></Label>
+                    <Label row="0" col="0" [text]="apodTitle" textWrap="true" class="h3 text-left p-l-8 p-r-8" verticalAlignment="center"></Label>
                 </GridLayout>
             </CardView>
             <CardView elevation="40" radius="40" margin="10">
-                <GridLayout rows="160" columns="4*, 3*" class="sideContentCard">
+                <GridLayout rows="160" columns="4*, 3*" class="cardview">
                     <Image row="0" col="0" src="~/images/aste.jpg" stretch="aspectFill"></Image>
-                    <Label row="0" col="1" [text]="asteroidTitle" textWrap="true" class="h3 text-left p-l-16" verticalAlignment="center"></Label>
+                    <Label row="0" col="1" [text]="asteroidTitle" textWrap="true" class="h3 text-right p-l-8 p-r-8" verticalAlignment="center"></Label>
                 </GridLayout>
             </CardView>
             <CardView elevation="40" radius="40" margin="10">
-                <GridLayout rows="160" columns="3*, 4*" class="sideContentCard">
+                <GridLayout rows="160" columns="3*, 4*" class="cardview">
                     <Image row="0" col="1" src="~/images/rover.jpg" stretch="aspectFill"></Image>
-                    <Label row="0" col="0" [text]="roversTitle" textWrap="true" class="h3 text-right p-l-8 p-r-8" verticalAlignment="center"></Label>
+                    <Label row="0" col="0" [text]="roversTitle" textWrap="true" class="h3 text-left p-l-8 p-r-8" verticalAlignment="center"></Label>
                 </GridLayout>
             </CardView>
             <CardView elevation="40" radius="40" margin="10">
-                <GridLayout rows="160" columns="4*, 3*" [nsRouterLink]="['/info']" class="sideContentCard">
+                <GridLayout rows="160" columns="4*, 3*" [nsRouterLink]="['/info']" class="cardview">
                     <Image row="0" col="0" src="res://logo" stretch="aspectFill"></Image>
                     <Label row="0" col="1" [text]="detailsTitle" textWrap="true" class="h3 text-right p-l-8 p-r-8" verticalAlignment="center"></Label>
                 </GridLayout>
