@@ -60,7 +60,12 @@ export class ApodComponent {
     }
 
     goToNextDay() {
-        if (this.lastLoadedDate.getDate() + 1 <= new Date().getDate()) {
+        
+        let now = new Date();
+        console.log("now: " + now);
+        console.log("this.lastLoadedDate.getDate(): " + this.lastLoadedDate);
+        console.log(this.lastLoadedDate <= now);
+        if (this.lastLoadedDate <= now) {
             this.lastLoadedDate.setDate(this.lastLoadedDate.getDate() + 1); // next day - TODO: implement logic to prevent looking for photos in the future
             this.direction = false;
         } else {
