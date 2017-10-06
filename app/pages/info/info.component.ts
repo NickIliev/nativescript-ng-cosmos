@@ -1,4 +1,6 @@
 import { Component, } from "@angular/core";
+import { isAndroid } from "platform";
+import { Page } from "ui/page";
 
 @Component({
     selector: "ns-details",
@@ -7,5 +9,9 @@ import { Component, } from "@angular/core";
 })
 export class InfoComponent {
 
-    constructor() { }
+    constructor(private page: Page) { 
+        if (isAndroid) {
+            this.page.actionBarHidden = true;
+        }
+    }
 }

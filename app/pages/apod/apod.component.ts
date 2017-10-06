@@ -2,13 +2,15 @@ import { Page } from "ui/page";
 import { Label } from "ui/label";
 import { DockLayout } from "ui/layouts/dock-layout";
 import { alert } from "ui/dialogs";
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input} from "@angular/core";
 import { ApodItem } from "../../models/apod-model";
 import { ApodService } from "../../services/apod.service";
 import { isAndroid, isIOS } from "platform";
 import { ad } from "utils/utils";
 import { shareImage, shareText, shareUrl } from "nativescript-social-share";
 import { ImageSource, fromUrl } from "image-source";
+import { EventData } from "data/observable";
+import { Button } from "ui/button";
 
 @Component({
     selector: "ns-items",
@@ -23,7 +25,9 @@ export class ApodComponent {
     direction: boolean; // true means going to Prevous date; false means going to Next date
 
     constructor(private apodService: ApodService, private page: Page) {
-        this.page.actionBarHidden = true;
+        if (isAndroid) {
+            this.page.actionBarHidden = true;
+        }
 
         this.dateToLoad = this.dateToString(this.lastLoadedDate);
         this.extractData(this.dateToLoad); // initially load TODAY's pic
@@ -97,23 +101,14 @@ export class ApodComponent {
     }
 
     onSetWallpaper() {
+        // Android only feature!!
         fromUrl(this.item.hdurl).then(image => {
-            if (isAndroid) {
-                let wallpaperManager = android.app.WallpaperManager.getInstance(ad.getApplicationContext());
-                try {
-                    wallpaperManager.setBitmap(image.android);
-                } catch (error) {
-                    console.log(error);
-                }
-            } else if (isIOS) {
-                // TODO
+            let wallpaperManager = android.app.WallpaperManager.getInstance(ad.getApplicationContext());
+            try {
+                wallpaperManager.setBitmap(image.android);
+            } catch (error) {
+                console.log(error);
             }
         })
     }
-
-    // onHide(args) {
-    //     let label = <Label>args.object;
-    //     let dock = <DockLayout>label.parent;
-    //     dock.visibility = "collapse";
-    // }
 }

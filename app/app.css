@@ -12,6 +12,15 @@ ActionBar {
     color: #BCBCBC;
 }
 
+Label {
+    color: #BCBCBC;
+    font-size:14;
+}
+
+.fa {
+    font-family: "FontAwesome";
+}
+
 /*
 http://www.colourlovers.com/palette/482774/dream_magnet
 #343838 (main gray)  
