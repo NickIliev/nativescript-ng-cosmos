@@ -1,0 +1,12 @@
+Button {
+    width: 50;
+    height: 50;
+    border-radius: 25;
+    background-color:#1b1d1d;
+    color: #E8EAEB;
+}
+
+Button:highlighted {
+    background-color:#E8EAEB;
+    color: #1b1d1d;
+}

@@ -18,16 +18,3 @@
     border-width: 2 0 0 0;
     border-color: gray;
 }
-
-.dock Button {
-    width: 50;
-    height: 50;
-    border-radius: 25;
-    background-color:#1b1d1d;
-    color: #E8EAEB;
-}
-
-.dock Button:highlighted {
-    background-color:#E8EAEB;
-    color: #1b1d1d;
-}

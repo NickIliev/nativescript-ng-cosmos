@@ -2,7 +2,7 @@ import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
 
 import { ApodComponent } from "./apod.component";
-
+import { ToolbarComponent } from "./toolbar/toolbar.component";
 export const routerConfig = [
     {
         path: "",
@@ -15,7 +15,7 @@ export const routerConfig = [
         NativeScriptRouterModule,
         NativeScriptRouterModule.forChild(routerConfig)
     ],
-    declarations: [ApodComponent],
+    declarations: [ApodComponent, ToolbarComponent],
     schemas: [
         NO_ERRORS_SCHEMA
     ]
