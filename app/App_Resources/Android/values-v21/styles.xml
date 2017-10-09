@@ -7,9 +7,12 @@
         <item name="android:timePickerStyle">@style/SpinnerTimePicker</item>
     </style>
 
-    <!-- Default style for DatePicker - in spinner mode -->
+    <!-- Default style for DatePicker - in calendar mode -->
     <style name="SpinnerDatePicker" parent="android:Widget.Material.Light.DatePicker">
-        <item name="android:datePickerMode">spinner</item>
+        <item name="android:datePickerMode">calendar</item>
+        <item name="colorPrimary">@color/ns_blue</item>
+        <item name="colorPrimaryDark">@color/ns_primaryDark</item>
+        <item name="colorAccent">@color/ns_accent</item>
     </style>
 
     <!-- Default style for TimePicker - in spinner mode -->

@@ -1,15 +1,11 @@
 import { Injectable } from "@angular/core";
 import { Http} from "@angular/http";
 
-import { ApodItem } from "../models/apod-model";
-
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/do";
 
-
 @Injectable()
 export class ApodService {
-    private _item: ApodItem;
     
     constructor(private http: Http) { }
 

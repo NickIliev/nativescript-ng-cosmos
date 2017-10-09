@@ -2,8 +2,6 @@ import { NgModule } from "@angular/core";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
 import { Routes } from "@angular/router";
 
-import { ApodComponent } from "./pages/apod/apod.component";
-import { InfoComponent } from "./pages/info/info.component";
 import { MainComponent } from "./pages/main/main.component";
 
 const routes: Routes = [
@@ -16,6 +14,10 @@ const routes: Routes = [
     {
         path: "apod",
         loadChildren: "./pages/apod/apod.module#ApodModule",
+    },
+    { 
+        path: "rovers", 
+        loadChildren: "./pages/rovers/rovers.module#RoversModule" 
     }
 ];
 

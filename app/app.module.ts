@@ -3,9 +3,6 @@ import { NativeScriptModule } from "nativescript-angular/nativescript.module";
 import { AppRoutingModule } from "./app.routing";
 import { AppComponent } from "./app.component";
 
-import { ApodService } from "./services/apod.service";
-
-import { ApodComponent } from "./pages/apod/apod.component";
 import { MainComponent } from "./pages/main/main.component";
 
 import { NativeScriptUISideDrawerModule } from "nativescript-telerik-ui-pro/sidedrawer/angular";
@@ -36,7 +33,6 @@ elementRegistryModule.registerElement("CardView", () => require("nativescript-ca
         MainComponent
     ],
     providers: [
-        ApodService,
         [{ provide: NgModuleFactoryLoader, useClass: NSModuleFactoryLoader }]
     ],
     schemas: [

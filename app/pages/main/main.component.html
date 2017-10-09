@@ -54,7 +54,7 @@
                 </GridLayout>
             </CardView>
             <CardView elevation="40" radius="40" margin="10">
-                <GridLayout rows="160" columns="3*, 4*" class="cardview">
+                <GridLayout rows="160" columns="3*, 4*" [nsRouterLink]="['/rovers']" class="cardview">
                     <Image row="0" col="1" src="~/images/rover.jpg" stretch="aspectFill"></Image>
                     <Label row="0" col="0" [text]="roversTitle" textWrap="true" class="h3 text-left p-l-8 p-r-8" verticalAlignment="center"></Label>
                 </GridLayout>
