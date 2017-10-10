@@ -5,8 +5,8 @@ import { AppComponent } from "./app.component";
 
 import { MainComponent } from "./pages/main/main.component";
 
-import { NativeScriptUISideDrawerModule } from "nativescript-telerik-ui-pro/sidedrawer/angular";
-import { NativeScriptUIListViewModule } from "nativescript-telerik-ui-pro/listview/angular";
+import { NativeScriptUISideDrawerModule } from "nativescript-pro-ui/sidedrawer/angular";
+import { NativeScriptUIListViewModule } from "nativescript-pro-ui/listview/angular";
 
 import { NativeScriptFormsModule } from "nativescript-angular/forms";
 import { NativeScriptHttpModule } from "nativescript-angular/http";

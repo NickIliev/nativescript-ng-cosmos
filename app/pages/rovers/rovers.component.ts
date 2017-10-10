@@ -11,6 +11,8 @@ import { RoverPhotosService } from "../../services/rover.service";
 })
 export class RoversComponent {
 
+    public roverPhotos: Array<RoverPhoto> = [];
+
     constructor(private roverService: RoverPhotosService) {
         this.extractData("2017-06-21", 1);
     }
@@ -19,7 +21,8 @@ export class RoversComponent {
         this.roverService.getPhotosWithDateAndPageIndex(pageIndex)
             .subscribe((result) => {
                 // create UI with logic for three different rovers, for different dates and paging
-                console.dir(result);
+                console.log(result["photos"].lenght);
+                
             }, (error) => {
                 console.log(error);
             });
