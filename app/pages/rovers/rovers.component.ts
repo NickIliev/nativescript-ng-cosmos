@@ -1,9 +1,13 @@
 
 import { Page } from "ui/page";
-import { Component, OnInit } from "@angular/core";
+import { Component, ChangeDetectionStrategy } from "@angular/core";
+
+import { ListViewEventData } from "nativescript-pro-ui/listview";
+
 import { RoverPhoto } from "../../models/rover-model";
 import { RoverPhotosService } from "../../services/rover.service";
 
+import { Observable as RxObservable } from "rxjs/Observable";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/do";
 
@@ -14,32 +18,47 @@ import "rxjs/add/operator/do";
 })
 export class RoversComponent {
 
-    public roverPhotos: Array<RoverPhoto> = [];
+    public roverPhotos: RxObservable<Array<RoverPhoto>>;
+    private tempArr: Array<RoverPhoto> = [];
+    private pageIndex: number;
+    private subscr;
 
     constructor(private roverService: RoverPhotosService) {
-        this.extractData("2017-06-21", 1);
+        this.pageIndex = 1;
+        this.extractData("2017-06-21", this.pageIndex);
     }
 
     private extractData(date: string, pageIndex: number) {
-        this.roverService.getPhotosWithDateAndPageIndex(pageIndex)
-            .map(data => {
-                let itemsList = [];
-                data.photos.forEach((item) => {
-                    console.log("item.id: " + item.id)
-                    itemsList.push(new RoverPhoto(item.id, item.sol, item.camera.id, item.camera.name, item.camera.rover_id, item.camera.full_name, item.img_src, item.earth_date));
 
-                });
-                return itemsList;
-            })
+        // this.roverService.getPhotosWithDateAndPageIndex(pageIndex)
+        //     .subscribe((itemsList) => {
+        //         this.roverPhotos = itemsList;
+        //     }, (error) => {
+        //         console.log(error);
+        //     });
+
+        this.roverService.getPhotosWithDateAndPageIndex(pageIndex)
             .subscribe((itemsList) => {
-                this.roverPhotos = itemsList;
-                console.dir(this.roverPhotos[0]);
-                console.dir(this.roverPhotos[2]);
+                this.tempArr = itemsList;
+
+                this.roverPhotos = RxObservable.create(subscriber => {
+                    this.subscr = subscriber;
+                    subscriber.next(this.tempArr);
+                });
+
             }, (error) => {
                 console.log(error);
             });
-        
+    }
 
-            console.log("his.roverPhotos.length" + this.roverPhotos.length);
+    onLoadMoreItemsRequested(args: ListViewEventData) {
+        this.roverService.getPhotosWithDateAndPageIndex(++this.pageIndex)
+            .subscribe((itemsList) => {
+                itemsList.forEach(element => {
+                    this.tempArr.push(element);
+                });
+
+                this.subscr.next(this.tempArr);
+            })
     }
 }

@@ -21,7 +21,7 @@
     "@angular/http": "~4.4.1",
     "@angular/platform-browser": "~4.4.1",
     "@angular/router": "~4.4.1",
-    "nativescript-angular": "next",
+    "nativescript-angular": "4.4.1",
     "nativescript-cardview": "^2.0.3",
     "nativescript-pro-ui": "^3.1.4",
     "nativescript-social-share": "^1.4.0",
