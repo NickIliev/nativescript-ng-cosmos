@@ -6,7 +6,6 @@ import { AppComponent } from "./app.component";
 import { MainComponent } from "./pages/main/main.component";
 
 import { NativeScriptUISideDrawerModule } from "nativescript-pro-ui/sidedrawer/angular";
-import { NativeScriptUIListViewModule } from "nativescript-pro-ui/listview/angular";
 
 import { NativeScriptFormsModule } from "nativescript-angular/forms";
 import { NativeScriptHttpModule } from "nativescript-angular/http";
@@ -25,8 +24,7 @@ elementRegistryModule.registerElement("CardView", () => require("nativescript-ca
         NativeScriptHttpModule,
         NativeScriptFormsModule,
         NativeScriptRouterModule,
-        NativeScriptUISideDrawerModule,
-        NativeScriptUIListViewModule
+        NativeScriptUISideDrawerModule
     ],
     declarations: [
         AppComponent,

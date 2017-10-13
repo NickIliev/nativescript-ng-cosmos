@@ -1,1 +1,15 @@
-<Label text="ROVERS PAGE" textWrap="true"></Label>
+<GridLayout rows="auto,  *" columns="*">
+    <Label row="0" text="Curiosity photos" textWrap="true"></Label>
+    <RadListView row="1" [items]="roverPhotos">
+        <ng-template tkListItemTemplate let-photo="item">
+            <CardView elevation="40" radius="40" margin="5">
+            <GridLayout rows="auto, *" columns="*, *" backgroundColor="lightgray">
+                <Label row="0" col="0" [text]="photo.id" class="h4 text-left m-l-5" textWrap="true"></Label>
+                <Label row="0" col="1" [text]="photo.earthDate" class="h4 text-right m-r-5"></Label>
+                <Image row="1" col="0" colSpan="2" [src]="photo.imageUri" loadMode="async"></Image>
+            </GridLayout>
+            </CardView>
+        </ng-template>
+        <ListViewGridLayout tkListViewLayout scrollDirection="Vertical" ios:itemHeight="200" spanCount="2"></ListViewGridLayout>
+    </RadListView>
+</GridLayout>
