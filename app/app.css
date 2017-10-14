@@ -21,6 +21,12 @@ Label {
     font-family: "FontAwesome";
 }
 
+.titleStackLabel {
+    font-family: "Nasalization";
+    color: #BCBCBC;
+    text-align: center;
+}
+
 /*
 http://www.colourlovers.com/palette/482774/dream_magnet
 #343838 (main gray)  

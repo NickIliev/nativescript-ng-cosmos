@@ -18,7 +18,7 @@ export class MainComponent {
     asteroidTitle: string;
     roversTitle: string;
     detailsTitle: string;
-    
+
     public isAndroid: boolean = isAndroid;
     public isIos: boolean = isIOS;
 

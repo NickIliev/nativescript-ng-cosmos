@@ -3,6 +3,7 @@ import { NativeScriptRouterModule } from "nativescript-angular/router";
 import { CommonModule } from '@angular/common';
 
 import { NativeScriptUIListViewModule } from "nativescript-pro-ui/listview/angular";
+import { NativeScriptModule } from "nativescript-angular/nativescript.module";
 
 import { RoverPhotosService } from "../../services/rover.service";
 import { RoversComponent } from "./rovers.component";
@@ -14,9 +15,11 @@ export const routerConfig = [
     }
 ]
 
+
 @NgModule({
     imports: [
         CommonModule,
+        NativeScriptModule,
         NativeScriptUIListViewModule,
         NativeScriptRouterModule,
         NativeScriptRouterModule.forChild(routerConfig)
