@@ -37,8 +37,12 @@ export class ToolbarHelper {
         return isValidDate;
     }
 
+    onSaveFile(item: ApodItem) {
+        console.log("onSaveFile not implelented!");
+    }
+
     onShare(item: ApodItem) {
-        fromUrl(item.hdurl).then(image => {
+        fromUrl(item.url).then(image => {
             if (isAndroid) {
                 shareImage(image, item.title);
             } else if (isIOS) {
@@ -49,7 +53,7 @@ export class ToolbarHelper {
 
     onSetWallpaper(item: ApodItem) {
         // Android only feature!!
-        fromUrl(item.hdurl).then(image => {
+        fromUrl(item.url).then(image => {
             let wallpaperManager = android.app.WallpaperManager.getInstance(ad.getApplicationContext());
             try {
                 wallpaperManager.setBitmap(image.android);
