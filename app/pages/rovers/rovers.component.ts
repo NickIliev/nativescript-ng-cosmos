@@ -26,7 +26,9 @@ export class RoversComponent {
     private subscr;
 
     constructor(private roverService: RoverPhotosService, private page: Page) {
-        this.page.actionBarHidden = true;
+        if (isAndroid) {
+            this.page.actionBarHidden = true;
+        }
 
         this.pageIndex = 1;
         this.extractData("2017-06-21", this.pageIndex);
