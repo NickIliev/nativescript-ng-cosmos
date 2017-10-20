@@ -1,18 +1,5 @@
 <GridLayout rows="auto,  *" columns="*">
     <Label row="0" text="Curiosity photos" textWrap="true" class="h3 text-center m-t-5 m-b-5" color="lightgray"></Label>
-    <!-- <RadListView row="1" [items]="roverPhotos | async" loadOnDemandMode="Auto" (loadMoreDataRequested)="onLoadMoreItemsRequested($event)">
-        <ng-template tkListItemTemplate let-photo="item">
-            <CardView elevation="40" radius="40" class="card">
-                <GridLayout rows="auto, *" columns="*, *, *" class="card-grid" height="240">
-                    <Label row="0" col="0" [text]="photo.id" class="h4 text-left m-l-5 m-t-5" textWrap="true"></Label>
-                    <Label row="0" col="1" [text]="photo.cameraName" class="h4 text-center m-t-5" textWrap="true"></Label>
-                    <Label row="0" col="2" [text]="photo.earthDate" class="h4 text-right m-r-5 m-t-5"></Label>
-                    <Image row="1" col="0" colSpan="3" [src]="photo.imageUri" decodeHeight="240" loadMode="async" stretch="aspectFill"></Image>
-                </GridLayout>
-            </CardView>
-        </ng-template>
-        <ListViewGridLayout tkListViewLayout scrollDirection="Vertical" ios:itemHeight="200" spanCount="2"></ListViewGridLayout>
-    </RadListView> -->
 
     <ListView row="1" [items]="roverPhotos | async" (loadMoreItems)="onLoadMoreItemsRequested($event)" separatorColor="#343838" class="list-view">
         <ng-template let-photo="item">

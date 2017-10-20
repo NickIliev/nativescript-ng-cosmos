@@ -25,13 +25,13 @@ export class RoversComponent {
     private pageIndex: number;
     private subscr;
 
+    constructor(private roverService: RoverPhotosService, private page: Page) {
+        this.page.actionBarHidden = true;
 
-    constructor(private roverService: RoverPhotosService) {
         this.pageIndex = 1;
         this.extractData("2017-06-21", this.pageIndex);
 
         this.isAndroid = isAndroid;
-        
     }
 
     private extractData(date: string, pageIndex: number) {
@@ -51,7 +51,6 @@ export class RoversComponent {
                     this.subscr = subscriber;
                     subscriber.next(this.tempArr);
                 });
-
             }, (error) => {
                 console.log(error);
             });
