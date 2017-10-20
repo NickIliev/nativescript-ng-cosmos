@@ -1,6 +1,5 @@
-
 import { Page } from "ui/page";
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { ApodItem } from "../../models/apod-model";
 import { ApodService } from "../../services/apod.service";
 import { isAndroid } from "platform";
@@ -43,7 +42,9 @@ export class ApodComponent {
             this.toolbarHelper.onShare(this.item);
         } else if (message === "onSetWallpaper") {
             this.toolbarHelper.onSetWallpaper(this.item);
-        } 
+        } else if (message === "onSaveFile") {
+            console.log("onSaveFile not implemented!");
+        }
     }
 
     private extractData(date: string) {

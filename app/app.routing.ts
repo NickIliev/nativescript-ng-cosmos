@@ -1,7 +1,6 @@
 import { NgModule } from "@angular/core";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
 import { Routes } from "@angular/router";
-
 import { MainComponent } from "./pages/main/main.component";
 
 const routes: Routes = [

@@ -1,5 +1,4 @@
 <!-- Using @next on nativescript-angular to resilve 'more than one Conten View' error -->
-
 <ActionBar *ngIf="isAndroid">
     <ActionBar.titleView>
         <StackLayout class="p-8">
@@ -15,8 +14,8 @@
 
 <!-- The iOS ActionBar titleView is crashing with 3.2.x-->
 <ActionBar *ngIf="isIos">
-    <ActionItem ios.position="left" >
-        <StackLayout >
+    <ActionItem ios.position="left">
+        <StackLayout>
             <Label text="COSMOS Databank" class="h3 m-t-8 m-b-8 m-l-8 titleStackLabel"></Label>
         </StackLayout>
     </ActionItem>
@@ -39,7 +38,6 @@
             <!-- -Navigating with pageTransition="fade"  will freee the app on iOS!!!-->
         </StackLayout>
     </StackLayout>
-
     <ScrollView tkMainContent class="sideContent">
         <StackLayout>
             <CardView elevation="40" radius="40" margin="10">
@@ -68,5 +66,4 @@
             </CardView>
         </StackLayout>
     </ScrollView>
-
 </RadSideDrawer>

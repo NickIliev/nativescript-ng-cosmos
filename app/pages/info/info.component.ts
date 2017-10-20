@@ -1,4 +1,4 @@
-import { Component, } from "@angular/core";
+import { Component } from "@angular/core";
 import { isAndroid } from "platform";
 import { Page } from "ui/page";
 

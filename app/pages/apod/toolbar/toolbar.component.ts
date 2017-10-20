@@ -11,14 +11,16 @@ import { Button } from "ui/button";
 export class ToolbarComponent {
     @Output() notify: EventEmitter<string> = new EventEmitter<string>();
 
-    constructor() { }
-
     goToPrevousDay() {
         this.notify.emit("goToPrevousDay");
     }
 
     goToNextDay() {
         this.notify.emit("goToNextDay");
+    }
+
+    onSaveFile() {
+        this.notify.emit("onSaveFile");
     }
 
     onShare() {

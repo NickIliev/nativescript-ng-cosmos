@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Http } from "@angular/http";
 import { RoverPhoto } from "../models/rover-model";
-
 import "rxjs/add/operator/map";
 
 const API_URL_START = "https://api.nasa.gov/mars-photos/api/v1/rovers/";
@@ -14,7 +13,6 @@ export class RoverPhotosService {
     public year: number;
     public month: number;
     public day: number;
-
     public requestedURL: string;
 
     constructor(private http: Http) { }
