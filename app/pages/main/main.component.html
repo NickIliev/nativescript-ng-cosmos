@@ -47,7 +47,7 @@
                 </GridLayout>
             </CardView>
             <CardView elevation="40" radius="40" margin="10">
-                <GridLayout rows="160" columns="4*, 3*" class="cardview">
+                <GridLayout rows="160" columns="4*, 3*" [nsRouterLink]="['/asteroids']" class="cardview">
                     <Image row="0" col="0" src="~/images/aste.jpg" stretch="aspectFill"></Image>
                     <Label row="0" col="1" [text]="asteroidTitle" textWrap="true" class="h3 text-right p-l-8 p-r-8" verticalAlignment="center"></Label>
                 </GridLayout>

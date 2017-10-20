@@ -17,6 +17,10 @@ const routes: Routes = [
     { 
         path: "rovers", 
         loadChildren: "./pages/rovers/rovers.module#RoversModule" 
+    },
+    { 
+        path: "asteroids", 
+        loadChildren: "./pages/asteroids/asteroids.module#AsteroidsModule" 
     }
 ];
 

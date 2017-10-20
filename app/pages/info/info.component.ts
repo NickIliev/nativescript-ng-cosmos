@@ -3,7 +3,7 @@ import { isAndroid } from "platform";
 import { Page } from "ui/page";
 
 @Component({
-    selector: "ns-details",
+    selector: "ns-info",
     moduleId: module.id,
     templateUrl: "./info.component.html",
 })
