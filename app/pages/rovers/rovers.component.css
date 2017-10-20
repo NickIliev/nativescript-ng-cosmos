@@ -1,0 +1,17 @@
+.list-view {
+    background-color: #343838;
+}
+
+.card {
+    margin: 0 10 10 10;
+}
+
+.card-grid-android {
+    background-color: lightgray;
+    border-radius: 0 0 20 20;
+}
+
+.card-grid-ios {
+    background-color: lightgray;
+    border-radius: 20;
+}

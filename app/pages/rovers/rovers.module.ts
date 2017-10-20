@@ -1,8 +1,7 @@
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
 import { CommonModule } from '@angular/common';
-
-import { NativeScriptUIListViewModule } from "nativescript-pro-ui/listview/angular";
+import { NativeScriptModule } from "nativescript-angular/nativescript.module";  // use only if the lazy loaded module uses ListView
 
 import { RoverPhotosService } from "../../services/rover.service";
 import { RoversComponent } from "./rovers.component";
@@ -17,7 +16,7 @@ export const routerConfig = [
 @NgModule({
     imports: [
         CommonModule,
-        NativeScriptUIListViewModule,
+        NativeScriptModule,
         NativeScriptRouterModule,
         NativeScriptRouterModule.forChild(routerConfig)
     ],

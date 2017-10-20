@@ -1,8 +1,7 @@
 
 import { Page } from "ui/page";
+import { isAndroid } from "platform";
 import { Component, ChangeDetectionStrategy } from "@angular/core";
-
-import { ListViewEventData } from "nativescript-pro-ui/listview";
 
 import { RoverPhoto } from "../../models/rover-model";
 import { RoverPhotosService } from "../../services/rover.service";
@@ -14,18 +13,25 @@ import "rxjs/add/operator/do";
 @Component({
     selector: "rovers",
     moduleId: module.id,
-    templateUrl: "./rovers.component.html"
+    templateUrl: "./rovers.component.html",
+    styleUrls: ["./rovers.component.css"]
 })
 export class RoversComponent {
 
     public roverPhotos: RxObservable<Array<RoverPhoto>>;
+    public isAndroid: boolean;
+
     private tempArr: Array<RoverPhoto> = [];
     private pageIndex: number;
     private subscr;
 
+
     constructor(private roverService: RoverPhotosService) {
         this.pageIndex = 1;
         this.extractData("2017-06-21", this.pageIndex);
+
+        this.isAndroid = isAndroid;
+        
     }
 
     private extractData(date: string, pageIndex: number) {
@@ -51,7 +57,7 @@ export class RoversComponent {
             });
     }
 
-    onLoadMoreItemsRequested(args: ListViewEventData) {
+    onLoadMoreItemsRequested(args) {
         this.roverService.getPhotosWithDateAndPageIndex(++this.pageIndex)
             .subscribe((itemsList) => {
                 itemsList.forEach(element => {
