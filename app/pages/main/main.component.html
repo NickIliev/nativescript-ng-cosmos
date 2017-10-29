@@ -34,6 +34,8 @@
         <StackLayout class="sideStackLayout">
             <Button text="Home" (tap)="toggleDrawer()" class="btn btn-primary btn-active sideButton"></Button>
             <Button text="Photo of the Day" [nsRouterLink]="['/apod']" class="btn btn-primary btn-active sideButton"></Button>
+            <Button text="Asteroids Proximity Checker" [nsRouterLink]="['/asteroids']" class="btn btn-primary btn-active sideButton"></Button>
+            <Button text="Mars Rovers Photos" [nsRouterLink]="['/rovers']" class="btn btn-primary btn-active sideButton"></Button>
             <Button text="Details" [nsRouterLink]="['/info']" class="btn btn-primary btn-active sideButton"></Button>
             <!-- -Navigating with pageTransition="fade"  will freee the app on iOS!!!-->
         </StackLayout>
