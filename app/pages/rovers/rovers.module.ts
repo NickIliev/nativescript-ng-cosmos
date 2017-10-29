@@ -5,11 +5,14 @@ import { NativeScriptModule } from "nativescript-angular/nativescript.module";  
 import { RoverPhotosService } from "../../services/rover.service";
 import { RoversComponent } from "./rovers.component";
 
+import { PhotoDetailComponent } from "./photo-detail.component"
+
 export const routerConfig = [
     {
-        path: "",
+        path: "", 
         component: RoversComponent
-    }
+    },
+    { path: "photo/:id", component: PhotoDetailComponent },
 ]
 
 @NgModule({
@@ -19,7 +22,7 @@ export const routerConfig = [
         NativeScriptRouterModule,
         NativeScriptRouterModule.forChild(routerConfig)
     ],
-    declarations: [RoversComponent],
+    declarations: [RoversComponent, PhotoDetailComponent],
     providers: [RoverPhotosService],
     schemas: [
         NO_ERRORS_SCHEMA

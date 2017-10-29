@@ -15,8 +15,9 @@ import "rxjs/add/operator/map";
 export class RoversComponent {
 
     public roverPhotos: RxObservable<Array<RoverPhoto>>;
-    private tempArr: Array<RoverPhoto> = [];
     public isAndroid: boolean;
+
+    private tempArr: Array<RoverPhoto> = [];
     private pageIndex: number;
     private subscr;
 
@@ -25,10 +26,10 @@ export class RoversComponent {
             this.page.actionBarHidden = true;
         }
 
+        this.isAndroid = isAndroid;
+
         this.pageIndex = 1;
         this.extractData("2017-06-21", this.pageIndex);
-
-        this.isAndroid = isAndroid;
     }
 
     private extractData(date: string, pageIndex: number) {
