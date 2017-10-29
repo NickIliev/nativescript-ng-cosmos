@@ -1,3 +1,8 @@
+GridLayout Label {
+    background-color: #282a2a;
+    color: #BCBCBC;
+}
+
 .list-view {
     background-color: #343838;
 }
@@ -7,11 +12,9 @@
 }
 
 .card-grid-android {
-    background-color: lightgray;
-    border-radius: 0 0 20 20;
+    border-radius: 0;
 }
 
 .card-grid-ios {
-    background-color: lightgray;
     border-radius: 20;
 }

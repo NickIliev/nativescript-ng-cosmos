@@ -1,9 +1,9 @@
-<StackLayout>
-  <Label text="ASTEROIDS PAGE" class="h2 text-center"textWrap="true"></Label>
+<GridLayout rows="auto, auto,  *" columns="*">
+  <Label row="0" text="ASTEROIDS PAGE" class="h2 text-center"textWrap="true"></Label>
   
-  <Label [text]="asteroidCount + ' nearby asteroids in the next 7 days'" class="h4 text-center" textWrap="true"></Label>
+  <Label row="1" [text]="asteroidCount + ' nearby asteroids in the next 7 days'" class="h4 text-center" textWrap="true"></Label>
   
-  <ListView [items]="asteroidItems | async" class="list-view">
+  <ListView row="2" [items]="asteroidItems | async" class="list-view">
     <ng-template let-asteroid="item" let-odd="odd" let-even="even">
       <CardView elevation="40" radius="40" class="card">
         <StackLayout class="{{ isAndroid ? 'card-grid-android' : 'card-grid-ios'}}" >
@@ -24,4 +24,4 @@
       </CardView>
     </ng-template>
   </ListView>
-</StackLayout>
+</GridLayout>
