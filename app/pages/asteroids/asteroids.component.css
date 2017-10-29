@@ -1,0 +1,24 @@
+StackLayout Label {
+    background-color: #282a2a;
+    color: #BCBCBC;
+}
+
+.card {
+    margin: 5 10;
+}
+
+.card Label {
+    color: #BCBCBC;
+    font-size:12;
+    margin-left:10;
+}
+
+.card-grid-android {
+    background-color:#343838;
+}
+
+
+.card-grid-ios {
+    background-color: #343838;
+    border-radius: 20;
+}

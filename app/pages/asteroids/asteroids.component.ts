@@ -12,13 +12,14 @@ import "rxjs/add/operator/map";
     selector: "ns-asteroids",
     moduleId: module.id,
     templateUrl: "./asteroids.component.html",
+    styleUrls:["./asteroids.component.css"]
 })
 export class AsteroidsComponent {
     public asteroidItems: RxObservable<Array<AsteroidItem>>;
     private tempArr: Array<AsteroidItem> = [];
 
     public asteroidCount: number = 0;
-
+    public isAndroid: boolean;
     private subscr;
 
     constructor(private _page: Page, private _asteroidsService: AsteroidsService) { 
@@ -26,10 +27,11 @@ export class AsteroidsComponent {
             this._page.actionBarHidden = true;
         }
 
-        this._asteroidsService.getAsteroidsData().subscribe((result) => { 
+        this.isAndroid = isAndroid;
 
-            console.log(result.element_count)
-            console.log(result.links)
+        this._asteroidsService.getAsteroidsData().subscribe((result) => { 
+            
+            this.asteroidCount = result.element_count;
 
             // foe each date in the seven days period ahead..
             for (var key in result.near_earth_objects) {
@@ -51,8 +53,6 @@ export class AsteroidsComponent {
                         );
 
                         this.tempArr.push(newAsteroid);
-                        //
-                        console.log(newAsteroid.name);
                     });
                 }
             }
