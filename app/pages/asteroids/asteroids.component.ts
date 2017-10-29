@@ -4,6 +4,7 @@ import { Page } from "ui/page";
 
 import { AsteroidItem,  AsteroidsOnDate } from "../../models//asteroids-model";
 import { AsteroidsService } from "../../services/asteroids.service";
+
 import { Observable as RxObservable } from "rxjs/Observable";
 import "rxjs/add/operator/map";
 
@@ -17,18 +18,50 @@ export class AsteroidsComponent {
     private tempArr: Array<AsteroidItem> = [];
 
     public asteroidCount: number = 0;
-    public url: string;
+
+    private subscr;
 
     constructor(private _page: Page, private _asteroidsService: AsteroidsService) { 
         if (isAndroid) {
             this._page.actionBarHidden = true;
         }
 
-        this._asteroidsService.getAsteroidsData().map((result) => { 
+        this._asteroidsService.getAsteroidsData().subscribe((result) => { 
 
-            result.near_earth_objects.date.forEach(element => {
-                console.dir(element);
+            console.log(result.element_count)
+            console.log(result.links)
+
+            // foe each date in the seven days period ahead..
+            for (var key in result.near_earth_objects) {
+                if (result.near_earth_objects.hasOwnProperty(key)) {
+                    var date = result.near_earth_objects[key];
+
+                    // itterate all the asteroids on each date
+                    date.forEach(asteroid => {
+                        let newAsteroid = new AsteroidItem(
+                            asteroid.links, 
+                            asteroid.neo_reference_id, 
+                            asteroid.name, 
+                            asteroid.nasa_jpl_url,
+                            asteroid.absolute_magnitude_h,
+                            asteroid.estimated_diameter,
+                            asteroid.is_potentially_hazardous_asteroid,
+                            asteroid.close_approach_data,
+                            asteroid.orbital_data
+                        );
+
+                        this.tempArr.push(newAsteroid);
+                        //
+                        console.log(newAsteroid.name);
+                    });
+                }
+            }
+
+            this.asteroidItems = RxObservable.create(subscriber => {
+                this.subscr = subscriber;
+                subscriber.next(this.tempArr);
             });
+            
         })
     }
 }

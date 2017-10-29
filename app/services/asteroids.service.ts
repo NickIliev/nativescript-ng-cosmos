@@ -23,7 +23,7 @@ export class AsteroidsService {
             .map(res => res.json())
             .map(data => {
                 let apiData: AsteroidsApiData = new AsteroidsApiData(data.links, data.element_count, data.near_earth_objects);
-                console.log("apiData.element_count: " + apiData.element_count);
+                // console.log("apiData.element_count: " + apiData.element_count);
                 return apiData;
             })
     }

@@ -14,7 +14,7 @@ export interface AsteroidsOnDate {
     date: Array<AsteroidItem>;
 }
 
-export interface AsteroidItem {
+export class AsteroidItem {
     links: Link;
     neo_reference_id: string;
     name: string;
@@ -24,6 +24,28 @@ export interface AsteroidItem {
     is_potentially_hazardous_asteroid: boolean;
     close_approach_data: Array<ApproachDate>;
     orbital_data: OrbitalData;
+
+    constructor(
+        links: Link, 
+        neo_reference_id: string, 
+        name: string, 
+        nasa_jpl_url: string,
+        absolute_magnitude_h: number,
+        estimated_diameter: EstimatedDiameter,
+        is_potentially_hazardous_asteroid: boolean,
+        close_approach_data: Array<ApproachDate>,
+        orbital_data: OrbitalData
+    ) {
+        this.links = links;
+        this.neo_reference_id = neo_reference_id;
+        this.name = name;
+        this.nasa_jpl_url = nasa_jpl_url;
+        this.absolute_magnitude_h = absolute_magnitude_h;
+        this.estimated_diameter = estimated_diameter;
+        this.is_potentially_hazardous_asteroid = is_potentially_hazardous_asteroid;
+        this.close_approach_data = close_approach_data;
+        this.orbital_data = orbital_data;
+    }
 }
 
 export interface Link {

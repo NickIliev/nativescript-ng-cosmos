@@ -1,1 +1,10 @@
 <Label text="ASTEROIDS PAGE" textWrap="true"></Label>
+
+<ListView [items]="asteroidItems | async" class="list-group">
+    <ng-template let-asteroid="item" let-odd="odd" let-even="even">
+      <StackLayout>
+        <Label [text]="asteroid.name" class="list-group-item"></Label>
+        
+      </StackLayout>
+    </ng-template>
+</ListView>
