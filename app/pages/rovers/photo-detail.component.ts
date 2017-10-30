@@ -1,8 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-
+import { isAndroid } from "platform";
+import { Page } from "ui/page";
 import { RoverPhoto } from "../../models/rover-model";
-import { RoverPhotosService } from "../../services/rover.service";
+import { ad } from "utils/utils";
+import { fromUrl } from "image-source";
+import { shareImage } from "nativescript-social-share";
 
 @Component({
     selector: "ns-details",
@@ -10,20 +13,55 @@ import { RoverPhotosService } from "../../services/rover.service";
     templateUrl: "./photo-detail.component.html",
 })
 export class PhotoDetailComponent implements OnInit {
-    item: RoverPhoto;
 
-    constructor(
-        private itemService: RoverPhotosService,
-        private route: ActivatedRoute
-    ) { }
+    photo: RoverPhoto;
 
-    ngOnInit(): void {
-        const id = +this.route.snapshot.params["id"];
-        console.log("photo detaile page received ID: " + id);
-        // this.item = this.itemService.getItem(id);
+    constructor(private route: ActivatedRoute, private page: Page) {
+        if (isAndroid) {
+            this.page.actionBarHidden = true;
+        }
     }
 
-    getItem(items: Array<RoverPhoto>, id: number): RoverPhoto {
-        return items.filter(item => item.id === id)[0];
+    ngOnInit(): void {
+        if (this.route.snapshot.queryParams) {
+            const query = this.route.snapshot.queryParams;
+
+            this.photo = new RoverPhoto(
+                query.id,
+                query.sol,
+                query.cameraId,
+                query.cameraName,
+                query.cameRoverId,
+                query.cameraFullName,
+                query.imageUri,
+                query.earthDate
+            );
+            // console.log(`id: ${query['id']}`);
+        }
+    }
+
+    onNotify(message: string) {
+        if (message === "goToPrevousDay") {
+            console.log("goToPrevousDay not implemented!");
+        } else if (message === "goToNextDay") {
+            console.log("goToNextDay not implemented!");
+        } else if (message === "onShare") {
+            fromUrl(this.photo.imageUri).then(image => {
+                shareImage(image);
+            })
+        } else if (message === "onSetWallpaper") {
+            if (isAndroid) {
+                fromUrl(this.photo.imageUri).then(image => {
+                    let wallpaperManager = android.app.WallpaperManager.getInstance(ad.getApplicationContext());
+                    try {
+                        wallpaperManager.setBitmap(image.android);
+                    } catch (error) {
+                        console.log(error);
+                    }
+                })
+            }
+        } else if (message === "onSaveFile") {
+            console.log("onSaveFile not implemented!");
+        }
     }
 }

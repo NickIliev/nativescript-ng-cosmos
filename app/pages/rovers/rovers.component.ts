@@ -1,6 +1,9 @@
 import { Page } from "ui/page";
+import { ItemEventData } from "ui/list-view";
 import { isAndroid } from "platform";
 import { Component } from "@angular/core";
+import { RouterExtensions } from "nativescript-angular/router";
+
 import { RoverPhoto } from "../../models/rover-model";
 import { RoverPhotosService } from "../../services/rover.service";
 import { Observable as RxObservable } from "rxjs/Observable";
@@ -21,7 +24,7 @@ export class RoversComponent {
     private pageIndex: number;
     private subscr;
 
-    constructor(private roverService: RoverPhotosService, private page: Page) {
+    constructor(private roverService: RoverPhotosService, private page: Page, private routerExtensions: RouterExtensions) {
         if (isAndroid) {
             this.page.actionBarHidden = true;
         }
@@ -55,5 +58,28 @@ export class RoversComponent {
 
                 this.subscr.next(this.tempArr);
             })
+    }
+
+    public onItemTap(args:ItemEventData) {
+        let index = args.index;
+        let photo = this.tempArr[index];
+
+        this.routerExtensions.navigate(["/rovers/photo"], {
+            replaceUrl: false,
+            queryParams: {
+                id: photo.id,
+                cameraFullName: photo.cameraFullName,
+                cameraName: photo.cameraName,
+                cameraId: photo.cameraId,
+                cameraRoverId: photo.cameraRoverId,
+                imageUri: photo.imageUri,
+                earthDate: photo.earthDate,
+                sol: photo.sol    
+            }
+        });
+    }
+
+    private getItem(items: Array<RoverPhoto>, id: number): RoverPhoto {
+        return items.filter(item => item.id === id)[0];
     }
 }

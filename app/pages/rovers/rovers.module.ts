@@ -4,15 +4,14 @@ import { CommonModule } from '@angular/common';
 import { NativeScriptModule } from "nativescript-angular/nativescript.module";  // use only if the lazy loaded module uses ListView
 import { RoverPhotosService } from "../../services/rover.service";
 import { RoversComponent } from "./rovers.component";
-
-import { PhotoDetailComponent } from "./photo-detail.component"
+import { PhotoDetailComponent } from "./photo-detail.component";
 
 export const routerConfig = [
     {
         path: "", 
         component: RoversComponent
     },
-    { path: "photo/:id", component: PhotoDetailComponent },
+    { path: "photo", component: PhotoDetailComponent },
 ]
 
 @NgModule({
