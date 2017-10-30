@@ -36,7 +36,7 @@ export class RoversComponent {
     }
 
     private extractData(date: string, pageIndex: number) {
-        this.roverService.getPhotosWithDateAndPageIndex(pageIndex)
+        this.roverService.getPhotosWithDateAndPageIndex("curiosity", 2017, 6, 21, pageIndex)
             .subscribe((itemsList) => {
                 this.tempArr = itemsList;
 
@@ -50,7 +50,7 @@ export class RoversComponent {
     }
 
     public onLoadMoreItemsRequested(args) {
-        this.roverService.getPhotosWithDateAndPageIndex(++this.pageIndex)
+        this.roverService.getPhotosWithDateAndPageIndex("curiosity", 2017, 6, 21, ++this.pageIndex)
             .subscribe((itemsList) => {
                 itemsList.forEach(element => {
                     this.tempArr.push(element);

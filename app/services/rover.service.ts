@@ -17,8 +17,8 @@ export class RoverPhotosService {
 
     constructor(private http: Http) { }
 
-    getPhotosWithDateAndPageIndex(pageIndex: number) {
-        return this.http.get(this.getUpdatedUrl("curiosity", 2017, 6, 21) + "&page=" + pageIndex)
+    getPhotosWithDateAndPageIndex(rover: string, year: number, month: number, day: number, pageIndex: number) {
+        return this.http.get(this.getUpdatedUrl(rover, year, month, day) + "&page=" + pageIndex)
             .map(res => res.json())
             .map(data => {
                 let itemsList = [];
@@ -28,7 +28,6 @@ export class RoverPhotosService {
                 return itemsList;
             })
     }
-
 
     getUpdatedUrl(rover: string, year: number, month: number, day: number) {
         this.rover = rover;
