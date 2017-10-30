@@ -3,6 +3,10 @@ GridLayout Label {
     color: #BCBCBC;
 }
 
+.list-view {
+    background-color: #343838;
+}
+
 .card {
     margin: 5 10;
 }
@@ -10,15 +14,16 @@ GridLayout Label {
 .card Label {
     color: #BCBCBC;
     font-size:12;
-    margin-left:10;
 }
 
 .card-grid-android {
-    background-color:#343838;
+    background-color:#282a2a;
+    padding-left:10;
 }
 
 
 .card-grid-ios {
-    background-color: #343838;
+    background-color: #282a2a;
+    padding-left:10;
     border-radius: 20;
 }
