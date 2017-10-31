@@ -16,15 +16,15 @@ export class PhotoDetailComponent implements OnInit {
 
     photo: RoverPhoto;
 
-    constructor(private route: ActivatedRoute, private page: Page) {
+    constructor(private _route: ActivatedRoute, private _page: Page) {
         if (isAndroid) {
-            this.page.actionBarHidden = true;
+            this._page.actionBarHidden = true;
         }
     }
 
     ngOnInit(): void {
-        if (this.route.snapshot.queryParams) {
-            const query = this.route.snapshot.queryParams;
+        if (this._route.snapshot.queryParams) {
+            const query = this._route.snapshot.queryParams;
 
             this.photo = new RoverPhoto(
                 query.id,

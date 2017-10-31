@@ -3,6 +3,7 @@ import { ItemEventData } from "ui/list-view";
 import { isAndroid } from "platform";
 import { Component } from "@angular/core";
 import { RouterExtensions } from "nativescript-angular/router";
+import { ActivatedRoute } from "@angular/router";
 
 import { RoverPhoto } from "../../models/rover-model";
 import { RoverPhotosService } from "../../services/rover.service";
@@ -20,23 +21,41 @@ export class RoversComponent {
     public roverPhotos: RxObservable<Array<RoverPhoto>>;
     public isAndroid: boolean;
 
+    public day: number;
+    public month: number;
+    public year: number;
+    public rover: string;
+
     private tempArr: Array<RoverPhoto> = [];
     private pageIndex: number;
     private subscr;
 
-    constructor(private roverService: RoverPhotosService, private page: Page, private routerExtensions: RouterExtensions) {
+    constructor(private _roverService: RoverPhotosService, private _page: Page, private _router: RouterExtensions, private _activatedRoute: ActivatedRoute) {
         if (isAndroid) {
-            this.page.actionBarHidden = true;
+            this._page.actionBarHidden = true;
         }
 
         this.isAndroid = isAndroid;
-
-        this.pageIndex = 1;
-        this.extractData("2017-06-21", this.pageIndex);
     }
 
-    private extractData(date: string, pageIndex: number) {
-        this.roverService.getPhotosWithDateAndPageIndex("curiosity", 2017, 6, 21, pageIndex)
+    ngOnInit() {
+        if (this._activatedRoute.snapshot.queryParams) {
+            const query = this._activatedRoute.snapshot.queryParams;
+
+            this.rover = query.rover;
+            this.day = query.day;
+            this.month = query.month;
+            this.year = query.year; 
+        }
+    }
+
+    ngAfterViewInit() {
+        this.pageIndex = 1;
+        this.extractData(this.rover, this.year, this.month, this.day, this.pageIndex);
+    }
+
+    private extractData(rover: string, year: number, month: number, day: number, pageIndex: number) {
+        this._roverService.getPhotosWithDateAndPageIndex(rover, year, month, day, pageIndex)
             .subscribe((itemsList) => {
                 this.tempArr = itemsList;
 
@@ -50,7 +69,7 @@ export class RoversComponent {
     }
 
     public onLoadMoreItemsRequested(args) {
-        this.roverService.getPhotosWithDateAndPageIndex("curiosity", 2017, 6, 21, ++this.pageIndex)
+        this._roverService.getPhotosWithDateAndPageIndex(this.rover, this.year, this.month, this.day, ++this.pageIndex)
             .subscribe((itemsList) => {
                 itemsList.forEach(element => {
                     this.tempArr.push(element);
@@ -60,11 +79,11 @@ export class RoversComponent {
             })
     }
 
-    public onItemTap(args:ItemEventData) {
+    public onItemTap(args: ItemEventData) {
         let index = args.index;
         let photo = this.tempArr[index];
 
-        this.routerExtensions.navigate(["/rovers/photo"], {
+        this._router.navigate(["/rovers/photo"], {
             replaceUrl: false,
             queryParams: {
                 id: photo.id,
@@ -74,12 +93,8 @@ export class RoversComponent {
                 cameraRoverId: photo.cameraRoverId,
                 imageUri: photo.imageUri,
                 earthDate: photo.earthDate,
-                sol: photo.sol    
+                sol: photo.sol
             }
         });
-    }
-
-    private getItem(items: Array<RoverPhoto>, id: number): RoverPhoto {
-        return items.filter(item => item.id === id)[0];
     }
 }

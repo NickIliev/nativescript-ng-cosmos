@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterExtensions } from "nativescript-angular/router";
 import { Page } from "ui/page";
 import { DatePicker } from "ui/date-picker";
+import { ListPicker } from "ui/list-picker";
 import { isAndroid } from "platform";
 
 @Component({
@@ -18,50 +19,67 @@ export class PickersComponent {
 	month: number;
 	year: number;
 
+	selectedIndex: number;
+
 	constructor(private _page: Page, private _router: RouterExtensions) { 
 		if (isAndroid) {
 			this._page.actionBarHidden = true;
 		}
 
-		this.rovers = ["Curiosity", "Opportunity", "Spirit"];
+		this.rovers = ["Opportunity", "Curiosity", "Spirit"];
 	}
+
+	public selectedIndexChanged(args) {
+        let picker = <ListPicker>args.object;
+		console.log("picker selection: " + picker.selectedIndex);
+		
+		this.selectedIndex = picker.selectedIndex;
+		console.log(this.rovers[this.selectedIndex]);
+    }
 
 	goToPhotos() {
 		console.log("goToPhotos");
-		this._router.navigate(["/rovers/rover"]);
+		this._router.navigate(["/rovers/rover"], {
+            replaceUrl: false,
+            queryParams: {
+				rover: this.rovers[this.selectedIndex].toLowerCase(),
+				day: this.day,
+				month: this.month,
+				year: this.year
+            }
+        });
 	}
 
-	onPickerLoaded(args) {
+	onListickerLoaded(args) { 
+		let listPicker = <ListPicker>args.object;
+		listPicker.selectedIndex = 1;
+	}
+
+	onDatePickerLoaded(args) {
         let datePicker = <DatePicker>args.object;
 
-        datePicker.year = 2017;
-        datePicker.month = 6;
-        datePicker.day = 2;
+		// TODO: intial values for picker date and for the queryParams
+		datePicker.year = 2017; 
+		this.year = datePicker.year;
+		datePicker.month = 6; 
+		this.month = datePicker.month;
+		datePicker.day = 2; 
+		this.day = datePicker.day;
+
+		// TODO: different min and max dates for different rovers
         datePicker.minDate = new Date(2008, 0, 29);
         datePicker.maxDate = new Date();
     }
 
-    onDateChanged(args) {
-        console.log("Date changed");
-        console.log("New value: " + args.value);
-        console.log("Old value: " + args.oldValue);
-    }
-
     onDayChanged(args) {
-        console.log("Day changed");
-        console.log("New value: " + args.value);
-        console.log("Old value: " + args.oldValue);
+		this.day = args.value;
     }
 
     onMonthChanged(args) {
-        console.log("Month changed");
-        console.log("New value: " + args.value);
-        console.log("Old value: " + args.oldValue);
+		this.month = args.value;
     }
 
     onYearChanged(args) {
-        console.log("Year changed");
-        console.log("New value: " + args.value);
-        console.log("Old value: " + args.oldValue);
+		this.year = args.value;
     }
 }
