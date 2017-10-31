@@ -3,7 +3,7 @@
     <ListPicker row="2" [items]="rovers" ></ListPicker>
     
     <Label row="3" class="text-center m-t-10" text="Select Date" textWrap="true"></Label>
-    <DatePicker row="4" [day]="day" [month]="month" [year]="year"></DatePicker>
+    <DatePicker row="4" (loaded)="onPickerLoaded($event)" (dateChange)="onDateChanged($event)" (dayChange)="onDayChanged($event)" (monthChange)="onMonthChanged($event)" (yearChange)="onYearChanged($event)"></DatePicker>
 
     <Button row="5" class="text-center m-t-10" text="Show photos for selected date" (tap)="goToPhotos()"></Button>
 </GridLayout>

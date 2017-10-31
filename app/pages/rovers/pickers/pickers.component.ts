@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterExtensions } from "nativescript-angular/router";
 import { Page } from "ui/page";
+import { DatePicker } from "ui/date-picker";
 import { isAndroid } from "platform";
 
 @Component({
@@ -23,14 +24,44 @@ export class PickersComponent {
 		}
 
 		this.rovers = ["Curiosity", "Opportunity", "Spirit"];
-
-		this.day = 1;
-		this.month = 6;
-		this.year = 2017;
 	}
 
 	goToPhotos() {
 		console.log("goToPhotos");
 		this._router.navigate(["/rovers/rover"]);
 	}
+
+	onPickerLoaded(args) {
+        let datePicker = <DatePicker>args.object;
+
+        datePicker.year = 2017;
+        datePicker.month = 6;
+        datePicker.day = 2;
+        datePicker.minDate = new Date(2008, 0, 29);
+        datePicker.maxDate = new Date();
+    }
+
+    onDateChanged(args) {
+        console.log("Date changed");
+        console.log("New value: " + args.value);
+        console.log("Old value: " + args.oldValue);
+    }
+
+    onDayChanged(args) {
+        console.log("Day changed");
+        console.log("New value: " + args.value);
+        console.log("Old value: " + args.oldValue);
+    }
+
+    onMonthChanged(args) {
+        console.log("Month changed");
+        console.log("New value: " + args.value);
+        console.log("Old value: " + args.oldValue);
+    }
+
+    onYearChanged(args) {
+        console.log("Year changed");
+        console.log("New value: " + args.value);
+        console.log("Old value: " + args.oldValue);
+    }
 }
