@@ -57,6 +57,10 @@ export class RoversComponent {
     private extractData(rover: string, year: number, month: number, day: number, pageIndex: number) {
         this._roverService.getPhotosWithDateAndPageIndex(rover, year, month, day, pageIndex)
             .subscribe((itemsList) => {
+                
+                //  TODO: create check if lenght === 0 then provide info and option to change date
+                console.log("itemsList.length: " + itemsList.length); 
+
                 this.tempArr = itemsList;
 
                 this.roverPhotos = RxObservable.create(subscriber => {
