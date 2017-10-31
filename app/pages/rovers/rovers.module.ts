@@ -5,11 +5,14 @@ import { RoverPhotosService } from "../../services/rover.service";
 import { RoversComponent } from "./rovers.component";
 import { PhotoDetailComponent } from "./photo-detail.component";
 
+import { PickersComponent } from "./pickers/pickers.component";
+
 export const routerConfig = [
     {
         path: "", 
-        component: RoversComponent
+        component: PickersComponent
     },
+    { path: "rover", component: RoversComponent },
     { path: "photo", component: PhotoDetailComponent },
 ]
 
@@ -19,7 +22,7 @@ export const routerConfig = [
         NativeScriptRouterModule,
         NativeScriptRouterModule.forChild(routerConfig)
     ],
-    declarations: [RoversComponent, PhotoDetailComponent],
+    declarations: [RoversComponent, PhotoDetailComponent, PickersComponent],
     providers: [RoverPhotosService],
     schemas: [
         NO_ERRORS_SCHEMA
