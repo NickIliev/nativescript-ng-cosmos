@@ -9,77 +9,121 @@ import { isAndroid } from "platform";
 	selector: 'pickers',
 	moduleId: module.id,
 	templateUrl: './pickers.component.html',
-	styleUrls:['./pickers.component.css']
+	styleUrls: ['./pickers.component.css']
 })
 
 export class PickersComponent {
-	rovers: Array<string>;
 
-	day: number;
-	month: number;
-	year: number;
+	public rovers: Array<string>;
 
-	selectedIndex: number;
+	private _day: number;
+	private _month: number;
+	private _year: number;
+	private _selectedIndex: number;
+	private _selectedRover: string;
 
-	constructor(private _page: Page, private _router: RouterExtensions) { 
+	private _datePicker: DatePicker;
+
+	private _today: Date;
+
+	constructor(private _page: Page, private _router: RouterExtensions) {
 		if (isAndroid) {
 			this._page.actionBarHidden = true;
 		}
 
+		this._today = new Date();
 		this.rovers = ["Opportunity", "Curiosity", "Spirit"];
 	}
 
-	public selectedIndexChanged(args) {
-        let picker = <ListPicker>args.object;
-		console.log("picker selection: " + picker.selectedIndex);
-		
-		this.selectedIndex = picker.selectedIndex;
-		console.log(this.rovers[this.selectedIndex]);
-    }
-
 	goToPhotos() {
-		console.log("goToPhotos");
 		this._router.navigate(["/rovers/rover"], {
-            replaceUrl: false,
-            queryParams: {
-				rover: this.rovers[this.selectedIndex].toLowerCase(),
-				day: this.day,
-				month: this.month,
-				year: this.year
-            }
-        });
+			replaceUrl: false,
+			queryParams: {
+				rover: this.rovers[this._selectedIndex].toLowerCase(),
+				day: this._day,
+				month: this._month,
+				year: this._year
+			}
+		});
 	}
 
-	onListickerLoaded(args) { 
+	/* LISTPicker logic START */
+	onListickerLoaded(args) {
 		let listPicker = <ListPicker>args.object;
 		listPicker.selectedIndex = 1;
 	}
 
+	public selectedIndexChanged(args) {
+		let picker = <ListPicker>args.object;
+		this._selectedIndex = picker.selectedIndex;
+		this._selectedRover = this.rovers[this._selectedIndex];
+		console.log("Selected Rover: " + this._selectedRover);
+
+		this.adjustDatePickerForSelectedRover(this._today);
+	}
+	/* LISTPicker logic END */
+
+	/* DatePicker logic START */
 	onDatePickerLoaded(args) {
-        let datePicker = <DatePicker>args.object;
+		this._datePicker = <DatePicker>args.object;
 
-		// TODO: intial values for picker date and for the queryParams
-		datePicker.year = 2017; 
-		this.year = datePicker.year;
-		datePicker.month = 6; 
-		this.month = datePicker.month;
-		datePicker.day = 2; 
-		this.day = datePicker.day;
+		this.adjustDatePickerForSelectedRover(this._today);
+	}
 
-		// TODO: different min and max dates for different rovers
-        datePicker.minDate = new Date(2008, 0, 29);
-        datePicker.maxDate = new Date();
-    }
+	onDayChanged(args) {
+		this._day = args.value;
+	}
 
-    onDayChanged(args) {
-		this.day = args.value;
-    }
+	onMonthChanged(args) {
+		this._month = args.value;
+	}
 
-    onMonthChanged(args) {
-		this.month = args.value;
-    }
+	onYearChanged(args) {
+		this._year = args.value;
+	}
+	/* DatePicker logic END */
 
-    onYearChanged(args) {
-		this.year = args.value;
-    }
+	private adjustDatePickerForSelectedRover(today: Date) {
+
+		if (this._selectedRover) {
+			switch (this._selectedRover.toLowerCase()) {
+				case "opportunity":
+					this._datePicker.minDate = new Date(2004, 0, 26);
+					this._datePicker.maxDate = today;
+
+					// intial values for picker date and for the queryParams
+					this._datePicker.year = today.getUTCFullYear();
+					this._year = this._datePicker.year;
+					this._datePicker.month = today.getUTCMonth() + 1;
+					this._month = this._datePicker.month;
+					this._datePicker.day = today.getUTCDate();
+					this._day = this._datePicker.day;
+					break;
+				case "curiosity":
+					this._datePicker.minDate = new Date(2012, 6 + 1, 6);
+					this._datePicker.maxDate = today;
+
+					this._datePicker.year = today.getUTCFullYear();
+					this._year = this._datePicker.year;
+					this._datePicker.month = today.getUTCMonth() + 1;
+					this._month = this._datePicker.month;
+					this._datePicker.day = today.getUTCDate();
+					this._day = this._datePicker.day;
+					break;
+				case "spirit":
+					this._datePicker.minDate = new Date(2004, 0, 5);
+					this._datePicker.maxDate = new Date(2010, 1 + 1, 21);
+
+					this._datePicker.year = 2008;
+					this._year = this._datePicker.year;
+					this._datePicker.month = 6;
+					this._month = this._datePicker.month;
+					this._datePicker.day = 2;
+					this._day = this._datePicker.day;
+					break;
+				default:
+					break;
+			}
+		}
+	}
 }
