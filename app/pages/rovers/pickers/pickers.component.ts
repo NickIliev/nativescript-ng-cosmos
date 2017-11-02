@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { RouterExtensions } from "nativescript-angular/router";
 import { Page } from "ui/page";
 import { DatePicker } from "ui/date-picker";
@@ -16,15 +16,16 @@ export class PickersComponent {
 
 	public rovers: Array<string>;
 
+	private _today: Date;
 	private _day: number;
 	private _month: number;
 	private _year: number;
+
 	private _selectedIndex: number;
 	private _selectedRover: string;
 
+	@ViewChild("dp") dp: ElementRef;
 	private _datePicker: DatePicker;
-
-	private _today: Date;
 
 	constructor(private _page: Page, private _router: RouterExtensions) {
 		if (isAndroid) {
@@ -33,6 +34,10 @@ export class PickersComponent {
 
 		this._today = new Date();
 		this.rovers = ["Opportunity", "Curiosity", "Spirit"];
+	}
+
+	ngAfterViewInit() {
+		this._datePicker = <DatePicker>this.dp.nativeElement;
 	}
 
 	goToPhotos() {
@@ -46,7 +51,6 @@ export class PickersComponent {
 			}
 		});
 	}
-
 	/* LISTPicker logic START */
 	onListickerLoaded(args) {
 		let listPicker = <ListPicker>args.object;
@@ -57,7 +61,6 @@ export class PickersComponent {
 		let picker = <ListPicker>args.object;
 		this._selectedIndex = picker.selectedIndex;
 		this._selectedRover = this.rovers[this._selectedIndex];
-		console.log("Selected Rover: " + this._selectedRover);
 
 		this.adjustDatePickerForSelectedRover(this._today);
 	}
@@ -65,9 +68,12 @@ export class PickersComponent {
 
 	/* DatePicker logic START */
 	onDatePickerLoaded(args) {
-		this._datePicker = <DatePicker>args.object;
-
-		this.adjustDatePickerForSelectedRover(this._today);
+		if (this._datePicker) {
+			this.adjustDatePickerForSelectedRover(this._today);
+		} else {
+			this._datePicker = <DatePicker>args.object;
+			this.adjustDatePickerForSelectedRover(this._today);
+		}
 	}
 
 	onDayChanged(args) {

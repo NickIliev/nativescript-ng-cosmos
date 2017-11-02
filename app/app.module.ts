@@ -1,5 +1,6 @@
 import { NgModule, NO_ERRORS_SCHEMA, NgModuleFactoryLoader } from "@angular/core";
 import { NativeScriptModule } from "nativescript-angular/nativescript.module";
+import { NativeScriptCommonModule } from "nativescript-angular/common";
 import { AppRoutingModule } from "./app.routing";
 import { AppComponent } from "./app.component";
 import { MainComponent } from "./pages/main/main.component";
@@ -18,6 +19,7 @@ elementRegistryModule.registerElement("CardView", () => require("nativescript-ca
     ],
     imports: [
         NativeScriptModule,
+        NativeScriptCommonModule,
         AppRoutingModule,
         NativeScriptHttpModule,
         NativeScriptFormsModule,

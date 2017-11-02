@@ -28,6 +28,10 @@ export class MainComponent {
         this.detailsTitle = "About\n Cosmos Databank\n Application";
     }
 
+    ngOnInit() {
+        console.log("ngOnInit");
+    }
+
     ngAfterViewInit() {
         this.drawer = this.drawerComponent.sideDrawer;
         this._changeDetectionRef.detectChanges();
