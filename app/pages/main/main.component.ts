@@ -35,9 +35,12 @@ export class MainComponent {
     ngAfterViewInit() {
         this.drawer = this.drawerComponent.sideDrawer;
         this._changeDetectionRef.detectChanges();
+
+        console.log("ngAfterViewInit: " + this.drawer);
     }
 
     public toggleDrawer() {
+        console.log("toggle: " + this.drawer);
         this.drawer.toggleDrawerState();
     }
 }

@@ -1,14 +1,14 @@
 <!-- Using @next on nativescript-angular to resilve 'more than one Conten View' error -->
-<ActionBar *ngIf="isAndroid">
+<ActionBar *ngIf="isAndroid" >
     <ActionBar.titleView>
-        <StackLayout class="p-8">
+        <StackLayout class="p-8" >
             <Label text="COSMOS Databank" class="h3 action-bar-title"></Label>
         </StackLayout>
     </ActionBar.titleView>
-    <ActionItem ios.position="right" (tap)="toggleDrawer()">
-        <StackLayout>
-            <Image src="res://ic_menu" class="m-r-16" stretch="aspectFlll"></Image>
-        </StackLayout>
+    <ActionItem ios.position="right" (tap)="toggleDrawer()" >
+        <GridLayout width="60" borderWidth="8" borderRadius="20" borderColor="#343838" backgroundColor="#282a2a">
+            <Image src="res://ic_menu" opacity="0.8" verticalAlignment="center" horizontalAlignment="center" stretch="aspectFlll"></Image>
+        </GridLayout>
     </ActionItem>
 </ActionBar>
 
@@ -21,7 +21,7 @@
     </ActionItem>
     <ActionItem ios.position="right" (tap)="toggleDrawer()">
         <StackLayout>
-            <Image src="res://ic_menu" class="m-t-8 m-b-8" width="30" height="30" stretch="aspectFit"></Image>
+            <Image src="res://ic_menu" class="m-t-8 m-b-8" width="40" height="40" stretch="aspectFit"></Image>
         </StackLayout>
     </ActionItem>
 </ActionBar>
