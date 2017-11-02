@@ -13,14 +13,14 @@ import { ToolbarHelper } from "../../shared/toolbar-helper";
 })
 export class ApodComponent {
     item: ApodItem = new ApodItem("", "", "", "", "", "", "", "");
-    lastLoadedDate: Date = new Date(); // today
+    lastLoadedDate: Date; // today
     dateToLoad: string; // API string represenation of the currently loaded date
     direction: boolean; // true means going to Prevous date; false means going to Next date
     toolbarHelper : ToolbarHelper;
 
     constructor(private apodService: ApodService, private page: Page) {
         this.toolbarHelper = new ToolbarHelper();
-        
+        this.lastLoadedDate = new Date();
         if (isAndroid) {
             this.page.actionBarHidden = true;
         }

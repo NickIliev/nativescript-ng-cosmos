@@ -14,11 +14,21 @@ export class ToolbarHelper {
 
     goToNextDay(lastLoadedDate: Date, direction: boolean): boolean {
         let isValidDate: boolean;
-        let now = new Date();
 
-        if (lastLoadedDate <= now) {
-            lastLoadedDate.setDate(lastLoadedDate.getDate() + 1); // next day - TODO: implement logic to prevent looking for photos in the future
-            direction = false;
+        let today = new Date();
+        let tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+
+        console.log("lastLoadedDate: "+ lastLoadedDate);
+        console.log("today: " + today.getDate());
+        console.log("tomorrow: " + tomorrow.getDate());
+        console.log(lastLoadedDate.getDate() < tomorrow.getDate());
+        console.log(lastLoadedDate.getDate() !== today.getDate());
+        console.log(lastLoadedDate.getMonth() === today.getMonth());
+
+        if (lastLoadedDate <= tomorrow) {
+            lastLoadedDate.setDate(lastLoadedDate.getDate() + 1); // next day - TODO: implement logic to prevent looking for photos in the future  
+            direction = false; // false === go to next date
             isValidDate = true;
         } else {
             isValidDate = false;
@@ -64,6 +74,6 @@ export class ToolbarHelper {
     }
 
     dateToString(date: Date) {
-        return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getUTCDate();
+        return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
     }
 }
