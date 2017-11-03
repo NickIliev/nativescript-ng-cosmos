@@ -1,3 +1,8 @@
+ActivityIndicator {
+    width: 150;
+    height: 150;
+}
+
 .date {
     horizontal-align: center;
     font-size: 12;
