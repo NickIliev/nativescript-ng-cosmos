@@ -1,4 +1,6 @@
 import { Page } from "ui/page";
+import { ActivityIndicator } from "ui/activity-indicator";
+import { Image } from "ui/image";
 import { Component } from "@angular/core";
 import { ApodItem } from "../../models/apod-model";
 import { ApodService } from "../../services/apod.service";
@@ -17,6 +19,8 @@ export class ApodComponent {
     dateToLoad: string; // API string represenation of the currently loaded date
     direction: boolean; // true means going to Prevous date; false means going to Next date
     toolbarHelper : ToolbarHelper;
+    isBusy: boolean;
+    indicator: ActivityIndicator;
 
     constructor(private apodService: ApodService, private page: Page) {
         this.toolbarHelper = new ToolbarHelper();
@@ -27,6 +31,32 @@ export class ApodComponent {
 
         this.dateToLoad = this.toolbarHelper.dateToString(this.lastLoadedDate);
         this.extractData(this.dateToLoad); // initially load TODAY's pic
+
+        this.isBusy = true;
+    }
+
+    onImageLoaded(args) {
+        let image = <Image>args.object;
+        image.visibility = "collapse";
+
+        image.on("isLoadingChange", (args) => {
+            if (!image.isLoading) {
+                image.visibility = "visible"; // show image - change indicator
+                this.indicator.busy= false;
+                this.indicator.visibility = "collapse";
+                console.log("image LOADED");
+            } else {
+                image.visibility = "collapse";
+                this.indicator.busy = true;
+                this.indicator.visibility = "visible";
+                console.log("image LOADING");
+            }
+        })
+    }
+
+    onBusyChanged(args) {
+        this.indicator = <ActivityIndicator>args.object;
+        console.log("indicator.busy changed to: " + this.indicator.busy);
     }
 
     onNotify(message: string): void {

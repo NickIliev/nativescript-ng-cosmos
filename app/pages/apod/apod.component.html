@@ -1,7 +1,8 @@
 <GridLayout rows="*, auto">
     <ScrollView row="0">
         <StackLayout>
-            <Image [src]="item.url"></Image>
+            <ActivityIndicator [busy]="isBusy" (busyChange)="onBusyChanged($event)" width="150" height="150" class="activity-indicator m-20"></ActivityIndicator>
+            <Image (loaded)="onImageLoaded($event)" [src]="item.url"></Image>
             <Label [text]="item.title" class="title p-10" textWrap="true"></Label>
             <Label [text]="item.explanation" class="description p-b-10 p-l-10 p-r-10" textWrap="true"></Label>
             <Label [text]="item.date" class="date p-b-10 p-l-10 p-r-10" textWrap="true"></Label>
