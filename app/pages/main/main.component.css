@@ -4,12 +4,13 @@
 
 .cardview Label {
     color: #BCBCBC;
-    font-size:14;
+    font-size: 14;
 }
 
 .action-bar-title {
-    font-family: "Nasalization";
     color: #BCBCBC;
+    font-family: "Nasalization";
+    font-size: 18;
     text-align: center;
 }
 

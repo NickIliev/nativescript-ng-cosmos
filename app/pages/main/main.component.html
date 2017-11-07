@@ -2,7 +2,7 @@
 <ActionBar *ngIf="isAndroid" >
     <ActionBar.titleView>
         <StackLayout class="p-8" >
-            <Label text="COSMOS Databank" class="h3 action-bar-title"></Label>
+            <Label text="COSMOS Databank" class="action-bar-title"></Label>
         </StackLayout>
     </ActionBar.titleView>
     <ActionItem ios.position="right" (tap)="toggleDrawer()" >
@@ -16,7 +16,7 @@
 <ActionBar *ngIf="isIos">
     <ActionItem ios.position="left">
         <StackLayout>
-            <Label text="COSMOS Databank" class="h3 m-t-8 m-b-8 m-l-8 action-bar-title"></Label>
+            <Label text="COSMOS Databank" class="m-t-8 m-b-8 m-l-8 action-bar-title"></Label>
         </StackLayout>
     </ActionItem>
     <ActionItem ios.position="right" (tap)="toggleDrawer()">
@@ -41,25 +41,25 @@
             <CardView elevation="40" radius="40" margin="10">
                 <GridLayout rows="160" columns="3*, 4*" [nsRouterLink]="['/apod']" class="cardview">
                     <Image row="0" col="1" src="~/images/cosmos.jpg" stretch="aspectFill"></Image>
-                    <Label row="0" col="0" [text]="apodTitle" textWrap="true" class="h3 text-left p-l-8 p-r-8" verticalAlignment="center"></Label>
+                    <Label row="0" col="0" [text]="apodTitle" textWrap="true" class="text-left p-l-8 p-r-8" verticalAlignment="center"></Label>
                 </GridLayout>
             </CardView>
             <CardView elevation="40" radius="40" margin="10">
                 <GridLayout rows="160" columns="4*, 3*" [nsRouterLink]="['/asteroids']" class="cardview">
                     <Image row="0" col="0" src="~/images/aste.jpg" stretch="aspectFill"></Image>
-                    <Label row="0" col="1" [text]="asteroidTitle" textWrap="true" class="h3 text-right p-l-8 p-r-8" verticalAlignment="center"></Label>
+                    <Label row="0" col="1" [text]="asteroidTitle" textWrap="true" class="text-right p-l-8 p-r-8" verticalAlignment="center"></Label>
                 </GridLayout>
             </CardView>
             <CardView elevation="40" radius="40" margin="10">
                 <GridLayout rows="160" columns="3*, 4*" [nsRouterLink]="['/rovers']" class="cardview">
                     <Image row="0" col="1" src="~/images/rover.jpg" stretch="aspectFill"></Image>
-                    <Label row="0" col="0" [text]="roversTitle" textWrap="true" class="h3 text-left p-l-8 p-r-8" verticalAlignment="center"></Label>
+                    <Label row="0" col="0" [text]="roversTitle" textWrap="true" class="text-left p-l-8 p-r-8" verticalAlignment="center"></Label>
                 </GridLayout>
             </CardView>
             <CardView elevation="40" radius="40" margin="10">
                 <GridLayout rows="160" columns="4*, 3*" [nsRouterLink]="['/info']" class="cardview">
                     <Image row="0" col="0" src="res://logo" stretch="aspectFill"></Image>
-                    <Label row="0" col="1" [text]="detailsTitle" textWrap="true" class="h3 text-right p-l-8 p-r-8" verticalAlignment="center"></Label>
+                    <Label row="0" col="1" [text]="detailsTitle" textWrap="true" class="text-right p-l-8 p-r-8" verticalAlignment="center"></Label>
                 </GridLayout>
             </CardView>
         </StackLayout>

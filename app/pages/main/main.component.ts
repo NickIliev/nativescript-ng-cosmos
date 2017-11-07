@@ -24,23 +24,16 @@ export class MainComponent {
     constructor(private _changeDetectionRef: ChangeDetectorRef) {
         this.apodTitle = "Astronomical \nPhoto \nof the Day";
         this.asteroidTitle = "Asteroids\n Proximity\n Checker";
-        this.roversTitle = "Mars Rovers\n Photos\n Databank";
+        this.roversTitle = "Mars Rovers \nPhotos \nDatabank";
         this.detailsTitle = "About\n Cosmos Databank\n Application";
-    }
-
-    ngOnInit() {
-        console.log("ngOnInit");
     }
 
     ngAfterViewInit() {
         this.drawer = this.drawerComponent.sideDrawer;
         this._changeDetectionRef.detectChanges();
-
-        console.log("ngAfterViewInit: " + this.drawer);
     }
 
     public toggleDrawer() {
-        console.log("toggle: " + this.drawer);
         this.drawer.toggleDrawerState();
     }
 }
