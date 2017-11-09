@@ -21,6 +21,7 @@ export class ApodComponent {
     toolbarHelper : ToolbarHelper;
     isBusy: boolean;
     indicator: ActivityIndicator;
+    image: Image;
 
     constructor(private apodService: ApodService, private page: Page) {
         this.toolbarHelper = new ToolbarHelper();
@@ -36,20 +37,18 @@ export class ApodComponent {
     }
 
     onImageLoaded(args) {
-        let image = <Image>args.object;
-        image.visibility = "collapse";
+        this.image = <Image>args.object;
+        this.image.visibility = !this.image.isLoading ? "visible" : "collapse"; // on App resume check if image is already loaded or not
 
-        image.on("isLoadingChange", (args) => {
-            if (!image.isLoading) {
-                image.visibility = "visible"; // show image - change indicator
+        this.image.on("isLoadingChange", (args) => {
+            if (!this.image.isLoading) {
+                this.image.visibility = "visible"; // show image - change indicator
                 this.indicator.busy= false;
                 this.indicator.visibility = "collapse";
-                console.log("image LOADED");
             } else {
-                image.visibility = "collapse";
+                this.image.visibility = "collapse";
                 this.indicator.busy = true;
                 this.indicator.visibility = "visible";
-                console.log("image LOADING");
             }
         })
     }
