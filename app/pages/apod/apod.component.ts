@@ -15,25 +15,21 @@ import { ToolbarHelper } from "../../shared/toolbar-helper";
 })
 export class ApodComponent {
     item: ApodItem = new ApodItem("", "", "", "", "", "", "", "");
-    lastLoadedDate: Date; // today
-    dateToLoad: string; // API string represenation of the currently loaded date
+    lastLoadedDate: Date = new Date(); // today
+
+    toolbarHelper : ToolbarHelper = new ToolbarHelper();
     direction: boolean; // true means going to Prevous date; false means going to Next date
-    toolbarHelper : ToolbarHelper;
-    isBusy: boolean;
+
     indicator: ActivityIndicator;
     image: Image;
 
     constructor(private apodService: ApodService, private page: Page) {
-        this.toolbarHelper = new ToolbarHelper();
-        this.lastLoadedDate = new Date();
+
         if (isAndroid) {
             this.page.actionBarHidden = true;
         }
 
-        this.dateToLoad = this.toolbarHelper.dateToString(this.lastLoadedDate);
-        this.extractData(this.dateToLoad); // initially load TODAY's pic
-
-        this.isBusy = true;
+        this.extractData(this.toolbarHelper.dateToString(this.lastLoadedDate)); // initially load TODAY's pic
     }
 
     onImageLoaded(args) {
@@ -53,9 +49,8 @@ export class ApodComponent {
         })
     }
 
-    onBusyChanged(args) {
+    onBIndicatorLoaded(args) {
         this.indicator = <ActivityIndicator>args.object;
-        console.log("indicator.busy changed to: " + this.indicator.busy);
     }
 
     onNotify(message: string): void {
