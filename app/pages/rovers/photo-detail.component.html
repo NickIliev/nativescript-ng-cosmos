@@ -7,7 +7,7 @@
             <Label [text]="photo.earthDate" class="date p-b-10 p-l-10 p-r-10" textWrap="true"></Label>
         </StackLayout>
     </ScrollView>
-    <!-- <DockLayout class="dock" row="1" stretchLastChild="true">
-        <toolbar (notify)="onNotify($event)"></toolbar>
-    </DockLayout> -->
+    <DockLayout class="dock" row="1" stretchLastChild="true">
+        <rovers-toolbar (notify)="onNotify($event)"></rovers-toolbar>
+    </DockLayout>
 </GridLayout>

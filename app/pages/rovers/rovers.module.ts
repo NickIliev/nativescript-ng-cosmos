@@ -6,7 +6,7 @@ import { RoversComponent } from "./rovers.component";
 import { PhotoDetailComponent } from "./photo-detail.component";
 
 import { PickersComponent } from "./pickers/pickers.component";
-
+import { RoversToolbarComponent } from "./toolbar/toolbar.component";
 export const routerConfig = [
     {
         path: "", 
@@ -22,7 +22,7 @@ export const routerConfig = [
         NativeScriptRouterModule,
         NativeScriptRouterModule.forChild(routerConfig)
     ],
-    declarations: [RoversComponent, PhotoDetailComponent, PickersComponent],
+    declarations: [RoversComponent, PhotoDetailComponent, PickersComponent, RoversToolbarComponent],
     providers: [RoverPhotosService],
     schemas: [
         NO_ERRORS_SCHEMA

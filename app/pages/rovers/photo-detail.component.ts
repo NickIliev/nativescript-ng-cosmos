@@ -41,11 +41,7 @@ export class PhotoDetailComponent implements OnInit {
     }
 
     onNotify(message: string) {
-        if (message === "goToPrevousDay") {
-            console.log("goToPrevousDay not implemented!");
-        } else if (message === "goToNextDay") {
-            console.log("goToNextDay not implemented!");
-        } else if (message === "onShare") {
+        if (message === "onShare") {
             fromUrl(this.photo.imageUri).then(image => {
                 shareImage(image);
             })
