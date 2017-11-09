@@ -8,6 +8,9 @@ import { ActivatedRoute } from "@angular/router";
 import { RoverPhoto } from "../../models/rover-model";
 import { RoverPhotosService } from "../../services/rover.service";
 import { Observable as RxObservable } from "rxjs/Observable";
+
+import { alert } from "ui/dialogs";
+
 import "rxjs/add/operator/map";
 
 @Component({
@@ -60,6 +63,12 @@ export class RoversComponent {
                 
                 //  TODO: create check if lenght === 0 then provide info and option to change date
                 console.log("itemsList.length: " + itemsList.length); 
+
+                if(itemsList.length === 0) {
+                    alert("No availabel photos for the selected date! Please choose different date from the selection page!").then(() => {
+                        this._router.back();
+                    })
+                }
 
                 this.tempArr = itemsList;
 

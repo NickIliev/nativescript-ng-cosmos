@@ -14,9 +14,9 @@ import { isAndroid } from "platform";
 
 export class PickersComponent {
 
-	public rovers: Array<string>;
+	public rovers: Array<string> = ["Opportunity", "Curiosity", "Spirit"];;
 
-	private _today: Date;
+	private _today: Date = new Date();
 	private _day: number;
 	private _month: number;
 	private _year: number;
@@ -31,9 +31,6 @@ export class PickersComponent {
 		if (isAndroid) {
 			this._page.actionBarHidden = true;
 		}
-
-		this._today = new Date();
-		this.rovers = ["Opportunity", "Curiosity", "Spirit"];
 	}
 
 	ngAfterViewInit() {
