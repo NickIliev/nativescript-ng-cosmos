@@ -49,8 +49,9 @@ export class ApodComponent {
         })
     }
 
-    onBIndicatorLoaded(args) {
+    onIndicatorLoaded(args) {
         this.indicator = <ActivityIndicator>args.object;
+        this.indicator.busy = true;
     }
 
     onNotify(message: string): void {

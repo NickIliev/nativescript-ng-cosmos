@@ -48,7 +48,7 @@ export class RoversComponent {
             this.rover = query.rover;
             this.day = query.day;
             this.month = query.month;
-            this.year = query.year; 
+            this.year = query.year;
         }
     }
 
@@ -60,14 +60,11 @@ export class RoversComponent {
     private extractData(rover: string, year: number, month: number, day: number, pageIndex: number) {
         this._roverService.getPhotosWithDateAndPageIndex(rover, year, month, day, pageIndex)
             .subscribe((itemsList) => {
-                
-                //  TODO: create check if lenght === 0 then provide info and option to change date
-                console.log("itemsList.length: " + itemsList.length); 
-
-                if(itemsList.length === 0) {
-                    alert("No availabel photos for the selected date! Please choose different date from the selection page!").then(() => {
-                        this._router.back();
-                    })
+                if (itemsList.length === 0) {
+                    alert("No availabel photos for the selected date! Please choose different date from the selection page!")
+                        .then(() => {
+                            this._router.back();
+                        })
                 }
 
                 this.tempArr = itemsList;
