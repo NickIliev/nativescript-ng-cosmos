@@ -10,7 +10,7 @@ import { shareImage } from "nativescript-social-share";
 @Component({
     selector: "ns-details",
 
-    templateUrl: "./photo-detail.component.html",
+    templateUrl: "./photo-detail.component.html"
 })
 export class PhotoDetailComponent implements OnInit {
 
