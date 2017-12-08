@@ -9,20 +9,33 @@ const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const { NativeScriptWorkerPlugin } = require("nativescript-worker-loader/NativeScriptWorkerPlugin");
 
 module.exports = env => {
+<<<<<<< HEAD
     const platform = env && (env.android && "android" || env.ios && "ios");
+=======
+    const platform = env.android && "android" || env.ios && "ios";
+>>>>>>> d566f12d4d70133e8e1c9e6b7560d21f216d47e4
     if (!platform) {
         throw new Error("You need to provide a target platform!");
     }
     const platforms = ["ios", "android"];
     const mainSheet = "app.css";
+<<<<<<< HEAD
     const { snapshot, uglify, report, aot } = env;
     const ngToolsWebpackOptions = { tsConfigPath: aot ? "tsconfig.aot.json" : "tsconfig.json"};
+=======
+    const { snapshot, uglify, skipCodeGeneration } = env;
+    const ngToolsWebpackOptions = { tsConfigPath: skipCodeGeneration ? "tsconfig.json" : "tsconfig.aot.json"};
+>>>>>>> d566f12d4d70133e8e1c9e6b7560d21f216d47e4
 
     const config = {
         context: resolve("./app"),
         target: nativescriptTarget,
         entry: {
+<<<<<<< HEAD
             bundle: aot ? "./main.aot.ts" : "./main.ts",
+=======
+            bundle: skipCodeGeneration ? "./main.ts" : "./main.aot.ts",
+>>>>>>> d566f12d4d70133e8e1c9e6b7560d21f216d47e4
             vendor: "./vendor",
         },
         output: {
@@ -33,7 +46,11 @@ module.exports = env => {
             filename: "[name].js",
         },
         resolve: {
+<<<<<<< HEAD
             extensions: [".ts", ".js", ".scss", ".css"],
+=======
+            extensions: [".js", ".ts", ".css", ".scss"],
+>>>>>>> d566f12d4d70133e8e1c9e6b7560d21f216d47e4
             // Resolve {N} system modules from tns-core-modules
             modules: [
                 "node_modules/tns-core-modules",
@@ -80,7 +97,10 @@ module.exports = env => {
             }),
             // Copy assets to out dir. Add your own globs as needed.
             new CopyWebpackPlugin([
+<<<<<<< HEAD
                 { from: "App_Resources/**" },
+=======
+>>>>>>> d566f12d4d70133e8e1c9e6b7560d21f216d47e4
                 { from: "fonts/**" },
                 { from: "**/*.jpg" },
                 { from: "**/*.png" },
@@ -93,10 +113,22 @@ module.exports = env => {
             ]),
             // Support for web workers since v3.2
             new NativeScriptWorkerPlugin(),
+<<<<<<< HEAD
+=======
+            // Generate report files for bundles content
+            new BundleAnalyzerPlugin({
+                analyzerMode: "static",
+                openAnalyzer: false,
+                generateStatsFile: true,
+                reportFilename: join(__dirname, "report", `report.html`),
+                statsFilename: join(__dirname, "report", `stats.json`),
+            }),
+>>>>>>> d566f12d4d70133e8e1c9e6b7560d21f216d47e4
             // AngularCompilerPlugin with augmented NativeScript filesystem to handle platform specific resource resolution.
             new nsWebpack.NativeScriptAngularCompilerPlugin(
                 Object.assign({
                     entryModule: resolve(__dirname, "app/app.module#AppModule"),
+<<<<<<< HEAD
                     skipCodeGeneration: !aot,
                     platformOptions: {
                         platform,
@@ -119,6 +151,18 @@ module.exports = env => {
             statsFilename: join(__dirname, "report", `stats.json`),
         }));
     }
+=======
+                    skipCodeGeneration,
+                    platformOptions: {
+                        platform,
+                        platforms,
+                        ignore: ["App_Resources"]
+                    },
+                }, ngToolsWebpackOptions)
+            ),
+        ],
+    };
+>>>>>>> d566f12d4d70133e8e1c9e6b7560d21f216d47e4
     if (snapshot) {
         config.plugins.push(new nsWebpack.NativeScriptSnapshotPlugin({
             chunk: "vendor",
