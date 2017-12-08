@@ -9,7 +9,7 @@ import { ToolbarHelper } from "../../shared/toolbar-helper";
 
 @Component({
     selector: "ns-items",
-    moduleId: module.id,
+
     templateUrl: "./apod.component.html",
     styleUrls: ["./apod.component.css"]
 })

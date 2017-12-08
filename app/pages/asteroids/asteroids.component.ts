@@ -10,7 +10,7 @@ import "rxjs/add/operator/map";
 
 @Component({
     selector: "ns-asteroids",
-    moduleId: module.id,
+
     templateUrl: "./asteroids.component.html",
     styleUrls:["./asteroids.component.css"]
 })

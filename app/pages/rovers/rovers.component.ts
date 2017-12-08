@@ -15,7 +15,7 @@ import "rxjs/add/operator/map";
 
 @Component({
     selector: "rovers",
-    moduleId: module.id,
+
     templateUrl: "./rovers.component.html",
     styleUrls: ["./rovers.component.css"]
 })
