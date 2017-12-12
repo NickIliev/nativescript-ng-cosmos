@@ -4,7 +4,7 @@ import { Page } from "ui/page";
 
 @Component({
     selector: "ns-info",
-    moduleId: module.id,
+    
     templateUrl: "./info.component.html",
 })
 export class InfoComponent {
