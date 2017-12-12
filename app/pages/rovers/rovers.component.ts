@@ -23,12 +23,10 @@ export class RoversComponent {
 
     public roverPhotos: RxObservable<Array<RoverPhoto>>;
     public isAndroid: boolean;
-
     public day: number;
     public month: number;
     public year: number;
     public rover: string;
-
     private tempArr: Array<RoverPhoto> = [];
     private pageIndex: number;
     private subscr;
@@ -44,7 +42,6 @@ export class RoversComponent {
     ngOnInit() {
         if (this._activatedRoute.snapshot.queryParams) {
             const query = this._activatedRoute.snapshot.queryParams;
-
             this.rover = query.rover;
             this.day = query.day;
             this.month = query.month;
