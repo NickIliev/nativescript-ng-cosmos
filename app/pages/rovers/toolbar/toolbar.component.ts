@@ -3,7 +3,7 @@ import { Button } from "ui/button";
 
 @Component({
     selector: 'rovers-toolbar',
-
+    moduleId: module.id,
     templateUrl: './toolbar.component.html',
     styleUrls: ['./toolbar.component.css']
 })

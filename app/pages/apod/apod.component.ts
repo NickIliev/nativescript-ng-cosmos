@@ -6,10 +6,11 @@ import { ApodItem } from "../../models/apod-model";
 import { ApodService } from "../../services/apod.service";
 import { isAndroid } from "platform";
 import { ToolbarHelper } from "../../shared/toolbar-helper";
+import { alert } from "ui/dialogs";
 
 @Component({
     selector: "ns-items",
-
+    moduleId: module.id,
     templateUrl: "./apod.component.html",
     styleUrls: ["./apod.component.css"]
 })
@@ -29,6 +30,8 @@ export class ApodComponent {
             this.page.actionBarHidden = true;
         }
 
+
+        console.log("constructor this.lastLoadedDate: " + this.lastLoadedDate.toDateString() );
         this.extractData(this.toolbarHelper.dateToString(this.lastLoadedDate)); // initially load TODAY's pic
     }
 
@@ -56,12 +59,33 @@ export class ApodComponent {
 
     onNotify(message: string): void {
         if (message === "goToPrevousDay") {
-            this.toolbarHelper.goToPrevousDay(this.lastLoadedDate, this.direction);
+            this.direction = true;
+
+            console.log("BBB goToPrevousDay this.lastLoadedDate: " + this.lastLoadedDate.toDateString() );
+            this.toolbarHelper.goToPrevousDay(this.lastLoadedDate);
+            console.log("AAA goToPrevousDay this.lastLoadedDate: " + this.lastLoadedDate.toDateString() );
             this.extractData(this.toolbarHelper.dateToString(this.lastLoadedDate));
         } else if (message === "goToNextDay") {
-            let isValideDate = this.toolbarHelper.goToNextDay(this.lastLoadedDate, this.direction);
-            if (isValideDate) {
+            this.direction = false;
+
+            console.log("BBB goToNextDay this.lastLoadedDate: " + this.lastLoadedDate.toDateString() );
+            let isValideDate = this.toolbarHelper.goToNextDay(this.lastLoadedDate);
+
+            if (isValideDate && this.lastLoadedDate <= new Date()) {
                 this.extractData(this.toolbarHelper.dateToString(this.lastLoadedDate));
+                console.log("AAA goToNextDay this.lastLoadedDate: " + this.lastLoadedDate.toDateString() );
+            } else {
+                let options = {
+                    title: "No Photo Available!",
+                    message: "Future date requested - returning to today's pic.",
+                    okButtonText: "OK"
+                };
+                // show warnig if the user request photos from future date - perhaps disable the next button here
+                alert(options).then(() => {
+                    console.log("No photos abailable - returning to today's pic");
+                    this.lastLoadedDate = new Date();
+                    this.extractData(this.toolbarHelper.dateToString(this.lastLoadedDate));
+                });
             }
         } else if (message === "onShare") {
             this.toolbarHelper.onShare(this.item);
@@ -73,19 +97,24 @@ export class ApodComponent {
     }
 
     private extractData(date: string) {
+
+        console.log("extractData this.direction: " +  this.direction);
+
         this.apodService.getDataWithCustomDate(date)
             .subscribe((result) => {
                 if (result.media_type === "image") {
                     this.item = new ApodItem(result.copyright, result.date, result.explanation, result.hdurl, result.media_type, result.service_version, result.title, result.url);
                 } else if (result.media_type !== "image" && this.direction) {
                     // return; // implement the logic for YouTube videos here
-                    this.toolbarHelper.goToPrevousDay(this.lastLoadedDate, this.direction);
+                    this.toolbarHelper.goToPrevousDay(this.lastLoadedDate);
                     this.extractData(this.toolbarHelper.dateToString(this.lastLoadedDate));
                 } else if (result.media_type !== "image" && !this.direction) {
                     // return; // implement the logic for YouTube videos here
-                    let isValideDate = this.toolbarHelper.goToNextDay(this.lastLoadedDate, this.direction);
+                    let isValideDate = this.toolbarHelper.goToNextDay(this.lastLoadedDate);
                     if (isValideDate) {
                         this.extractData(this.toolbarHelper.dateToString(this.lastLoadedDate));
+                    } else {
+                        return;
                     }
                 } else {
                     return;

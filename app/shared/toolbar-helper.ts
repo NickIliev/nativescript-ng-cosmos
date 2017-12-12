@@ -1,5 +1,4 @@
 import { ApodItem } from "../models/apod-model";
-import { alert } from "ui/dialogs";
 import { fromUrl } from "image-source";
 import { isAndroid, isIOS } from "platform";
 import { shareImage } from "nativescript-social-share";
@@ -7,41 +6,28 @@ import { ad } from "utils/utils";
 
 export class ToolbarHelper {
 
-    goToPrevousDay(lastLoadedDate: Date, direction: boolean) {
+    goToPrevousDay(lastLoadedDate: Date) {
+        console.log("GO TO PREVIOUS DAY");
+        console.log("BEFORE goToPrevousDay lastLoadedDate: " + (lastLoadedDate));
         lastLoadedDate.setDate(lastLoadedDate.getDate() - 1); // previous day
-        direction = true;
+
+        console.log("AFTER goToPrevousDay lastLoadedDate: " + (lastLoadedDate));
     }
 
-    goToNextDay(lastLoadedDate: Date, direction: boolean): boolean {
+    goToNextDay(lastLoadedDate: Date): boolean {
+        console.log("GO TO NEXTTT DAY");
         let isValidDate: boolean;
 
         let today = new Date();
+
         let tomorrow = new Date();
         tomorrow.setDate(tomorrow.getDate() + 1);
 
-        console.log("lastLoadedDate: "+ lastLoadedDate);
-        console.log("today: " + today.getDate());
-        console.log("tomorrow: " + tomorrow.getDate());
-        console.log(lastLoadedDate.getDate() < tomorrow.getDate());
-        console.log(lastLoadedDate.getDate() !== today.getDate());
-        console.log(lastLoadedDate.getMonth() === today.getMonth());
-
-        if (lastLoadedDate <= tomorrow) {
+        if (lastLoadedDate <= today) {
             lastLoadedDate.setDate(lastLoadedDate.getDate() + 1); // next day - TODO: implement logic to prevent looking for photos in the future  
-            direction = false; // false === go to next date
             isValidDate = true;
         } else {
             isValidDate = false;
-            
-            let options = {
-                title: "No Photo Available!",
-                message: "Future date requested - returning to today's pic.",
-                okButtonText: "OK"
-            };
-            // show warnig if the user request photos from future date - perhaps disable the next button here
-            alert(options).then(() => {
-                console.log("No photos abailable");
-            });
         }
 
         return isValidDate;

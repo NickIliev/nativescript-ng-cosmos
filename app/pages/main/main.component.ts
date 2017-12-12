@@ -5,7 +5,7 @@ import { isAndroid, isIOS } from "platform";
 
 @Component({
     selector: "ns-details",
-
+    moduleId: module.id,
     templateUrl: "./main.component.html",
     styleUrls: ['./main.component.css']
 })
