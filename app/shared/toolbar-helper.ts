@@ -6,11 +6,11 @@ import { ad } from "utils/utils";
 
 export class ToolbarHelper {
 
-    goToPrevousDay(lastLoadedDate: Date) {
+    setPrevousDay(lastLoadedDate: Date) {
         lastLoadedDate.setDate(lastLoadedDate.getDate() - 1); // previous day
     }
 
-    goToNextDay(lastLoadedDate: Date): boolean {
+    setNextDay(lastLoadedDate: Date): boolean {
         let isValidDate: boolean;
         let today = new Date();
 

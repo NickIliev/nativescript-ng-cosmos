@@ -10,6 +10,7 @@ export class ApodService {
     getData() {
         return this.http.get("https://api.nasa.gov/planetary/apod?api_key=jXRI5DynwdFVqt950uq6XMwZtlf6w8mSgpTJTcbX")
                 .map(res => res.json());
+                
     }
 
     getDataWithCustomDate(date:string) { 

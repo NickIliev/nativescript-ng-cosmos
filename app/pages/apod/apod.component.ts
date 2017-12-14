@@ -18,8 +18,17 @@ export class ApodComponent {
     item: ApodItem = new ApodItem("", "", "", "", "", "", "", "");
     lastLoadedDate: Date = new Date(); // today
 
-    toolbarHelper : ToolbarHelper = new ToolbarHelper();
-    direction: boolean; // true means going to Prevous date; false means going to Next date
+    toolbarHelper: ToolbarHelper = new ToolbarHelper();
+
+    /* 
+    [direction: boolean]
+    true === means going to Prevous date; 
+    false === means going to Next date
+        initial value set to true so when an YouTube Is loaded for INITIAL date 
+        to set prveious day with (result.media_type !== "image" && this.direction)
+        Remove when logic for other media types is implemented!!!
+    */
+    direction: boolean = true;
 
     indicator: ActivityIndicator;
     image: Image;
@@ -30,6 +39,7 @@ export class ApodComponent {
             this.page.actionBarHidden = true;
         }
 
+        console.log("constructor: " + this.lastLoadedDate);
         this.extractData(this.toolbarHelper.dateToString(this.lastLoadedDate)); // initially load TODAY's pic
     }
 
@@ -40,7 +50,7 @@ export class ApodComponent {
         this.image.on("isLoadingChange", (args) => {
             if (!this.image.isLoading) {
                 this.image.visibility = "visible"; // show image - change indicator
-                this.indicator.busy= false;
+                this.indicator.busy = false;
                 this.indicator.visibility = "collapse";
             } else {
                 this.image.visibility = "collapse";
@@ -58,15 +68,14 @@ export class ApodComponent {
     onNotify(message: string): void {
         if (message === "goToPrevousDay") {
             this.direction = true;
-            this.toolbarHelper.goToPrevousDay(this.lastLoadedDate);
+            this.toolbarHelper.setPrevousDay(this.lastLoadedDate);
             this.extractData(this.toolbarHelper.dateToString(this.lastLoadedDate));
         } else if (message === "goToNextDay") {
             this.direction = false;
-            let isValideDate = this.toolbarHelper.goToNextDay(this.lastLoadedDate);
+            let isValideDate = this.toolbarHelper.setNextDay(this.lastLoadedDate);
 
             if (isValideDate && this.lastLoadedDate <= new Date()) {
                 this.extractData(this.toolbarHelper.dateToString(this.lastLoadedDate));
-
             } else {
                 let options = {
                     title: "No Photo Available!",
@@ -92,25 +101,44 @@ export class ApodComponent {
     private extractData(date: string) {
         this.apodService.getDataWithCustomDate(date)
             .subscribe((result) => {
+                console.log("subscriptiojn result: ");
+                console.log(result.media_type);
+
                 if (result.media_type === "image") {
-                    this.item = new ApodItem(result.copyright, result.date, result.explanation, result.hdurl, result.media_type, result.service_version, result.title, result.url);
+
+                    this.item = new ApodItem(
+                        result.copyright,
+                        result.date,
+                        result.explanation,
+                        result.hdurl,
+                        result.media_type,
+                        result.service_version,
+                        result.title,
+                        result.url
+                    );
+
                 } else if (result.media_type !== "image" && this.direction) {
+
                     // TODO: implement the logic for YouTube videos here
-                    this.toolbarHelper.goToPrevousDay(this.lastLoadedDate);
+                    this.toolbarHelper.setPrevousDay(this.lastLoadedDate);
                     this.extractData(this.toolbarHelper.dateToString(this.lastLoadedDate));
+
                 } else if (result.media_type !== "image" && !this.direction) {
+
                     // TODO: implement the logic for YouTube videos here
-                    let isValideDate = this.toolbarHelper.goToNextDay(this.lastLoadedDate);
+                    let isValideDate = this.toolbarHelper.setNextDay(this.lastLoadedDate);
                     if (isValideDate) {
                         this.extractData(this.toolbarHelper.dateToString(this.lastLoadedDate));
                     } else {
                         return;
                     }
+
                 } else {
                     return;
                 }
             }, (error) => {
-                console.log(error);
+                console.log("Server Status Code: " + error.status);
+                console.dir(error);
             });
     }
 }
