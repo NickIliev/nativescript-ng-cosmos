@@ -7,7 +7,7 @@ import { isAndroid } from "platform";
 
 @Component({
 	selector: 'pickers',
-	
+	moduleId: module.id,
 	templateUrl: './pickers.component.html',
 	styleUrls: ['./pickers.component.css']
 })

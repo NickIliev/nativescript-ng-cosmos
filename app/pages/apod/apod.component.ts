@@ -10,7 +10,7 @@ import { alert } from "ui/dialogs";
 
 @Component({
     selector: "ns-items",
-    
+    moduleId: module.id,
     templateUrl: "./apod.component.html",
     styleUrls: ["./apod.component.css"]
 })
