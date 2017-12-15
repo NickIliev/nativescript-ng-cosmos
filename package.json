@@ -5,11 +5,8 @@
   "repository": "<fill-your-repository-here>",
   "nativescript": {
     "id": "org.nativescript.curiosity",
-    "tns-ios": {
-      "version": "3.4.0-rc-2017-12-4-1"
-    },
     "tns-android": {
-      "version": "3.4.0-2017-12-6-3"
+      "version": "3.4.0-2017-12-14-01"
     }
   },
   "dependencies": {

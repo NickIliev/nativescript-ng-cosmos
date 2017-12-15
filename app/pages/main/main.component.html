@@ -1,11 +1,11 @@
 <!-- Using @next on nativescript-angular to resilve 'more than one Conten View' error -->
-<ActionBar *ngIf="isAndroid" >
+<ActionBar *ngIf="isAndroid">
     <ActionBar.titleView>
-        <StackLayout class="p-8" >
+        <StackLayout class="p-8">
             <Label text="COSMOS Databank" class="action-bar-title"></Label>
         </StackLayout>
     </ActionBar.titleView>
-    <ActionItem ios.position="right" (tap)="toggleDrawer()" >
+    <ActionItem ios.position="right" (tap)="toggleDrawer()">
         <GridLayout width="60" borderWidth="8" borderRadius="20" borderColor="#343838" backgroundColor="#282a2a">
             <Image src="res://ic_menu" opacity="0.8" verticalAlignment="center" horizontalAlignment="center" stretch="aspectFlll"></Image>
         </GridLayout>
@@ -28,36 +28,36 @@
 
 <RadSideDrawer tkExampleTitle tkToggleNavButton showOverNavigation="true">
     <StackLayout tkDrawerContent class="sidedrawer-content">
-            <Label text="Home" (tap)="toggleDrawer()" class="sidedrawer-label"></Label>
-            <Label text="Photo of the Day" [nsRouterLink]="['/apod']" pageTransition="fade" class="sidedrawer-label"></Label>
-            <Label text="Asteroids Proximity Checker" [nsRouterLink]="['/asteroids']" pageTransition="fade" class="sidedrawer-label"></Label>
-            <Label text="Mars Rovers Photos" [nsRouterLink]="['/rovers']" pageTransition="fade" class="sidedrawer-label"></Label>
-            <Label text="Details" [nsRouterLink]="['/info']" pageTransition="fade" class="sidedrawer-label"></Label>
-            <!-- -Navigating with pageTransition="fade"  will freee the app on iOS!!!-->
+        <Label text="Home" (tap)="toggleDrawer()" class="sidedrawer-label"></Label>
+        <Label text="Photo of the Day" [nsRouterLink]="['/apod']" pageTransition="fade" class="sidedrawer-label"></Label>
+        <Label text="Asteroids Proximity Checker" [nsRouterLink]="['/asteroids']" pageTransition="fade" class="sidedrawer-label"></Label>
+        <Label text="Mars Rovers Photos" [nsRouterLink]="['/rovers']" pageTransition="fade" class="sidedrawer-label"></Label>
+        <Label text="Details" [nsRouterLink]="['/info']" pageTransition="fade" class="sidedrawer-label"></Label>
+        <!-- -Navigating with pageTransition="fade"  will freee the app on iOS!!!-->
     </StackLayout>
 
-    <ScrollView tkMainContent >
+    <ScrollView tkMainContent>
         <StackLayout class="sidedrawer-content">
-            <CardView elevation="40" radius="40" margin="10">
-                <GridLayout rows="160" columns="3*, 4*" [nsRouterLink]="['/apod']" class="cardview">
+            <CardView elevation="40" radius="40" margin="10" class="cardview">
+                <GridLayout rows="160" columns="3*, 4*" [nsRouterLink]="['/apod']">
                     <Image row="0" col="1" src="~/images/cosmos.jpg" stretch="aspectFill"></Image>
                     <Label row="0" col="0" [text]="apodTitle" textWrap="true" class="text-left p-l-8 p-r-8" verticalAlignment="center"></Label>
                 </GridLayout>
             </CardView>
-            <CardView elevation="40" radius="40" margin="10">
-                <GridLayout rows="160" columns="4*, 3*" [nsRouterLink]="['/asteroids']" class="cardview">
+            <CardView elevation="40" radius="40" margin="10" class="cardview">
+                <GridLayout rows="160" columns="4*, 3*" [nsRouterLink]="['/asteroids']">
                     <Image row="0" col="0" src="~/images/aste.jpg" stretch="aspectFill"></Image>
                     <Label row="0" col="1" [text]="asteroidTitle" textWrap="true" class="text-right p-l-8 p-r-8" verticalAlignment="center"></Label>
                 </GridLayout>
             </CardView>
-            <CardView elevation="40" radius="40" margin="10">
-                <GridLayout rows="160" columns="3*, 4*" [nsRouterLink]="['/rovers']" class="cardview">
+            <CardView elevation="40" radius="40" margin="10" class="cardview">
+                <GridLayout rows="160" columns="3*, 4*" [nsRouterLink]="['/rovers']">
                     <Image row="0" col="1" src="~/images/rover.jpg" stretch="aspectFill"></Image>
                     <Label row="0" col="0" [text]="roversTitle" textWrap="true" class="text-left p-l-8 p-r-8" verticalAlignment="center"></Label>
                 </GridLayout>
             </CardView>
-            <CardView elevation="40" radius="40" margin="10">
-                <GridLayout rows="160" columns="4*, 3*" [nsRouterLink]="['/info']" class="cardview">
+            <CardView elevation="40" radius="40" margin="10" class="cardview">
+                <GridLayout rows="160" columns="4*, 3*" [nsRouterLink]="['/info']">
                     <Image row="0" col="0" src="res://logo" stretch="aspectFill"></Image>
                     <Label row="0" col="1" [text]="detailsTitle" textWrap="true" class="text-right p-l-8 p-r-8" verticalAlignment="center"></Label>
                 </GridLayout>
