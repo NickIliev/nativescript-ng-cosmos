@@ -15,12 +15,10 @@ import { isAndroid } from "platform";
 export class PickersComponent {
 
 	public rovers: Array<string> = ["Opportunity", "Curiosity", "Spirit"];;
-
 	private _today: Date = new Date();
 	private _day: number;
 	private _month: number;
 	private _year: number;
-
 	private _selectedIndex: number;
 	private _selectedRover: string;
 

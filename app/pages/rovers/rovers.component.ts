@@ -1,16 +1,13 @@
-import { Page } from "ui/page";
-import { ItemEventData } from "ui/list-view";
-import { isAndroid } from "platform";
 import { Component } from "@angular/core";
-import { RouterExtensions } from "nativescript-angular/router";
 import { ActivatedRoute } from "@angular/router";
-
+import { RouterExtensions } from "nativescript-angular/router";
+import { isAndroid } from "platform";
+import { alert } from "ui/dialogs";
+import { ItemEventData } from "ui/list-view";
+import { Page } from "ui/page";
 import { RoverPhoto } from "../../models/rover-model";
 import { RoverPhotosService } from "../../services/rover.service";
 import { Observable as RxObservable } from "rxjs/Observable";
-
-import { alert } from "ui/dialogs";
-
 import "rxjs/add/operator/map";
 
 @Component({
@@ -22,13 +19,10 @@ import "rxjs/add/operator/map";
 export class RoversComponent {
 
     public roverPhotos: RxObservable<Array<RoverPhoto>>;
-    public isAndroid: boolean;
-
     public day: number;
     public month: number;
     public year: number;
     public rover: string;
-
     private tempArr: Array<RoverPhoto> = [];
     private pageIndex: number;
     private subscr;
@@ -37,14 +31,11 @@ export class RoversComponent {
         if (isAndroid) {
             this._page.actionBarHidden = true;
         }
-
-        this.isAndroid = isAndroid;
     }
 
     ngOnInit() {
         if (this._activatedRoute.snapshot.queryParams) {
             const query = this._activatedRoute.snapshot.queryParams;
-
             this.rover = query.rover;
             this.day = query.day;
             this.month = query.month;

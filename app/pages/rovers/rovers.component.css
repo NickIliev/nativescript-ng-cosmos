@@ -1,20 +1,13 @@
-GridLayout Label {
+Label {
     background-color: #282a2a;
     color: #BCBCBC;
 }
 
-.list-view {
-    background-color: #343838;
-}
-
 .card {
+    background-color: #343838;
     margin: 0 10 10 10;
 }
 
-.card-grid-android {
-    border-radius: 0;
-}
-
-.card-grid-ios {
-    border-radius: 20;
+.card-grid {
+    border-radius:20;
 }

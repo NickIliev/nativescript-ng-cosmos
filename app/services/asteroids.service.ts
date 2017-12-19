@@ -17,8 +17,6 @@ export class AsteroidsService {
     constructor(private http: Http) { }
 
     getAsteroidsData() {
-        console.log("getAsteroidsData");
-
         return this.http.get(this.getUpdatedUrl())
             .map(res => res.json())
             .map(data => {

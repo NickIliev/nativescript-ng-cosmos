@@ -13,7 +13,7 @@ export const routerConfig = [
         component: PickersComponent
     },
     { path: "rover", component: RoversComponent },
-    { path: "photo", component: PhotoDetailComponent },
+    { path: "photo", component: PhotoDetailComponent }
 ]
 
 @NgModule({

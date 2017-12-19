@@ -4,11 +4,14 @@
 //dependencies {
 //	compile 'com.android.support:recyclerview-v7:+'
 //}
+dependencies {
+  compile "com.google.android.gms:play-services-base:11.4.0"
+}
 
 android {  
   defaultConfig {  
     generatedDensities = []
-    applicationId = "org.nativescript.cosmosng"  
+    applicationId = "org.nativescript.curiosity"  
   }  
   aaptOptions {  
     additionalParameters "--no-version-vectors"  

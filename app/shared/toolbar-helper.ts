@@ -1,5 +1,4 @@
 import { ApodItem } from "../models/apod-model";
-import { alert } from "ui/dialogs";
 import { fromUrl } from "image-source";
 import { isAndroid, isIOS } from "platform";
 import { shareImage } from "nativescript-social-share";
@@ -7,41 +6,19 @@ import { ad } from "utils/utils";
 
 export class ToolbarHelper {
 
-    goToPrevousDay(lastLoadedDate: Date, direction: boolean) {
+    setPrevousDay(lastLoadedDate: Date) {
         lastLoadedDate.setDate(lastLoadedDate.getDate() - 1); // previous day
-        direction = true;
     }
 
-    goToNextDay(lastLoadedDate: Date, direction: boolean): boolean {
+    setNextDay(lastLoadedDate: Date): boolean {
         let isValidDate: boolean;
-
         let today = new Date();
-        let tomorrow = new Date();
-        tomorrow.setDate(tomorrow.getDate() + 1);
 
-        console.log("lastLoadedDate: "+ lastLoadedDate);
-        console.log("today: " + today.getDate());
-        console.log("tomorrow: " + tomorrow.getDate());
-        console.log(lastLoadedDate.getDate() < tomorrow.getDate());
-        console.log(lastLoadedDate.getDate() !== today.getDate());
-        console.log(lastLoadedDate.getMonth() === today.getMonth());
-
-        if (lastLoadedDate <= tomorrow) {
-            lastLoadedDate.setDate(lastLoadedDate.getDate() + 1); // next day - TODO: implement logic to prevent looking for photos in the future  
-            direction = false; // false === go to next date
+        if (lastLoadedDate <= today) {
+            lastLoadedDate.setDate(lastLoadedDate.getDate() + 1); // next day
             isValidDate = true;
         } else {
             isValidDate = false;
-            
-            let options = {
-                title: "No Photo Available!",
-                message: "Future date requested - returning to today's pic.",
-                okButtonText: "OK"
-            };
-            // show warnig if the user request photos from future date - perhaps disable the next button here
-            alert(options).then(() => {
-                console.log("No photos abailable");
-            });
         }
 
         return isValidDate;
@@ -63,14 +40,18 @@ export class ToolbarHelper {
 
     onSetWallpaper(item: ApodItem) {
         // Android only feature!!
-        fromUrl(item.url).then(image => {
-            let wallpaperManager = android.app.WallpaperManager.getInstance(ad.getApplicationContext());
-            try {
-                wallpaperManager.setBitmap(image.android);
-            } catch (error) {
-                console.log(error);
-            }
-        })
+        if (isAndroid) {
+            fromUrl(item.url).then(image => {
+                let wallpaperManager = android.app.WallpaperManager.getInstance(ad.getApplicationContext());
+                try {
+                    wallpaperManager.setBitmap(image.android);
+                } catch (error) {
+                    console.log(error);
+                }
+            })
+        } else if (isIOS) {
+            console.log("feature not implemented for iOS");
+        }
     }
 
     dateToString(date: Date) {
