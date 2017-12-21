@@ -5,11 +5,11 @@
   "repository": "<fill-your-repository-here>",
   "nativescript": {
     "id": "org.nativescript.curiosity",
-    "tns-ios": {
-      "version": "next"
-    },
     "tns-android": {
-      "version": "3.4.0-2017-12-18-01"
+      "version": "3.4.0"
+    },
+    "tns-ios": {
+      "version": "3.5.0-2017-12-8-8"
     }
   },
   "dependencies": {
@@ -21,7 +21,7 @@
     "@angular/platform-browser": "~5.0.0",
     "@angular/platform-browser-dynamic": "~5.0.0",
     "@angular/router": "~5.0.0",
-    "nativescript-angular": "next",
+    "nativescript-angular": "5.0.0",
     "nativescript-cardview": "^2.0.4",
     "nativescript-pro-ui": "next",
     "nativescript-social-share": "^1.5.0",
@@ -29,7 +29,7 @@
     "nativescript-theme-core": "~1.0.4",
     "reflect-metadata": "~0.1.8",
     "rxjs": "^5.5.0",
-    "tns-core-modules": "next",
+    "tns-core-modules": "3.4.0",
     "zone.js": "^0.8.4"
   },
   "devDependencies": {
@@ -43,14 +43,14 @@
     "css-loader": "~0.28.7",
     "extract-text-webpack-plugin": "~3.0.0",
     "lazy": "1.0.11",
-    "nativescript-dev-typescript": "next",
-    "nativescript-dev-webpack": "^0.10.0-2017-12-19-02",
+    "nativescript-dev-typescript": "0.6.0",
+    "nativescript-dev-webpack": "^0.9.0",
     "nativescript-worker-loader": "~0.8.1",
     "node-sass": "^4.7.1",
     "raw-loader": "~0.5.1",
     "resolve-url-loader": "~2.1.0",
     "sass-loader": "^6.0.6",
-    "tns-platform-declarations": "next",
+    "tns-platform-declarations": "3.4.0",
     "typescript": "~2.4.2",
     "webpack": "~3.8.1",
     "webpack-bundle-analyzer": "^2.8.2",
