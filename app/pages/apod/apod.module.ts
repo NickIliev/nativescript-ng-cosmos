@@ -4,6 +4,10 @@ import { NativeScriptRouterModule } from "nativescript-angular/router";
 import { ApodService } from "../../services/apod.service";
 import { ApodComponent } from "./apod.component";
 import { ToolbarComponent } from "./toolbar/toolbar.component";
+import { CircularProgressBarComponent } from "../../shared/circular-bar.component";
+
+import { registerElement } from 'nativescript-angular/element-registry';
+registerElement("circularProgressBar", () => require("ui/layouts/stack-layout").StackLayout);
 
 export const routerConfig = [
     {
@@ -18,7 +22,7 @@ export const routerConfig = [
         NativeScriptRouterModule,
         NativeScriptRouterModule.forChild(routerConfig)
     ],
-    declarations: [ApodComponent, ToolbarComponent],
+    declarations: [ApodComponent, ToolbarComponent, CircularProgressBarComponent],
     providers: [ApodService],
     schemas: [
         NO_ERRORS_SCHEMA

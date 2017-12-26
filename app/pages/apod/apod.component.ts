@@ -19,7 +19,6 @@ export class ApodComponent {
     lastLoadedDate: Date = new Date(); // today
 
     toolbarHelper: ToolbarHelper = new ToolbarHelper();
-
     /* 
     [direction: boolean]
     true === means going to Prevous date; 
@@ -61,8 +60,7 @@ export class ApodComponent {
     }
 
     onIndicatorLoaded(args) {
-        this.indicator = <ActivityIndicator>args.object;
-        this.indicator.busy = true;
+        this.indicator = args.object;
     }
 
     onNotify(message: string): void {
