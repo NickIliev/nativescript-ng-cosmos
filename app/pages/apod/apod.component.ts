@@ -65,34 +65,42 @@ export class ApodComponent {
 
     onNotify(message: string): void {
         if (message === "goToPrevousDay") {
-            this.direction = true;
-            this.toolbarHelper.setPrevousDay(this.lastLoadedDate);
-            this.extractData(this.toolbarHelper.dateToString(this.lastLoadedDate));
+            this.setPreviousDate();
         } else if (message === "goToNextDay") {
-            this.direction = false;
-            let isValideDate = this.toolbarHelper.setNextDay(this.lastLoadedDate);
-
-            if (isValideDate && this.lastLoadedDate <= new Date()) {
-                this.extractData(this.toolbarHelper.dateToString(this.lastLoadedDate));
-            } else {
-                let options = {
-                    title: "No Photo Available!",
-                    message: "Future date requested - returning to today's pic.",
-                    okButtonText: "OK"
-                };
-                // show warnig if the user request photos from future date - disable the next button here
-                alert(options).then(() => {
-                    console.log("No photos abailable - returning to today's pic");
-                    this.lastLoadedDate = new Date();
-                    this.extractData(this.toolbarHelper.dateToString(this.lastLoadedDate));
-                });
-            }
+            this.setNextDate();
         } else if (message === "onShare") {
             this.toolbarHelper.onShare(this.item);
         } else if (message === "onSetWallpaper") {
             this.toolbarHelper.onSetWallpaper(this.item);
         } else if (message === "onSaveFile") {
-            console.log("onSaveFile not implemented!");
+            this.toolbarHelper.onSaveFile(this.item);
+        }
+    }
+
+    private setPreviousDate() {
+        this.direction = true;
+        this.toolbarHelper.setPrevousDay(this.lastLoadedDate);
+        this.extractData(this.toolbarHelper.dateToString(this.lastLoadedDate));
+    }
+
+    private setNextDate() {
+        this.direction = false;
+        let isValideDate = this.toolbarHelper.setNextDay(this.lastLoadedDate);
+
+        if (isValideDate && this.lastLoadedDate <= new Date()) {
+            this.extractData(this.toolbarHelper.dateToString(this.lastLoadedDate));
+        } else {
+            let options = {
+                title: "No Photo Available!",
+                message: "Future date requested - returning to today's pic.",
+                okButtonText: "OK"
+            };
+            // show warnig if the user request photos from future date - disable the next button here
+            alert(options).then(() => {
+                console.log("No photos abailable - returning to today's pic");
+                this.lastLoadedDate = new Date();
+                this.extractData(this.toolbarHelper.dateToString(this.lastLoadedDate));
+            });
         }
     }
 
