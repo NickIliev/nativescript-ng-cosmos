@@ -23,6 +23,7 @@
     "@angular/router": "~5.2.0",
     "nativescript-angular": "next",
     "nativescript-cardview": "^2.0.4",
+    "nativescript-permissions": "^1.2.3",
     "nativescript-pro-ui": "next",
     "nativescript-social-share": "^1.5.0",
     "nativescript-theme-core": "~1.0.4",
