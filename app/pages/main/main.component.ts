@@ -2,6 +2,8 @@ import { Component, ViewChild, ChangeDetectorRef } from "@angular/core";
 import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
 import { RadSideDrawer } from 'nativescript-pro-ui/sidedrawer';
 import { isAndroid, isIOS } from "platform";
+import { AnimationCurve } from "ui/enums";
+import { View } from "ui/core/view";
 
 @Component({
     selector: "ns-details",
@@ -18,7 +20,6 @@ export class MainComponent {
     public isIos: boolean = isIOS;
 
     private drawer: RadSideDrawer;
-
     @ViewChild(RadSideDrawerComponent) public drawerComponent: RadSideDrawerComponent;
 
     constructor(private _changeDetectionRef: ChangeDetectorRef) {
@@ -35,5 +36,21 @@ export class MainComponent {
 
     public toggleDrawer() {
         this.drawer.toggleDrawerState();
+    }
+
+    /* TODO: Test animation for all CardViews */
+    public onCard1Loaded(args) {
+        this.animateCard(args.object);
+    }
+
+    private animateCard(card: View) {
+        card.translateX = -100
+        console.log(card.translateX);
+        console.log("animateCard");
+        card.animate({
+            translate: { x: 0, y: 0 },
+            duration: 1000,
+            curve: AnimationCurve.spring
+        });
     }
 }
