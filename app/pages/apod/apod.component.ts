@@ -33,7 +33,6 @@ export class ApodComponent {
     image: Image;
 
     constructor(private apodService: ApodService, private page: Page) {
-
         if (isAndroid) {
             this.page.actionBarHidden = true;
         }
