@@ -4,7 +4,7 @@
   <Label row="1" [text]="asteroidCount + ' nearby asteroids in the next 7 days'" class="h4 text-center p-8" textWrap="true"></Label>
 
   <ListView row="2" [items]="asteroidItems | async" class="list-view" separatorColor="#343838">
-    <ng-template let-asteroid="item">
+    <ng-template let-asteroid="item" let-i="index">
 
       <CardView elevation="40" radius="40" class="card">
           <GridLayout rows="10,*,*,*,*,*,*,*,*,*,*,*,*" columns="*, *">
@@ -15,7 +15,7 @@
               <Label row="5" col="0" text="Est.Diameter Max (meters)" textWrap="true" class="small-text"></Label>
               <Label row="6" col="0" text="Est.Diameter Min (km)" textWrap="true" class="small-text"></Label>
               <Label row="7" col="0" text="Est.Diameter Max (km)" textWrap="true" class="small-text"></Label>
-              <Label row="8" text="Hazard Level" textWrap="true" class="small-text"></Label>
+              <Label row="8" col="0" text="Hazard Level" textWrap="true" class="small-text"></Label>
               <Label row="9" col="0" text="Close Approach Date" textWrap="true" class="small-text"></Label>
               <Label row="10" col="0" text="Miss Distance kilometers" textWrap="true" class="small-text"></Label>
               <Label row="11" col="0" text="Orbiting Body" textWrap="true" class="small-text"></Label>
@@ -32,7 +32,7 @@
               <Label row="10" col="1" [text]="asteroid.close_approach_data[0].miss_distance.kilometers"></Label>
               <Label row="11" col="1" [text]="asteroid.close_approach_data[0].orbiting_body"></Label>
 
-              <Button row="12" col="0" colSpan="2" text="&#xf1e0;" class="fa" (tap)="onShare()"></Button>
+              <Button row="12" col="0" colSpan="2" text="&#xf1e0;" class="fa" (tap)="onShare(i)"></Button>
           </GridLayout>
       </CardView>
 

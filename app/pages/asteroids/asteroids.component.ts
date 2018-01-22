@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { isAndroid } from "platform";
 import { Page } from "ui/page";
 import { shareText } from "nativescript-social-share";
-import { AsteroidItem,  AsteroidsOnDate } from "../../models//asteroids-model";
+import { AsteroidItem, AsteroidsOnDate, AsteroidsApiData } from "../../models//asteroids-model";
 import { AsteroidsService } from "../../services/asteroids.service";
 
 import { Observable as RxObservable } from "rxjs/Observable";
@@ -12,7 +12,7 @@ import "rxjs/add/operator/map";
     selector: "ns-asteroids",
     moduleId: module.id,
     templateUrl: "./asteroids.component.html",
-    styleUrls:["./asteroids.component.css"]
+    styleUrls: ["./asteroids.component.css"]
 })
 export class AsteroidsComponent {
     public asteroidItems: RxObservable<Array<AsteroidItem>>;
@@ -21,26 +21,25 @@ export class AsteroidsComponent {
     public asteroidCount: number = 0;
     private subscr;
 
-
-    constructor(private _page: Page, private _asteroidsService: AsteroidsService) { 
+    constructor(private _page: Page, private _asteroidsService: AsteroidsService) {
         if (isAndroid) {
             this._page.actionBarHidden = true;
         }
 
-        this._asteroidsService.getAsteroidsData().subscribe((result) => { 
-            
+        this._asteroidsService.getAsteroidsData().subscribe((result: AsteroidsApiData) => {
+
             this.asteroidCount = result.element_count;
-            // foe each date in the seven days period ahead..
+            // for each date in the seven days period ahead..
             for (var key in result.near_earth_objects) {
                 if (result.near_earth_objects.hasOwnProperty(key)) {
                     var date = result.near_earth_objects[key];
 
-                    // itterate all the asteroids on each date
+                    // itterate the array of asteroids on each date
                     date.forEach(asteroid => {
                         let newAsteroid = new AsteroidItem(
-                            asteroid.links, 
-                            asteroid.neo_reference_id, 
-                            asteroid.name, 
+                            asteroid.links,
+                            asteroid.neo_reference_id,
+                            asteroid.name,
                             asteroid.nasa_jpl_url,
                             asteroid.absolute_magnitude_h,
                             asteroid.estimated_diameter,
@@ -61,9 +60,10 @@ export class AsteroidsComponent {
         })
     }
 
-    onShare() {
+    onShare(index) {
         // TODO - form the share content to be meaningful
         // TODO UI and UX for share button
-        shareText(this.tempArr[0].close_approach_data[0].close_approach_date.toString() , "Asteriod Proximity Alert!")
+        // TODO create iOS logic
+        shareText("Asteroid " + this.tempArr[index].name + " in close proximity with Earth on " + this.tempArr[index].close_approach_data[0].close_approach_date.toString() + ". Reported by 'Cosmos Databank' for Android", "Asteriod Proximity Alert!")
     }
 }
