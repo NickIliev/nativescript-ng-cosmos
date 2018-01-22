@@ -5,7 +5,7 @@ import { RadSideDrawer } from 'nativescript-pro-ui/sidedrawer';
 import { isAndroid, isIOS } from "tns-core-modules/platform";
 import { AnimationCurve } from "tns-core-modules/ui/enums";
 import { View } from "tns-core-modules/ui/core/view";
-import { translateViewByXandY } from "../../shared/animations-helper";
+import { translateViewByXandYwithDurationAndCurve } from "../../shared/animations-helper";
 
 @Component({
     selector: "ns-details",
@@ -43,7 +43,7 @@ export class MainComponent {
     /* TODO: Test animation for all CardViews */
     public onViewLoaded(args, translateFromX, translateToX, translateFromY, translateToY) {
         let view = args.object;
-        translateViewByXandY(view, translateFromX, translateToX, translateFromY, translateToY, 600, "easeOut");
+        translateViewByXandYwithDurationAndCurve(view, translateFromX, translateToX, translateFromY, translateToY, 600, "easeOut");
     }
 
 }

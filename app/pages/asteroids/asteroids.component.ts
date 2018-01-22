@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { isAndroid } from "platform";
 import { Page } from "ui/page";
-
+import { shareText } from "nativescript-social-share";
 import { AsteroidItem,  AsteroidsOnDate } from "../../models//asteroids-model";
 import { AsteroidsService } from "../../services/asteroids.service";
 
@@ -19,20 +19,17 @@ export class AsteroidsComponent {
     private tempArr: Array<AsteroidItem> = [];
 
     public asteroidCount: number = 0;
-    public isAndroid: boolean;
     private subscr;
+
 
     constructor(private _page: Page, private _asteroidsService: AsteroidsService) { 
         if (isAndroid) {
             this._page.actionBarHidden = true;
         }
 
-        this.isAndroid = isAndroid;
-
         this._asteroidsService.getAsteroidsData().subscribe((result) => { 
             
             this.asteroidCount = result.element_count;
-
             // foe each date in the seven days period ahead..
             for (var key in result.near_earth_objects) {
                 if (result.near_earth_objects.hasOwnProperty(key)) {
@@ -61,7 +58,12 @@ export class AsteroidsComponent {
                 this.subscr = subscriber;
                 subscriber.next(this.tempArr);
             });
-            
         })
+    }
+
+    onShare() {
+        // TODO - form the share content to be meaningful
+        // TODO UI and UX for share button
+        shareText(this.tempArr[0].close_approach_data[0].close_approach_date.toString() , "Asteriod Proximity Alert!")
     }
 }
