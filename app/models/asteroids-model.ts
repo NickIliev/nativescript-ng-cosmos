@@ -23,7 +23,6 @@ export class AsteroidItem {
     estimated_diameter: EstimatedDiameter;
     is_potentially_hazardous_asteroid: boolean;
     close_approach_data: Array<ApproachDate>;
-    orbital_data: OrbitalData;
 
     constructor(
         links: Link, 
@@ -34,7 +33,6 @@ export class AsteroidItem {
         estimated_diameter: EstimatedDiameter,
         is_potentially_hazardous_asteroid: boolean,
         close_approach_data: Array<ApproachDate>,
-        orbital_data: OrbitalData
     ) {
         this.links = links;
         this.neo_reference_id = neo_reference_id;
@@ -44,7 +42,6 @@ export class AsteroidItem {
         this.estimated_diameter = estimated_diameter;
         this.is_potentially_hazardous_asteroid = is_potentially_hazardous_asteroid;
         this.close_approach_data = close_approach_data;
-        this.orbital_data = orbital_data;
     }
 }
 
@@ -69,6 +66,7 @@ export interface Meters {
 
 export interface ApproachDate {
     close_approach_date: string;
+    relative_velocity: RelativeVelocity;
     miss_distance: MissDistance;
     orbiting_body: string;
 }
@@ -76,8 +74,19 @@ export interface ApproachDate {
 export interface MissDistance {
     astronomical: string;
     kilometers: string;
+    miles: string;
 }
 
+export interface RelativeVelocity {
+    kilometers_per_second: string;
+    kilometers_per_hour: string;
+    miles_per_hour: string;
+}
+
+// Note: OribtalData is to be used for specific asteroid lookup
+// Neo - Lookup
+// Lookup a specific Asteroid based on its NASA JPL small body (SPK-ID) ID 
+// https://api.nasa.gov/neo/rest/v1/neo/3542519?api_key=DEMO_KEY
 export interface OrbitalData {
     OrbitalData: string;
     orbit_determination_date: string;

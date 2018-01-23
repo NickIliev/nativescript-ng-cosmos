@@ -44,8 +44,7 @@ export class AsteroidsComponent {
                             asteroid.absolute_magnitude_h,
                             asteroid.estimated_diameter,
                             asteroid.is_potentially_hazardous_asteroid,
-                            asteroid.close_approach_data,
-                            asteroid.orbital_data
+                            asteroid.close_approach_data
                         );
 
                         this.tempArr.push(newAsteroid);
@@ -62,8 +61,16 @@ export class AsteroidsComponent {
 
     onShare(index) {
         // TODO - form the share content to be meaningful
-        // TODO UI and UX for share button
+        // TODO UI and UX for share buttongit
         // TODO create iOS logic
         shareText("Asteroid " + this.tempArr[index].name + " in close proximity with Earth on " + this.tempArr[index].close_approach_data[0].close_approach_date.toString() + ". Reported by 'Cosmos Databank' for Android", "Asteriod Proximity Alert!")
+    }
+
+    isAstreroidLarge(sizeKm) {
+        return sizeKm > 0.5;
+    }
+
+    isAstreroidSmall(sizeKm) {
+        return sizeKm <= 0.5;
     }
 }

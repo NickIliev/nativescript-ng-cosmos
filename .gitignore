@@ -1,6 +1,8 @@
 .DS_Store
+.vscode/*
+.cloud/*
 lib/
-node_modules/
+node_modules/*
 platforms/*
 hooks/*
 report/*
@@ -11,6 +13,7 @@ report/*
 /keystore/
 *.apk
 *.ipa
+*.jks
 
 native-nick-release-key.jks
 my-release-key.jks

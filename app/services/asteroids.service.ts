@@ -3,6 +3,8 @@ import { Http } from "@angular/http";
 import { AsteroidItem,  AsteroidsApiData, AsteroidsOnDate } from "../models/asteroids-model";
 import "rxjs/add/operator/map";
 
+// Retrieve a list of Asteroids based on their closest approach date to Earth. (start date - end date period)
+// https://api.nasa.gov/neo/rest/v1/feed?start_date=2015-09-07&end_date=2015-09-08&api_key=DEMO_KEY
 const API_URL = "https://api.nasa.gov/neo/rest/v1/feed";
 const API_KEY = "&" + "api_key=jXRI5DynwdFVqt950uq6XMwZtlf6w8mSgpTJTcbX";
 
