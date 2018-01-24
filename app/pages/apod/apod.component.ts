@@ -1,12 +1,19 @@
-import { Page } from "ui/page";
-import { ActivityIndicator } from "ui/activity-indicator";
-import { Image } from "ui/image";
-import { Component } from "@angular/core";
+import { ActivityIndicator } from "tns-core-modules/ui/activity-indicator";
+import { View } from "tns-core-modules/ui/core/view";
+import { alert } from "tns-core-modules/ui/dialogs";
+import { GestureEventData, PinchGestureEventData, PanGestureEventData } from "tns-core-modules/ui/gestures";
+import { Image } from "tns-core-modules/ui/image";
+import { Page } from "tns-core-modules/ui/page";
+import { isAndroid } from "tns-core-modules/platform";
+import { ScrollView } from "tns-core-modules/ui/scroll-view";
+
+import { Component, ViewChild, ElementRef } from "@angular/core";
+
 import { ApodItem } from "../../models/apod-model";
 import { ApodService } from "../../services/apod.service";
-import { isAndroid } from "platform";
+
 import { ToolbarHelper } from "../../shared/toolbar-helper";
-import { alert } from "ui/dialogs";
+import { onDoubleTap as onDoubleZoom, onPan as onPanZoom, onPinch as onPinchZoom } from "../../shared/zoom-helper";
 
 @Component({
     selector: "ns-items",
@@ -19,6 +26,7 @@ export class ApodComponent {
     lastLoadedDate: Date = new Date(); // today
 
     toolbarHelper: ToolbarHelper = new ToolbarHelper();
+
     /* 
     [direction: boolean]
     true === means going to Prevous date; 
@@ -32,6 +40,9 @@ export class ApodComponent {
     indicator: ActivityIndicator;
     image: Image;
 
+    dock: View;
+    scroll: ScrollView;
+
     constructor(private apodService: ApodService, private page: Page) {
         if (isAndroid) {
             this.page.actionBarHidden = true;
@@ -41,8 +52,26 @@ export class ApodComponent {
         this.extractData(this.toolbarHelper.dateToString(this.lastLoadedDate)); // initially load TODAY's pic
     }
 
+    // onTouch() {
+    //     this.dock.animate({
+    //         translate: { x: 0, y: -100},    
+    //         duration: 1000
+    //     });
+    // }
+
+    onDockLoaded(args) {
+        this.dock = <View>args.object;
+        // this.dock.translateY = 60;
+        this.dock.translateY = 100;
+        this.dock.translateX = 50;
+        this.dock.animate({
+            translate: { x: 0, y: -10},    
+            duration: 1000
+        });
+    }
+
     onImageLoaded(args) {
-        this.image = <Image>args.object;
+        this.image = <Image>args.object; 
         this.image.visibility = !this.image.isLoading ? "visible" : "collapse"; // on App resume check if image is already loaded or not
 
         this.image.on("isLoadingChange", (args) => {
@@ -108,9 +137,7 @@ export class ApodComponent {
             .subscribe((result) => {
                 console.log("subscriptiojn result: ");
                 console.log(result.media_type);
-
                 if (result.media_type === "image") {
-
                     this.item = new ApodItem(
                         result.copyright,
                         result.date,
@@ -121,15 +148,11 @@ export class ApodComponent {
                         result.title,
                         result.url
                     );
-
                 } else if (result.media_type !== "image" && this.direction) {
-
                     // TODO: implement the logic for YouTube videos here
                     this.toolbarHelper.setPrevousDay(this.lastLoadedDate);
                     this.extractData(this.toolbarHelper.dateToString(this.lastLoadedDate));
-
                 } else if (result.media_type !== "image" && !this.direction) {
-
                     // TODO: implement the logic for YouTube videos here
                     let isValideDate = this.toolbarHelper.setNextDay(this.lastLoadedDate);
                     if (isValideDate) {
@@ -137,13 +160,11 @@ export class ApodComponent {
                     } else {
                         return;
                     }
-
                 } else {
                     return;
                 }
             }, (error) => {
                 console.log("Server Status Code: " + error.status);
-                console.dir(error);
             });
     }
 }
