@@ -6,10 +6,10 @@
   "nativescript": {
     "id": "org.nativescript.curiosity",
     "tns-android": {
-      "version": "3.4.1-2018-01-17-04"
+      "version": "next"
     },
     "tns-ios": {
-      "version": "4.0.0-2018-01-19-01"
+      "version": "next"
     }
   },
   "dependencies": {
