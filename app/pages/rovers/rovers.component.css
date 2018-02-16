@@ -4,10 +4,14 @@ Label {
 }
 
 .card {
-    background-color: #343838;
+    background-color: #282a2a;
     margin: 0 10 10 10;
 }
 
 .card-grid {
     border-radius:20;
+}
+
+.list-view {
+    background-color: #343838;
 }
