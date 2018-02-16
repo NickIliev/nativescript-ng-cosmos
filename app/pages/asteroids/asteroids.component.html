@@ -1,73 +1,49 @@
 <GridLayout rows="auto, auto,  *" columns="*">
   <Label row="0" text="ASTEROIDS PAGE" class="h2 text-center p-8" textWrap="true"></Label>
-
   <Label row="1" [text]="asteroidCount + ' nearby asteroids in the next 7 days'" class="h4 text-center p-8" textWrap="true"></Label>
 
   <ListView row="2" [items]="asteroidItems | async" class="list-view" separatorColor="#343838">
     <ng-template let-asteroid="item" let-i="index">
 
-      <!-- <CardView elevation="40" radius="40" class="card">
-          <GridLayout rows="10,*,*,*,*,*,*,*,*,*,*,*,*" columns="*, *">
-              <Label row="1" col="0" text="NEO Reference ID" textWrap="true" class="small-text"></Label>
-              <Label row="2" col="0" text="Asteroid Name" textWrap="true" class="small-text"></Label>
-              <Label row="3" col="0" text="Absolute Magnitude H" textWrap="true" class="small-text"></Label>
-              <Label row="4" col="0" text="Est.Diameter Min (meters)" textWrap="true" class="small-text"></Label>
-              <Label row="5" col="0" text="Est.Diameter Max (meters)" textWrap="true" class="small-text"></Label>
-              <Label row="6" col="0" text="Est.Diameter Min (km)" textWrap="true" class="small-text"></Label>
-              <Label row="7" col="0" text="Est.Diameter Max (km)" textWrap="true" class="small-text"></Label>
-              <Label row="8" col="0" text="Hazard Level" textWrap="true" class="small-text"></Label>
-              <Label row="9" col="0" text="Close Approach Date" textWrap="true" class="small-text"></Label>
-              <Label row="10" col="0" text="Miss Distance kilometers" textWrap="true" class="small-text"></Label>
-              <Label row="11" col="0" text="Orbiting Body" textWrap="true" class="small-text"></Label>
-
-              <Label row="1" col="1" [text]="asteroid.neo_reference_id"></Label>
-              <Label row="2" col="1" [text]="asteroid.name"></Label>
-              <Label row="3" col="1" [text]="asteroid.absolute_magnitude_h"></Label>
-              <Label row="4" col="1" [text]="asteroid.estimated_diameter.meters.estimated_diameter_min"></Label>
-              <Label row="5" col="1" [text]="asteroid.estimated_diameter.meters.estimated_diameter_max"></Label>
-              <Label row="6" col="1" [text]="asteroid.estimated_diameter.kilometers.estimated_diameter_min"></Label>
-              <Label row="7" col="1" [text]="asteroid.estimated_diameter.kilometers.estimated_diameter_max"></Label>
-              <Label row="8" col="1" [text]="asteroid.is_potentially_hazardous_asteroid" [color]="asteroid.is_potentially_hazardous_asteroid ? 'coral' : 'lightseagreen'"></Label>
-              <Label row="9" col="1" [text]="asteroid.close_approach_data[0].close_approach_date"></Label>
-              <Label row="10" col="1" [text]="asteroid.close_approach_data[0].miss_distance.kilometers"></Label>
-              <Label row="11" col="1" [text]="asteroid.close_approach_data[0].orbiting_body"></Label>
-
-              <Button row="12" col="0" colSpan="2" text="&#xf1e0;" class="fa" (tap)="onShare(i)"></Button>
-          </GridLayout>
-      </CardView> -->
-
       <CardView elevation="40" radius="40" class="card">
-        <FlexboxLayout alignItems="flex-start">
-          <FlexboxLayout flexGrow="0" alignSelf="center" flexDirection="column" margin="16">
-              <Image src="res://opportuity" width="100" stretch="aspectFit"></Image>
-              <Label text="Size" textWrap="true"></Label>
-              
-              <StackLayout *ngIf="isAstreroidSmall(asteroid.estimated_diameter.kilometers.estimated_diameter_max)">
-                  <Label text="Meters" textWrap="true"></Label>
-                  <Label [text]="asteroid.estimated_diameter.meters.estimated_diameter_min | number:'1.2-2'"></Label>
-                  <Label [text]="asteroid.estimated_diameter.meters.estimated_diameter_max | number:'1.2-2'"></Label>
-              </StackLayout>
-              <StackLayout *ngIf="isAstreroidLarge(asteroid.estimated_diameter.kilometers.estimated_diameter_max)">
-                  <Label text="Kilometers" textWrap="true"></Label>
-                  <Label [text]="asteroid.estimated_diameter.kilometers.estimated_diameter_min | number:'1.1-1'"></Label>
-                  <Label [text]="asteroid.estimated_diameter.kilometers.estimated_diameter_max | number:'1.0-1'"></Label>
-              </StackLayout>
 
-          </FlexboxLayout>
-          
-        
-          <FlexboxLayout flexGrow="1" flexDirection="column" margin="16">
-            <!-- <Label [text]="asteroid.neo_reference_id"></Label> -->
+        <GridLayout columns="*, 2*">
+          <GridLayout col="0">
+            <StackLayout *ngIf="isAstreroidSmall(asteroid.estimated_diameter.kilometers.estimated_diameter_max)">
+              <Label text="Size (m) " opacity="0.8" textWrap="true"></Label>
+              <StackLayout orientation="horizontal">
+                <Label text="min: " opacity="0.8"></Label>
+                <Label [text]="asteroid.estimated_diameter.meters.estimated_diameter_min | number:'1.2-2'"></Label>
+              </StackLayout>
+              <StackLayout orientation="horizontal">
+                <Label text="max: " opacity="0.8"></Label>
+                <Label [text]="asteroid.estimated_diameter.meters.estimated_diameter_max | number:'1.2-2'"></Label>
+              </StackLayout>
+            </StackLayout>
+
+            <StackLayout *ngIf="isAstreroidLarge(asteroid.estimated_diameter.kilometers.estimated_diameter_max)">
+              <Label text="Size (km)" opacity="0.8" textWrap="true"></Label>
+              <StackLayout orientation="horizontal">
+                <Label text="min: " opacity="0.8"></Label>
+                <Label [text]="asteroid.estimated_diameter.kilometers.estimated_diameter_min | number:'1.1-1'" textAlignment="center"></Label>
+              </StackLayout>
+              <StackLayout orientation="horizontal">
+                <Label text="max: " opacity="0.8"></Label>
+                <Label [text]="asteroid.estimated_diameter.kilometers.estimated_diameter_max | number:'1.0-1'" textAlignment="center"></Label>
+              </StackLayout>
+            </StackLayout>
+          </GridLayout>
+
+          <StackLayout col="1">
             <Label [text]="asteroid.name"></Label>
-            <!-- <Label [text]="asteroid.absolute_magnitude_h"></Label> -->
-            
             <Label [text]="asteroid.is_potentially_hazardous_asteroid" [color]="asteroid.is_potentially_hazardous_asteroid ? 'coral' : 'lightseagreen'"></Label>
             <Label [text]="asteroid.close_approach_data[0].close_approach_date"></Label>
             <Label [text]="asteroid.close_approach_data[0].relative_velocity.kilometers_per_hour"></Label>
             <Label [text]="asteroid.close_approach_data[0].miss_distance.kilometers"></Label>
             <Label [text]="asteroid.close_approach_data[0].orbiting_body"></Label>
-          </FlexboxLayout>
-        </FlexboxLayout>
+          </StackLayout>
+
+        </GridLayout>
       </CardView>
 
     </ng-template>

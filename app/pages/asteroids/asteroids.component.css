@@ -1,5 +1,4 @@
 Label {
-    background-color: #282a2a;
     color: #BCBCBC;
 }
 
@@ -9,32 +8,11 @@ Label {
 
 .card {
     background-color:#282a2a;
-    margin-bottom: 8;
-    margin-left: 8;
-    margin-right: 8;
+    margin: 0 8 8 8;
 }
+
 
 .card Label {
     padding-left: 8;
     font-size:12;
-    color: lightseagreen;
-    border-bottom-width: 1;
-    border-bottom-color: black;
-}
-
-.card Label.small-text {
-    font-size:10;
-    color:#BCBCBC;
-}
-
-Button {
-    height: 40;
-    border-radius: 0 0 20 20;
-    background-color:#1b1d1d;
-    color: #BCBCBC;
-}
-
-Button:highlighted {
-    background-color:#BCBCBC;
-    color: #1b1d1d;
 }
