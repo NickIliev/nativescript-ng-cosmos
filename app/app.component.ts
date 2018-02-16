@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { isAndroid } from "platform";
 import * as permissions from "nativescript-permissions";
-
+ 
 @Component({
     selector: "ns-app",
     templateUrl: "app.component.html",
@@ -21,7 +21,7 @@ export class AppComponent {
                     console.log("Permissions granted!");
                 }).catch(() => {
                     console.log("No permissions - plan B time!");
-                });
+                }); 
         }
     }
 }

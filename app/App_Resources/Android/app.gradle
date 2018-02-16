@@ -5,15 +5,25 @@
 //	compile 'com.android.support:recyclerview-v7:+'
 //}
 dependencies {
-  compile "com.google.android.gms:play-services-base:11.4.0"
+  compile "com.google.android.gms:play-services-base:11.8.0"
 }
 
 android {  
   defaultConfig {  
     generatedDensities = []
+    multiDexEnabled true
     applicationId = "org.nativescript.curiosity"  
   }  
   aaptOptions {  
     additionalParameters "--no-version-vectors"  
-  }  
+  }
+
+  project.ext {
+    googlePlayServicesVersion = "11.8.0"
+  } 
+
+  dexOptions {
+    jumboMode true
+    javaMaxHeapSize "4g"
+  }
 } 

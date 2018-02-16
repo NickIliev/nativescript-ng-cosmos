@@ -5,6 +5,7 @@
   <ListView row="2" [items]="asteroidItems | async" class="list-view" separatorColor="#343838">
     <ng-template let-asteroid="item" let-i="index">
 
+      <!-- Optimize and simplify the tempalte to achive max performance!  -->
       <CardView elevation="40" radius="40" class="card">
 
         <GridLayout columns="*, 2*">
