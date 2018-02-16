@@ -6,10 +6,10 @@
   "nativescript": {
     "id": "org.nativescript.curiosity",
     "tns-android": {
-      "version": "next"
+      "version": "3.4.1-2018-02-06-02"
     },
     "tns-ios": {
-      "version": "next"
+      "version": "4.0.0-2018-02-15-02"
     }
   },
   "dependencies": {
@@ -22,7 +22,7 @@
     "@angular/platform-browser-dynamic": "~5.2.0",
     "@angular/router": "~5.2.0",
     "nativescript-angular": "next",
-    "nativescript-cardview": "^2.0.4",
+    "nativescript-cardview": "^2.0.5",
     "nativescript-permissions": "^1.2.3",
     "nativescript-pro-ui": "next",
     "nativescript-social-share": "^1.5.0",
@@ -34,27 +34,27 @@
   },
   "devDependencies": {
     "@angular/compiler-cli": "~5.2.0",
-    "@ngtools/webpack": "~1.8.2",
+    "@ngtools/webpack": "~1.9.4",
     "@types/node": "^7.0.5",
     "babel-traverse": "6.26.0",
     "babel-types": "6.26.0",
     "babylon": "6.18.0",
-    "copy-webpack-plugin": "~4.0.1",
+    "copy-webpack-plugin": "~4.3.0",
     "css-loader": "~0.28.7",
-    "extract-text-webpack-plugin": "~3.0.0",
+    "extract-text-webpack-plugin": "~3.0.2",
     "lazy": "1.0.11",
     "nativescript-dev-typescript": "next",
     "nativescript-dev-webpack": "next",
     "nativescript-worker-loader": "~0.8.1",
     "node-sass": "^4.7.1",
     "raw-loader": "~0.5.1",
-    "resolve-url-loader": "~2.1.0",
+    "resolve-url-loader": "~2.2.1",
     "sass-loader": "^6.0.6",
     "tns-platform-declarations": "~3.4.0",
     "typescript": "~2.6.2",
-    "webpack": "~3.8.1",
-    "webpack-bundle-analyzer": "^2.8.2",
-    "webpack-sources": "~1.0.1",
+    "webpack": "~3.10.0",
+    "webpack-bundle-analyzer": "^2.9.1",
+    "webpack-sources": "~1.1.0",
     "uglifyjs-webpack-plugin": "~1.1.6"
   }
 }

@@ -1,5 +1,5 @@
 import { Component, ViewChild, ChangeDetectorRef } from "@angular/core";
-import { CardView } from "nativescript-cardview"; 
+import { CardView } from "nativescript-cardview";
 import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
 import { RadSideDrawer } from 'nativescript-pro-ui/sidedrawer';
 import { isAndroid, isIOS } from "tns-core-modules/platform";

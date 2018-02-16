@@ -48,16 +48,8 @@ export class ApodComponent {
             this.page.actionBarHidden = true;
         }
 
-        console.log("constructor: " + this.lastLoadedDate);
         this.extractData(this.toolbarHelper.dateToString(this.lastLoadedDate)); // initially load TODAY's pic
     }
-
-    // onTouch() {
-    //     this.dock.animate({
-    //         translate: { x: 0, y: -100},    
-    //         duration: 1000
-    //     });
-    // }
 
     onDockLoaded(args) {
         this.dock = <View>args.object;
@@ -135,8 +127,6 @@ export class ApodComponent {
     private extractData(date: string) {
         this.apodService.getDataWithCustomDate(date)
             .subscribe((result) => {
-                console.log("subscriptiojn result: ");
-                console.log(result.media_type);
                 if (result.media_type === "image") {
                     this.item = new ApodItem(
                         result.copyright,

@@ -1,28 +1,19 @@
-<!-- Using @next on nativescript-angular to resilve 'more than one Conten View' error -->
-<ActionBar *ngIf="isAndroid">
-    <ActionBar.titleView>
+<!-- The iOS ActionBar.titleView is crashing on 3.2.x and above (Measurment issue)-->
+<ActionBar>
+    <ActionBar.titleView *ngIf="isAndroid">
         <StackLayout class="p-8">
             <Label text="COSMOS Databank" class="action-bar-title"></Label>
         </StackLayout>
     </ActionBar.titleView>
+    <ActionItem ios.position="left" *ngIf="isIos">
+        <StackLayout>
+            <Label text="COSMOS Databank" class="action-bar-title"></Label>
+        </StackLayout>
+    </ActionItem>
     <ActionItem ios.position="right" (tap)="toggleDrawer()">
         <GridLayout width="60" borderWidth="8" borderRadius="20" borderColor="#343838" backgroundColor="#282a2a">
-            <Image src="res://ic_menu" opacity="0.8" verticalAlignment="center" horizontalAlignment="center" stretch="aspectFlll"></Image>
+            <Image src="res://ic_menu" opacity="0.8" verticalAlignment="center" horizontalAlignment="center" stretch="aspectFit"></Image>
         </GridLayout>
-    </ActionItem>
-</ActionBar>
-
-<!-- The iOS ActionBar titleView is crashing with 3.2.x-->
-<ActionBar *ngIf="isIos">
-    <ActionItem ios.position="left">
-        <StackLayout>
-            <Label text="COSMOS Databank" class="m-t-8 m-b-8 m-l-8 action-bar-title"></Label>
-        </StackLayout>
-    </ActionItem>
-    <ActionItem ios.position="right" (tap)="toggleDrawer()">
-        <StackLayout>
-            <Image src="res://ic_menu" class="m-t-8 m-b-8" width="40" height="40" stretch="aspectFit"></Image>
-        </StackLayout>
     </ActionItem>
 </ActionBar>
 

@@ -1,18 +1,15 @@
-<ScrollView>
-    <StackLayout class="p-b-16">
-        <ActivityIndicator (loaded)="onIndicatorLoaded($event)" class="m-t-30 m-b-20"></ActivityIndicator>
-        <!-- <circularProgressBar (loaded)="onProgressBarLoaded($event)" class="m-y-auto m-x-5" size="250" [progress]="progress">
-            <StackLayout class="m-y-auto" backgroundColor="red">
-                <Label text="{{ progress.toFixed() }}%" color="gray" fontSize="25" class="m-x-auto m-y-auto"></Label>
-                <Label text="Image Loading..." color="#aaa" fontSize="10" marginTop="-5" class="m-x-auto m-y-auto"></Label>
-            </StackLayout>
-        </circularProgressBar> -->
-        <Image (loaded)="onImageLoaded($event)" [src]="item.url"></Image>
-        <Label [text]="item.title" class="title p-10" textWrap="true"></Label>
-        <Label [text]="item.explanation" class="description p-b-10 p-l-10 p-r-10" textWrap="true"></Label>
-        <Label [text]="item.date" class="date p-b-10 p-l-10 p-r-10" textWrap="true"></Label>
-    </StackLayout>
-</ScrollView>
-<DockLayout class="dock" (loaded)="onDockLoaded($event)" verticalAlignment="bottom">
-    <toolbar (notify)="onNotify($event)"></toolbar>
-</DockLayout>
+<!-- Remove the outer GridLayout once https://github.com/NativeScript/nativescript-angular/issues/1203 is resolved! -->
+<GridLayout>
+    <ScrollView>
+        <StackLayout class="p-b-16">
+            <ActivityIndicator (loaded)="onIndicatorLoaded($event)" class="m-t-30 m-b-20"></ActivityIndicator>
+            <Image (loaded)="onImageLoaded($event)" [src]="item.url"></Image>
+            <Label [text]="item.title" class="title p-10" textWrap="true"></Label>
+            <Label [text]="item.explanation" class="description p-b-10 p-l-10 p-r-10" textWrap="true"></Label>
+            <Label [text]="item.date" class="date p-b-10 p-l-10 p-r-10" marginBottom="30" textWrap="true"></Label>
+        </StackLayout>
+    </ScrollView>
+    <DockLayout class="dock" (loaded)="onDockLoaded($event)" verticalAlignment="bottom">
+        <toolbar (notify)="onNotify($event)"></toolbar>
+    </DockLayout>
+</GridLayout>
