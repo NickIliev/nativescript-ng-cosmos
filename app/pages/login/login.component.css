@@ -1,0 +1,21 @@
+Page {
+    background-image: url("res://background");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+GridLayout {
+    background-color: transparent;
+}
+
+Button {
+    border-radius: 20;
+    background-color:#1b1d1d;
+    color: #E8EAEB;
+}
+
+Button:highlighted {
+    background-color:#E8EAEB;
+    color: #1b1d1d;
+}

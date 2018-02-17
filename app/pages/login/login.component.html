@@ -1,0 +1,16 @@
+<!-- <Frame> -->
+<Page>
+<GridLayout height="160" verticalAlignment="bottom" rows="2*, *" columns="*">
+    <Button row="0" (tap)="login()" class="m-8">
+        <FormattedString>
+            <Span [text]="loginText + '\n'" fontSize="28"></Span>
+            <Span [text]="desc" fontSize="12" ></Span>
+        </FormattedString>
+        </Button>
+    <GridLayout row="1" rows="*" columns="*, *" class="m-l-8 m-r-8 m-b-8">
+        <Button col="0" text="google" (tap)="google()" class="m-r-4"></Button>
+        <Button col="1" text="Facebook" (tap)="facebook()" class="m-l-4"></Button>
+    </GridLayout>  
+</GridLayout>
+</Page>
+<!-- </Frame> -->

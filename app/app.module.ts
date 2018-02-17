@@ -3,6 +3,7 @@ import { NativeScriptModule } from "nativescript-angular/nativescript.module";
 import { NativeScriptCommonModule } from "nativescript-angular/common";
 import { AppRoutingModule } from "./app.routing";
 import { AppComponent } from "./app.component";
+import { LoginComponent } from "./pages/login/login.component";
 import { MainComponent } from "./pages/main/main.component";
 import { NativeScriptUISideDrawerModule } from "nativescript-pro-ui/sidedrawer/angular";
 
@@ -28,6 +29,7 @@ elementRegistryModule.registerElement("CardView", () => require("nativescript-ca
     ],
     declarations: [
         AppComponent,
+        LoginComponent,
         MainComponent
     ],
     providers: [
