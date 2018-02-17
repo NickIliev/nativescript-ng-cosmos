@@ -48,7 +48,7 @@ export class ApodComponent {
             this.page.actionBarHidden = true;
         }
 
-        this.extractData(this.toolbarHelper.dateToString(this.lastLoadedDate)); // initially load TODAY's pic
+        this.initData(); // initially load TODAY's pic
     }
 
     onDockLoaded(args) {
@@ -122,6 +122,44 @@ export class ApodComponent {
                 this.extractData(this.toolbarHelper.dateToString(this.lastLoadedDate));
             });
         }
+    }
+
+    private initData() {
+        this.apodService.getData()
+            .subscribe((result) => {
+                if (result.media_type === "image") {
+                    this.item = new ApodItem(
+                        result.copyright,
+                        result.date,
+                        result.explanation,
+                        result.hdurl,
+                        result.media_type,
+                        result.service_version,
+                        result.title,
+                        result.url
+                    );
+
+                    this.lastLoadedDate = new Date(result.date);
+                } else if (result.media_type !== "image" && this.direction) {
+                    // TODO: implement the logic for YouTube videos here
+                    this.lastLoadedDate = new Date(result.date);
+                    this.toolbarHelper.setPrevousDay(this.lastLoadedDate);
+                    this.extractData(this.toolbarHelper.dateToString(this.lastLoadedDate));
+                } else if (result.media_type !== "image" && !this.direction) {
+                    // TODO: implement the logic for YouTube videos here
+                    this.lastLoadedDate = new Date(result.date);
+                    let isValideDate = this.toolbarHelper.setNextDay(this.lastLoadedDate);
+                    if (isValideDate) {
+                        this.extractData(this.toolbarHelper.dateToString(this.lastLoadedDate));
+                    } else {
+                        return;
+                    }
+                } else {
+                    return;
+                }
+            },(error) => {
+                console.log("Server Status Code: " + error.status);
+            })
     }
 
     private extractData(date: string) {
