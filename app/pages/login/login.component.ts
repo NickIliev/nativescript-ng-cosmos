@@ -19,21 +19,25 @@ export class LoginComponent {
     public title: string;
 
     constructor(private page: Page, private routerExtensions: RouterExtensions, private apodService: ApodService) { 
-
         if (isAndroid) {
             this.page.actionBarHidden = true;
         }
-
-        this.extractData();
     }
 
     ngAfterViewInit() {
+        this.initData();
         this.backgroundImage = "res://background";
+        setTimeout(() => {
+            this.login();
+        }, 6000);
     }
 
     login() {
         console.log("login func");
-        this.routerExtensions.navigate(["/main"], { clearHistory: true }); // 
+        this.routerExtensions.navigate(["/main"], { clearHistory: true , transition: {
+            name: "fade",
+            duration: 1000
+        }}); // 
     }
 
     facebook() {
@@ -52,7 +56,7 @@ export class LoginComponent {
         return `url("res://background")`;
      }
 
-    private extractData() {
+    private initData() {
         this.apodService.getData()
             .subscribe((result) => {
                 if (result.media_type === "image") {

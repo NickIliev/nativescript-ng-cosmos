@@ -1,7 +1,7 @@
 {
     "using_ios": true,
     "using_android": true,
-    "firestore": true,
+    "firestore": false,
     "realtimedb": false,
     "remote_config": false,
     "messaging": true,
@@ -9,6 +9,6 @@
     "storage": false,
     "facebook_auth": true,
     "google_auth": true,
-    "admob": true,
+    "admob": false,
     "invites": false
 }
