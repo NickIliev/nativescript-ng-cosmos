@@ -4,7 +4,8 @@ import { isAndroid } from "platform";
 import { Page } from "ui/page";
 import { ApodItem } from "../../models/apod-model";
 import { ApodService } from "../../services/apod.service";
-
+import * as appSettings from "application-settings";
+import { login, logout, LoginType } from "nativescript-plugin-firebase";
 @Component({
     selector: "ns-login",
     moduleId: module.id,
@@ -12,9 +13,9 @@ import { ApodService } from "../../services/apod.service";
     styleUrls:["./login.component.css"]
 })
 export class LoginComponent {
-    public backgroundImage: string;
+    public backgroundImage: string = "res://background";
     public date: string;
-    public desc: string = "100% free access";
+    public descText: string = "100% free access";
     public loginText: string = "No Pass Login";
     public title: string;
 
@@ -22,45 +23,56 @@ export class LoginComponent {
         if (isAndroid) {
             this.page.actionBarHidden = true;
         }
-    }
 
-    ngAfterViewInit() {
         this.initData();
-        this.backgroundImage = "res://background";
-        setTimeout(() => {
-            this.login();
-        }, 6000);
     }
 
     login() {
-        console.log("login func");
         this.routerExtensions.navigate(["/main"], { clearHistory: true , transition: {
             name: "fade",
-            duration: 1000
+            duration: 300
         }}); // 
     }
 
     facebook() {
         console.log("facebook func");
+
+        if (appSettings.getBoolean("isLogged")) {
+            logout().then(() => {
+                login({
+                    type: LoginType.FACEBOOK,
+                    scope: ['public_profile', 'email'] // optional: defaults to ['public_profile', 'email']
+                }).then(user => {
+                    //this.navigateWithContext(user, "views/drawer-page");
+                }).catch(err => {
+                    //dialogs.alert(err);
+                });
+            })
+        } else {
+            login({
+                type: LoginType.FACEBOOK,
+                scope: ['public_profile', 'email'] // optional: defaults to ['public_profile', 'email']
+            }).then(user => {
+                //this.navigateWithContext(user, "views/drawer-page");
+            }).catch(err => {
+                //dialogs.alert(err);
+            })          
+        }
     }
 
     google() {
         console.log("Google func");
     }
 
-    get backgroundImageUrl() {
-        if (this.backgroundImage) {
-            return `url("${this.backgroundImage}")`;
-        } 
-     
-        return `url("res://background")`;
-     }
+    email() {
+        console.log("Email func");
+    }
 
     private initData() {
         this.apodService.getData()
             .subscribe((result) => {
                 if (result.media_type === "image") {
-                    this.backgroundImage = result.hdurl;
+                    this.backgroundImage = result.url; // or bigger hdurl
                     this.title = result.title;
                     this.date = result.date;
                 }  else {
