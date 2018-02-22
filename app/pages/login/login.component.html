@@ -1,19 +1,24 @@
 <GridLayout class="background" [backgroundImage]="backgroundImage" rows="auto, *" columns="*">
+
     <StackLayout row="0" class="p-l-16 p-t-8">
         <Label [text]="'Astronomical photo of ' + date" fontSize="10" color="white" textWrap="false"></Label>
         <Label [text]="title" fontSize="16"  color="white" textWrap="false"></Label>
-    </StackLayout>  
+    </StackLayout>
+
     <DockLayout row="1" height="140">
+
         <Button dock="left" (tap)="login()" class="m-8">
             <FormattedString>
                 <Span [text]="loginText + '\n'" fontSize="28"></Span>
                 <Span [text]="descText" fontSize="12" ></Span>
             </FormattedString>
         </Button>
+
         <GridLayout dock="right" rows="*, *" columns="* , *" class="m-r-8 m-t-8 m-b-8">
             <Button row="0" col="0" text="G+" (tap)="google()" class="m-b-4 m-r-4"></Button>
             <Button row="0" col="1" text="f" (tap)="facebook()" class="m-b-4 m-l-4"></Button>
             <Button row="1" col="0" colSpan="2" text="Email" (tap)="email()" class="m-t-4"></Button>
         </GridLayout> 
+        
     </DockLayout>
 </GridLayout>

@@ -5,7 +5,7 @@ import { Page } from "ui/page";
 import { ApodItem } from "../../models/apod-model";
 import { ApodService } from "../../services/apod.service";
 import * as appSettings from "application-settings";
-import { login, logout, LoginType } from "nativescript-plugin-firebase";
+import { login, logout, LoginType, User, FirebaseFacebookLoginOptions } from "nativescript-plugin-firebase";
 @Component({
     selector: "ns-login",
     moduleId: module.id,
@@ -36,26 +36,68 @@ export class LoginComponent {
 
     facebook() {
         console.log("facebook func");
-
+        
         if (appSettings.getBoolean("isLogged")) {
             logout().then(() => {
                 login({
                     type: LoginType.FACEBOOK,
-                    scope: ['public_profile', 'email'] // optional: defaults to ['public_profile', 'email']
+                    facebookOptions: {
+                        // defaults to ['public_profile', 'email']
+                        scope: ['public_profile', 'email']
+                    }
                 }).then(user => {
-                    //this.navigateWithContext(user, "views/drawer-page");
+                    console.log("uid: " + user.uid)
+                    console.log("name: " + user.name);
+                    console.log("email: " + user.email);
+                    console.log("phoneNumber: " + user.phoneNumber);
+                    console.log("anonymous: " + user.anonymous);
+                    console.log("emailVerified: " + user.emailVerified);
+                    console.log("profileImageURL: " + user.profileImageURL);
+                    console.log("refreshToken: " + user.refreshToken)
+                    this.routerExtensions.navigate(["/main"], { 
+                        clearHistory: true, 
+                        transition: {
+                            name: "fade",
+                            duration: 300
+                        },
+                        queryParams: {
+                            name: user.name,
+                            profileImageURL: user.profileImageURL
+                        }
+                    });
                 }).catch(err => {
-                    //dialogs.alert(err);
+                    console.log(err);
                 });
             })
         } else {
             login({
                 type: LoginType.FACEBOOK,
-                scope: ['public_profile', 'email'] // optional: defaults to ['public_profile', 'email']
+                facebookOptions: {
+                    // defaults to ['public_profile', 'email']
+                    scope: ['public_profile', 'email']
+                }
             }).then(user => {
-                //this.navigateWithContext(user, "views/drawer-page");
+                console.log("uid: " + user.uid)
+                console.log("name: " + user.name);
+                console.log("email: " + user.email);
+                console.log("phoneNumber: " + user.phoneNumber);
+                console.log("anonymous: " + user.anonymous);
+                console.log("emailVerified: " + user.emailVerified);
+                console.log("profileImageURL: " + user.profileImageURL);
+                console.log("refreshToken: " + user.refreshToken)
+                this.routerExtensions.navigate(["/main"], { 
+                    clearHistory: true, 
+                    transition: {
+                        name: "fade",
+                        duration: 300
+                    },
+                    queryParams: {
+                        name: user.name,
+                        profileImageURL: user.profileImageURL
+                    }
+                });
             }).catch(err => {
-                //dialogs.alert(err);
+                console.log(err);
             })          
         }
     }

@@ -1,4 +1,5 @@
 import { Component, ViewChild, ChangeDetectorRef } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import { CardView } from "nativescript-cardview";
 import { RadSideDrawerComponent } from "nativescript-pro-ui/sidedrawer/angular";
 import { RadSideDrawer } from 'nativescript-pro-ui/sidedrawer';
@@ -6,6 +7,8 @@ import { isAndroid, isIOS } from "tns-core-modules/platform";
 import { AnimationCurve } from "tns-core-modules/ui/enums";
 import { View } from "tns-core-modules/ui/core/view";
 import { translateViewByXandYwithDurationAndCurve } from "../../shared/animations-helper";
+
+import { User } from "nativescript-plugin-firebase";
 
 @Component({
     selector: "ns-details",
@@ -21,14 +24,23 @@ export class MainComponent {
     public isAndroid: boolean = isAndroid;
     public isIos: boolean = isIOS;
 
+    public name: string;
+    public profileImageURL: string;
+
     private drawer: RadSideDrawer;
     @ViewChild(RadSideDrawerComponent) public drawerComponent: RadSideDrawerComponent;
 
-    constructor(private _changeDetectionRef: ChangeDetectorRef) {
+    constructor(private route: ActivatedRoute, private _changeDetectionRef: ChangeDetectorRef) {
         this.apodTitle = "Astronomical \nPhoto \nof the Day";
         this.asteroidTitle = "Asteroids\n Proximity\n Checker";
         this.roversTitle = "Mars Rovers \nPhotos \nDatabank";
         this.detailsTitle = "About\n Cosmos Databank\n Application";
+
+        this.route.queryParams.subscribe(params => {
+            this.name = params["name"];
+            this.profileImageURL = params["profileImageURL"];
+            console.log("main-page profile pic ULR: " + this.profileImageURL);
+        });
     }
 
     ngAfterViewInit() {
