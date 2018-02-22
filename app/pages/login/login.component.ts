@@ -31,7 +31,7 @@ export class LoginComponent {
         this.routerExtensions.navigate(["/main"], { clearHistory: true , transition: {
             name: "fade",
             duration: 300
-        }}); // 
+        }});
     }
 
     facebook() {

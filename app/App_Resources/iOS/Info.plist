@@ -58,8 +58,31 @@
 				<key>NSExceptionRequiresForwardSecrecy</key>
 				<true/>
 			</dict>
-		<!-- add more domain here -->
 		</dict>
 	</dict>
+	<key>CFBundleURLTypes</key>
+	<array>
+	<dict>
+		<key>CFBundleURLSchemes</key>
+		<array>
+		<string>fb1788923871358215</string>
+		</array>
+	</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>1788923871358215</string>
+	<key>FacebookDisplayName</key>
+	<string>Cosmos Databank</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 </dict>
 </plist>
