@@ -21,3 +21,4 @@ require("nativescript-angular/router");
 
 require("nativescript-cardview");
 require("nativescript-plugin-firebase");
+require("nativescript-ui-sidedrawer");

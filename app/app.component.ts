@@ -1,9 +1,8 @@
 import { Component } from "@angular/core";
+import * as appSettings from "tns-core-modules/application-settings";
 import { isAndroid } from "tns-core-modules/platform";
 import { requestPermission } from "nativescript-permissions";
 import { getCurrentPushToken, init } from "nativescript-plugin-firebase";
-
-import * as appSettings from "application-settings";
 
 @Component({
     selector: "ns-app",
@@ -48,8 +47,12 @@ export class AppComponent {
                         console.log("user's email address: " + (data.user.email ? data.user.email : "N/A"));
                         console.log("user's name: " + (data.user.name ? data.user.name : "N/A"));
                         appSettings.setBoolean("isLogged", true);
+                        appSettings.setString("username", data.user.name);
+                        appSettings.setString("email", data.user.email);
                     } else {
                         appSettings.setBoolean("isLogged", false);
+                        appSettings.setString("username", "");
+                        appSettings.setString("email", "");
                     }
                 },
         

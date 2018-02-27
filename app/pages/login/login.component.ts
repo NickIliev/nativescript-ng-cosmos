@@ -42,37 +42,18 @@ export class LoginComponent {
         console.log("facebook func");
 
         if (appSettings.getBoolean("isLogged")) {
-            logout().then(() => {
-                login({
-                    type: LoginType.FACEBOOK,
-                    facebookOptions: {
-                        // defaults to ['public_profile', 'email']
-                        scope: ['public_profile', 'email']
-                    }
-                }).then(user => {
-                    // console.log("uid: " + user.uid)
-                    // console.log("name: " + user.name);
-                    // console.log("email: " + user.email);
-                    // console.log("phoneNumber: " + user.phoneNumber);
-                    // console.log("anonymous: " + user.anonymous);
-                    // console.log("emailVerified: " + user.emailVerified);
-                    // console.log("profileImageURL: " + user.profileImageURL);
-                    // console.log("refreshToken: " + user.refreshToken)
-                    this.routerExtensions.navigate(["/main"], {
-                        clearHistory: true,
-                        transition: {
-                            name: "fade",
-                            duration: 300
-                        },
-                        queryParams: {
-                            name: user.name,
-                            profileImageURL: user.profileImageURL
-                        }
-                    });
-                }).catch(err => {
-                    console.log(err);
-                });
-            })
+            let username = appSettings.getString("username");
+
+            this.routerExtensions.navigate(["/main"], {
+                clearHistory: true,
+                transition: {
+                    name: "fade",
+                    duration: 300
+                },
+                queryParams: {
+                    name: username
+                }
+            });
         } else {
             login({
                 type: LoginType.FACEBOOK,
@@ -81,14 +62,6 @@ export class LoginComponent {
                     scope: ['public_profile', 'email']
                 }
             }).then(user => {
-                // console.log("uid: " + user.uid)
-                // console.log("name: " + user.name);
-                // console.log("email: " + user.email);
-                // console.log("phoneNumber: " + user.phoneNumber);
-                // console.log("anonymous: " + user.anonymous);
-                // console.log("emailVerified: " + user.emailVerified);
-                // console.log("profileImageURL: " + user.profileImageURL); // not working - use Facebook Graph instead
-                // console.log("refreshToken: " + user.refreshToken)
                 this.routerExtensions.navigate(["/main"], {
                     clearHistory: true,
                     transition: {
@@ -107,6 +80,41 @@ export class LoginComponent {
 
     google() {
         console.log("Google func");
+
+        if (appSettings.getBoolean("isLogged")) {
+            let username = appSettings.getString("username");
+
+            this.routerExtensions.navigate(["/main"], {
+                clearHistory: true,
+                transition: {
+                    name: "fade",
+                    duration: 300
+                },
+                queryParams: {
+                    name: username
+                }
+            });
+        } else {
+            login({
+                type: LoginType.GOOGLE,
+            }).then((result) => {
+                let user: User = result;
+                console.log(user);
+
+                this.routerExtensions.navigate(["/main"], {
+                    clearHistory: true,
+                    transition: {
+                        name: "fade",
+                        duration: 300
+                    },
+                    queryParams: {
+                        name: user.name
+                    }
+                });
+            }, (errorMessage) => {
+                console.log(errorMessage);
+            });
+        }
     }
 
     email() {
@@ -126,6 +134,7 @@ export class LoginComponent {
                 }
             }, (error) => {
                 console.log("Server Status Code: " + error.status);
+                // TODO handle error status codes with appropriate error UI
             });
     }
 }
