@@ -17,10 +17,10 @@
     </ActionItem>
 </ActionBar>
 
-<RadSideDrawer tkExampleTitle tkToggleNavButton showOverNavigation="true">
+<RadSideDrawer showOverNavigation="true">
     <StackLayout tkDrawerContent class="sidedrawer-content">
-        <Image [src]="profileImageURL" stretch="aspectFill" margin="10" width="50" height="50" borderRadius="25" horizontalAlignment="center"></Image>
-        
+        <!-- <Image [src]="profileImageURL" stretch="aspectFill" margin="10" width="50" height="50" borderRadius="25" horizontalAlignment="center"></Image>
+         -->
         <Label text="Home" (tap)="toggleDrawer()" class="sidedrawer-label"></Label>
         <Label text="Photo of the Day" [nsRouterLink]="['/apod']" pageTransition="fade" class="sidedrawer-label"></Label>
         <Label text="Asteroids Proximity Checker" [nsRouterLink]="['/asteroids']" pageTransition="fade" class="sidedrawer-label"></Label>

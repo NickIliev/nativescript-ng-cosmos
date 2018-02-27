@@ -1,16 +1,17 @@
 import { Component } from "@angular/core";
 import { RouterExtensions } from "nativescript-angular/router";
-import { isAndroid } from "platform";
-import { Page } from "ui/page";
+import { login, logout, LoginType, User, FirebaseFacebookLoginOptions } from "nativescript-plugin-firebase";
+import * as appSettings from "tns-core-modules/application-settings";
+import { isAndroid } from "tns-core-modules/platform";
+import { Page } from "tns-core-modules/ui/page";
 import { ApodItem } from "../../models/apod-model";
 import { ApodService } from "../../services/apod.service";
-import * as appSettings from "application-settings";
-import { login, logout, LoginType, User, FirebaseFacebookLoginOptions } from "nativescript-plugin-firebase";
+
 @Component({
     selector: "ns-login",
     moduleId: module.id,
     templateUrl: "./login.component.html",
-    styleUrls:["./login.component.css"]
+    styleUrls: ["./login.component.css"]
 })
 export class LoginComponent {
     public backgroundImage: string = "res://background";
@@ -19,7 +20,7 @@ export class LoginComponent {
     public loginText: string = "No Pass Login";
     public title: string;
 
-    constructor(private page: Page, private routerExtensions: RouterExtensions, private apodService: ApodService) { 
+    constructor(private page: Page, private routerExtensions: RouterExtensions, private apodService: ApodService) {
         if (isAndroid) {
             this.page.actionBarHidden = true;
         }
@@ -28,15 +29,18 @@ export class LoginComponent {
     }
 
     login() {
-        this.routerExtensions.navigate(["/main"], { clearHistory: true , transition: {
-            name: "fade",
-            duration: 300
-        }});
+        this.routerExtensions.navigate(["/main"], {
+            clearHistory: true,
+            transition: {
+                name: "fade",
+                duration: 300
+            }
+        });
     }
 
     facebook() {
         console.log("facebook func");
-        
+
         if (appSettings.getBoolean("isLogged")) {
             logout().then(() => {
                 login({
@@ -46,16 +50,16 @@ export class LoginComponent {
                         scope: ['public_profile', 'email']
                     }
                 }).then(user => {
-                    console.log("uid: " + user.uid)
-                    console.log("name: " + user.name);
-                    console.log("email: " + user.email);
-                    console.log("phoneNumber: " + user.phoneNumber);
-                    console.log("anonymous: " + user.anonymous);
-                    console.log("emailVerified: " + user.emailVerified);
-                    console.log("profileImageURL: " + user.profileImageURL);
-                    console.log("refreshToken: " + user.refreshToken)
-                    this.routerExtensions.navigate(["/main"], { 
-                        clearHistory: true, 
+                    // console.log("uid: " + user.uid)
+                    // console.log("name: " + user.name);
+                    // console.log("email: " + user.email);
+                    // console.log("phoneNumber: " + user.phoneNumber);
+                    // console.log("anonymous: " + user.anonymous);
+                    // console.log("emailVerified: " + user.emailVerified);
+                    // console.log("profileImageURL: " + user.profileImageURL);
+                    // console.log("refreshToken: " + user.refreshToken)
+                    this.routerExtensions.navigate(["/main"], {
+                        clearHistory: true,
                         transition: {
                             name: "fade",
                             duration: 300
@@ -77,28 +81,27 @@ export class LoginComponent {
                     scope: ['public_profile', 'email']
                 }
             }).then(user => {
-                console.log("uid: " + user.uid)
-                console.log("name: " + user.name);
-                console.log("email: " + user.email);
-                console.log("phoneNumber: " + user.phoneNumber);
-                console.log("anonymous: " + user.anonymous);
-                console.log("emailVerified: " + user.emailVerified);
-                console.log("profileImageURL: " + user.profileImageURL);
-                console.log("refreshToken: " + user.refreshToken)
-                this.routerExtensions.navigate(["/main"], { 
-                    clearHistory: true, 
+                // console.log("uid: " + user.uid)
+                // console.log("name: " + user.name);
+                // console.log("email: " + user.email);
+                // console.log("phoneNumber: " + user.phoneNumber);
+                // console.log("anonymous: " + user.anonymous);
+                // console.log("emailVerified: " + user.emailVerified);
+                // console.log("profileImageURL: " + user.profileImageURL); // not working - use Facebook Graph instead
+                // console.log("refreshToken: " + user.refreshToken)
+                this.routerExtensions.navigate(["/main"], {
+                    clearHistory: true,
                     transition: {
                         name: "fade",
                         duration: 300
                     },
                     queryParams: {
-                        name: user.name,
-                        profileImageURL: user.profileImageURL
+                        name: user.name
                     }
                 });
             }).catch(err => {
                 console.log(err);
-            })          
+            })
         }
     }
 
@@ -117,7 +120,7 @@ export class LoginComponent {
                     this.backgroundImage = result.url; // or bigger hdurl
                     this.title = result.title;
                     this.date = result.date;
-                }  else {
+                } else {
                     this.backgroundImage = "res://background";
                     return;
                 }

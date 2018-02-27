@@ -1,20 +1,19 @@
 import { NgModule, NO_ERRORS_SCHEMA, NgModuleFactoryLoader } from "@angular/core";
 import { NativeScriptModule } from "nativescript-angular/nativescript.module";
 import { NativeScriptCommonModule } from "nativescript-angular/common";
-import { AppRoutingModule } from "./app.routing";
-import { AppComponent } from "./app.component";
-import { LoginComponent } from "./pages/login/login.component";
-import { MainComponent } from "./pages/main/main.component";
-import { NativeScriptUISideDrawerModule } from "nativescript-pro-ui/sidedrawer/angular";
-
-import { ApodService } from "./services/apod.service";
-
+import { registerElement } from 'nativescript-angular/element-registry';
 import { NativeScriptFormsModule } from "nativescript-angular/forms";
 import { NativeScriptHttpModule } from "nativescript-angular/http";
 import { NativeScriptRouterModule, NSModuleFactoryLoader } from "nativescript-angular/router";
+import { NativeScriptUISideDrawerModule } from "nativescript-ui-sidedrawer/angular";
 
-import * as elementRegistryModule from 'nativescript-angular/element-registry';
-elementRegistryModule.registerElement("CardView", () => require("nativescript-cardview").CardView);
+import { AppComponent } from "./app.component";
+import { AppRoutingModule } from "./app.routing";
+import { LoginComponent } from "./pages/login/login.component";
+import { MainComponent } from "./pages/main/main.component";
+import { ApodService } from "./services/apod.service";
+
+registerElement("CardView", () => require("nativescript-cardview").CardView);
 
 @NgModule({
     bootstrap: [
