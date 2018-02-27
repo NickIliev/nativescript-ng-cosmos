@@ -38,7 +38,7 @@ export class MainComponent {
         this.route.queryParams.subscribe(params => {
             this.name = params["name"];
 
-            console.log("User " + this.name);
+            console.log("[MainComponent] User " + this.name);
             // this.profileImageURL = params["profileImageURL"];
             // console.log("main-page profile pic ULR: " + this.profileImageURL);
         });

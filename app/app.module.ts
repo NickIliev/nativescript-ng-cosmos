@@ -12,6 +12,7 @@ import { AppRoutingModule } from "./app.routing";
 import { LoginComponent } from "./pages/login/login.component";
 import { MainComponent } from "./pages/main/main.component";
 import { ApodService } from "./services/apod.service";
+import { LoginService } from "./services/login.service";
 
 registerElement("CardView", () => require("nativescript-cardview").CardView);
 
@@ -35,7 +36,8 @@ registerElement("CardView", () => require("nativescript-cardview").CardView);
     ],
     providers: [
         [{ provide: NgModuleFactoryLoader, useClass: NSModuleFactoryLoader }],
-        ApodService
+        ApodService,
+        LoginService
     ],
     schemas: [
         NO_ERRORS_SCHEMA

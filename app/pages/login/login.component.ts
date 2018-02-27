@@ -1,11 +1,9 @@
 import { Component } from "@angular/core";
 import { RouterExtensions } from "nativescript-angular/router";
-import { login, logout, LoginType, User, FirebaseFacebookLoginOptions } from "nativescript-plugin-firebase";
-import * as appSettings from "tns-core-modules/application-settings";
 import { isAndroid } from "tns-core-modules/platform";
 import { Page } from "tns-core-modules/ui/page";
-import { ApodItem } from "../../models/apod-model";
 import { ApodService } from "../../services/apod.service";
+import { LoginService } from "../../services/login.service";
 
 @Component({
     selector: "ns-login",
@@ -20,7 +18,10 @@ export class LoginComponent {
     public loginText: string = "No Pass Login";
     public title: string;
 
-    constructor(private page: Page, private routerExtensions: RouterExtensions, private apodService: ApodService) {
+    constructor(private page: Page, 
+                private routerExtensions: RouterExtensions, 
+                private apodService: ApodService,
+                private loginService: LoginService) {
         if (isAndroid) {
             this.page.actionBarHidden = true;
         }
@@ -29,96 +30,19 @@ export class LoginComponent {
     }
 
     login() {
-        this.routerExtensions.navigate(["/main"], {
-            clearHistory: true,
-            transition: {
-                name: "fade",
-                duration: 300
-            }
-        });
+        this.loginService.login(this.routerExtensions);
     }
 
     facebook() {
-        console.log("facebook func");
-
-        if (appSettings.getBoolean("isLogged")) {
-            let username = appSettings.getString("username");
-
-            this.routerExtensions.navigate(["/main"], {
-                clearHistory: true,
-                transition: {
-                    name: "fade",
-                    duration: 300
-                },
-                queryParams: {
-                    name: username
-                }
-            });
-        } else {
-            login({
-                type: LoginType.FACEBOOK,
-                facebookOptions: {
-                    // defaults to ['public_profile', 'email']
-                    scope: ['public_profile', 'email']
-                }
-            }).then(user => {
-                this.routerExtensions.navigate(["/main"], {
-                    clearHistory: true,
-                    transition: {
-                        name: "fade",
-                        duration: 300
-                    },
-                    queryParams: {
-                        name: user.name
-                    }
-                });
-            }).catch(err => {
-                console.log(err);
-            })
-        }
+        this.loginService.facebook(this.routerExtensions);
     }
 
     google() {
-        console.log("Google func");
-
-        if (appSettings.getBoolean("isLogged")) {
-            let username = appSettings.getString("username");
-
-            this.routerExtensions.navigate(["/main"], {
-                clearHistory: true,
-                transition: {
-                    name: "fade",
-                    duration: 300
-                },
-                queryParams: {
-                    name: username
-                }
-            });
-        } else {
-            login({
-                type: LoginType.GOOGLE,
-            }).then((result) => {
-                let user: User = result;
-                console.log(user);
-
-                this.routerExtensions.navigate(["/main"], {
-                    clearHistory: true,
-                    transition: {
-                        name: "fade",
-                        duration: 300
-                    },
-                    queryParams: {
-                        name: user.name
-                    }
-                });
-            }, (errorMessage) => {
-                console.log(errorMessage);
-            });
-        }
+        this.loginService.google(this.routerExtensions);
     }
 
     email() {
-        console.log("Email func");
+        this.loginService.login(this.routerExtensions);
     }
 
     private initData() {
@@ -133,7 +57,7 @@ export class LoginComponent {
                     return;
                 }
             }, (error) => {
-                console.log("Server Status Code: " + error.status);
+                // console.log("Server Status Code: " + error.status);
                 // TODO handle error status codes with appropriate error UI
             });
     }
