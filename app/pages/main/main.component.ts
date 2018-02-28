@@ -5,7 +5,6 @@ import { User } from "nativescript-plugin-firebase";
 import { RadSideDrawerComponent } from "nativescript-ui-sidedrawer/angular";
 import { RadSideDrawer } from 'nativescript-ui-sidedrawer';
 import { isAndroid, isIOS } from "tns-core-modules/platform";
-import { AnimationCurve } from "tns-core-modules/ui/enums";
 import { View } from "tns-core-modules/ui/core/view";
 import { translateViewByXandYwithDurationAndCurve } from "../../shared/animations-helper";
 

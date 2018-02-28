@@ -1,16 +1,28 @@
-GridLayout Label {
-    background-color: #282a2a;
-    border-radius: 20;
+GridLayout {
+    background-color: transparent;
+}
+
+/* TODO  add PNG to resources*/
+.background {
+    background-image: url("~/images/night-shift.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+Label {
+    background-color: orangered;
+    border-radius: 20 20 0 0;
     color: #BCBCBC;
     width: 80%;
+    margin-top: 8;
 }
 
 DatePicker, ListPicker {
     background-color: #BCBCBC;
-    border-radius: 20;
+    border-radius: 0 0 20 20;
     color: #282a2a;
     font-family: "Nasalization";
-    height: 160;
     width: 80%;
 }
 

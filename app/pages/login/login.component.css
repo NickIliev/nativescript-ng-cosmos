@@ -12,7 +12,7 @@ GridLayout, StackLayout {
 DockLayout {
     background-color: transparent;
     vertical-align: bottom;
-    opacity: 0.7;
+    opacity: 0.8;
 }
 
 Button {
@@ -24,4 +24,8 @@ Button {
 Button:highlighted {
     background-color:#E8EAEB;
     color: #1b1d1d;
+}
+
+Label {
+    color: whitesmoke;
 }

@@ -1,9 +1,10 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { RouterExtensions } from "nativescript-angular/router";
-import { Page } from "ui/page";
-import { DatePicker } from "ui/date-picker";
-import { ListPicker } from "ui/list-picker";
-import { isAndroid } from "platform";
+import { Page } from "tns-core-modules/ui/page";
+import { DatePicker } from "tns-core-modules/ui/date-picker";
+import { ListPicker } from "tns-core-modules/ui/list-picker";
+import { isAndroid } from "tns-core-modules/platform";
+import { translateViewByXandYwithDurationAndCurve } from "../../../shared/animations-helper";
 
 @Component({
 	selector: 'pickers',
@@ -50,9 +51,14 @@ export class PickersComponent {
 	onListickerLoaded(args) {
 		let listPicker = <ListPicker>args.object;
 		listPicker.selectedIndex = 1;
+
+		listPicker.animate({ scale: { x: 1.3, y: 1.3 }, duration: 300 })
+			.then(() => { return listPicker.animate({ scale: { x: 1, y: 1 }, duration: 300 }); })
+			.then(() => { return this._datePicker.animate({ scale: { x: 1.3, y: 1.3 }, duration: 300 }); })
+			.then(() => { return this._datePicker.animate({ scale: { x: 1, y: 1 }, duration: 300 }); })
 	}
 
-	public selectedIndexChanged(args) {
+	selectedIndexChanged(args) {
 		let picker = <ListPicker>args.object;
 		this._selectedIndex = picker.selectedIndex;
 		this._selectedRover = this.rovers[this._selectedIndex];

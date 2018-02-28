@@ -4,6 +4,7 @@ import { isAndroid } from "tns-core-modules/platform";
 import { Page } from "tns-core-modules/ui/page";
 import { ApodService } from "../../services/apod.service";
 import { LoginService } from "../../services/login.service";
+import { translateViewByXandYwithDurationAndCurve } from "../../shared/animations-helper";
 
 @Component({
     selector: "ns-login",
@@ -45,6 +46,11 @@ export class LoginComponent {
         this.loginService.login(this.routerExtensions);
     }
 
+    public onViewLoaded(args, translateFromX, translateToX, translateFromY, translateToY) {
+        let view = args.object;
+        translateViewByXandYwithDurationAndCurve(view, translateFromX, translateToX, translateFromY, translateToY, 1200, "easeOut");
+    }
+
     private initData() {
         this.apodService.getData()
             .subscribe((result) => {
@@ -54,7 +60,6 @@ export class LoginComponent {
                     this.date = result.date;
                 } else {
                     this.backgroundImage = "res://background";
-                    return;
                 }
             }, (error) => {
                 // console.log("Server Status Code: " + error.status);
