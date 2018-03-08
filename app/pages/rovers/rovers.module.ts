@@ -4,7 +4,7 @@ import { NativeScriptCommonModule } from "nativescript-angular/common";
 import { RoverPhotosService } from "../../services/rover.service";
 import { RoversComponent } from "./rovers.component";
 import { PhotoDetailComponent } from "./photo-detail.component";
-
+import { ToolbarHelper } from "../../shared/toolbar-helper";
 import { PickersComponent } from "./pickers/pickers.component";
 import { RoversToolbarComponent } from "./toolbar/toolbar.component";
 export const routerConfig = [
@@ -23,7 +23,7 @@ export const routerConfig = [
         NativeScriptRouterModule.forChild(routerConfig)
     ],
     declarations: [RoversComponent, PhotoDetailComponent, PickersComponent, RoversToolbarComponent],
-    providers: [RoverPhotosService],
+    providers: [RoverPhotosService, ToolbarHelper],
     schemas: [
         NO_ERRORS_SCHEMA
     ]

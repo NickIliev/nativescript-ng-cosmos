@@ -81,10 +81,10 @@ export class ToolbarHelper {
         })
     }
 
-    onSetWallpaper(item: ApodItem) {
+    onSetWallpaper(url: string) {
         // Android only feature!!
         if (isAndroid) {
-            fromUrl(item.url).then(imageSource => {
+            fromUrl(url).then(imageSource => {
                 let wallpaperManager = android.app.WallpaperManager.getInstance(ad.getApplicationContext());
                 try {
                     wallpaperManager.setBitmap(imageSource.android);

@@ -25,8 +25,6 @@ export class ApodComponent {
     item: ApodItem = new ApodItem("", "", "", "", "", "", "", "");
     lastLoadedDate: Date = new Date(); // today
 
-    toolbarHelper: ToolbarHelper = new ToolbarHelper();
-
     /* 
     [direction: boolean]
     true === means going to Prevous date; 
@@ -43,9 +41,9 @@ export class ApodComponent {
     dock: View;
     scroll: ScrollView;
 
-    constructor(private apodService: ApodService, private page: Page) {
+    constructor(private _apodService: ApodService, private _page: Page, private _toolbarHelper: ToolbarHelper) {
         if (isAndroid) {
-            this.page.actionBarHidden = true;
+            this._page.actionBarHidden = true;
         }
 
         this.initData(); // initially load TODAY's pic
@@ -96,7 +94,7 @@ export class ApodComponent {
         } else if (message === "goToNextDay") {
             this.setNextDate();
         } else if (message === "onShare") {
-            this.toolbarHelper.onShare(this.item);
+            this._toolbarHelper.onShare(this.item);
         } else if (message === "onSetWallpaper") {
             let options: ConfirmOptions = {
                 // title: this.item.title,
@@ -109,7 +107,7 @@ export class ApodComponent {
                 // result can be true/false/undefined
                 console.log("confirm result: " + result);
                 if (result) {
-                    this.toolbarHelper.onSetWallpaper(this.item);
+                    this._toolbarHelper.onSetWallpaper(this.item.url);
                 } else {
                     return;
                 }
@@ -121,23 +119,23 @@ export class ApodComponent {
                 okButtonText: "OK"
             };
             alert(options).then(() => {
-                this.toolbarHelper.onSaveFile(this.item);
+                this._toolbarHelper.onSaveFile(this.item);
             }); 
         }
     }
 
     private setPreviousDate() {
         this.direction = true;
-        this.toolbarHelper.setPrevousDay(this.lastLoadedDate);
-        this.extractData(this.toolbarHelper.dateToString(this.lastLoadedDate));
+        this._toolbarHelper.setPrevousDay(this.lastLoadedDate);
+        this.extractData(this._toolbarHelper.dateToString(this.lastLoadedDate));
     }
 
     private setNextDate() {
         this.direction = false;
-        let isValideDate = this.toolbarHelper.setNextDay(this.lastLoadedDate);
+        let isValideDate = this._toolbarHelper.setNextDay(this.lastLoadedDate);
 
         if (isValideDate && this.lastLoadedDate <= new Date()) {
-            this.extractData(this.toolbarHelper.dateToString(this.lastLoadedDate));
+            this.extractData(this._toolbarHelper.dateToString(this.lastLoadedDate));
         } else {
             let options = {
                 title: "No Photo Available!",
@@ -148,13 +146,13 @@ export class ApodComponent {
             alert(options).then(() => {
                 console.log("No photos abailable - returning to today's pic");
                 this.lastLoadedDate = new Date();
-                this.extractData(this.toolbarHelper.dateToString(this.lastLoadedDate));
+                this.extractData(this._toolbarHelper.dateToString(this.lastLoadedDate));
             });
         }
     }
 
     private initData() {
-        this.apodService.getData()
+        this._apodService.getData()
             .subscribe((result) => {
                 if (result.media_type === "image") {
                     this.item = new ApodItem(
@@ -172,14 +170,14 @@ export class ApodComponent {
                 } else if (result.media_type !== "image" && this.direction) {
                     // TODO: implement the logic for YouTube videos here
                     this.lastLoadedDate = new Date(result.date);
-                    this.toolbarHelper.setPrevousDay(this.lastLoadedDate);
-                    this.extractData(this.toolbarHelper.dateToString(this.lastLoadedDate));
+                    this._toolbarHelper.setPrevousDay(this.lastLoadedDate);
+                    this.extractData(this._toolbarHelper.dateToString(this.lastLoadedDate));
                 } else if (result.media_type !== "image" && !this.direction) {
                     // TODO: implement the logic for YouTube videos here
                     this.lastLoadedDate = new Date(result.date);
-                    let isValideDate = this.toolbarHelper.setNextDay(this.lastLoadedDate);
+                    let isValideDate = this._toolbarHelper.setNextDay(this.lastLoadedDate);
                     if (isValideDate) {
-                        this.extractData(this.toolbarHelper.dateToString(this.lastLoadedDate));
+                        this.extractData(this._toolbarHelper.dateToString(this.lastLoadedDate));
                     } else {
                         return;
                     }
@@ -192,7 +190,7 @@ export class ApodComponent {
     }
 
     private extractData(date: string) {
-        this.apodService.getDataWithCustomDate(date)
+        this._apodService.getDataWithCustomDate(date)
             .subscribe((result) => {
                 if (result.media_type === "image") {
                     this.item = new ApodItem(
@@ -207,13 +205,13 @@ export class ApodComponent {
                     );
                 } else if (result.media_type !== "image" && this.direction) {
                     // TODO: implement the logic for YouTube videos here
-                    this.toolbarHelper.setPrevousDay(this.lastLoadedDate);
-                    this.extractData(this.toolbarHelper.dateToString(this.lastLoadedDate));
+                    this._toolbarHelper.setPrevousDay(this.lastLoadedDate);
+                    this.extractData(this._toolbarHelper.dateToString(this.lastLoadedDate));
                 } else if (result.media_type !== "image" && !this.direction) {
                     // TODO: implement the logic for YouTube videos here
-                    let isValideDate = this.toolbarHelper.setNextDay(this.lastLoadedDate);
+                    let isValideDate = this._toolbarHelper.setNextDay(this.lastLoadedDate);
                     if (isValideDate) {
-                        this.extractData(this.toolbarHelper.dateToString(this.lastLoadedDate));
+                        this.extractData(this._toolbarHelper.dateToString(this.lastLoadedDate));
                     } else {
                         return;
                     }

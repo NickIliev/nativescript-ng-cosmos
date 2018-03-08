@@ -1,11 +1,14 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { isAndroid } from "platform";
-import { Page } from "ui/page";
-import { RoverPhoto } from "../../models/rover-model";
-import { ad } from "utils/utils";
-import { fromUrl } from "image-source";
 import { shareImage } from "nativescript-social-share";
+import { confirm, ConfirmOptions } from "tns-core-modules/ui/dialogs";
+import { fromUrl } from "tns-core-modules/image-source";
+import { Page } from "tns-core-modules/ui/page";
+import { isAndroid } from "tns-core-modules/platform";
+import { ad } from "tns-core-modules/utils/utils";
+
+import { RoverPhoto } from "../../models/rover-model";
+import { ToolbarHelper } from "../../shared/toolbar-helper";
 
 @Component({
     selector: "ns-details",
@@ -16,7 +19,7 @@ export class PhotoDetailComponent implements OnInit {
 
     photo: RoverPhoto;
 
-    constructor(private _route: ActivatedRoute, private _page: Page) {
+    constructor(private _route: ActivatedRoute, private _page: Page, private _toolbarHelper: ToolbarHelper) {
         if (isAndroid) {
             this._page.actionBarHidden = true;
         }
@@ -36,7 +39,6 @@ export class PhotoDetailComponent implements OnInit {
                 query.imageUri,
                 query.earthDate
             );
-            // console.log(`id: ${query['id']}`);
         }
     }
 
@@ -47,17 +49,46 @@ export class PhotoDetailComponent implements OnInit {
             })
         } else if (message === "onSetWallpaper") {
             if (isAndroid) {
-                fromUrl(this.photo.imageUri).then(image => {
-                    let wallpaperManager = android.app.WallpaperManager.getInstance(ad.getApplicationContext());
-                    try {
-                        wallpaperManager.setBitmap(image.android);
-                    } catch (error) {
-                        console.log(error);
+                // fromUrl(this.photo.imageUri).then(image => {
+                //     let wallpaperManager = android.app.WallpaperManager.getInstance(ad.getApplicationContext());
+                //     try {
+                //         wallpaperManager.setBitmap(image.android);
+                //     } catch (error) {
+                //         console.log(error);
+                //     }
+                // });
+
+                let options: ConfirmOptions = {
+                    message: "Set as Wallpaper?",
+                    okButtonText: "Yes",
+                    cancelButtonText: "No",
+                    neutralButtonText: "Cancel"
+                };
+                confirm(options).then((result: boolean) => {
+                    // result can be true/false/undefined
+                    console.log("confirm result: " + result);
+                    if (result) {
+                        this._toolbarHelper.onSetWallpaper(this.photo.imageUri);
+                    } else {
+                        return;
                     }
-                })
+                });
             }
         } else if (message === "onSaveFile") {
             console.log("onSaveFile not implemented!");
         }
     }
 }
+
+
+
+// } else if (message === "onSaveFile") {
+//     let options: ConfirmOptions = {
+//         title: "Image Downloaded!",
+//         message: "Saved in /Pictures/CosmosDatabank",
+//         okButtonText: "OK"
+//     };
+//     alert(options).then(() => {
+//         this.toolbarHelper.onSaveFile(this.item);
+//     }); 
+// }
