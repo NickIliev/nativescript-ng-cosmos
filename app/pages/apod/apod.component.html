@@ -1,6 +1,6 @@
 <!-- Remove the outer GridLayout once https://github.com/NativeScript/nativescript-angular/issues/1203 is resolved! -->
 <GridLayout>
-    <ScrollView>
+    <ScrollView (loaded)="onScrollLoaded($event)">
         <StackLayout class="p-b-16">
             <ActivityIndicator (loaded)="onIndicatorLoaded($event)" class="m-t-30 m-b-20"></ActivityIndicator>
             <Image (loaded)="onImageLoaded($event)" [src]="item.url"></Image>

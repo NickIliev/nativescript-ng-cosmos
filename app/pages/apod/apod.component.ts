@@ -57,16 +57,19 @@ export class ApodComponent {
         this.dock.translateY = 100;
         this.dock.translateX = 50;
         this.dock.animate({
-            translate: { x: 0, y: -10},    
+            translate: { x: 0, y: -10 },
             duration: 1000
         });
     }
 
     onImageLoaded(args) {
-        this.image = <Image>args.object; 
+        this.image = <Image>args.object;
         this.image.visibility = !this.image.isLoading ? "visible" : "collapse"; // on App resume check if image is already loaded or not
 
         this.image.on("isLoadingChange", (args) => {
+            this.scroll.scrollToHorizontalOffset(0, true);
+            this.scroll.scrollToVerticalOffset(0, true);
+
             if (!this.image.isLoading) {
                 this.image.visibility = "visible"; // show image - change indicator
                 this.indicator.busy = false;
@@ -79,6 +82,10 @@ export class ApodComponent {
         })
     }
 
+    onScrollLoaded(args) {
+        this.scroll = <ScrollView>args.object;
+    }
+
     onIndicatorLoaded(args) {
         this.indicator = args.object;
     }
@@ -87,7 +94,7 @@ export class ApodComponent {
         if (message === "goToPrevousDay") {
             this.setPreviousDate();
         } else if (message === "goToNextDay") {
-            this.setNextDate();
+            this.setNextDate()
         } else if (message === "onShare") {
             this.toolbarHelper.onShare(this.item);
         } else if (message === "onSetWallpaper") {
@@ -101,6 +108,8 @@ export class ApodComponent {
         this.direction = true;
         this.toolbarHelper.setPrevousDay(this.lastLoadedDate);
         this.extractData(this.toolbarHelper.dateToString(this.lastLoadedDate));
+
+        return 1;
     }
 
     private setNextDate() {
@@ -122,6 +131,8 @@ export class ApodComponent {
                 this.extractData(this.toolbarHelper.dateToString(this.lastLoadedDate));
             });
         }
+
+        return 1;
     }
 
     private initData() {
@@ -157,7 +168,7 @@ export class ApodComponent {
                 } else {
                     return;
                 }
-            },(error) => {
+            }, (error) => {
                 console.log("Server Status Code: " + error.status);
             })
     }
