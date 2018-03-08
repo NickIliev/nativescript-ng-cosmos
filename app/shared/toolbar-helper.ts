@@ -1,11 +1,13 @@
 import { ApodItem } from "../models/apod-model";
-import { ImageSource, fromUrl } from "image-source";
-import { isAndroid, isIOS } from "platform";
+
+import { ImageSource, fromUrl } from "tns-core-modules/image-source";
+import { isAndroid, isIOS } from "tns-core-modules/platform";
 import { shareImage } from "nativescript-social-share";
-import { ad } from "utils/utils";
-import { File, Folder, path, knownFolders } from "file-system";
-import * as enums from "ui/enums";
+import { ad } from "tns-core-modules/utils/utils";
+import { File, Folder, path, knownFolders } from "tns-core-modules/file-system";
+import * as enums from "tns-core-modules/ui/enums";
 import { alert } from "tns-core-modules/ui/dialogs/dialogs";
+import * as app from "tns-core-modules/application";
 
 export class ToolbarHelper {
 
@@ -34,34 +36,39 @@ export class ToolbarHelper {
 
         fromUrl(url).then(imageSource => {
             if (isAndroid) {
-                var androidDownloadsPath = android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_DOWNLOADS).toString();
-                cosmosFolderPath = path.join(androidDownloadsPath, "CosmosDataBank");
+                let androidDownloadsPath = android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_PICTURES).toString();
+                cosmosFolderPath = path.join(androidDownloadsPath, "CosmosDatabank");
 
                 let folder: Folder = Folder.fromPath(cosmosFolderPath);
                 let myPath: string = path.join(cosmosFolderPath, fileName);
                 let exists: boolean = File.exists(myPath);
-            
+
                 if (!exists) {
                     let saved: boolean = imageSource.saveToFile(myPath, "jpg");
-                    console.log("saved: " + saved);
-                    alert("Image saved!");
+                    this.broadCastToAndroidPhotos(new java.io.File(myPath));
                 }
             } else if (isIOS) {
                 // TODO : does this work? - where are the images ?
-                var iosDownloadPath = knownFolders.documents();
+                let iosDownloadPath = knownFolders.documents();
                 cosmosFolderPath = path.join(iosDownloadPath.path, "CosmosDataBank");
 
                 let folder = Folder.fromPath(cosmosFolderPath);
                 let myPath = path.join(cosmosFolderPath, fileName);
                 let exists = File.exists(myPath);
-            
+
                 if (!exists) {
                     let saved = imageSource.saveToFile(myPath, "jpeg");
                     console.log("saved: " + saved);
-                    alert("Image saved!");
                 }
             }
         });
+    }
+
+    broadCastToAndroidPhotos(imageFile) {
+        var mediaScanIntent = new android.content.Intent(android.content.Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        var contentUri = android.net.Uri.fromFile(imageFile);
+        mediaScanIntent.setData(contentUri);
+        app.android.foregroundActivity.sendBroadcast(mediaScanIntent);
     }
 
     onShare(item: ApodItem) {

@@ -1,6 +1,6 @@
 import { ActivityIndicator } from "tns-core-modules/ui/activity-indicator";
 import { View } from "tns-core-modules/ui/core/view";
-import { alert } from "tns-core-modules/ui/dialogs";
+import { alert, confirm, ConfirmOptions } from "tns-core-modules/ui/dialogs";
 import { GestureEventData, PinchGestureEventData, PanGestureEventData } from "tns-core-modules/ui/gestures";
 import { Image } from "tns-core-modules/ui/image";
 import { Page } from "tns-core-modules/ui/page";
@@ -94,13 +94,35 @@ export class ApodComponent {
         if (message === "goToPrevousDay") {
             this.setPreviousDate();
         } else if (message === "goToNextDay") {
-            this.setNextDate()
+            this.setNextDate();
         } else if (message === "onShare") {
             this.toolbarHelper.onShare(this.item);
         } else if (message === "onSetWallpaper") {
-            this.toolbarHelper.onSetWallpaper(this.item);
+            let options: ConfirmOptions = {
+                // title: this.item.title,
+                message: "Set as Wallpaper?",
+                okButtonText: "Yes",
+                cancelButtonText: "No",
+                neutralButtonText: "Cancel"
+            };
+            confirm(options).then((result: boolean) => {
+                // result can be true/false/undefined
+                console.log("confirm result: " + result);
+                if (result) {
+                    this.toolbarHelper.onSetWallpaper(this.item);
+                } else {
+                    return;
+                }
+            });
         } else if (message === "onSaveFile") {
-            this.toolbarHelper.onSaveFile(this.item);
+            let options: ConfirmOptions = {
+                title: "Image Downloaded!",
+                message: "Saved in /Pictures/CosmosDatabank",
+                okButtonText: "OK"
+            };
+            alert(options).then(() => {
+                this.toolbarHelper.onSaveFile(this.item);
+            }); 
         }
     }
 
@@ -108,8 +130,6 @@ export class ApodComponent {
         this.direction = true;
         this.toolbarHelper.setPrevousDay(this.lastLoadedDate);
         this.extractData(this.toolbarHelper.dateToString(this.lastLoadedDate));
-
-        return 1;
     }
 
     private setNextDate() {
@@ -131,8 +151,6 @@ export class ApodComponent {
                 this.extractData(this.toolbarHelper.dateToString(this.lastLoadedDate));
             });
         }
-
-        return 1;
     }
 
     private initData() {
