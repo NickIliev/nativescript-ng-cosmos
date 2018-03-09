@@ -44,15 +44,13 @@ export class AppComponent {
                 onAuthStateChanged: (data) => { // optional but useful to immediately re-logon the user when he re-visits your app
                     // console.log(data.loggedIn ? "Logged in to firebase" : "Logged out from firebase");
                     if (data.loggedIn) {
-                        console.log("user's email address: " + (data.user.email ? data.user.email : "N/A"));
-                        console.log("user's name: " + (data.user.name ? data.user.name : "N/A"));
+                        // console.log("user's email address: " + (data.user.email ? data.user.email : "N/A"));
+                        // console.log("user's name: " + (data.user.name ? data.user.name : "N/A"));
                         appSettings.setBoolean("isLogged", true);
-                        appSettings.setString("username", data.user.name);
-                        appSettings.setString("email", data.user.email);
+                        appSettings.setString("username", (data.user.name ? data.user.name : "N/A"));
                     } else {
                         appSettings.setBoolean("isLogged", false);
                         appSettings.setString("username", "");
-                        appSettings.setString("email", "");
                     }
                 },
         
@@ -65,7 +63,7 @@ export class AppComponent {
 
         getCurrentPushToken().then((token: string) => {
             // may be null if not known yet
-            console.log("Current push token: " + token);
+            // console.log("Current push token: " + token);
         });  
     }
 
