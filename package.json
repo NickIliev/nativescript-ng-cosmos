@@ -6,7 +6,7 @@
   "nativescript": {
     "id": "org.nativescript.curiosity",
     "tns-android": {
-      "version": "4.0.0-2018.3.8.6"
+      "version": "next"
     },
     "tns-ios": {
       "version": "next"
@@ -27,7 +27,6 @@
     "nativescript-plugin-firebase": "^5.1.7",
     "nativescript-social-share": "^1.5.0",
     "nativescript-theme-core": "^1.0.4",
-    "nativescript-ui-listview": "^3.5.0",
     "nativescript-ui-sidedrawer": "^3.5.0",
     "reflect-metadata": "~0.1.8",
     "rxjs": "^5.5.0",
@@ -45,7 +44,7 @@
     "css-loader": "~0.28.7",
     "extract-text-webpack-plugin": "~3.0.2",
     "lazy": "1.0.11",
-    "nativescript-dev-typescript": "next",
+    "nativescript-dev-typescript": "0.6.0",
     "nativescript-dev-webpack": "next",
     "nativescript-worker-loader": "~0.8.1",
     "node-sass": "^4.7.1",

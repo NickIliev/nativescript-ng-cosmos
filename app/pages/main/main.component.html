@@ -1,18 +1,20 @@
 <!-- The iOS ActionBar.titleView is crashing on 3.2.x and above (Measurment issue)-->
-<ActionBar>
+<ActionBar title="">
     <ActionBar.titleView *ngIf="isAndroid">
-        <StackLayout class="p-8">
-            <Label text="COSMOS Databank" class="action-bar-title"></Label>
+        <StackLayout>
+            <Label text="COSMOS Databank" class="action-bar-title p-b-8"></Label>
         </StackLayout>
     </ActionBar.titleView>
+
+
     <ActionItem ios.position="left" *ngIf="isIos">
         <StackLayout>
-            <Label text="COSMOS Databank" class="action-bar-title"></Label>
+            <Label text="COSMOS Databank" class="action-bar-title" textAlignment="center"></Label>
         </StackLayout>
     </ActionItem>
     <ActionItem ios.position="right" (tap)="toggleDrawer()">
-        <GridLayout width="60" borderWidth="8" borderRadius="20" borderColor="#343838" backgroundColor="#282a2a">
-            <Image src="res://ic_menu" opacity="0.8" verticalAlignment="center" horizontalAlignment="center" stretch="aspectFit"></Image>
+        <GridLayout width="40" height="40" borderWidth="2" borderColor="#282a2a" borderRadius="20" backgroundColor="#282a2a">
+            <Image src="res://ic_menu" opacity="0.6" verticalAlignment="center" horizontalAlignment="center" stretch="none"></Image>
         </GridLayout>
     </ActionItem>
 </ActionBar>

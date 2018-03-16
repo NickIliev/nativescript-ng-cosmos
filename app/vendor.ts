@@ -16,7 +16,6 @@ require("@angular/http");
 require("@angular/router");
 
 require("nativescript-angular/platform-static");
-require("nativescript-angular/forms");
 require("nativescript-angular/router");
 
 require("nativescript-cardview");

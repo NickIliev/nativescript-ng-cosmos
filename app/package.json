@@ -5,6 +5,6 @@
   },
   "main": "main.js",
   "name": "tns-template-hello-world-ng",
-  "profiling": "timeline",
-  "version": "3.1.2"
+  "version": "3.1.2",
+  "profiling": "timeline"
 }

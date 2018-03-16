@@ -22,3 +22,10 @@ ActivityIndicator {
 .dock {
     background-color: transparent;
 }
+
+.action-bar-title {
+    color: #BCBCBC;
+    font-family: "Nasalization";
+    font-size: 18;
+    text-align: center;
+}

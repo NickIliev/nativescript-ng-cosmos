@@ -16,10 +16,17 @@ module.exports = env => {
     }
     const platforms = ["ios", "android"];
     const { snapshot, uglify, report, aot } = env;
-    const ngToolsWebpackOptions = { tsConfigPath: "tsconfig.json" };
+    const ngToolsWebpackOptions = { tsConfigPath: join(__dirname, "tsconfig.json") };
 
     const config = {
-        context: resolve("./app"),
+        context: resolve(__dirname, "app"),
+        watchOptions: {
+            ignored: [
+                resolve(__dirname, "./app/App_Resources"),
+                // Don't watch hidden files
+                "**/.*",
+            ]
+        },
         target: nativescriptTarget,
         entry: {
             bundle: aot ? "./main.aot.ts" : "./main.ts",
@@ -154,7 +161,6 @@ module.exports = env => {
         const compress = platform !== "android";
         config.plugins.push(new UglifyJsPlugin({
             uglifyOptions: {
-                mangle: { reserved: nsWebpack.uglifyMangleExcludes },
                 compress,
             }
         }));
