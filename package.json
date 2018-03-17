@@ -6,10 +6,7 @@
   "nativescript": {
     "id": "org.nativescript.curiosity",
     "tns-android": {
-      "version": "next"
-    },
-    "tns-ios": {
-      "version": "next"
+      "version": "4.0.0-2018.3.12.1"
     }
   },
   "dependencies": {
@@ -24,10 +21,10 @@
     "nativescript-angular": "next",
     "nativescript-cardview": "^2.0.5",
     "nativescript-permissions": "^1.2.3",
-    "nativescript-plugin-firebase": "^5.1.7",
+    "nativescript-plugin-firebase": "^5.1.8",
     "nativescript-social-share": "^1.5.0",
     "nativescript-theme-core": "^1.0.4",
-    "nativescript-ui-sidedrawer": "^3.5.0",
+    "nativescript-ui-sidedrawer": "^3.5.1",
     "reflect-metadata": "~0.1.8",
     "rxjs": "^5.5.0",
     "tns-core-modules": "next",
