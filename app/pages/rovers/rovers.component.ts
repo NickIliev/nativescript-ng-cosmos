@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { AfterViewInit, Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { RouterExtensions } from "nativescript-angular/router";
 import { isAndroid } from "platform";
@@ -16,7 +16,7 @@ import "rxjs/add/operator/map";
     templateUrl: "./rovers.component.html",
     styleUrls: ["./rovers.component.css"]
 })
-export class RoversComponent {
+export class RoversComponent implements OnInit, AfterViewInit {
 
     public roverPhotos: RxObservable<Array<RoverPhoto>>;
     public day: number;
@@ -27,7 +27,11 @@ export class RoversComponent {
     private pageIndex: number;
     private subscr;
 
-    constructor(private _roverService: RoverPhotosService, private _page: Page, private _router: RouterExtensions, private _activatedRoute: ActivatedRoute) {
+    constructor(
+        private _roverService: RoverPhotosService,
+        private _page: Page,
+        private _router: RouterExtensions,
+        private _activatedRoute: ActivatedRoute) {
         if (isAndroid) {
             this._page.actionBarHidden = true;
         }
@@ -55,7 +59,7 @@ export class RoversComponent {
                     alert("No availabel photos for the selected date! Please choose different date from the selection page!")
                         .then(() => {
                             this._router.back();
-                        })
+                        });
                 }
 
                 this.tempArr = itemsList;
@@ -77,7 +81,7 @@ export class RoversComponent {
                 });
 
                 this.subscr.next(this.tempArr);
-            })
+            });
     }
 
     public onItemTap(args: ItemEventData) {

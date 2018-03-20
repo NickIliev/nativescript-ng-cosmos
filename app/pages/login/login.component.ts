@@ -19,10 +19,10 @@ export class LoginComponent {
     public loginText: string = "No Pass Login";
     public title: string;
 
-    constructor(private page: Page, 
-                private routerExtensions: RouterExtensions, 
-                private apodService: ApodService,
-                private loginService: LoginService) {
+    constructor(private page: Page,
+        private routerExtensions: RouterExtensions,
+        private apodService: ApodService,
+        private loginService: LoginService) {
         if (isAndroid) {
             this.page.actionBarHidden = true;
         }
@@ -48,7 +48,14 @@ export class LoginComponent {
 
     public onViewLoaded(args, translateFromX, translateToX, translateFromY, translateToY) {
         let view = args.object;
-        translateViewByXandYwithDurationAndCurve(view, translateFromX, translateToX, translateFromY, translateToY, 1200, "easeOut");
+        translateViewByXandYwithDurationAndCurve(
+            view,
+            translateFromX,
+            translateToX,
+            translateFromY,
+            translateToY,
+            1200,
+            "easeOut");
     }
 
     private initData() {

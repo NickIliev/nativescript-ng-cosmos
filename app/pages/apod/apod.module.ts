@@ -5,7 +5,7 @@ import { ApodService } from "../../services/apod.service";
 import { ApodComponent } from "./apod.component";
 import { ToolbarComponent } from "./toolbar/toolbar.component";
 import { ToolbarHelper } from "../../shared/toolbar-helper";
-import { registerElement } from 'nativescript-angular/element-registry';
+import { registerElement } from "nativescript-angular/element-registry";
 registerElement("circularProgressBar", () => require("ui/layouts/stack-layout").StackLayout);
 
 export const routerConfig = [
@@ -13,7 +13,7 @@ export const routerConfig = [
         path: "",
         component: ApodComponent
     }
-]
+];
 
 @NgModule({
     imports: [

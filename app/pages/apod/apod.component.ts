@@ -16,7 +16,7 @@ import { ToolbarHelper } from "../../shared/toolbar-helper";
 import { onDoubleTap as onDoubleZoom, onPan as onPanZoom, onPinch as onPinchZoom } from "../../shared/zoom-helper";
 
 @Component({
-    selector: "ns-items",
+    selector: "cosmos-items",
     moduleId: module.id,
     templateUrl: "./apod.component.html",
     styleUrls: ["./apod.component.css"]
@@ -25,11 +25,11 @@ export class ApodComponent {
     item: ApodItem = new ApodItem("", "", "", "", "", "", "", "");
     lastLoadedDate: Date = new Date(); // today
 
-    /* 
+    /*
     [direction: boolean]
-    true === means going to Prevous date; 
+    true === means going to Prevous date;
     false === means going to Next date
-        initial value set to true so when an YouTube Is loaded for INITIAL date 
+        initial value set to true so when an YouTube Is loaded for INITIAL date
         to set prveious day with (result.media_type !== "image" && this.direction)
         Remove when logic for other media types is implemented!!!
     */
@@ -62,9 +62,11 @@ export class ApodComponent {
 
     onImageLoaded(args) {
         this.image = <Image>args.object;
-        this.image.visibility = !this.image.isLoading ? "visible" : "collapse"; // on App resume check if image is already loaded or not
 
-        this.image.on("isLoadingChange", (args) => {
+        // on App resume check if image is already loaded or not
+        this.image.visibility = !this.image.isLoading ? "visible" : "collapse";
+
+        this.image.on("isLoadingChange", (params) => {
             this.scroll.scrollToHorizontalOffset(0, true);
             this.scroll.scrollToVerticalOffset(0, true);
 
@@ -77,7 +79,7 @@ export class ApodComponent {
                 this.indicator.busy = true;
                 this.indicator.visibility = "visible";
             }
-        })
+        });
     }
 
     onScrollLoaded(args) {
@@ -120,7 +122,7 @@ export class ApodComponent {
             };
             alert(options).then(() => {
                 this._toolbarHelper.onSaveFile(this.item);
-            }); 
+            });
         }
     }
 
@@ -186,7 +188,7 @@ export class ApodComponent {
                 }
             }, (error) => {
                 console.log("Server Status Code: " + error.status);
-            })
+            });
     }
 
     private extractData(date: string) {

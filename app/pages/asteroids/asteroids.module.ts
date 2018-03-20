@@ -9,7 +9,7 @@ export const routerConfig = [
         path: "",
         component: AsteroidsComponent
     }
-]
+];
 
 @NgModule({
     imports: [

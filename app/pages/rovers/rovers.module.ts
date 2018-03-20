@@ -9,12 +9,12 @@ import { PickersComponent } from "./pickers/pickers.component";
 import { RoversToolbarComponent } from "./toolbar/toolbar.component";
 export const routerConfig = [
     {
-        path: "", 
+        path: "",
         component: PickersComponent
     },
     { path: "rover", component: RoversComponent },
     { path: "photo", component: PhotoDetailComponent }
-]
+];
 
 @NgModule({
     imports: [

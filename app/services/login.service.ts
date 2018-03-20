@@ -4,10 +4,10 @@ import * as appSettings from "tns-core-modules/application-settings";
 
 @Injectable()
 export class LoginService {
-    
+
     constructor() { }
 
-    login(routerExtensions:any) {
+    login(routerExtensions: any) {
         routerExtensions.navigate(["/main"], {
             clearHistory: true,
             transition: {
@@ -17,7 +17,7 @@ export class LoginService {
         });
     }
 
-    facebook(routerExtensions:any) {
+    facebook(routerExtensions: any) {
         if (appSettings.getBoolean("isLogged")) {
             let username = appSettings.getString("username");
             console.log("facebook username (isLogged): " + username);
@@ -37,7 +37,7 @@ export class LoginService {
                 type: LoginType.FACEBOOK,
                 facebookOptions: {
                     // defaults to ['public_profile', 'email']
-                    scope: ['public_profile', 'email']
+                    scope: ["public_profile", "email"]
                 }
             }).then(user => {
                 console.log("facebook user.name: " + user.name);
@@ -53,11 +53,11 @@ export class LoginService {
                 });
             }).catch(err => {
                 console.log(err);
-            })
+            });
         }
     }
 
-    google(routerExtensions:any) {
+    google(routerExtensions: any) {
         if (appSettings.getBoolean("isLogged")) {
             let username = appSettings.getString("username");
             console.log("google username (isLogged): " + username);

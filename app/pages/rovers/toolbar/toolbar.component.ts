@@ -1,11 +1,11 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter } from "@angular/core";
 import { Button } from "ui/button";
 
 @Component({
-    selector: 'rovers-toolbar',
+    selector: "rovers-toolbar",
     moduleId: module.id,
-    templateUrl: './toolbar.component.html',
-    styleUrls: ['./toolbar.component.css']
+    templateUrl: "./toolbar.component.html",
+    styleUrls: ["./toolbar.component.css"]
 })
 
 export class RoversToolbarComponent {

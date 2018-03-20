@@ -8,7 +8,7 @@ export const routerConfig = [
         path: "",
         component: InfoComponent
     }
-]
+];
 
 @NgModule({
     imports: [

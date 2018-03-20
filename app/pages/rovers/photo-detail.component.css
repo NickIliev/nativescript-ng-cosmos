@@ -1,0 +1,12 @@
+.cardview {
+    background-color: #343838;
+}
+
+.cardview Label {
+    color: #BCBCBC;
+    font-size: 14;
+}
+
+.dock {
+    background-color: transparent;
+}

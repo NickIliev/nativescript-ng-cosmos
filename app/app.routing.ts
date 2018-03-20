@@ -8,21 +8,21 @@ const routes: Routes = [
     { path: "", redirectTo: "/login", pathMatch: "full" },
     { path: "login", component: LoginComponent },
     { path: "main", component: MainComponent },
-    { 
-        path: "info", 
-        loadChildren: "./pages/info/info.module#InfoModule" 
+    {
+        path: "info",
+        loadChildren: "./pages/info/info.module#InfoModule"
     },
     {
         path: "apod",
         loadChildren: "./pages/apod/apod.module#ApodModule",
     },
-    { 
-        path: "rovers", 
-        loadChildren: "./pages/rovers/rovers.module#RoversModule" 
+    {
+        path: "rovers",
+        loadChildren: "./pages/rovers/rovers.module#RoversModule"
     },
-    { 
-        path: "asteroids", 
-        loadChildren: "./pages/asteroids/asteroids.module#AsteroidsModule" 
+    {
+        path: "asteroids",
+        loadChildren: "./pages/asteroids/asteroids.module#AsteroidsModule"
     }
 ];
 

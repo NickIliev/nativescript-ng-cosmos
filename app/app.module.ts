@@ -1,7 +1,7 @@
 import { NgModule, NO_ERRORS_SCHEMA, NgModuleFactoryLoader } from "@angular/core";
 import { NativeScriptModule } from "nativescript-angular/nativescript.module";
 import { NativeScriptCommonModule } from "nativescript-angular/common";
-import { registerElement } from 'nativescript-angular/element-registry';
+import { registerElement } from "nativescript-angular/element-registry";
 // import { NativeScriptFormsModule } from "nativescript-angular/forms";
 import { NativeScriptHttpModule } from "nativescript-angular/http";
 import { NativeScriptRouterModule, NSModuleFactoryLoader } from "nativescript-angular/router";

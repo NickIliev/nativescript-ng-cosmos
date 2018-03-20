@@ -3,7 +3,7 @@ export class AsteroidsApiData {
     element_count: number;
     near_earth_objects: AsteroidsOnDate;
 
-    constructor(links: Link, element_count: number,near_earth_objects: AsteroidsOnDate) {
+    constructor(links: Link, element_count: number, near_earth_objects: AsteroidsOnDate) {
         this.links = links;
         this.element_count = element_count;
         this.near_earth_objects = near_earth_objects;
@@ -25,9 +25,9 @@ export class AsteroidItem {
     close_approach_data: Array<ApproachDate>;
 
     constructor(
-        links: Link, 
-        neo_reference_id: string, 
-        name: string, 
+        links: Link,
+        neo_reference_id: string,
+        name: string,
         nasa_jpl_url: string,
         absolute_magnitude_h: number,
         estimated_diameter: EstimatedDiameter,
@@ -85,7 +85,7 @@ export interface RelativeVelocity {
 
 // Note: OribtalData is to be used for specific asteroid lookup
 // Neo - Lookup
-// Lookup a specific Asteroid based on its NASA JPL small body (SPK-ID) ID 
+// Lookup a specific Asteroid based on its NASA JPL small body (SPK-ID) ID
 // https://api.nasa.gov/neo/rest/v1/neo/3542519?api_key=DEMO_KEY
 export interface OrbitalData {
     OrbitalData: string;

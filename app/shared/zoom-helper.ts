@@ -49,6 +49,5 @@ export function onDoubleTap(args: GestureEventData, viewItem: View) {
         scale: { x: 1, y: 1 },
         curve: "easeOut",
         duration: 300
-    })
-
+    });
 }

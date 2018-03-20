@@ -1,39 +1,51 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef } from "@angular/core";
 import { RouterExtensions } from "nativescript-angular/router";
 import { Page } from "tns-core-modules/ui/page";
 import { DatePicker } from "tns-core-modules/ui/date-picker";
+import { StackLayout } from "tns-core-modules/ui/layouts/stack-layout";
 import { ListPicker } from "tns-core-modules/ui/list-picker";
 import { isAndroid } from "tns-core-modules/platform";
 import { translateViewByXandYwithDurationAndCurve } from "../../../shared/animations-helper";
 
 @Component({
-	selector: 'pickers',
+	selector: "pickers",
 	moduleId: module.id,
-	templateUrl: './pickers.component.html',
-	styleUrls: ['./pickers.component.css']
+	templateUrl: "./pickers.component.html",
+	styleUrls: ["./pickers.component.css"]
 })
 
 export class PickersComponent {
 
-	public rovers: Array<string> = ["Opportunity", "Curiosity", "Spirit"];;
-	private _today: Date = new Date();
+	public rovers: Array<string>;
+	private _today: Date;
 	private _day: number;
 	private _month: number;
 	private _year: number;
 	private _selectedIndex: number;
 	private _selectedRover: string;
-
-	@ViewChild("dp") dp: ElementRef;
 	private _datePicker: DatePicker;
+	private _stackList: StackLayout;
+	private _stackDate: StackLayout;
 
 	constructor(private _page: Page, private _router: RouterExtensions) {
+		console.log("constructor");
 		if (isAndroid) {
 			this._page.actionBarHidden = true;
-		}
-	}
 
-	ngAfterViewInit() {
-		this._datePicker = <DatePicker>this.dp.nativeElement;
+			// bug with DatePicker on API17 is preventing setting dates after in/max date has been already set
+			// as only Spirit rover is requiring to change the min-max date
+			// out of range the temp solution is to remove Spirit
+			if (android.os.Build.VERSION.SDK_INT > 21) {
+				this.rovers = ["Opportunity", "Curiosity", "Spirit"];
+			} else {
+				this.rovers = ["Opportunity", "Curiosity"];
+			}
+		} else {
+			// iOS
+			this.rovers = ["Opportunity", "Curiosity", "Spirit"];
+		}
+
+		this._today = new Date();
 	}
 
 	goToPhotos() {
@@ -47,15 +59,24 @@ export class PickersComponent {
 			}
 		});
 	}
+
+	onStackListLoaded(args) {
+		this._stackList = args.object;
+	}
+
+	onStackDateLoaded(args) {
+		this._stackDate = args.object;
+
+		this._stackList.animate({ scale: { x: 1.3, y: 1.3 }, duration: 300 })
+			.then(() => { return this._stackList.animate({ scale: { x: 1, y: 1 }, duration: 300 }); })
+			.then(() => { return this._stackDate.animate({ scale: { x: 1.3, y: 1.3 }, duration: 300 }); })
+			.then(() => { return this._stackDate.animate({ scale: { x: 1, y: 1 }, duration: 300 }); });
+	}
+
 	/* LISTPicker logic START */
 	onListickerLoaded(args) {
 		let listPicker = <ListPicker>args.object;
 		listPicker.selectedIndex = 1;
-
-		listPicker.animate({ scale: { x: 1.3, y: 1.3 }, duration: 300 })
-			.then(() => { return listPicker.animate({ scale: { x: 1, y: 1 }, duration: 300 }); })
-			.then(() => { return this._datePicker.animate({ scale: { x: 1.3, y: 1.3 }, duration: 300 }); })
-			.then(() => { return this._datePicker.animate({ scale: { x: 1, y: 1 }, duration: 300 }); })
 	}
 
 	selectedIndexChanged(args) {
@@ -69,12 +90,8 @@ export class PickersComponent {
 
 	/* DatePicker logic START */
 	onDatePickerLoaded(args) {
-		if (this._datePicker) {
-			this.adjustDatePickerForSelectedRover(this._today);
-		} else {
-			this._datePicker = <DatePicker>args.object;
-			this.adjustDatePickerForSelectedRover(this._today);
-		}
+		this._datePicker = <DatePicker>args.object;
+		this.adjustDatePickerForSelectedRover(this._today);
 	}
 
 	onDayChanged(args) {
@@ -91,7 +108,7 @@ export class PickersComponent {
 	/* DatePicker logic END */
 
 	private adjustDatePickerForSelectedRover(today: Date) {
-
+		console.log("this._selectedRover: " + this._selectedRover);
 		if (this._selectedRover) {
 			switch (this._selectedRover.toLowerCase()) {
 				case "opportunity":

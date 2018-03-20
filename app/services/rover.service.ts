@@ -23,10 +23,18 @@ export class RoverPhotosService {
             .map(data => {
                 let itemsList = [];
                 data.photos.forEach((item) => {
-                    itemsList.push(new RoverPhoto(item.id, item.sol, item.camera.id, item.camera.name, item.camera.rover_id, item.camera.full_name, item.img_src, item.earth_date));
+                    itemsList.push(new RoverPhoto(
+                        item.id,
+                        item.sol,
+                        item.camera.id,
+                        item.camera.name,
+                        item.camera.rover_id,
+                        item.camera.full_name,
+                        item.img_src,
+                        item.earth_date));
                 });
                 return itemsList;
-            })
+            });
     }
 
     getUpdatedUrl(rover: string, year: number, month: number, day: number) {

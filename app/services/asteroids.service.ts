@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Http } from "@angular/http";
-import { AsteroidItem,  AsteroidsApiData, AsteroidsOnDate } from "../models/asteroids-model";
+import { AsteroidItem, AsteroidsApiData, AsteroidsOnDate } from "../models/asteroids-model";
 import "rxjs/add/operator/map";
 
 // Retrieve a list of Asteroids based on their closest approach date to Earth. (start date - end date period)
@@ -22,22 +22,25 @@ export class AsteroidsService {
         return this.http.get(this.getUpdatedUrl())
             .map(res => res.json())
             .map(data => {
-                let apiData: AsteroidsApiData = new AsteroidsApiData(data.links, data.element_count, data.near_earth_objects);
+                let apiData: AsteroidsApiData = new AsteroidsApiData(
+                    data.links,
+                    data.element_count,
+                    data.near_earth_objects);
                 // console.log("apiData.element_count: " + apiData.element_count);
                 return apiData;
-            })
+            });
     }
 
 
     getUpdatedUrl() {
-        var today = new Date();
-        var requiredDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7);
-        var dateRange = "?start_date=" + this.formatDate(today) + "&end_date=" + this.formatDate(requiredDate);
+        let today = new Date();
+        let requiredDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7);
+        let dateRange = "?start_date=" + this.formatDate(today) + "&end_date=" + this.formatDate(requiredDate);
         return API_URL + dateRange + API_KEY;
     }
 
     private formatDate(date) {
-        var d = new Date(date),
+        let d = new Date(date),
             month = "" + (d.getMonth() + 1),
             day = "" + d.getDate(),
             year = d.getFullYear();

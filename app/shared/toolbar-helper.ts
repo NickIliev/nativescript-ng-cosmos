@@ -36,7 +36,8 @@ export class ToolbarHelper {
 
         fromUrl(url).then(imageSource => {
             if (isAndroid) {
-                let androidDownloadsPath = android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_PICTURES).toString();
+                let androidDownloadsPath = android.os.Environment.getExternalStoragePublicDirectory(
+                    android.os.Environment.DIRECTORY_PICTURES).toString();
                 cosmosFolderPath = path.join(androidDownloadsPath, "CosmosDatabank");
 
                 let folder: Folder = Folder.fromPath(cosmosFolderPath);
@@ -65,8 +66,8 @@ export class ToolbarHelper {
     }
 
     broadCastToAndroidPhotos(imageFile) {
-        var mediaScanIntent = new android.content.Intent(android.content.Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        var contentUri = android.net.Uri.fromFile(imageFile);
+        const mediaScanIntent = new android.content.Intent(android.content.Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        const contentUri = android.net.Uri.fromFile(imageFile);
         mediaScanIntent.setData(contentUri);
         app.android.foregroundActivity.sendBroadcast(mediaScanIntent);
     }
@@ -78,7 +79,7 @@ export class ToolbarHelper {
             } else if (isIOS) {
                 shareImage(imageSource);
             }
-        })
+        });
     }
 
     onSetWallpaper(url: string) {
@@ -91,7 +92,7 @@ export class ToolbarHelper {
                 } catch (error) {
                     console.log(error);
                 }
-            })
+            });
         } else if (isIOS) {
             console.log("feature not implemented for iOS");
         }

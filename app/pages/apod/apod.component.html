@@ -1,10 +1,10 @@
 <!-- Remove the outer GridLayout once https://github.com/NativeScript/nativescript-angular/issues/1203 is resolved! -->
 <ActionBar title="">
-        <ActionItem ios.position="right" >
-            <StackLayout>
-                <Label text="COSMOS Databank" class="action-bar-title" textAlignment="center"></Label>
-            </StackLayout>
-        </ActionItem>
+    <ActionItem ios.position="right" >
+        <StackLayout>
+            <Label text="COSMOS Databank" class="action-bar-title" textAlignment="center"></Label>
+        </StackLayout>
+    </ActionItem>
 </ActionBar>
 <GridLayout>
     <ScrollView (loaded)="onScrollLoaded($event)">

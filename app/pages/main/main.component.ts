@@ -1,20 +1,20 @@
-import { Component, ViewChild, ChangeDetectorRef } from "@angular/core";
+import { AfterViewInit, Component, ViewChild, ChangeDetectorRef } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { CardView } from "nativescript-cardview";
 import { User } from "nativescript-plugin-firebase";
 import { RadSideDrawerComponent } from "nativescript-ui-sidedrawer/angular";
-import { RadSideDrawer } from 'nativescript-ui-sidedrawer';
+import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import { isAndroid, isIOS } from "tns-core-modules/platform";
 import { View } from "tns-core-modules/ui/core/view";
 import { translateViewByXandYwithDurationAndCurve } from "../../shared/animations-helper";
 
 @Component({
-    selector: "ns-details",
+    selector: "cosmos-details",
     moduleId: module.id,
     templateUrl: "./main.component.html",
-    styleUrls: ['./main.component.css']
+    styleUrls: ["./main.component.css"]
 })
-export class MainComponent {
+export class MainComponent implements AfterViewInit {
     public apodTitle: string;
     public asteroidTitle: string;
     public roversTitle: string;
@@ -55,7 +55,14 @@ export class MainComponent {
     /* TODO: Test animation for all CardViews */
     public onViewLoaded(args, translateFromX, translateToX, translateFromY, translateToY) {
         let view = args.object;
-        translateViewByXandYwithDurationAndCurve(view, translateFromX, translateToX, translateFromY, translateToY, 600, "easeOut");
+        translateViewByXandYwithDurationAndCurve(
+            view,
+            translateFromX,
+            translateToX,
+            translateFromY,
+            translateToY,
+            600,
+            "easeOut");
     }
 
 }

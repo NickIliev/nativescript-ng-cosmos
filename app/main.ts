@@ -14,14 +14,16 @@ if (androidApp) {
         android.os.StrictMode.setVmPolicy(builder.build());
 
         // Needed for corner cases with HTTP request using TSL on Android API19
-        com.google.android.gms.security.ProviderInstaller.installIfNeededAsync(context, new com.google.android.gms.security.ProviderInstaller.ProviderInstallListener({
-            onProviderInstalled: () => {
-                console.log("Provider Installed!");
-            },
-            onProviderInstallFailed: (errorCode, intent) => {
-                console.log("Error: " + errorCode);
-            }
-        }))
+        com.google.android.gms.security.ProviderInstaller.installIfNeededAsync(
+            context,
+            new com.google.android.gms.security.ProviderInstaller.ProviderInstallListener({
+                onProviderInstalled: () => {
+                    console.log("Provider Installed!");
+                },
+                onProviderInstallFailed: (errorCode, intent) => {
+                    console.log("Error: " + errorCode);
+                }
+            }));
     });
 }
 

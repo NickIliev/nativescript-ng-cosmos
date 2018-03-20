@@ -31,3 +31,12 @@ Button {
     border-radius: 20;
     width: 80%;
 }
+
+.action-bar-title {
+    background-color: transparent;
+    border-radius: 0;
+    color: #BCBCBC;
+    font-family: "Nasalization";
+    font-size: 18;
+    text-align: center;
+}

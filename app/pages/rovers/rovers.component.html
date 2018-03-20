@@ -8,7 +8,7 @@
                     <Label row="0" col="0" [text]="photo.id" class="text-left p-5" textWrap="true"></Label>
                     <Label row="0" col="1" [text]="photo.cameraName" class="text-center p-5" textWrap="true"></Label>
                     <Label row="0" col="2" [text]="photo.earthDate" class="text-right p-5"></Label>
-                    <Image row="1" col="0" colSpan="3" [src]="photo.imageUri" decodeHeight="240" loadMode="async" stretch="aspectFill"></Image>
+                    <Image row="1" col="0" colSpan="3" [src]="photo.imageUri" loadMode="async" stretch="aspectFill"></Image>
                 </GridLayout>
             </CardView>
         </ng-template>

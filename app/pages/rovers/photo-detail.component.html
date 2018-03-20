@@ -1,13 +1,15 @@
-<GridLayout rows="*, auto">
-    <ScrollView row="0">
-        <StackLayout>
-            <Image [src]="photo.imageUri"></Image>
-            <Label [text]="photo.id" class="title p-10" textWrap="true"></Label>
-            <Label [text]="photo.cameraFullName" class="description p-b-10 p-l-10 p-r-10" textWrap="true"></Label>
-            <Label [text]="photo.earthDate" class="date p-b-10 p-l-10 p-r-10" textWrap="true"></Label>
-        </StackLayout>
+<GridLayout>
+    <ScrollView>
+        <CardView elevation="40" radius="40" margin="10" class="cardview">
+            <StackLayout>
+                <Image [src]="photo.imageUri" stretch="aspectFill"></Image>
+                <Label [text]="'Photo ID: ' + photo.id" class="p-10" textWrap="true"></Label>
+                <Label [text]="'Camera: ' + photo.cameraFullName" class="p-b-10 p-l-10 p-r-10" textWrap="true"></Label>
+                <Label [text]="'Taken on ' + photo.earthDate" class="p-b-10 p-l-10 p-r-10" textWrap="true"></Label>
+            </StackLayout>
+        </CardView>
     </ScrollView>
-    <DockLayout class="dock" row="1" stretchLastChild="true">
+    <DockLayout stretchLastChild="true" class="dock" verticalAlignment="bottom">
         <rovers-toolbar (notify)="onNotify($event)"></rovers-toolbar>
     </DockLayout>
 </GridLayout>

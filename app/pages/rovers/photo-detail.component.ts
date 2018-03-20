@@ -11,9 +11,10 @@ import { RoverPhoto } from "../../models/rover-model";
 import { ToolbarHelper } from "../../shared/toolbar-helper";
 
 @Component({
-    selector: "ns-details",
+    selector: "cosmos-details",
     moduleId: module.id,
-    templateUrl: "./photo-detail.component.html"
+    templateUrl: "./photo-detail.component.html",
+    styleUrls: ["./photo-detail.component.css"]
 })
 export class PhotoDetailComponent implements OnInit {
 
@@ -46,7 +47,7 @@ export class PhotoDetailComponent implements OnInit {
         if (message === "onShare") {
             fromUrl(this.photo.imageUri).then(image => {
                 shareImage(image);
-            })
+            });
         } else if (message === "onSetWallpaper") {
             if (isAndroid) {
                 // fromUrl(this.photo.imageUri).then(image => {
@@ -80,8 +81,6 @@ export class PhotoDetailComponent implements OnInit {
     }
 }
 
-
-
 // } else if (message === "onSaveFile") {
 //     let options: ConfirmOptions = {
 //         title: "Image Downloaded!",
@@ -90,5 +89,5 @@ export class PhotoDetailComponent implements OnInit {
 //     };
 //     alert(options).then(() => {
 //         this.toolbarHelper.onSaveFile(this.item);
-//     }); 
+//     });
 // }

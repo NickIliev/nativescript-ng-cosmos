@@ -10,3 +10,7 @@ Button:highlighted {
     background-color:#E8EAEB;
     color: #1b1d1d;
 }
+
+GridLayout {
+    background-color: transparent;
+}

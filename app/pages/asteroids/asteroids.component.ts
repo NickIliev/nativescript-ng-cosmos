@@ -30,9 +30,9 @@ export class AsteroidsComponent {
 
             this.asteroidCount = result.element_count;
             // for each date in the seven days period ahead..
-            for (var key in result.near_earth_objects) {
+            for (let key in result.near_earth_objects) {
                 if (result.near_earth_objects.hasOwnProperty(key)) {
-                    var date = result.near_earth_objects[key];
+                    let date = result.near_earth_objects[key];
 
                     // itterate the array of asteroids on each date
                     date.forEach(asteroid => {
@@ -56,14 +56,19 @@ export class AsteroidsComponent {
                 this.subscr = subscriber;
                 subscriber.next(this.tempArr);
             });
-        })
+        });
     }
 
     onShare(index) {
         // TODO - form the share content to be meaningful
         // TODO UI and UX for share buttongit
         // TODO create iOS logic
-        shareText("Asteroid " + this.tempArr[index].name + " in close proximity with Earth on " + this.tempArr[index].close_approach_data[0].close_approach_date.toString() + ". Reported by 'Cosmos Databank' for Android", "Asteriod Proximity Alert!")
+        shareText(
+            "Asteroid " +
+            this.tempArr[index].name +
+            " in close proximity with Earth on " +
+            this.tempArr[index].close_approach_data[0].close_approach_date.toString() +
+            ". Reported by 'Cosmos Databank' for Android", "Asteriod Proximity Alert!");
     }
 
     isAstreroidLarge(sizeKm) {

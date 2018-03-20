@@ -1,10 +1,21 @@
+<!-- <ActionBar title="" icon="">
+    <ActionItem ios.position="left">
+        <StackLayout>
+            <Label text="Mars Rovers" class="action-bar-title" textAlignment="center"></Label>
+        </StackLayout>
+    </ActionItem>
+</ActionBar> -->
 <ScrollView class="background">
-    <GridLayout rows="*, auto, auto, auto, auto, auto, *" columns="*" verticalAlignment="middle">
-        <Label row="1" class="text-center p-b-4" text="Choose Rover" textWrap="true"></Label>
-        <ListPicker row="2" [items]="rovers" (loaded)="onListickerLoaded($event)" (selectedIndexChange)="selectedIndexChanged($event)"></ListPicker>
+    <GridLayout rows="*, auto, auto, auto, *" columns="*" verticalAlignment="middle">
+        <StackLayout (loaded)="onStackListLoaded($event)" row="1">
+            <Label class="text-center p-b-4" text="Choose Rover" textWrap="true"></Label>
+            <ListPicker [items]="rovers" (loaded)="onListickerLoaded($event)" (selectedIndexChange)="selectedIndexChanged($event)"></ListPicker>
+        </StackLayout>
         
-        <Label row="3" class="text-center p-b-4" text="Select Date" textWrap="true"></Label>
-        <DatePicker row="4" #dp (loaded)="onDatePickerLoaded($event)" (dayChange)="onDayChanged($event)" (monthChange)="onMonthChanged($event)" (yearChange)="onYearChanged($event)"></DatePicker>
+        <StackLayout (loaded)="onStackDateLoaded($event)" row="2">
+            <Label class="text-center p-b-4" text="Select Date" textWrap="true"></Label>
+            <DatePicker (loaded)="onDatePickerLoaded($event)" (dayChange)="onDayChanged($event)" (monthChange)="onMonthChanged($event)" (yearChange)="onYearChanged($event)"></DatePicker>
+        </StackLayout>
     
         <Button row="5" class="text-center m-t-10" text="Show photos for selected date" (tap)="goToPhotos()"></Button>
     </GridLayout>
