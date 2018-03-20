@@ -10,7 +10,6 @@
     },
     "tns-android": {
       "version": "4.0.0-rc-2018.3.20.1"
-    }
   },
   "dependencies": {
     "@angular/common": "~5.2.0",
