@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Http } from "@angular/http";
+import { HttpClient } from "@angular/common/http";
 import { AsteroidItem, AsteroidsApiData, AsteroidsOnDate } from "../models/asteroids-model";
 import "rxjs/add/operator/map";
 
@@ -16,16 +16,19 @@ export class AsteroidsService {
     public day: number;
     public requestedURL: string;
 
-    constructor(private http: Http) { }
+    constructor(private http: HttpClient) { }
 
     getAsteroidsData() {
+        console.log("get data for ", this.getUpdatedUrl());
+
         return this.http.get(this.getUpdatedUrl())
-            .map(res => res.json())
             .map(data => {
+                console.log("data: ", data);
+
                 let apiData: AsteroidsApiData = new AsteroidsApiData(
-                    data.links,
-                    data.element_count,
-                    data.near_earth_objects);
+                    data["links"],
+                    data["element_count"],
+                    data["near_earth_objects"]);
                 // console.log("apiData.element_count: " + apiData.element_count);
                 return apiData;
             });

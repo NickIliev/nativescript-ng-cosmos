@@ -14,6 +14,7 @@ import "rxjs/add/operator/map";
     templateUrl: "./asteroids.component.html",
     styleUrls: ["./asteroids.component.css"]
 })
+
 export class AsteroidsComponent {
     public asteroidItems: RxObservable<Array<AsteroidItem>>;
     private tempArr: Array<AsteroidItem> = [];
@@ -26,37 +27,43 @@ export class AsteroidsComponent {
             this._page.actionBarHidden = true;
         }
 
-        this._asteroidsService.getAsteroidsData().subscribe((result: AsteroidsApiData) => {
+        this._asteroidsService.getAsteroidsData()
+            .subscribe((result: AsteroidsApiData) => {
 
-            this.asteroidCount = result.element_count;
-            // for each date in the seven days period ahead..
-            for (let key in result.near_earth_objects) {
-                if (result.near_earth_objects.hasOwnProperty(key)) {
-                    let date = result.near_earth_objects[key];
+                this.asteroidCount = result.element_count;
+                // for each date in the seven days period ahead..
+                for (let key in result.near_earth_objects) {
+                    if (result.near_earth_objects.hasOwnProperty(key)) {
+                        let date = result.near_earth_objects[key];
 
-                    // itterate the array of asteroids on each date
-                    date.forEach(asteroid => {
-                        let newAsteroid = new AsteroidItem(
-                            asteroid.links,
-                            asteroid.neo_reference_id,
-                            asteroid.name,
-                            asteroid.nasa_jpl_url,
-                            asteroid.absolute_magnitude_h,
-                            asteroid.estimated_diameter,
-                            asteroid.is_potentially_hazardous_asteroid,
-                            asteroid.close_approach_data
-                        );
+                        // itterate the array of asteroids on each date
+                        date.forEach(asteroid => {
+                            let newAsteroid = new AsteroidItem(
+                                asteroid.links,
+                                asteroid.neo_reference_id,
+                                asteroid.name,
+                                asteroid.nasa_jpl_url,
+                                asteroid.absolute_magnitude_h,
+                                asteroid.estimated_diameter,
+                                asteroid.is_potentially_hazardous_asteroid,
+                                asteroid.close_approach_data
+                            );
 
-                        this.tempArr.push(newAsteroid);
-                    });
+                            this.tempArr.push(newAsteroid);
+                        });
+                    }
                 }
-            }
 
-            this.asteroidItems = RxObservable.create(subscriber => {
-                this.subscr = subscriber;
-                subscriber.next(this.tempArr);
+                this.asteroidItems = RxObservable.create(subscriber => {
+                    this.subscr = subscriber;
+                    subscriber.next(this.tempArr);
+                });
+            }, error => {
+                console.log(error);
+                if (error.status >= 500) {
+                    console.log("Service temporary DOWN!");
+                }
             });
-        });
     }
 
     onShare(index) {

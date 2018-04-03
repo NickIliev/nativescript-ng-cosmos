@@ -1,6 +1,7 @@
 import { NativeScriptCommonModule } from "nativescript-angular/common";
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
+import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
 import { AsteroidsComponent } from "./asteroids.component";
 import { AsteroidsService } from "../../services/asteroids.service";
 
@@ -14,6 +15,7 @@ export const routerConfig = [
 @NgModule({
     imports: [
         NativeScriptCommonModule,
+        NativeScriptHttpClientModule,
         NativeScriptRouterModule,
         NativeScriptRouterModule.forChild(routerConfig)
     ],
