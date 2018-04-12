@@ -6,10 +6,10 @@
   "nativescript": {
     "id": "org.nativescript.curiosity",
     "tns-ios": {
-      "version": "4.0.0"
+      "version": "4.0.1"
     },
     "tns-android": {
-      "version": "4.0.0-rc-2018.3.22.1"
+      "version": "4.0.0"
     }
   },
   "dependencies": {
@@ -21,7 +21,7 @@
     "@angular/platform-browser": "~5.2.0",
     "@angular/platform-browser-dynamic": "~5.2.0",
     "@angular/router": "~5.2.0",
-    "nativescript-angular": "^5.3.0-2018-03-29-03",
+    "nativescript-angular": "next",
     "nativescript-cardview": "^2.0.5",
     "nativescript-permissions": "^1.2.3",
     "nativescript-plugin-firebase": "^5.1.8",
@@ -45,7 +45,7 @@
     "css-loader": "~0.28.7",
     "extract-text-webpack-plugin": "~3.0.2",
     "lazy": "1.0.11",
-    "nativescript-dev-typescript": "0.6.0",
+    "nativescript-dev-typescript": "next",
     "nativescript-dev-webpack": "next",
     "nativescript-worker-loader": "~0.8.1",
     "node-sass": "^4.7.1",

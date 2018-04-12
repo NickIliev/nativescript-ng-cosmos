@@ -4,7 +4,7 @@ import { NativeScriptCommonModule } from "nativescript-angular/common";
 import { registerElement } from "nativescript-angular/element-registry";
 // import { NativeScriptFormsModule } from "nativescript-angular/forms";
 import { NativeScriptHttpModule } from "nativescript-angular/http";
-import { NativeScriptRouterModule, NSModuleFactoryLoader } from "nativescript-angular/router";
+import { NativeScriptRouterModule } from "nativescript-angular/router";
 import { NativeScriptUISideDrawerModule } from "nativescript-ui-sidedrawer/angular";
 
 import { AppComponent } from "./app.component";
@@ -22,7 +22,6 @@ registerElement("CardView", () => require("nativescript-cardview").CardView);
     ],
     imports: [
         NativeScriptModule,
-        NativeScriptCommonModule,
         AppRoutingModule,
         NativeScriptHttpModule,
         NativeScriptRouterModule,
@@ -34,7 +33,6 @@ registerElement("CardView", () => require("nativescript-cardview").CardView);
         MainComponent
     ],
     providers: [
-        [{ provide: NgModuleFactoryLoader, useClass: NSModuleFactoryLoader }],
         ApodService,
         LoginService
     ],
