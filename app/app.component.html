@@ -1,12 +1,11 @@
 
 <RadSideDrawer>
     <StackLayout tkDrawerContent class="sidedrawer-content">
-        <Label text="Home" (tap)="navigateTo('/main', false)"></Label>
+        <Label text="Home" (tap)="navigateTo('/main', false)" marginTop="40"></Label>
         <Label text="Photo of the Day" (tap)="navigateTo('/apod', false)"></Label>
         <Label text="Asteroids Proximity Checker" (tap)="navigateTo('/asteroids', false)"></Label>
         <Label text="Mars Rovers Photos" (tap)="navigateTo('/rovers', false)"></Label>
         <Label text="Details" (tap)="navigateTo('/info', false)"></Label>
-
     </StackLayout>
 
     <GridLayout tkMainContent>
