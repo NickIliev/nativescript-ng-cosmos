@@ -9,6 +9,13 @@ import * as enums from "tns-core-modules/ui/enums";
 import { alert } from "tns-core-modules/ui/dialogs/dialogs";
 import * as app from "tns-core-modules/application";
 
+
+import {
+    write as traceWrite, categories as traceCategories, messageType as traceMessageType
+} from "tns-core-modules/trace";
+import { getNativeApplication, android as androidApp } from "tns-core-modules/application";
+import { FileSystemAccess } from "tns-core-modules/file-system/file-system-access";
+
 export class ToolbarHelper {
 
     setPrevousDay(lastLoadedDate: Date) {
@@ -47,6 +54,10 @@ export class ToolbarHelper {
                 if (!exists) {
                     let saved: boolean = imageSource.saveToFile(myPath, "jpg");
                     this.broadCastToAndroidPhotos(new java.io.File(myPath));
+
+                    setTimeout(() => {
+                        this.openFile(myPath);
+                    }, 1000);
                 }
             } else if (isIOS) {
                 // TODO : does this work? - where are the images ?
@@ -107,4 +118,44 @@ export class ToolbarHelper {
         let n = fileName.indexOf(".");
         return fileName = fileName.substring(0, n !== -1 ? n : fileName.length) + ".jpeg";
     }
+
+    openFile(filePath: string): boolean {
+        const context = ad.getApplicationContext();
+        try {
+            if (this.isExternalStorageAvailable() && !this.isExternalStorageReadOnly()) {
+                const fsa = new FileSystemAccess();
+                const mimeTypeMap = android.webkit.MimeTypeMap.getSingleton();
+                const mimeType = mimeTypeMap.getMimeTypeFromExtension(
+                    fsa.getFileExtension(filePath).replace(".", "").toLowerCase());
+                const intent = new android.content.Intent(android.content.Intent.ACTION_VIEW);
+                intent.setDataAndType(android.net.Uri.fromFile(new java.io.File(filePath)), mimeType);
+
+                context.startActivity(android.content.Intent.createChooser(intent, "Open File..."));
+
+                return true;
+            }
+        } catch (e) {
+            traceWrite("Error in openFile", traceCategories.Error, traceMessageType.error);
+        }
+        return false;
+    }
+
+    isExternalStorageReadOnly(): boolean {
+        const extStorageState = android.os.Environment.getExternalStorageState();
+        if (android.os.Environment.MEDIA_MOUNTED_READ_ONLY === extStorageState) {
+            return true;
+        }
+        return false;
+    }
+
+
+    isExternalStorageAvailable(): boolean {
+        const extStorageState = android.os.Environment.getExternalStorageState();
+        if (android.os.Environment.MEDIA_MOUNTED === extStorageState) {
+            return true;
+        }
+        return false;
+    }
+
 }
+

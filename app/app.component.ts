@@ -1,16 +1,23 @@
-import { Component, OnInit } from "@angular/core";
-import * as appSettings from "tns-core-modules/application-settings";
-import { isAndroid } from "tns-core-modules/platform";
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from "@angular/core";
+import { RouterExtensions } from "nativescript-angular/router";
 import { requestPermission } from "nativescript-permissions";
 import { getCurrentPushToken, init } from "nativescript-plugin-firebase";
+import { RadSideDrawerComponent } from "nativescript-ui-sidedrawer/angular";
+import { RadSideDrawer } from "nativescript-ui-sidedrawer";
+import * as appSettings from "tns-core-modules/application-settings";
+import { isAndroid } from "tns-core-modules/platform";
 
 @Component({
     selector: "cosmos-app",
     templateUrl: "app.component.html",
+    styleUrls: ["./app.component.css"]
 })
 
-export class AppComponent implements OnInit {
-    constructor() {
+export class AppComponent implements OnInit, AfterViewInit {
+    private drawer: RadSideDrawer;
+    @ViewChild(RadSideDrawerComponent) public drawerComponent: RadSideDrawerComponent;
+
+    constructor(private _changeDetectionRef: ChangeDetectorRef, private _router: RouterExtensions) {
         if (isAndroid) {
             requestPermission([
                 "android.permission.INTERNET",
@@ -59,8 +66,7 @@ export class AppComponent implements OnInit {
             console.log("firebase.init done");
         }, error => {
             console.log(`firebase.init error: ${error}`);
-        }
-        );
+        });
 
         getCurrentPushToken().then((token: string) => {
             // may be null if not known yet
@@ -68,4 +74,22 @@ export class AppComponent implements OnInit {
         });
     }
 
+    ngAfterViewInit() {
+        this.drawer = this.drawerComponent.sideDrawer;
+        this._changeDetectionRef.detectChanges();
+    }
+
+    navigateTo(path: string, clearHistory: boolean) {
+        this._router.navigate(
+                [path], {
+                transition: {
+                    name: "fade",
+                    duration: 300,
+                },
+                clearHistory: clearHistory
+            }
+        ).then(() => {
+            this.drawer.closeDrawer();
+        });
+    }
 }

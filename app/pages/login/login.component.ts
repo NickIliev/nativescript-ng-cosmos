@@ -24,7 +24,7 @@ export class LoginComponent {
         private apodService: ApodService,
         private loginService: LoginService) {
         if (isAndroid) {
-            this.page.actionBarHidden = true;
+            // this.page.actionBarHidden = true;
         }
 
         this.initData();

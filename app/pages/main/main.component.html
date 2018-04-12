@@ -18,50 +18,38 @@
     </ActionItem>
 </ActionBar>
 
-<RadSideDrawer showOverNavigation="true">
-    <StackLayout tkDrawerContent class="sidedrawer-content">
-        <!-- <Image [src]="profileImageURL" stretch="aspectFill" margin="10" width="50" height="50" borderRadius="25" horizontalAlignment="center"></Image>
-         -->
-        <Label text="Home" (tap)="toggleDrawer()" class="sidedrawer-label"></Label>
-        <Label text="Photo of the Day" [nsRouterLink]="['/apod']" pageTransition="fade" class="sidedrawer-label"></Label>
-        <Label text="Asteroids Proximity Checker" [nsRouterLink]="['/asteroids']" pageTransition="fade" class="sidedrawer-label"></Label>
-        <Label text="Mars Rovers Photos" [nsRouterLink]="['/rovers']" pageTransition="fade" class="sidedrawer-label"></Label>
-        <Label text="Details" [nsRouterLink]="['/info']" pageTransition="fade" class="sidedrawer-label"></Label>
-        <!-- -Navigating with pageTransition="fade"  will freee the app on iOS!!!-->
-    </StackLayout>
-
-    <ScrollView tkMainContent>
-        <StackLayout class="sidedrawer-content">
-
-            <!-- test card-view load animations -->
-            <CardView elevation="40" radius="40" margin="10" class="cardview" (loaded)="onViewLoaded($event, -400, 0, -300, 0)" >
-                <GridLayout rows="160" columns="3*, 4*" [nsRouterLink]="['/apod']">
-                    <Image row="0" col="1" src="~/images/cosmos.jpg" stretch="aspectFill" (loaded)="onViewLoaded($event, 400, 0, 0, 0)" ></Image>
-                    <Label row="0" col="0" [text]="apodTitle" textWrap="true" class="text-left p-l-8 p-r-8" verticalAlignment="center"></Label>
-                </GridLayout>
-            </CardView>
-
-            <CardView elevation="40" radius="40" margin="10" class="cardview" (loaded)="onViewLoaded($event, 400, 0, -100, 0)" >
-                <GridLayout rows="160" columns="4*, 3*" [nsRouterLink]="['/asteroids']">
-                    <Image row="0" col="0" src="~/images/aste.jpg" stretch="aspectFill" (loaded)="onViewLoaded($event, -400, 0, 0, 0)" ></Image>
-                    <Label row="0" col="1" [text]="asteroidTitle" textWrap="true" class="text-right p-l-8 p-r-8" verticalAlignment="center"></Label>
-                </GridLayout>
-            </CardView>
-
-            <CardView elevation="40" radius="40" margin="10" class="cardview" (loaded)="onViewLoaded($event, -400, 0, -100, 0)" >
-                <GridLayout rows="160" columns="3*, 4*" [nsRouterLink]="['/rovers']">
-                    <Image row="0" col="1" src="~/images/rover.jpg" stretch="aspectFill" (loaded)="onViewLoaded($event, 400, 0, 0, 0)" ></Image>
-                    <Label row="0" col="0" [text]="roversTitle" textWrap="true" class="text-left p-l-8 p-r-8" verticalAlignment="center"></Label>
-                </GridLayout>
-            </CardView>
-
-            <CardView elevation="40" radius="40" margin="10" class="cardview" (loaded)="onViewLoaded($event, 400, 0, -100, 0)" >
-                <GridLayout rows="160" columns="4*, 3*" [nsRouterLink]="['/info']">
-                    <Image row="0" col="0" src="res://logo" stretch="aspectFill" (loaded)="onViewLoaded($event, -400, 0, 0, 0)" ></Image>
-                    <Label row="0" col="1" [text]="detailsTitle" textWrap="true" class="text-right p-l-8 p-r-8" verticalAlignment="center"></Label>
-                </GridLayout>
-            </CardView>
-
-        </StackLayout>
-    </ScrollView>
-</RadSideDrawer>
+<GridLayout rows="*" columns="*">
+        <ScrollView>
+                <StackLayout class="sidedrawer-content">
+            
+                    <CardView elevation="40" radius="40" margin="10" class="cardview" (loaded)="onViewLoaded($event, -400, 0, -300, 0)" >
+                        <GridLayout rows="160" columns="3*, 4*" [nsRouterLink]="['/apod']">
+                            <Image row="0" col="1" src="~/images/cosmos.jpg" stretch="aspectFill" (loaded)="onViewLoaded($event, 400, 0, 0, 0)" ></Image>
+                            <Label row="0" col="0" [text]="apodTitle" textWrap="true" class="text-left p-l-8 p-r-8" verticalAlignment="center"></Label>
+                        </GridLayout>
+                    </CardView>
+            
+                    <CardView elevation="40" radius="40" margin="10" class="cardview" (loaded)="onViewLoaded($event, 400, 0, -100, 0)" >
+                        <GridLayout rows="160" columns="4*, 3*" [nsRouterLink]="['/asteroids']">
+                            <Image row="0" col="0" src="~/images/aste.jpg" stretch="aspectFill" (loaded)="onViewLoaded($event, -400, 0, 0, 0)" ></Image>
+                            <Label row="0" col="1" [text]="asteroidTitle" textWrap="true" class="text-right p-l-8 p-r-8" verticalAlignment="center"></Label>
+                        </GridLayout>
+                    </CardView>
+            
+                    <CardView elevation="40" radius="40" margin="10" class="cardview" (loaded)="onViewLoaded($event, -400, 0, -100, 0)" >
+                        <GridLayout rows="160" columns="3*, 4*" [nsRouterLink]="['/rovers']">
+                            <Image row="0" col="1" src="~/images/rover.jpg" stretch="aspectFill" (loaded)="onViewLoaded($event, 400, 0, 0, 0)" ></Image>
+                            <Label row="0" col="0" [text]="roversTitle" textWrap="true" class="text-left p-l-8 p-r-8" verticalAlignment="center"></Label>
+                        </GridLayout>
+                    </CardView>
+            
+                    <CardView elevation="40" radius="40" margin="10" class="cardview" (loaded)="onViewLoaded($event, 400, 0, -100, 0)" >
+                        <GridLayout rows="160" columns="4*, 3*" [nsRouterLink]="['/info']">
+                            <Image row="0" col="0" src="res://logo" stretch="aspectFill" (loaded)="onViewLoaded($event, -400, 0, 0, 0)" ></Image>
+                            <Label row="0" col="1" [text]="detailsTitle" textWrap="true" class="text-right p-l-8 p-r-8" verticalAlignment="center"></Label>
+                        </GridLayout>
+                    </CardView>
+            
+                </StackLayout>
+            </ScrollView>
+</GridLayout>

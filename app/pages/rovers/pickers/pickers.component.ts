@@ -28,7 +28,7 @@ export class PickersComponent {
 	private _stackDate: StackLayout;
 
 	constructor(private _page: Page, private _router: RouterExtensions) {
-		console.log("constructor");
+		// console.log("constructor");
 		if (isAndroid) {
 			this._page.actionBarHidden = true;
 
@@ -108,7 +108,7 @@ export class PickersComponent {
 	/* DatePicker logic END */
 
 	private adjustDatePickerForSelectedRover(today: Date) {
-		console.log("this._selectedRover: " + this._selectedRover);
+		// console.log("this._selectedRover: " + this._selectedRover);
 		if (this._selectedRover) {
 			switch (this._selectedRover.toLowerCase()) {
 				case "opportunity":

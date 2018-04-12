@@ -1,0 +1,14 @@
+.sidedrawer-content {
+    background-color: #282a2a;
+}
+
+.sidedrawer-content > Label {
+    background-color: #343838;
+    border-radius: 20;
+    color: #BCBCBC;
+    font-family: "Nasalization";
+    font-size: 14;
+    margin: 8;
+    padding: 16;
+    text-align: center;
+}

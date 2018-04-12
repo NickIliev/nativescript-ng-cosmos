@@ -69,7 +69,7 @@ export class RoversComponent implements OnInit, AfterViewInit {
                     subscriber.next(this.tempArr);
                 });
             }, (error) => {
-                console.log(error);
+                // console.log(error);
             });
     }
 

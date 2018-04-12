@@ -1,4 +1,5 @@
 const firebase = require("nativescript-plugin-firebase");
+
 import { platformNativeScriptDynamic } from "nativescript-angular/platform";
 import { AppModule } from "./app.module";
 import { android as androidApp, AndroidApplication, AndroidActivityBundleEventData } from "application";

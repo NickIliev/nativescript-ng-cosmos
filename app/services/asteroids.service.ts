@@ -19,12 +19,8 @@ export class AsteroidsService {
     constructor(private http: HttpClient) { }
 
     getAsteroidsData() {
-        console.log("get data for ", this.getUpdatedUrl());
-
         return this.http.get(this.getUpdatedUrl())
             .map(data => {
-                console.log("data: ", data);
-
                 let apiData: AsteroidsApiData = new AsteroidsApiData(
                     data["links"],
                     data["element_count"],

@@ -29,3 +29,10 @@ Button:highlighted {
 Label {
     color: whitesmoke;
 }
+
+.action-bar-title {
+    color: #BCBCBC;
+    font-family: "Nasalization";
+    font-size: 18;
+    text-align: center;
+}

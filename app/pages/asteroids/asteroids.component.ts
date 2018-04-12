@@ -59,7 +59,7 @@ export class AsteroidsComponent {
                     subscriber.next(this.tempArr);
                 });
             }, error => {
-                console.log(error);
+                // console.log(error);
                 if (error.status >= 500) {
                     console.log("Service temporary DOWN!");
                 }

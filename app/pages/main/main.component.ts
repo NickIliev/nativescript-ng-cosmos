@@ -1,9 +1,9 @@
-import { AfterViewInit, Component, ViewChild, ChangeDetectorRef } from "@angular/core";
+import { AfterViewInit, Component } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { CardView } from "nativescript-cardview";
 import { User } from "nativescript-plugin-firebase";
-import { RadSideDrawerComponent } from "nativescript-ui-sidedrawer/angular";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
+import { getRootView } from "tns-core-modules/application";
 import { isAndroid, isIOS } from "tns-core-modules/platform";
 import { View } from "tns-core-modules/ui/core/view";
 import { translateViewByXandYwithDurationAndCurve } from "../../shared/animations-helper";
@@ -23,12 +23,10 @@ export class MainComponent implements AfterViewInit {
     public isIos: boolean = isIOS;
 
     public name: string;
-    // public profileImageURL: string;
 
-    private drawer: RadSideDrawer;
-    @ViewChild(RadSideDrawerComponent) public drawerComponent: RadSideDrawerComponent;
+    public drawer: RadSideDrawer;
 
-    constructor(private route: ActivatedRoute, private _changeDetectionRef: ChangeDetectorRef) {
+    constructor(private route: ActivatedRoute) {
         this.apodTitle = "Astronomical \nPhoto \nof the Day";
         this.asteroidTitle = "Asteroids\n Proximity\n Checker";
         this.roversTitle = "Mars Rovers \nPhotos \nDatabank";
@@ -44,16 +42,15 @@ export class MainComponent implements AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.drawer = this.drawerComponent.sideDrawer;
-        this._changeDetectionRef.detectChanges();
+        this.drawer = <RadSideDrawer>getRootView();
     }
 
-    public toggleDrawer() {
+    toggleDrawer() {
         this.drawer.toggleDrawerState();
     }
 
     /* TODO: Test animation for all CardViews */
-    public onViewLoaded(args, translateFromX, translateToX, translateFromY, translateToY) {
+    onViewLoaded(args, translateFromX, translateToX, translateFromY, translateToY) {
         let view = args.object;
         translateViewByXandYwithDurationAndCurve(
             view,
@@ -64,5 +61,4 @@ export class MainComponent implements AfterViewInit {
             600,
             "easeOut");
     }
-
 }
