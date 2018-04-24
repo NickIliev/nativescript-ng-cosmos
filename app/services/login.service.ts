@@ -60,7 +60,7 @@ export class LoginService {
     google(routerExtensions: any) {
         if (appSettings.getBoolean("isLogged")) {
             let username = appSettings.getString("username");
-            console.log("google username (isLogged): " + username);
+            // console.log("google username (isLogged): " + username);
 
             routerExtensions.navigate(["/main"], {
                 clearHistory: true,

@@ -5,11 +5,11 @@
   "repository": "<fill-your-repository-here>",
   "nativescript": {
     "id": "org.nativescript.curiosity",
-    "tns-ios": {
+    "tns-android": {
       "version": "4.0.1"
     },
-    "tns-android": {
-      "version": "4.0.0"
+    "tns-ios": {
+      "version": "4.0.1"
     }
   },
   "dependencies": {
@@ -21,8 +21,8 @@
     "@angular/platform-browser": "~5.2.0",
     "@angular/platform-browser-dynamic": "~5.2.0",
     "@angular/router": "~5.2.0",
-    "nativescript-angular": "next",
-    "nativescript-cardview": "^2.0.5",
+    "nativescript-angular": "5.3.0",
+    "nativescript-cardview": "^3.0.1",
     "nativescript-permissions": "^1.2.3",
     "nativescript-plugin-firebase": "^5.2.0",
     "nativescript-social-share": "^1.5.0",
@@ -30,7 +30,7 @@
     "nativescript-ui-sidedrawer": "^4.0.0",
     "reflect-metadata": "~0.1.8",
     "rxjs": "^5.5.9",
-    "tns-core-modules": "next",
+    "tns-core-modules": "4.0.0",
     "zone.js": "^0.8.4"
   },
   "devDependencies": {
@@ -40,26 +40,26 @@
     "babel-traverse": "6.26.0",
     "babel-types": "6.26.0",
     "babylon": "6.18.0",
+    "clean-webpack-plugin": "~0.1.19",
     "codelyzer": "^4.2.1",
     "copy-webpack-plugin": "~4.3.0",
     "css-loader": "~0.28.7",
     "extract-text-webpack-plugin": "~3.0.2",
     "lazy": "1.0.11",
-    "nativescript-dev-typescript": "next",
-    "nativescript-dev-webpack": "next",
+    "nativescript-dev-typescript": "0.7.1",
+    "nativescript-dev-webpack": "^0.10.2",
     "nativescript-worker-loader": "~0.8.1",
     "node-sass": "^4.7.1",
     "raw-loader": "~0.5.1",
     "resolve-url-loader": "~2.2.1",
     "sass-loader": "^6.0.6",
-    "tns-platform-declarations": "~3.4.0",
+    "tns-platform-declarations": "4.0.0",
     "tslint": "^5.9.1",
     "typescript": "~2.6.2",
     "uglifyjs-webpack-plugin": "~1.1.6",
     "webpack": "~3.10.0",
     "webpack-bundle-analyzer": "^2.9.1",
-    "webpack-sources": "~1.1.0",
-    "clean-webpack-plugin": "~0.1.19"
+    "webpack-sources": "~1.1.0"
   },
   "scripts": {
     "tslint": "tslint -p tsconfig.json"

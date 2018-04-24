@@ -8,6 +8,9 @@ import { isAndroid, isIOS } from "tns-core-modules/platform";
 import { View } from "tns-core-modules/ui/core/view";
 import { translateViewByXandYwithDurationAndCurve } from "../../shared/animations-helper";
 
+
+import { Page } from "tns-core-modules/ui/page";
+
 @Component({
     selector: "cosmos-details",
     moduleId: module.id,
@@ -26,11 +29,13 @@ export class MainComponent implements AfterViewInit {
 
     public drawer: RadSideDrawer;
 
-    constructor(private route: ActivatedRoute) {
+    constructor(private route: ActivatedRoute, private _page: Page) {
         this.apodTitle = "Astronomical \nPhoto \nof the Day";
         this.asteroidTitle = "Asteroids\n Proximity\n Checker";
         this.roversTitle = "Mars Rovers \nPhotos \nDatabank";
         this.detailsTitle = "About\n Cosmos Databank\n Application";
+
+        (<any>this._page).scrollableContent = false;
 
         this.route.queryParams.subscribe(params => {
             this.name = params["name"];
@@ -43,6 +48,8 @@ export class MainComponent implements AfterViewInit {
 
     ngAfterViewInit() {
         this.drawer = <RadSideDrawer>getRootView();
+        console.log("ngAfterViewInit");
+        console.log(this.drawer);
     }
 
     toggleDrawer() {

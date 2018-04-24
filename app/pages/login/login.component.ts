@@ -1,5 +1,7 @@
-import { Component } from "@angular/core";
+import { AfterViewInit, Component } from "@angular/core";
 import { RouterExtensions } from "nativescript-angular/router";
+import { RadSideDrawer } from "nativescript-ui-sidedrawer";
+import { getRootView } from "tns-core-modules/application";
 import { isAndroid } from "tns-core-modules/platform";
 import { Page } from "tns-core-modules/ui/page";
 import { ApodService } from "../../services/apod.service";
@@ -12,12 +14,14 @@ import { translateViewByXandYwithDurationAndCurve } from "../../shared/animation
     templateUrl: "./login.component.html",
     styleUrls: ["./login.component.css"]
 })
-export class LoginComponent {
+export class LoginComponent implements AfterViewInit {
     public backgroundImage: string = "res://background";
     public date: string;
     public descText: string = "100% free access";
     public loginText: string = "No Pass Login";
     public title: string;
+
+    public drawer: RadSideDrawer;
 
     constructor(private page: Page,
         private routerExtensions: RouterExtensions,
@@ -28,6 +32,14 @@ export class LoginComponent {
         }
 
         this.initData();
+    }
+
+    ngAfterViewInit() {
+        // use setTimeout otherwise there is no getRootView valid reference
+        setTimeout(() => {
+            this.drawer = <RadSideDrawer>getRootView();
+            this.drawer.gesturesEnabled = false;
+        }, 100);
     }
 
     login() {
@@ -59,6 +71,7 @@ export class LoginComponent {
     }
 
     private initData() {
+        console.log("initData");
         this.apodService.getData()
             .subscribe((result) => {
                 if (result.media_type === "image") {
@@ -69,7 +82,7 @@ export class LoginComponent {
                     this.backgroundImage = "res://background";
                 }
             }, (error) => {
-                // console.log("Server Status Code: " + error.status);
+                console.log("Server Status Code: " + error.status);
                 // TODO handle error status codes with appropriate error UI
             });
     }
