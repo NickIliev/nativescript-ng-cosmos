@@ -8,7 +8,6 @@ import { isAndroid, isIOS } from "tns-core-modules/platform";
 import { View } from "tns-core-modules/ui/core/view";
 import { translateViewByXandYwithDurationAndCurve } from "../../shared/animations-helper";
 
-
 import { Page } from "tns-core-modules/ui/page";
 
 @Component({
@@ -48,8 +47,10 @@ export class MainComponent implements AfterViewInit {
 
     ngAfterViewInit() {
         this.drawer = <RadSideDrawer>getRootView();
-        console.log("ngAfterViewInit");
+        this.drawer.gesturesEnabled = true;
+        console.log("NG AFTER VIEW INIT!!!");
         console.log(this.drawer);
+
     }
 
     toggleDrawer() {

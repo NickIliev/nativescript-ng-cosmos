@@ -74,6 +74,9 @@ export class LoginComponent implements AfterViewInit {
         console.log("initData");
         this.apodService.getData()
             .subscribe((result) => {
+                console.log("RESULT: ");
+                console.log(result);
+
                 if (result.media_type === "image") {
                     this.backgroundImage = result.url; // or bigger hdurl
                     this.title = result.title;
