@@ -9,7 +9,7 @@ import { LoginService } from "../../services/login.service";
 import { translateViewByXandYwithDurationAndCurve } from "../../shared/animations-helper";
 
 @Component({
-    selector: "ns-login",
+    selector: "cosmos-login",
     moduleId: module.id,
     templateUrl: "./login.component.html",
     styleUrls: ["./login.component.css"]
@@ -18,10 +18,9 @@ export class LoginComponent implements AfterViewInit {
     public backgroundImage: string = "res://background";
     public date: string;
     public descText: string = "100% free access";
+    public drawer: RadSideDrawer;
     public loginText: string = "No Pass Login";
     public title: string;
-
-    public drawer: RadSideDrawer;
 
     constructor(private page: Page,
         private routerExtensions: RouterExtensions,
@@ -71,12 +70,8 @@ export class LoginComponent implements AfterViewInit {
     }
 
     private initData() {
-        console.log("initData");
         this.apodService.getData()
             .subscribe((result) => {
-                console.log("RESULT: ");
-                console.log(result);
-
                 if (result.media_type === "image") {
                     this.backgroundImage = result.url; // or bigger hdurl
                     this.title = result.title;

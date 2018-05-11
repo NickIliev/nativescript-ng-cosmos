@@ -1,20 +1,18 @@
 @import '~nativescript-theme-core/css/core.light.css';
 
-Page, GridLayout {
+Page {
     background-color: #343838;   
     color: #BCBCBC;
     font-family: "Nasalization"; 
 }
 
 ActionBar {
-    background-color: #343838;   
-    color: #BCBCBC;
-    font-family: "Nasalization";
+    background-color: #343838;
 }
 
 Label {
     color: #BCBCBC;
-    font-size:14;
+    font-size: 14;
 }
 
 .fa {

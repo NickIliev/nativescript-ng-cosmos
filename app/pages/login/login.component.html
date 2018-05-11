@@ -1,7 +1,7 @@
 <GridLayout class="background" [backgroundImage]="backgroundImage" rows="auto, *" columns="*">
 
     <StackLayout row="0" class="p-l-16 p-t-8">
-        <Label [text]="'Astronomical photo of ' + date" [visibility]="title ? 'visible' : 'collapsed'" fontSize="10" textWrap="false"></Label>
+        <Label [text]="'Astronomical photo of ' + date" [visibility]="title ? 'visible' : 'collapsed'" fontSize="10" textWrap="true"></Label>
         <Label [text]="title" fontSize="16" textWrap="true" (loaded)="onViewLoaded($event, -900, 0, 0, 0)"></Label>
     </StackLayout>
 

@@ -11,14 +11,15 @@ GridLayout, StackLayout {
 
 DockLayout {
     background-color: transparent;
-    vertical-align: bottom;
     opacity: 0.8;
+    vertical-align: bottom;
 }
 
 Button {
-    border-radius: 20;
+    border-radius: 10;
     background-color:#1b1d1d;
     color: #E8EAEB;
+    padding: 0 16 0 16;
 }
 
 Button:highlighted {
@@ -28,11 +29,4 @@ Button:highlighted {
 
 Label {
     color: whitesmoke;
-}
-
-.action-bar-title {
-    color: #BCBCBC;
-    font-family: "Nasalization";
-    font-size: 18;
-    text-align: center;
 }
