@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { AsteroidItem, AsteroidsApiData, AsteroidsOnDate } from "../models/asteroids-model";
-import "rxjs/add/operator/map";
+import { map } from "rxjs/operators";
 
 // Retrieve a list of Asteroids based on their closest approach date to Earth. (start date - end date period)
 // https://api.nasa.gov/neo/rest/v1/feed?start_date=2015-09-07&end_date=2015-09-08&api_key=DEMO_KEY
@@ -20,14 +20,14 @@ export class AsteroidsService {
 
     getAsteroidsData() {
         return this.http.get(this.getUpdatedUrl())
-            .map(data => {
+            .pipe( map(data => {
                 let apiData: AsteroidsApiData = new AsteroidsApiData(
                     data["links"],
                     data["element_count"],
                     data["near_earth_objects"]);
                 // console.log("apiData.element_count: " + apiData.element_count);
                 return apiData;
-            });
+            }) );
     }
 
 

@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Http } from "@angular/http";
 import { RoverPhoto } from "../models/rover-model";
-import "rxjs/add/operator/map";
+import { map } from "rxjs/operators";
 
 const API_URL_START = "https://api.nasa.gov/mars-photos/api/v1/rovers/";
 const API_URL_DATE = "/photos?earth_date=";
@@ -19,8 +19,8 @@ export class RoverPhotosService {
 
     getPhotosWithDateAndPageIndex(rover: string, year: number, month: number, day: number, pageIndex: number) {
         return this.http.get(this.getUpdatedUrl(rover, year, month, day) + "&page=" + pageIndex)
-            .map(res => res.json())
-            .map(data => {
+            .pipe( map(res => res.json()) )
+            .pipe( map(data => {
                 let itemsList = [];
                 data.photos.forEach((item) => {
                     itemsList.push(new RoverPhoto(
@@ -34,7 +34,7 @@ export class RoverPhotosService {
                         item.earth_date));
                 });
                 return itemsList;
-            });
+            }) );
     }
 
     getUpdatedUrl(rover: string, year: number, month: number, day: number) {
