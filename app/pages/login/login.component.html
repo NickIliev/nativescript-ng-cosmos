@@ -1,23 +1,22 @@
-<GridLayout class="background" [backgroundImage]="backgroundImage" rows="auto, *" columns="*">
+<GridLayout class="background" [backgroundImage]="backgroundImage">
 
-    <StackLayout row="0" class="p-l-16 p-t-8">
+    <StackLayout class="p-l-16 p-t-8">
         <Label [text]="'Astronomical photo of ' + date" [visibility]="title ? 'visible' : 'collapsed'" fontSize="10" textWrap="true"></Label>
         <Label [text]="title" fontSize="16" textWrap="true" (loaded)="onViewLoaded($event, -900, 0, 0, 0)"></Label>
     </StackLayout>
 
-    <DockLayout row="1" height="120">
+    <DockLayout height="20%" verticalAlignment="bottom">
 
-        <Button dock="left" (tap)="login()" class="m-8" (loaded)="onViewLoaded($event, 200, 0, 200, 0)">
+        <Button width="70%" dock="left" (tap)="login()" class="m-8" (loaded)="onViewLoaded($event, 200, 0, 200, 0)">
             <FormattedString>
                 <Span [text]="loginText + '\n'" fontSize="28"></Span>
                 <Span [text]="descText" fontSize="12" ></Span>
             </FormattedString>
         </Button>
 
-        <GridLayout dock="right" rows="*, *" columns="*, *" class="m-r-8 m-t-8 m-b-8" (loaded)="onViewLoaded($event, -200, 0, 200, 0)">
-            <Button row="0" col="0" text="G+" (tap)="google()" class="m-b-4 m-r-4"></Button>
-            <Button row="0" col="1" text="f" (tap)="facebook()" class="m-b-4 m-l-4"></Button>
-            <Button row="1" col="0" colSpan="2" text="Email" (tap)="email()" class="m-t-4"></Button>
+        <GridLayout dock="right" rows="*, *" class="m-r-8 m-t-8 m-b-8" (loaded)="onViewLoaded($event, -200, 0, 200, 0)">
+            <Button row="0" text="G+" (tap)="google()" class="m-b-4"></Button>
+            <Button row="1" text="f" (tap)="facebook()" class="m-t-4"></Button>
         </GridLayout> 
         
     </DockLayout>

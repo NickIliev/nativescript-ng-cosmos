@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { login, logout, LoginType, User, FirebaseFacebookLoginOptions } from "nativescript-plugin-firebase";
+import { login as fbLogin, LoginType, User, FirebaseFacebookLoginOptions } from "nativescript-plugin-firebase";
 import * as appSettings from "tns-core-modules/application-settings";
 
 @Injectable()
@@ -8,19 +8,8 @@ export class LoginService {
     constructor() { }
 
     login(routerExtensions: any) {
-        routerExtensions.navigate(["/main"], {
-            clearHistory: true,
-            transition: {
-                name: "fade",
-                duration: 300
-            }
-        });
-    }
-
-    facebook(routerExtensions: any) {
-        if (appSettings.getBoolean("isLogged")) {
+        if (appSettings.getBoolean("isLogged")) { 
             let username = appSettings.getString("username");
-            // console.log("facebook username (isLogged): " + username);
 
             routerExtensions.navigate(["/main"], {
                 clearHistory: true,
@@ -29,18 +18,48 @@ export class LoginService {
                     duration: 300
                 },
                 queryParams: {
-                    name: username
+                    username: username
                 }
             });
         } else {
-            login({
+            routerExtensions.navigate(["/main"], {
+                clearHistory: true,
+                transition: {
+                    name: "fade",
+                    duration: 300
+                }
+            });
+        }
+    }
+
+    facebook(routerExtensions: any) {
+        if (appSettings.getBoolean("isLogged")) {
+            let username = appSettings.getString("username");
+            console.log("facebook username (isLogged): " + username);
+
+            routerExtensions.navigate(["/main"], {
+                clearHistory: true,
+                transition: {
+                    name: "fade",
+                    duration: 300
+                },
+                queryParams: {
+                    username: username
+                }
+            });
+        } else {
+            fbLogin({
                 type: LoginType.FACEBOOK,
                 facebookOptions: {
                     // defaults to ['public_profile', 'email']
                     scope: ["public_profile", "email"]
                 }
             }).then(user => {
-                // console.log("facebook user.name: " + user.name);
+                console.log("facebook user.name: " + user.name);
+
+                appSettings.setBoolean("isLogged", true);
+                appSettings.setString("username", user.name);
+
                 routerExtensions.navigate(["/main"], {
                     clearHistory: true,
                     transition: {
@@ -48,7 +67,7 @@ export class LoginService {
                         duration: 300
                     },
                     queryParams: {
-                        name: user.name
+                        username: user.name
                     }
                 });
             }).catch(err => {
@@ -60,7 +79,7 @@ export class LoginService {
     google(routerExtensions: any) {
         if (appSettings.getBoolean("isLogged")) {
             let username = appSettings.getString("username");
-            // console.log("google username (isLogged): " + username);
+            console.log("google username (isLogged): " + username);
 
             routerExtensions.navigate(["/main"], {
                 clearHistory: true,
@@ -69,15 +88,18 @@ export class LoginService {
                     duration: 300
                 },
                 queryParams: {
-                    name: username
+                    username: username
                 }
             });
         } else {
-            login({
+            fbLogin({
                 type: LoginType.GOOGLE,
             }).then((result) => {
                 let user: User = result;
-                // console.log("google user.name: " + user.name);
+                console.log("google user.name: " + user.name);
+
+                appSettings.setBoolean("isLogged", true);
+                appSettings.setString("username", user.name);
 
                 routerExtensions.navigate(["/main"], {
                     clearHistory: true,
@@ -86,7 +108,7 @@ export class LoginService {
                         duration: 300
                     },
                     queryParams: {
-                        name: user.name
+                        username: user.name
                     }
                 });
             }, (errorMessage) => {
