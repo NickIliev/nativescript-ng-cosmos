@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from "@angular/core";
 import { RouterExtensions } from "nativescript-angular/router";
 import { requestPermission } from "nativescript-permissions";
-import { getCurrentPushToken, init } from "nativescript-plugin-firebase";
+import { getCurrentPushToken, init, logout } from "nativescript-plugin-firebase";
 import { RadSideDrawerComponent } from "nativescript-ui-sidedrawer/angular";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as appSettings from "tns-core-modules/application-settings";
@@ -14,10 +14,14 @@ import { isAndroid } from "tns-core-modules/platform";
 })
 
 export class AppComponent implements OnInit, AfterViewInit {
-    private drawer: RadSideDrawer;
-    @ViewChild(RadSideDrawerComponent) public drawerComponent: RadSideDrawerComponent;
+    private _drawer: RadSideDrawer;
+    
+    @ViewChild(RadSideDrawerComponent) drawerComponent: RadSideDrawerComponent;
+    isUserLogged: boolean = false;
 
-    constructor(private _changeDetectionRef: ChangeDetectorRef, private _router: RouterExtensions) {
+    constructor(
+        private _changeDetectionRef: ChangeDetectorRef, 
+        private _routerExtensions: RouterExtensions) {
         if (isAndroid) {
             requestPermission([
                 "android.permission.INTERNET",
@@ -54,9 +58,11 @@ export class AppComponent implements OnInit, AfterViewInit {
                 if (data.loggedIn) {
                     // console.log("user's email address: " + (data.user.email ? data.user.email : "N/A"));
                     // console.log("user's name: " + (data.user.name ? data.user.name : "N/A"));
+                    this.isUserLogged = true;
                     appSettings.setBoolean("isLogged", true);
                     appSettings.setString("username", (data.user.name ? data.user.name : "N/A"));
                 } else {
+                    this.isUserLogged = false;
                     appSettings.setBoolean("isLogged", false);
                     appSettings.setString("username", "");
                 }
@@ -75,12 +81,12 @@ export class AppComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.drawer = this.drawerComponent.sideDrawer;
+        this._drawer = this.drawerComponent.sideDrawer;
         this._changeDetectionRef.detectChanges();
     }
 
     navigateTo(path: string, clearHistory: boolean) {
-        this._router.navigate(
+        this._routerExtensions.navigate(
                 [path], {
                 transition: {
                     name: "fade",
@@ -89,7 +95,25 @@ export class AppComponent implements OnInit, AfterViewInit {
                 clearHistory: clearHistory
             }
         ).then(() => {
-            this.drawer.closeDrawer();
+            this._drawer.closeDrawer();
         });
+    }
+
+    firebaseLogout() {
+        logout().then(() => {
+            this.isUserLogged = false;
+            appSettings.setBoolean("isLogged", false);
+            appSettings.setString("username", "");
+
+            this._drawer.closeDrawer();
+
+            this._routerExtensions.navigate(["/login"], {
+                clearHistory: true,
+                transition: {
+                    name: "fade",
+                    duration: 300
+                },
+            })
+        })
     }
 }

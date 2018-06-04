@@ -1,9 +1,12 @@
 import { AfterViewInit, Component } from "@angular/core";
 import { RouterExtensions } from "nativescript-angular/router";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
+
 import { getRootView } from "tns-core-modules/application";
+import { getBoolean, getString } from "tns-core-modules/application-settings";
 import { isAndroid } from "tns-core-modules/platform";
 import { Page } from "tns-core-modules/ui/page";
+
 import { ApodService } from "../../services/apod.service";
 import { LoginService } from "../../services/login.service";
 import { translateViewByXandYwithDurationAndCurve } from "../../shared/animations-helper";
@@ -34,6 +37,8 @@ export class LoginComponent implements AfterViewInit {
     }
 
     ngAfterViewInit() {
+        console.log("### ngAfterViewInit isLogged: ", getBoolean("isLogged"));
+        console.log("### ngAfterViewInit username: ", getString("username"));
         // use setTimeout otherwise there is no getRootView valid reference
         setTimeout(() => {
             this.drawer = <RadSideDrawer>getRootView();
@@ -51,10 +56,6 @@ export class LoginComponent implements AfterViewInit {
 
     google() {
         this.loginService.google(this.routerExtensions);
-    }
-
-    email() {
-        this.loginService.login(this.routerExtensions);
     }
 
     public onViewLoaded(args, translateFromX, translateToX, translateFromY, translateToY) {

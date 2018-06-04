@@ -7,8 +7,7 @@ import { ItemEventData } from "ui/list-view";
 import { Page } from "ui/page";
 import { RoverPhoto } from "../../models/rover-model";
 import { RoverPhotosService } from "../../services/rover.service";
-import { Observable as RxObservable } from "rxjs/Observable";
-import "rxjs/add/operator/map";
+import { Observable as RxObservable } from "rxjs";
 
 @Component({
     selector: "rovers",

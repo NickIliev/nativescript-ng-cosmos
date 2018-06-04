@@ -5,10 +5,12 @@
     "realtimedb": false,
     "remote_config": false,
     "messaging": true,
+    "crashlytics": false,
     "crash_reporting": false,
     "storage": false,
     "facebook_auth": true,
     "google_auth": true,
     "admob": false,
-    "invites": false
+    "invites": false,
+    "ml_kit": false
 }

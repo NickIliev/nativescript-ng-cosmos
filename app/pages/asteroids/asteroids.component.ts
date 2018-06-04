@@ -4,9 +4,7 @@ import { Page } from "ui/page";
 import { shareText } from "nativescript-social-share";
 import { AsteroidItem, AsteroidsOnDate, AsteroidsApiData } from "../../models//asteroids-model";
 import { AsteroidsService } from "../../services/asteroids.service";
-
-import { Observable as RxObservable } from "rxjs/Observable";
-import "rxjs/add/operator/map";
+import { Observable as RxObservable } from "rxjs";
 
 @Component({
     selector: "ns-asteroids",

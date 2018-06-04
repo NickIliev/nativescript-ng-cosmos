@@ -1,14 +1,17 @@
 import { AfterViewInit, Component } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { PageRoute, RouterExtensions } from "nativescript-angular/router";
+import { switchMap } from "rxjs/operators";
+
 import { CardView } from "nativescript-cardview";
 import { User } from "nativescript-plugin-firebase";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
+
 import { getRootView } from "tns-core-modules/application";
+import { Page } from "tns-core-modules/ui/page";
 import { isAndroid, isIOS } from "tns-core-modules/platform";
 import { View } from "tns-core-modules/ui/core/view";
-import { translateViewByXandYwithDurationAndCurve } from "../../shared/animations-helper";
 
-import { Page } from "tns-core-modules/ui/page";
+import { translateViewByXandYwithDurationAndCurve } from "../../shared/animations-helper";
 
 @Component({
     selector: "cosmos-details",
@@ -24,11 +27,11 @@ export class MainComponent implements AfterViewInit {
     public isAndroid: boolean = isAndroid;
     public isIos: boolean = isIOS;
 
-    public name: string;
+    public username: string;
 
     public drawer: RadSideDrawer;
 
-    constructor(private route: ActivatedRoute, private _page: Page) {
+    constructor(private _route: PageRoute, private _page: Page) {
         this.apodTitle = "Astronomical \nPhoto \nof the Day";
         this.asteroidTitle = "Asteroids\n Proximity\n Checker";
         this.roversTitle = "Mars Rovers \nPhotos \nDatabank";
@@ -36,12 +39,11 @@ export class MainComponent implements AfterViewInit {
 
         (<any>this._page).scrollableContent = false;
 
-        this.route.queryParams.subscribe(params => {
-            this.name = params["name"];
-
-            console.log("[MainComponent] User " + this.name);
-            // this.profileImageURL = params["profileImageURL"];
-            // console.log("main-page profile pic ULR: " + this.profileImageURL);
+        this._route.activatedRoute.pipe(
+            switchMap(activatedRoute => activatedRoute.queryParams)
+        ).forEach((params) => {
+            this.username = params["username"];
+            console.log("Main Page (username): ", this.username)
         });
     }
 
@@ -50,7 +52,6 @@ export class MainComponent implements AfterViewInit {
         this.drawer.gesturesEnabled = true;
         console.log("NG AFTER VIEW INIT!!!");
         console.log(this.drawer);
-
     }
 
     toggleDrawer() {

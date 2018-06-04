@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Http } from "@angular/http";
-import "rxjs/add/operator/map";
+import { map } from "rxjs/operators";
 
 @Injectable()
 export class ApodService {
@@ -9,13 +9,13 @@ export class ApodService {
 
     getData() {
         return this.http.get("https://api.nasa.gov/planetary/apod?api_key=jXRI5DynwdFVqt950uq6XMwZtlf6w8mSgpTJTcbX")
-            .map(res => res.json());
+            .pipe( map(res => res.json()) );
     }
 
     getDataWithCustomDate(date: string) {
         // For Example: date: string = "2017-07-25";
         const URL = "https://api.nasa.gov/planetary/apod?api_key=jXRI5DynwdFVqt950uq6XMwZtlf6w8mSgpTJTcbX&date=";
         return this.http.get(URL + date)
-            .map(res => res.json());
+            .pipe( map(res => res.json()) );
     }
 }
