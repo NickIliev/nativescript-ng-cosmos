@@ -3,11 +3,13 @@ const { join, relative, resolve, sep } = require("path");
 const webpack = require("webpack");
 const nsWebpack = require("nativescript-dev-webpack");
 const nativescriptTarget = require("nativescript-dev-webpack/nativescript-target");
+const { PlatformReplacementHost } = require("nativescript-dev-webpack/host/platform");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const { NativeScriptWorkerPlugin } = require("nativescript-worker-loader/NativeScriptWorkerPlugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const { AngularCompilerPlugin } = require("@ngtools/webpack");
 
 module.exports = env => {
     // Add your custom Activities, Services and other Android app components here.
@@ -21,9 +23,10 @@ module.exports = env => {
         throw new Error("You need to provide a target platform!");
     }
 
-    const platforms = ["ios", "android"];
+    const extensions = ["tns", platform];
+    const platformHost = new PlatformReplacementHost(extensions);
+
     const projectRoot = __dirname;
-    nsWebpack.loadAdditionalPlugins({ projectDir: projectRoot });
 
     // Default destination inside platforms/<platform>/...
     const dist = resolve(projectRoot, nsWebpack.getAppPath(platform, projectRoot));
@@ -42,7 +45,6 @@ module.exports = env => {
         uglify, // --env.uglify
         report, // --env.report
     } = env;
-    const ngToolsWebpackOptions = { tsConfigPath: join(__dirname, "tsconfig.esm.json") };
 
     const appFullPath = resolve(projectRoot, appPath);
     const appResourcesFullPath = resolve(projectRoot, appResourcesPath);
@@ -147,6 +149,7 @@ module.exports = env => {
                         {
                             loader: "nativescript-dev-webpack/bundle-config-loader",
                             options: {
+                                angular: true,
                                 loadCss: !snapshot, // load the application css if in debug mode
                             }
                         },
@@ -179,7 +182,7 @@ module.exports = env => {
                 {
                     test: /.ts$/, use: [
                         "nativescript-dev-webpack/moduleid-compat-loader",
-                        { loader: "@ngtools/webpack", options: ngToolsWebpackOptions },
+                        "@ngtools/webpack",
                     ]
                 },
 
@@ -217,19 +220,16 @@ module.exports = env => {
                 "./vendor",
                 "./bundle",
             ]),
-            // Support for web workers since v3.2
+            // For instructions on how to set up workers with webpack
+            // check out https://github.com/nativescript/worker-loader
             new NativeScriptWorkerPlugin(),
-            // AngularCompilerPlugin with augmented NativeScript filesystem to handle platform specific resource resolution.
-            new nsWebpack.NativeScriptAngularCompilerPlugin(
-                Object.assign({
-                    entryModule: resolve(appPath, "app.module#AppModule"),
-                    skipCodeGeneration: !aot,
-                    platformOptions: {
-                        platform,
-                        platforms,
-                    },
-                }, ngToolsWebpackOptions)
-            ),
+
+            new AngularCompilerPlugin({
+                host: platformHost,
+                entryModule: resolve(appPath, "app.module#AppModule"),
+                tsConfigPath: join(__dirname, "tsconfig.esm.json"),
+                skipCodeGeneration: !aot,
+            }),
             // Does IPC communication with the {N} CLI to notify events when running in watch mode.
             new nsWebpack.WatchStateLoggerPlugin(),
         ],
@@ -249,6 +249,7 @@ module.exports = env => {
     if (snapshot) {
         config.plugins.push(new nsWebpack.NativeScriptSnapshotPlugin({
             chunk: "vendor",
+            angular: true,
             requireModules: [
                 "reflect-metadata",
                 "@angular/platform-browser",

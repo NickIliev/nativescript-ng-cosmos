@@ -17,7 +17,12 @@ report/*
 
 native-nick-release-key.jks
 my-release-key.jks
+
 google-services.json
+GoogleService-Info.plist
+
+webpack.config.js
+
 times.html
 startup-times.md
 
