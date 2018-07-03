@@ -3,12 +3,11 @@ import { NativeScriptCommonModule } from "nativescript-angular/common";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
 import { InfoComponent } from "./info.component";
 
-export const routerConfig = [
-    {
-        path: "",
-        component: InfoComponent
-    }
+export const routerConfig =  [
+    { path: "", redirectTo: "info", pathMatch: "full" },
+    { path: "info", component: InfoComponent }
 ];
+
 
 @NgModule({
     imports: [
