@@ -6,19 +6,19 @@
   "nativescript": {
     "id": "org.nativescript.curiosity",
     "tns-android": {
-      "version": "4.2.0-2018-07-02-02"
+      "version": "4.1.3"
     }
   },
   "dependencies": {
-    "@angular/common": "~6.0.0",
-    "@angular/compiler": "~6.0.0",
-    "@angular/core": "~6.0.0",
-    "@angular/forms": "~6.0.0",
-    "@angular/http": "~6.0.0",
-    "@angular/platform-browser": "~6.0.0",
-    "@angular/platform-browser-dynamic": "~6.0.0",
-    "@angular/router": "~6.0.0",
-    "nativescript-angular": "next",
+    "@angular/common": "~6.0.6",
+    "@angular/compiler": "~6.0.6",
+    "@angular/core": "~6.0.6",
+    "@angular/forms": "~6.0.6",
+    "@angular/http": "~6.0.6",
+    "@angular/platform-browser": "~6.0.6",
+    "@angular/platform-browser-dynamic": "~6.0.6",
+    "@angular/router": "~6.0.6",
+    "nativescript-angular": "~6.0.6",
     "nativescript-cardview": "^3.0.1",
     "nativescript-permissions": "^1.2.3",
     "nativescript-plugin-firebase": "^6.0.1",
@@ -26,19 +26,19 @@
     "nativescript-theme-core": "^1.0.4",
     "nativescript-ui-sidedrawer": "^4.1.1",
     "reflect-metadata": "~0.1.8",
-    "rxjs": "~6.0.0-rc.1",
-    "tns-core-modules": "next",
-    "zone.js": "^0.8.4"
+    "rxjs": "~6.0.0 || >=6.1.0",
+    "tns-core-modules": "4.1.0",
+    "zone.js": "^0.8.26"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.7.0-rc.0",
-    "@angular/compiler-cli": "~6.1.0-beta.1",
+    "@angular-devkit/build-angular": "0.7.0-rc.0",
+    "@angular/compiler-cli": "~6.1.0-beta.3",
     "babel-traverse": "6.4.5",
     "babel-types": "6.4.5",
     "babylon": "6.4.5",
     "lazy": "1.0.11",
     "nativescript-dev-typescript": "~0.7.2",
-    "nativescript-dev-webpack": "^0.14.2",
+    "nativescript-dev-webpack": "^0.14.4",
     "tns-platform-declarations": "^4.1.0",
     "typescript": "~2.7.2"
   },
