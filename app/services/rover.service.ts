@@ -1,5 +1,7 @@
 import { Injectable } from "@angular/core";
-import { Http } from "@angular/http";
+
+import { HttpClient } from "@angular/common/http";
+
 import { RoverPhoto } from "../models/rover-model";
 import { map } from "rxjs/operators";
 
@@ -15,14 +17,13 @@ export class RoverPhotosService {
     public day: number;
     public requestedURL: string;
 
-    constructor(private http: Http) { }
+    constructor(private http: HttpClient) { }
 
     getPhotosWithDateAndPageIndex(rover: string, year: number, month: number, day: number, pageIndex: number) {
         return this.http.get(this.getUpdatedUrl(rover, year, month, day) + "&page=" + pageIndex)
-            .pipe( map(res => res.json()) )
             .pipe( map(data => {
                 let itemsList = [];
-                data.photos.forEach((item) => {
+                data["photos"].forEach((item) => {
                     itemsList.push(new RoverPhoto(
                         item.id,
                         item.sol,

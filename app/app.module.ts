@@ -1,6 +1,9 @@
 import { NgModule, NO_ERRORS_SCHEMA, NgModuleFactoryLoader } from "@angular/core";
 import { NativeScriptModule } from "nativescript-angular/nativescript.module";
-import { NativeScriptHttpModule } from "nativescript-angular/http";
+
+// import { NativeScriptHttpModule } from "nativescript-angular/http";
+import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
+
 import { NativeScriptRouterModule } from "nativescript-angular/router";
 import { NativeScriptUISideDrawerModule } from "nativescript-ui-sidedrawer/angular";
 
@@ -21,7 +24,7 @@ registerElement("CardView", () => require("nativescript-cardview").CardView);
     imports: [
         NativeScriptModule,
         AppRoutingModule,
-        NativeScriptHttpModule,
+        NativeScriptHttpClientModule,
         NativeScriptRouterModule,
         NativeScriptUISideDrawerModule
     ],

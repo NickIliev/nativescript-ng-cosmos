@@ -73,10 +73,10 @@ export class LoginComponent implements AfterViewInit {
     private initData() {
         this.apodService.getData()
             .subscribe((result) => {
-                if (result.media_type === "image") {
-                    this.backgroundImage = result.url; // or bigger hdurl
-                    this.title = result.title;
-                    this.date = result.date;
+                if (result["media_type"] === "image") {
+                    this.backgroundImage = result["url"]; // or bigger hdurl
+                    this.title = result["title"];
+                    this.date = result["date"];
                 } else {
                     this.backgroundImage = "res://background";
                 }

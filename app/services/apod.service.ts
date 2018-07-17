@@ -1,21 +1,22 @@
 import { Injectable } from "@angular/core";
+
 import { Http } from "@angular/http";
+import { HttpClient } from "@angular/common/http";
+
 import { map } from "rxjs/operators";
 
 @Injectable()
 export class ApodService {
 
-    constructor(private http: Http) { }
+    constructor(private http: HttpClient) { }
 
     getData() {
         return this.http.get("https://api.nasa.gov/planetary/apod?api_key=jXRI5DynwdFVqt950uq6XMwZtlf6w8mSgpTJTcbX")
-            .pipe( map(res => res.json()) );
     }
 
     getDataWithCustomDate(date: string) {
         // For Example: date: string = "2017-07-25";
         const URL = "https://api.nasa.gov/planetary/apod?api_key=jXRI5DynwdFVqt950uq6XMwZtlf6w8mSgpTJTcbX&date=";
         return this.http.get(URL + date)
-            .pipe( map(res => res.json()) );
     }
 }

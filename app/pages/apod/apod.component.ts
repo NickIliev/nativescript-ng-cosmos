@@ -156,27 +156,27 @@ export class ApodComponent {
     private initData() {
         this._apodService.getData()
             .subscribe((result) => {
-                if (result.media_type === "image") {
+                if (result["media_type"] === "image") {
                     this.item = new ApodItem(
-                        result.copyright,
-                        result.date,
-                        result.explanation,
-                        result.hdurl,
-                        result.media_type,
-                        result.service_version,
-                        result.title,
-                        result.url
+                        result["copyright"],
+                        result["date"],
+                        result["explanation"],
+                        result["hdurl"],
+                        result["media_type"],
+                        result["service_version"],
+                        result["title"],
+                        result["url"]
                     );
 
-                    this.lastLoadedDate = new Date(result.date);
-                } else if (result.media_type !== "image" && this.direction) {
+                    this.lastLoadedDate = new Date(result["date"]);
+                } else if (result["media_type"] !== "image" && this.direction) {
                     // TODO: implement the logic for YouTube videos here
-                    this.lastLoadedDate = new Date(result.date);
+                    this.lastLoadedDate = new Date(result["date"]);
                     this._toolbarHelper.setPrevousDay(this.lastLoadedDate);
                     this.extractData(this._toolbarHelper.dateToString(this.lastLoadedDate));
-                } else if (result.media_type !== "image" && !this.direction) {
+                } else if (result["media_type"] !== "image" && !this.direction) {
                     // TODO: implement the logic for YouTube videos here
-                    this.lastLoadedDate = new Date(result.date);
+                    this.lastLoadedDate = new Date(result["date"]);
                     let isValideDate = this._toolbarHelper.setNextDay(this.lastLoadedDate);
                     if (isValideDate) {
                         this.extractData(this._toolbarHelper.dateToString(this.lastLoadedDate));
@@ -194,22 +194,22 @@ export class ApodComponent {
     private extractData(date: string) {
         this._apodService.getDataWithCustomDate(date)
             .subscribe((result) => {
-                if (result.media_type === "image") {
+                if (result["media_type"] === "image") {
                     this.item = new ApodItem(
-                        result.copyright,
-                        result.date,
-                        result.explanation,
-                        result.hdurl,
-                        result.media_type,
-                        result.service_version,
-                        result.title,
-                        result.url
+                        result["copyright"],
+                        result["date"],
+                        result["explanation"],
+                        result["hdurl"],
+                        result["media_type"],
+                        result["service_version"],
+                        result["title"],
+                        result["url"]
                     );
-                } else if (result.media_type !== "image" && this.direction) {
+                } else if (result["media_type"] !== "image" && this.direction) {
                     // TODO: implement the logic for YouTube videos here
                     this._toolbarHelper.setPrevousDay(this.lastLoadedDate);
                     this.extractData(this._toolbarHelper.dateToString(this.lastLoadedDate));
-                } else if (result.media_type !== "image" && !this.direction) {
+                } else if (result["media_type"] !== "image" && !this.direction) {
                     // TODO: implement the logic for YouTube videos here
                     let isValideDate = this._toolbarHelper.setNextDay(this.lastLoadedDate);
                     if (isValideDate) {
