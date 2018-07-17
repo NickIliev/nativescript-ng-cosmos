@@ -50,15 +50,6 @@ export class PhotoDetailComponent implements OnInit {
             });
         } else if (message === "onSetWallpaper") {
             if (isAndroid) {
-                // fromUrl(this.photo.imageUri).then(image => {
-                //     let wallpaperManager = android.app.WallpaperManager.getInstance(ad.getApplicationContext());
-                //     try {
-                //         wallpaperManager.setBitmap(image.android);
-                //     } catch (error) {
-                //         console.log(error);
-                //     }
-                // });
-
                 let options: ConfirmOptions = {
                     message: "Set as Wallpaper?",
                     okButtonText: "Yes",

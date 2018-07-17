@@ -1,5 +1,6 @@
 
 <RadSideDrawer>
+    
     <StackLayout tkDrawerContent class="sidedrawer-content">
         <Label text="Home" (tap)="navigateTo('/main', false)" textWrap="true"></Label>
         <Label text="Photo of the Day" (tap)="navigateTo('/apod', false)" textWrap="true"></Label>
@@ -7,7 +8,6 @@
         <Label text="Mars Rovers Photos" (tap)="navigateTo('/rovers', false)" textWrap="true"></Label>
         <Label text="Details" (tap)="navigateTo('/info', false)" textWrap="true"></Label>
         <Label text="Logout" (tap)="firebaseLogout()" *ngIf="isUserLogged" textWrap="true"></Label>
-        
     </StackLayout>
 
     <GridLayout tkMainContent>

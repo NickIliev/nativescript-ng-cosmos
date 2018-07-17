@@ -1,7 +1,5 @@
 import { Injectable } from "@angular/core";
-
 import { HttpClient } from "@angular/common/http";
-
 import { AsteroidItem, AsteroidsApiData, AsteroidsOnDate } from "../models/asteroids-model";
 import { map } from "rxjs/operators";
 

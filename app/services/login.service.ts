@@ -5,8 +5,6 @@ import * as appSettings from "tns-core-modules/application-settings";
 @Injectable()
 export class LoginService {
 
-    constructor() { }
-
     login(routerExtensions: any) {
         if (appSettings.getBoolean("isLogged")) { 
             let username = appSettings.getString("username");
