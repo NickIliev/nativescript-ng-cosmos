@@ -1,0 +1,6 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/ns_primaryDark"/>
+    <item>
+        <bitmap android:gravity="center_horizontal|center_vertical" android:src="@drawable/background" />
+    </item>
+</layer-list>

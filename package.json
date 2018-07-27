@@ -6,7 +6,7 @@
   "nativescript": {
     "id": "org.nativescript.curiosity",
     "tns-android": {
-      "version": "4.1.3"
+      "version": "4.2.0-rc-2018-07-26-04"
     }
   },
   "dependencies": {
