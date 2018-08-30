@@ -1,5 +1,6 @@
 import { AfterViewInit, Component } from "@angular/core";
 import { RouterExtensions } from "nativescript-angular/router";
+import { AppCenter } from "nativescript-app-center";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 
 import { getRootView } from "tns-core-modules/application";
@@ -28,7 +29,8 @@ export class LoginComponent implements AfterViewInit {
     constructor(private page: Page,
         private routerExtensions: RouterExtensions,
         private apodService: ApodService,
-        private loginService: LoginService) {
+        private loginService: LoginService,
+        private appCenter: AppCenter) {
         if (isAndroid) {
             this.page.actionBarHidden = true;
         }
@@ -47,6 +49,7 @@ export class LoginComponent implements AfterViewInit {
     }
 
     login() {
+        this.appCenter.trackEvent('login', [{ key: 'user', value: "Anonymous" }]);
         this.loginService.login(this.routerExtensions);
     }
 

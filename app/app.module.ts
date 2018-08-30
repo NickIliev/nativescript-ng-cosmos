@@ -14,6 +14,9 @@ import { MainComponent } from "./pages/main/main.component";
 import { ApodService } from "./services/apod.service";
 import { LoginService } from "./services/login.service";
 
+import { AppCenter } from "nativescript-app-center";
+import { appCenter } from "./shared/app-center-initializer";
+
 import { registerElement } from "nativescript-angular/element-registry";
 registerElement("CardView", () => require("nativescript-cardview").CardView);
 
@@ -35,7 +38,11 @@ registerElement("CardView", () => require("nativescript-cardview").CardView);
     ],
     providers: [
         ApodService,
-        LoginService
+        LoginService,
+        {
+            provide: AppCenter,
+            useValue: appCenter
+        }
     ],
     schemas: [
         NO_ERRORS_SCHEMA

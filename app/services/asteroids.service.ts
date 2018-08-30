@@ -1,22 +1,26 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { AsteroidItem, AsteroidsApiData, AsteroidsOnDate } from "../models/asteroids-model";
+import { AsteroidsApiData } from "../models/asteroids-model";
+import { getApiKey } from "../shared/nasa-api";
 import { map } from "rxjs/operators";
-
-// Retrieve a list of Asteroids based on their closest approach date to Earth. (start date - end date period)
-// https://api.nasa.gov/neo/rest/v1/feed?start_date=2015-09-07&end_date=2015-09-08&api_key=DEMO_KEY
-const API_URL = "https://api.nasa.gov/neo/rest/v1/feed";
-const API_KEY = "&" + "api_key=jXRI5DynwdFVqt950uq6XMwZtlf6w8mSgpTJTcbX";
 
 @Injectable()
 export class AsteroidsService {
-    public rover: string;
-    public year: number;
-    public month: number;
-    public day: number;
-    public requestedURL: string;
+    rover: string;
+    year: number;
+    month: number;
+    day: number;
+    requestedURL: string;
+    API_URL: string;
+    NASA_API_KEY: string;
+    
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) { 
+        // Retrieve a list of Asteroids based on their closest approach date to Earth. (start date - end date period)
+        // https://api.nasa.gov/neo/rest/v1/feed?start_date=2015-09-07&end_date=2015-09-08&api_key=DEMO_KEY
+        this.API_URL = "https://api.nasa.gov/neo/rest/v1/feed";
+        this.NASA_API_KEY = getApiKey();
+    }
 
     getAsteroidsData() {
         return this.http.get(this.getUpdatedUrl())
@@ -35,7 +39,7 @@ export class AsteroidsService {
         let today = new Date();
         let requiredDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7);
         let dateRange = "?start_date=" + this.formatDate(today) + "&end_date=" + this.formatDate(requiredDate);
-        return API_URL + dateRange + API_KEY;
+        return this.API_URL + dateRange + "&api_key=" + this.NASA_API_KEY;
     }
 
     private formatDate(date) {

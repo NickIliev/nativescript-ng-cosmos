@@ -1,21 +1,26 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { RoverPhoto } from "../models/rover-model";
+import { getApiKey } from "../shared/nasa-api";
 import { map } from "rxjs/operators";
-
-const API_URL_START = "https://api.nasa.gov/mars-photos/api/v1/rovers/";
-const API_URL_DATE = "/photos?earth_date=";
-const API_KEY = "&" + "api_key=jXRI5DynwdFVqt950uq6XMwZtlf6w8mSgpTJTcbX";
 
 @Injectable()
 export class RoverPhotosService {
-    public rover: string;
-    public year: number;
-    public month: number;
-    public day: number;
-    public requestedURL: string;
+    rover: string;
+    year: number;
+    month: number;
+    day: number;
+    requestedURL: string;
 
-    constructor(private http: HttpClient) { }
+    NASA_API_KEY: string;
+    API_URL_START: string;
+    API_URL_DATE: string;
+
+    constructor(private http: HttpClient) {
+        this.API_URL_START = "https://api.nasa.gov/mars-photos/api/v1/rovers/";
+        this.API_URL_DATE = "/photos?earth_date=";
+        this.NASA_API_KEY = getApiKey();
+    }
 
     getPhotosWithDateAndPageIndex(rover: string, year: number, month: number, day: number, pageIndex: number) {
         return this.http.get(this.getUpdatedUrl(rover, year, month, day) + "&page=" + pageIndex)
@@ -42,10 +47,10 @@ export class RoverPhotosService {
         this.month = month;
         this.day = day;
 
-        return this.requestedURL = API_URL_START
-            + this.rover
-            + API_URL_DATE
-            + this.year + "-" + this.month + "-" + this.day
-            + API_KEY;
+        return this.requestedURL = this.API_URL_START
+                                    + this.rover
+                                    + this.API_URL_DATE
+                                    + this.year + "-" + this.month + "-" + this.day
+                                    + "&api_key=" + this.NASA_API_KEY;
     }
 }

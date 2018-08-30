@@ -19,6 +19,7 @@
     "@angular/platform-browser-dynamic": "~6.1.0",
     "@angular/router": "~6.1.0",
     "nativescript-angular": "^6.1.0",
+    "nativescript-app-center": "^1.0.3",
     "nativescript-cardview": "^3.1.1",
     "nativescript-permissions": "^1.2.3",
     "nativescript-plugin-firebase": "^6.6.0",

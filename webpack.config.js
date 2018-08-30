@@ -47,8 +47,7 @@ module.exports = env => {
     const appResourcesFullPath = resolve(projectRoot, appResourcesPath);
 
     const entryModule = aot ?
-        nsWebpack.getAotEntryModule(appFullPath) : 
-        `${nsWebpack.getEntryModule(appFullPath)}.ts`;
+        nsWebpack.getAotEntryModule(appFullPath) : `${nsWebpack.getEntryModule(appFullPath)}.ts`;
     const entryPath = `.${sep}${entryModule}`;
 
     const config = {
@@ -209,6 +208,7 @@ module.exports = env => {
             ]),
             // Copy assets to out dir. Add your own globs as needed.
             new CopyWebpackPlugin([
+                { from: "settings.json" },
                 { from: "fonts/**" },
                 { from: "**/*.jpg" },
                 { from: "**/*.png" },

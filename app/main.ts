@@ -1,10 +1,11 @@
-const firebase = require("nativescript-plugin-firebase");
-
-import { platformNativeScriptDynamic } from "nativescript-angular/platform";
 import { AppModule } from "./app.module";
-import { android as androidApp, AndroidApplication, AndroidActivityBundleEventData } from "application";
-import { ad } from "utils/utils";
+import { initializeLoggers } from "./shared/app-center-initializer";
 
+const firebase = require("nativescript-plugin-firebase");
+import { platformNativeScriptDynamic } from "nativescript-angular/platform";
+
+import { android as androidApp, AndroidApplication, AndroidActivityBundleEventData } from "tns-core-modules/application";
+import { ad } from "tns-core-modules/utils/utils";
 declare let com: any;
 
 if (androidApp) {
@@ -27,5 +28,7 @@ if (androidApp) {
             }));
     });
 }
+
+initializeLoggers();
 
 platformNativeScriptDynamic().bootstrapModule(AppModule);

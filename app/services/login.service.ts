@@ -1,5 +1,6 @@
+
 import { Injectable } from "@angular/core";
-import { login as fbLogin, LoginType, User, FirebaseFacebookLoginOptions } from "nativescript-plugin-firebase";
+import { login as fbLogin, LoginType, User } from "nativescript-plugin-firebase";
 import * as appSettings from "tns-core-modules/application-settings";
 
 @Injectable()
