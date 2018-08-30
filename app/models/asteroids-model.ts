@@ -72,15 +72,15 @@ export interface ApproachDate {
 }
 
 export interface MissDistance {
-    astronomical: string;
-    kilometers: string;
-    miles: string;
+    astronomical: number;
+    kilometers: number;
+    miles: number;
 }
 
 export interface RelativeVelocity {
-    kilometers_per_second: string;
-    kilometers_per_hour: string;
-    miles_per_hour: string;
+    kilometers_per_second: number;
+    kilometers_per_hour: number;
+    miles_per_hour: number;
 }
 
 // Note: OribtalData is to be used for specific asteroid lookup

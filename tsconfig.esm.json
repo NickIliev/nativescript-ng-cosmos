@@ -1,5 +1,6 @@
 {
     "extends": "./tsconfig",
+    "experimentalDecorators": true,
     "compilerOptions": {
         "module": "es2015",
         "moduleResolution": "node"

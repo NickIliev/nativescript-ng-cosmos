@@ -1,5 +1,6 @@
 {
   "extends": "./tsconfig",
+  "experimentalDecorators": true,
   "angularCompilerOptions": {
     "skipMetadataEmit": true,
     "genDir": "./"
