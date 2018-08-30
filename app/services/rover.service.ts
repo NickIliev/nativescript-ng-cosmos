@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { map } from "rxjs/operators";
+
 import { RoverPhoto } from "../models/rover-model";
 import { getApiKey } from "../shared/nasa-api";
-import { map } from "rxjs/operators";
 
 @Injectable()
 export class RoverPhotosService {
@@ -16,14 +17,14 @@ export class RoverPhotosService {
     API_URL_START: string;
     API_URL_DATE: string;
 
-    constructor(private http: HttpClient) {
+    constructor(private _http: HttpClient) {
         this.API_URL_START = "https://api.nasa.gov/mars-photos/api/v1/rovers/";
         this.API_URL_DATE = "/photos?earth_date=";
         this.NASA_API_KEY = getApiKey();
     }
 
     getPhotosWithDateAndPageIndex(rover: string, year: number, month: number, day: number, pageIndex: number) {
-        return this.http.get(this.getUpdatedUrl(rover, year, month, day) + "&page=" + pageIndex)
+        return this._http.get(this.getUpdatedUrl(rover, year, month, day) + "&page=" + pageIndex)
             .pipe(map(data => {
                 let itemsList = [];
                 data["photos"].forEach((item) => {

@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
-import { isAndroid } from "platform";
-import { Page } from "ui/page";
+import { isAndroid } from "tns-core-modules/platform";
+import { Page } from "tns-core-modules/ui/page";
 
 @Component({
     selector: "cosmos-info",
@@ -9,9 +9,9 @@ import { Page } from "ui/page";
 })
 export class InfoComponent {
 
-    constructor(private page: Page) {
+    constructor(private _page: Page) {
         if (isAndroid) {
-            this.page.actionBarHidden = true;
+            this._page.actionBarHidden = true;
         }
     }
 }

@@ -1,10 +1,11 @@
 import { AfterViewInit, Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { RouterExtensions } from "nativescript-angular/router";
-import { isAndroid } from "platform";
-import { alert } from "ui/dialogs";
-import { ItemEventData } from "ui/list-view";
-import { Page } from "ui/page";
+import { isAndroid } from "tns-core-modules/platform";
+import { alert } from "tns-core-modules/ui/dialogs";
+import { ItemEventData } from "tns-core-modules/ui/list-view";
+import { Page } from "tns-core-modules/ui/page";
+
 import { RoverPhoto } from "../../models/rover-model";
 import { RoverPhotosService } from "../../services/rover.service";
 import { Observable as RxObservable } from "rxjs";
@@ -17,14 +18,15 @@ import { Observable as RxObservable } from "rxjs";
 })
 export class RoversComponent implements OnInit, AfterViewInit {
 
-    public roverPhotos: RxObservable<Array<RoverPhoto>>;
-    public day: number;
-    public month: number;
-    public year: number;
-    public rover: string;
-    private tempArr: Array<RoverPhoto> = [];
-    private pageIndex: number;
-    private subscr;
+    roverPhotos: RxObservable<Array<RoverPhoto>>;
+    day: number;
+    month: number;
+    year: number;
+    rover: string;
+
+    private _tempArr: Array<RoverPhoto> = [];
+    private _pageIndex: number;
+    private _subscr;
 
     constructor(
         private _roverService: RoverPhotosService,
@@ -47,12 +49,12 @@ export class RoversComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.pageIndex = 1;
-        this.extractData(this.rover, this.year, this.month, this.day, this.pageIndex);
+        this._pageIndex = 1;
+        this.extractData(this.rover, this.year, this.month, this.day, this._pageIndex);
     }
 
-    private extractData(rover: string, year: number, month: number, day: number, pageIndex: number) {
-        this._roverService.getPhotosWithDateAndPageIndex(rover, year, month, day, pageIndex)
+    private extractData(rover: string, year: number, month: number, day: number, _pageIndex: number) {
+        this._roverService.getPhotosWithDateAndPageIndex(rover, year, month, day, _pageIndex)
             .subscribe((itemsList) => {
                 if (itemsList.length === 0) {
                     alert("No availabel photos for the selected date! Please choose different date from the selection page!")
@@ -61,11 +63,11 @@ export class RoversComponent implements OnInit, AfterViewInit {
                         });
                 }
 
-                this.tempArr = itemsList;
+                this._tempArr = itemsList;
 
                 this.roverPhotos = RxObservable.create(subscriber => {
-                    this.subscr = subscriber;
-                    subscriber.next(this.tempArr);
+                    this._subscr = subscriber;
+                    subscriber.next(this._tempArr);
                 });
             }, (error) => {
                 // console.log(error);
@@ -73,19 +75,19 @@ export class RoversComponent implements OnInit, AfterViewInit {
     }
 
     public onLoadMoreItemsRequested(args) {
-        this._roverService.getPhotosWithDateAndPageIndex(this.rover, this.year, this.month, this.day, ++this.pageIndex)
+        this._roverService.getPhotosWithDateAndPageIndex(this.rover, this.year, this.month, this.day, ++this._pageIndex)
             .subscribe((itemsList) => {
                 itemsList.forEach(element => {
-                    this.tempArr.push(element);
+                    this._tempArr.push(element);
                 });
 
-                this.subscr.next(this.tempArr);
+                this._subscr.next(this._tempArr);
             });
     }
 
     public onItemTap(args: ItemEventData) {
         let index = args.index;
-        let photo = this.tempArr[index];
+        let photo = this._tempArr[index];
 
         this._router.navigate(["/rovers/photo"], {
             replaceUrl: false,

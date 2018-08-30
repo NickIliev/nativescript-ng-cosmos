@@ -1,10 +1,7 @@
 import { AfterViewInit, Component } from "@angular/core";
 import { RouterExtensions } from "nativescript-angular/router";
-import { AppCenter } from "nativescript-app-center";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
-
 import { getRootView } from "tns-core-modules/application";
-import { getBoolean, getString } from "tns-core-modules/application-settings";
 import { isAndroid } from "tns-core-modules/platform";
 import { Page } from "tns-core-modules/ui/page";
 
@@ -26,21 +23,15 @@ export class LoginComponent implements AfterViewInit {
     public loginText: string = "No Pass Login";
     public title: string;
 
-    constructor(private page: Page,
-        private routerExtensions: RouterExtensions,
-        private apodService: ApodService,
-        private loginService: LoginService,
-        private appCenter: AppCenter) {
+    constructor(private _page: Page, private _routerExtensions: RouterExtensions, private _apodService: ApodService, private _loginService: LoginService) {
         if (isAndroid) {
-            this.page.actionBarHidden = true;
+            this._page.actionBarHidden = true;
         }
 
         this.initData();
     }
 
     ngAfterViewInit() {
-        console.log("### ngAfterViewInit isLogged: ", getBoolean("isLogged"));
-        console.log("### ngAfterViewInit username: ", getString("username"));
         // use setTimeout otherwise there is no getRootView valid reference
         setTimeout(() => {
             this.drawer = <RadSideDrawer>getRootView();
@@ -49,16 +40,15 @@ export class LoginComponent implements AfterViewInit {
     }
 
     login() {
-        this.appCenter.trackEvent('login', [{ key: 'user', value: "Anonymous" }]);
-        this.loginService.login(this.routerExtensions);
+        this._loginService.login(this._routerExtensions);
     }
 
     facebook() {
-        this.loginService.facebook(this.routerExtensions);
+        this._loginService.facebook(this._routerExtensions);
     }
 
     google() {
-        this.loginService.google(this.routerExtensions);
+        this._loginService.google(this._routerExtensions);
     }
 
     public onViewLoaded(args, translateFromX, translateToX, translateFromY, translateToY) {
@@ -74,7 +64,7 @@ export class LoginComponent implements AfterViewInit {
     }
 
     private initData() {
-        this.apodService.getData()
+        this._apodService.getData()
             .subscribe((result) => {
                 if (result["media_type"] === "image") {
                     this.backgroundImage = result["url"]; // or bigger hdurl

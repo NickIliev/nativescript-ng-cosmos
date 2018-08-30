@@ -1,11 +1,10 @@
-import { Component, ViewChild, ElementRef } from "@angular/core";
+import { Component } from "@angular/core";
 import { RouterExtensions } from "nativescript-angular/router";
 import { Page } from "tns-core-modules/ui/page";
 import { DatePicker } from "tns-core-modules/ui/date-picker";
 import { StackLayout } from "tns-core-modules/ui/layouts/stack-layout";
 import { ListPicker } from "tns-core-modules/ui/list-picker";
 import { isAndroid } from "tns-core-modules/platform";
-import { translateViewByXandYwithDurationAndCurve } from "../../../shared/animations-helper";
 
 @Component({
 	selector: "pickers",
@@ -16,7 +15,8 @@ import { translateViewByXandYwithDurationAndCurve } from "../../../shared/animat
 
 export class PickersComponent {
 
-	public rovers: Array<string>;
+	rovers: Array<string>;
+
 	private _today: Date;
 	private _day: number;
 	private _month: number;
@@ -27,8 +27,7 @@ export class PickersComponent {
 	private _stackList: StackLayout;
 	private _stackDate: StackLayout;
 
-	constructor(private _page: Page, private _router: RouterExtensions) {
-		// console.log("constructor");
+	constructor(private _page: Page, private _router: RouterExtensions) {       
 		if (isAndroid) {
 			this._page.actionBarHidden = true;
 

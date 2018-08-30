@@ -1,19 +1,15 @@
+import { Component } from "@angular/core";
 import { ActivityIndicator } from "tns-core-modules/ui/activity-indicator";
 import { View } from "tns-core-modules/ui/core/view";
 import { alert, confirm, ConfirmOptions } from "tns-core-modules/ui/dialogs";
-import { GestureEventData, PinchGestureEventData, PanGestureEventData } from "tns-core-modules/ui/gestures";
 import { Image } from "tns-core-modules/ui/image";
 import { Page } from "tns-core-modules/ui/page";
 import { isAndroid } from "tns-core-modules/platform";
 import { ScrollView } from "tns-core-modules/ui/scroll-view";
 
-import { Component, ViewChild, ElementRef } from "@angular/core";
-
 import { ApodItem } from "../../models/apod-model";
 import { ApodService } from "../../services/apod.service";
-
 import { ToolbarHelper } from "../../shared/toolbar-helper";
-import { onDoubleTap as onDoubleZoom, onPan as onPanZoom, onPinch as onPinchZoom } from "../../shared/zoom-helper";
 
 @Component({
     selector: "cosmos-items",
@@ -34,10 +30,8 @@ export class ApodComponent {
         Remove when logic for other media types is implemented!!!
     */
     direction: boolean = true;
-
     indicator: ActivityIndicator;
     image: Image;
-
     dock: View;
     scroll: ScrollView;
 
@@ -107,7 +101,6 @@ export class ApodComponent {
             };
             confirm(options).then((result: boolean) => {
                 // result can be true/false/undefined
-                console.log("confirm result: " + result);
                 if (result) {
                     this._toolbarHelper.onSetWallpaper(this.item.url);
                 } else {
@@ -146,7 +139,6 @@ export class ApodComponent {
             };
             // show warnig if the user request photos from future date - disable the next button here
             alert(options).then(() => {
-                console.log("No photos abailable - returning to today's pic");
                 this.lastLoadedDate = new Date();
                 this.extractData(this._toolbarHelper.dateToString(this.lastLoadedDate));
             });

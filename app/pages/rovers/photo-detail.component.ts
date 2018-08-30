@@ -5,7 +5,6 @@ import { confirm, ConfirmOptions } from "tns-core-modules/ui/dialogs";
 import { fromUrl } from "tns-core-modules/image-source";
 import { Page } from "tns-core-modules/ui/page";
 import { isAndroid } from "tns-core-modules/platform";
-import { ad } from "tns-core-modules/utils/utils";
 
 import { RoverPhoto } from "../../models/rover-model";
 import { ToolbarHelper } from "../../shared/toolbar-helper";
@@ -58,7 +57,6 @@ export class PhotoDetailComponent implements OnInit {
                 };
                 confirm(options).then((result: boolean) => {
                     // result can be true/false/undefined
-                    console.log("confirm result: " + result);
                     if (result) {
                         this._toolbarHelper.onSetWallpaper(this.photo.imageUri);
                     } else {

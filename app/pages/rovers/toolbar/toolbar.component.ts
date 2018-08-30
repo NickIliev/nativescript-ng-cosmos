@@ -1,5 +1,4 @@
 import { Component, Output, EventEmitter } from "@angular/core";
-import { Button } from "ui/button";
 
 @Component({
     selector: "rovers-toolbar",

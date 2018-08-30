@@ -1,10 +1,11 @@
 import { Component } from "@angular/core";
-import { isAndroid } from "platform";
-import { Page } from "ui/page";
 import { shareText } from "nativescript-social-share";
-import { AsteroidItem, AsteroidsOnDate, AsteroidsApiData } from "../../models//asteroids-model";
-import { AsteroidsService } from "../../services/asteroids.service";
+import { isAndroid } from "tns-core-modules/platform";
+import { Page } from "tns-core-modules/ui/page";
 import { Observable as RxObservable } from "rxjs";
+
+import { AsteroidItem, AsteroidsApiData } from "../../models//asteroids-model";
+import { AsteroidsService } from "../../services/asteroids.service";
 
 @Component({
     selector: "ns-asteroids",
@@ -15,16 +16,17 @@ import { Observable as RxObservable } from "rxjs";
 
 export class AsteroidsComponent {
     public asteroidItems: RxObservable<Array<AsteroidItem>>;
-    private tempArr: Array<AsteroidItem> = [];
+    public asteroidCount: number;
 
-    public asteroidCount: number = 0;
-    private subscr;
+    private _tempArr: Array<AsteroidItem> = [];
+    private _subscr: any;
 
     constructor(private _page: Page, private _asteroidsService: AsteroidsService) {
         if (isAndroid) {
             this._page.actionBarHidden = true;
         }
 
+        this.asteroidCount = 0;
         this._asteroidsService.getAsteroidsData()
             .subscribe((result: AsteroidsApiData) => {
 
@@ -47,14 +49,14 @@ export class AsteroidsComponent {
                                 asteroid.close_approach_data
                             );
 
-                            this.tempArr.push(newAsteroid);
+                            this._tempArr.push(newAsteroid);
                         });
                     }
                 }
 
                 this.asteroidItems = RxObservable.create(subscriber => {
-                    this.subscr = subscriber;
-                    subscriber.next(this.tempArr);
+                    this._subscr = subscriber;
+                    subscriber.next(this._tempArr);
                 });
             }, error => {
                 // console.log(error);
@@ -70,9 +72,9 @@ export class AsteroidsComponent {
         // TODO create iOS logic
         shareText(
             "Asteroid " +
-            this.tempArr[index].name +
+            this._tempArr[index].name +
             " in close proximity with Earth on " +
-            this.tempArr[index].close_approach_data[0].close_approach_date.toString() +
+            this._tempArr[index].close_approach_data[0].close_approach_date.toString() +
             ". Reported by 'Cosmos Databank' for Android", "Asteriod Proximity Alert!");
     }
 
