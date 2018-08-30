@@ -1,5 +1,6 @@
 import { knownFolders } from "tns-core-modules/file-system";
 import { AppCenter } from "nativescript-app-center";
+import { isAndroid } from "tns-core-modules/platform";
 
 export const appCenter = new AppCenter;
 
@@ -12,7 +13,7 @@ export function initializeLoggers() {
         appCenter.start({
             analytics: true,
             crashes: true,
-            appSecret: contents.appCenterSecret
+            appSecret: isAndroid ? contents.appCenterSecret : contents.appCenterSecretIOS
         });
     }
 }
