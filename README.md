@@ -1,6 +1,8 @@
 # The Cosmos Databank Applicaiton
 POC application powered by NativeScript + Angular-2 and using Angular HTTP and NASA API.
 
+[Install Cosmos Databank from Google Play Store](https://play.google.com/store/apps/details?id=org.nativescript.curiosity&hl=bg) or use the instructions below to create a local build.
+
 Main sections:
 
 - Astronomical Photo of the Day (APOD).
