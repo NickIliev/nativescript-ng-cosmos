@@ -1,29 +1,37 @@
+# Environment files & folders
 .DS_Store
 .vscode/*
 .cloud/*
 lib/
+
+# Development files & folders
 node_modules/*
 platforms/*
 hooks/*
-report/*
 
+# Transpiled source files
 /app/**/*.js
 /app/**/*.map
 
+# Keystores
 /keystore/
 *.apk
 *.ipa
 *.jks
-
 native-nick-release-key.jks
 my-release-key.jks
 
+# Google Services config files
 google-services.json
 GoogleService-Info.plist
 
-webpack.config.js
+# Api Keys, Credentials, etc.
+app/settings.json
 
+# Reports and Stats files
+report/*
 times.html
 startup-times.md
 
-package.lock.json
+# Others
+package-lock.json
