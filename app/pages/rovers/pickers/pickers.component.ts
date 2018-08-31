@@ -45,7 +45,9 @@ export class PickersComponent {
 		}
 
 		this._today = new Date();
+		this._today.setDate(this._today.getDate() - 2);
 	}
+
 
 	goToPhotos() {
 		this._router.navigate(["/rovers/rover"], {
