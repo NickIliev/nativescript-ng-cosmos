@@ -1,3 +1,4 @@
+import { enableProdMode } from "@angular/core";
 import { AppModule } from "./app.module";
 import { initializeLoggers } from "./shared/app-center-initializer";
 
@@ -30,5 +31,6 @@ if (androidApp) {
 }
 
 initializeLoggers();
+enableProdMode();
 
 platformNativeScriptDynamic().bootstrapModule(AppModule);

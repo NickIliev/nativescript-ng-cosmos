@@ -30,7 +30,6 @@ if (androidApp) {
 }
 
 initializeLoggers();
-
 enableProdMode();
 
 platformNativeScript().bootstrapModuleFactory(AppModuleNgFactory);

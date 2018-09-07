@@ -47,7 +47,8 @@ module.exports = env => {
     const appResourcesFullPath = resolve(projectRoot, appResourcesPath);
 
     const entryModule = aot ?
-        nsWebpack.getAotEntryModule(appFullPath) : `${nsWebpack.getEntryModule(appFullPath)}.ts`;
+        nsWebpack.getAotEntryModule(appFullPath) : 
+        `${nsWebpack.getEntryModule(appFullPath)}.ts`;
     const entryPath = `.${sep}${entryModule}`;
 
     const config = {
