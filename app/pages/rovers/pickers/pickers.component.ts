@@ -17,13 +17,14 @@ import { SegmentedBar, SegmentedBarItem } from "tns-core-modules/ui/segmented-ba
 
 export class PickersComponent {
 	rovers: Array<string>;
+	selectedRover: string;
 
 	private _today: Date;
 	private _day: number;
 	private _month: number;
 	private _year: number;
 	private _selectedIndex: number;
-	private _selectedRover: string;
+	
 	private _datePicker: DatePicker;
 	private _stackList: StackLayout;
 	private _stackDate: StackLayout;
@@ -33,7 +34,7 @@ export class PickersComponent {
 	constructor(private _page: Page, private _router: RouterExtensions) {  
 		this.mySegmentedBarItems = [];
         for (let i = 0; i < 3; i++) {
-            const item = new SegmentedBarItem();
+			const item = new SegmentedBarItem();
             if (i === 0) {
 				item.title = "Opportunity";
 			} else if (i === 1) {
@@ -89,21 +90,20 @@ export class PickersComponent {
 			.then(() => { return this._stackDate.animate({ scale: { x: 1, y: 1 }, duration: 300 }); });
 	}
 
-	/* LISTPicker logic START */
+	/* SegmentedBar logic START */
 	onSegmentedbarLoaded(args) {
 		let segbar = <SegmentedBar>args.object;
 		segbar.selectedIndex = 1;
-
 	}
 
 	onSelectedIndexChange(args) {
-		let picker = <SegmentedBar>args.object;
-		this._selectedIndex = picker.selectedIndex;
-		this._selectedRover = this.rovers[this._selectedIndex];
+		let segbar = <SegmentedBar>args.object;
+		this._selectedIndex = segbar.selectedIndex;
+		this.selectedRover = this.rovers[this._selectedIndex];
 
 		this.adjustDatePickerForSelectedRover(this._today);
 	}
-	/* LISTPicker logic END */
+	/* SegmentedBar logic END */
 
 	/* DatePicker logic START */
 	onDatePickerLoaded(args) {
@@ -125,8 +125,8 @@ export class PickersComponent {
 	/* DatePicker logic END */
 
 	private adjustDatePickerForSelectedRover(today: Date) {
-		if (this._selectedRover && this._datePicker) {
-			switch (this._selectedRover.toLowerCase()) {
+		if (this.selectedRover && this._datePicker) {
+			switch (this.selectedRover.toLowerCase()) {
 				case "opportunity":
 					this._datePicker.minDate = new Date(2004, 0, 26);
 					this._datePicker.maxDate = today;

@@ -11,17 +11,23 @@ GridLayout {
 }
 
 Label {
-    background-color: orangered;
+    background-color: #282a2a;
     border-radius: 20 20 0 0;
     color: #BCBCBC;
     width: 90%;
 }
 
 SegmentedBar {
+    background-color: #BCBCBC;
+    border-radius: 0;
+    color: #282a2a;
     font-size: 10;
+    font-family: "Nasalization";
+    font-weight: bold;
+    width: 90%;
 }
 
-DatePicker, ListPicker, SegmentedBar {
+DatePicker, ListPicker {
     background-color: #BCBCBC;
     border-radius: 0 0 20 20;
     color: #282a2a;

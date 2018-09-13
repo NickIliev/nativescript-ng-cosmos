@@ -1,15 +1,16 @@
 <ScrollView class="background">
     <GridLayout rows="auto, *, auto" verticalAlignment="middle">
         <StackLayout row="0" class="m-t-10" (loaded)="onStackListLoaded($event)">
-            <Label class="text-center p-b-4" text="Choose Rover" textWrap="true"></Label>
+            <Label class="text-center" text="Choose Rover" textWrap="true"></Label>
             <SegmentedBar [items]="mySegmentedBarItems" 
                           (loaded)="onSegmentedbarLoaded($event)" 
-                          (selectedIndexChange)="onSelectedIndexChange($event)">
+                          (selectedIndexChange)="onSelectedIndexChange($event)"
+                          selectedBackgroundColor="red">
             </SegmentedBar>
         </StackLayout>
     
         <StackLayout row="1" class="m-t-10" (loaded)="onStackDateLoaded($event)">
-            <Label class="text-center p-b-4" text="Select Date" textWrap="true"></Label>
+            <Label class="text-center font-weight-bold" [text]="'Select Date for ' + selectedRover" textWrap="true"></Label>
             <DatePicker (loaded)="onDatePickerLoaded($event)" 
                         (dayChange)="onDayChanged($event)" 
                         (monthChange)="onMonthChanged($event)" 
