@@ -19,7 +19,7 @@ Over 500k (five hundred thousand!) photos made from Opportunty, Spirit and Curio
 
 ## Requirements
 - NativeScript 3.x.x.
-- Android or iOS device or emulator.
+- Android (API 19 and above) or iOS device or emulator.
 
 ## Instructions
 - Clone the repository.
@@ -33,6 +33,8 @@ npm i
 tns platform add android
 tns run android --bundle --env.uglify --env.aot --env.snapshot
 ```
+
+> Note: The project's `app.gradle` file is setting `minSdkVersion` to 19
 
 **iOS**
 ```
