@@ -9,7 +9,7 @@ export function initializeLoggers() {
     const contents = JSON.parse(documents.getFile('settings.json').readTextSync());
 
     if (contents.appCenterSecret) {
-        console.log(contents.appCenterSecret)
+        // console.log(contents.appCenterSecret)
         appCenter.start({
             analytics: true,
             crashes: true,

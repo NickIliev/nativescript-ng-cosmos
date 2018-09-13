@@ -6,6 +6,8 @@ import { StackLayout } from "tns-core-modules/ui/layouts/stack-layout";
 import { ListPicker } from "tns-core-modules/ui/list-picker";
 import { isAndroid } from "tns-core-modules/platform";
 
+import { SegmentedBar, SegmentedBarItem } from "tns-core-modules/ui/segmented-bar";
+
 @Component({
 	selector: "pickers",
 	moduleId: module.id,
@@ -14,7 +16,6 @@ import { isAndroid } from "tns-core-modules/platform";
 })
 
 export class PickersComponent {
-
 	rovers: Array<string>;
 
 	private _today: Date;
@@ -27,7 +28,22 @@ export class PickersComponent {
 	private _stackList: StackLayout;
 	private _stackDate: StackLayout;
 
-	constructor(private _page: Page, private _router: RouterExtensions) {       
+	public mySegmentedBarItems: Array<SegmentedBarItem>;
+
+	constructor(private _page: Page, private _router: RouterExtensions) {  
+		this.mySegmentedBarItems = [];
+        for (let i = 0; i < 3; i++) {
+            const item = new SegmentedBarItem();
+            if (i === 0) {
+				item.title = "Opportunity";
+			} else if (i === 1) {
+				item.title = "Curiosity";
+			} else if (i === 2) {
+				item.title = "Spirit";
+			}
+            this.mySegmentedBarItems.push(item);
+        }
+		
 		if (isAndroid) {
 			this._page.actionBarHidden = true;
 
@@ -47,7 +63,6 @@ export class PickersComponent {
 		this._today = new Date();
 		this._today.setDate(this._today.getDate() - 2);
 	}
-
 
 	goToPhotos() {
 		this._router.navigate(["/rovers/rover"], {
@@ -75,13 +90,14 @@ export class PickersComponent {
 	}
 
 	/* LISTPicker logic START */
-	onListickerLoaded(args) {
-		let listPicker = <ListPicker>args.object;
-		listPicker.selectedIndex = 1;
+	onSegmentedbarLoaded(args) {
+		let segbar = <SegmentedBar>args.object;
+		segbar.selectedIndex = 1;
+
 	}
 
-	selectedIndexChanged(args) {
-		let picker = <ListPicker>args.object;
+	onSelectedIndexChange(args) {
+		let picker = <SegmentedBar>args.object;
 		this._selectedIndex = picker.selectedIndex;
 		this._selectedRover = this.rovers[this._selectedIndex];
 
@@ -109,8 +125,7 @@ export class PickersComponent {
 	/* DatePicker logic END */
 
 	private adjustDatePickerForSelectedRover(today: Date) {
-		// console.log("this._selectedRover: " + this._selectedRover);
-		if (this._selectedRover) {
+		if (this._selectedRover && this._datePicker) {
 			switch (this._selectedRover.toLowerCase()) {
 				case "opportunity":
 					this._datePicker.minDate = new Date(2004, 0, 26);

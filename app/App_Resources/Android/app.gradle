@@ -7,6 +7,7 @@ android {
     generatedDensities = []
     multiDexEnabled true
     applicationId = "org.nativescript.curiosity"  
+    minSdkVersion 19
   }  
   aaptOptions {  
     additionalParameters "--no-version-vectors"  

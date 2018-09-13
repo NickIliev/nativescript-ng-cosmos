@@ -58,8 +58,6 @@ export class AsteroidsComponent {
                             newAsteroid.close_approach_data[0].relative_velocity.kilometers_per_hour = parseInt(asteroid.close_approach_data[0].relative_velocity.kilometers_per_hour);
                             newAsteroid.close_approach_data[0].miss_distance.kilometers = parseInt(asteroid.close_approach_data[0].miss_distance.kilometers);
 
-                            console.log("newAsteroid.close_approach_data[0].relative_velocity.kilometers_per_hour: ", newAsteroid.close_approach_data[0].relative_velocity.kilometers_per_hour);
-
                             this._tempArr.push(newAsteroid);
                         });
                     }
@@ -71,7 +69,6 @@ export class AsteroidsComponent {
                 });
 
             }, error => {
-                // console.log(error);
                 if (error.status >= 500) {
                     console.log("Service temporary DOWN!");
                 }
