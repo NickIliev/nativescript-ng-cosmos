@@ -42,6 +42,7 @@ module.exports = env => {
         uglify, // --env.uglify
         report, // --env.report
         sourceMap, // --env.sourceMap
+        hmr, // --env.hmr
     } = env;
 
     const appFullPath = resolve(projectRoot, appPath);
@@ -217,7 +218,6 @@ module.exports = env => {
             ]),
             // Copy assets to out dir. Add your own globs as needed.
             new CopyWebpackPlugin([
-                { from: "settings.json" },
                 { from: "fonts/**" },
                 { from: "**/*.jpg" },
                 { from: "**/*.png" },
@@ -264,6 +264,10 @@ module.exports = env => {
             projectRoot,
             webpackConfig: config,
         }));
+    }
+
+    if (hmr) {
+        config.plugins.push(new webpack.HotModuleReplacementPlugin());
     }
 
     return config;

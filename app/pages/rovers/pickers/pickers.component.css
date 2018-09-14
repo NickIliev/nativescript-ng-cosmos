@@ -10,29 +10,27 @@ GridLayout {
     background-size: cover;
 }
 
+DatePicker, Label, Segmentedbar {
+    opacity: 0.9;
+    width: 90%;
+}
+
 Label {
     background-color: #282a2a;
     border-radius: 20 20 0 0;
     color: #BCBCBC;
-    width: 90%;
 }
 
 SegmentedBar {
     background-color: #BCBCBC;
-    border-radius: 0;
     color: #282a2a;
     font-size: 10;
-    font-family: "Nasalization";
     font-weight: bold;
-    width: 90%;
 }
 
-DatePicker, ListPicker {
+DatePicker {
     background-color: #BCBCBC;
     border-radius: 0 0 20 20;
-    color: #282a2a;
-    font-family: "Nasalization";
-    width: 90%;
 }
 
 Button {

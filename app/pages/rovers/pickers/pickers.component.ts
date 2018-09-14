@@ -1,11 +1,9 @@
 import { Component } from "@angular/core";
 import { RouterExtensions } from "nativescript-angular/router";
+import { isAndroid } from "tns-core-modules/platform";
 import { Page } from "tns-core-modules/ui/page";
 import { DatePicker } from "tns-core-modules/ui/date-picker";
 import { StackLayout } from "tns-core-modules/ui/layouts/stack-layout";
-import { ListPicker } from "tns-core-modules/ui/list-picker";
-import { isAndroid } from "tns-core-modules/platform";
-
 import { SegmentedBar, SegmentedBarItem } from "tns-core-modules/ui/segmented-bar";
 
 @Component({
