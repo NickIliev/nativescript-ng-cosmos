@@ -10,9 +10,6 @@
         <Label text="Logout" (tap)="firebaseLogout()" *ngIf="isUserLogged" textWrap="true"></Label>
     </StackLayout>
 
-    <GridLayout tkMainContent>
-        <!-- https://docs.nativescript.org/angular/core-concepts/angular-navigation.html#page-router-outlet -->
-        <page-router-outlet></page-router-outlet>
-    </GridLayout>
+    <page-router-outlet tkMainContent></page-router-outlet>
 
 </RadSideDrawer>

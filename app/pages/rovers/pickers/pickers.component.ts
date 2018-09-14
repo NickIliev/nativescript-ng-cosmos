@@ -79,13 +79,17 @@ export class PickersComponent {
 		this._stackList = args.object;
 	}
 
-	onStackDateLoaded(args) {
+	onStackDateLoaded(args, ...settings) {
 		this._stackDate = args.object;
 
-		this._stackList.animate({ scale: { x: 1.3, y: 1.3 }, duration: 300 })
-			.then(() => { return this._stackList.animate({ scale: { x: 1, y: 1 }, duration: 300 }); })
-			.then(() => { return this._stackDate.animate({ scale: { x: 1.3, y: 1.3 }, duration: 300 }); })
-			.then(() => { return this._stackDate.animate({ scale: { x: 1, y: 1 }, duration: 300 }); });
+		let orig = settings[0];
+		let enlarge = settings[1];
+		let dur = settings[2] | 300;
+
+		this._stackList.animate({ scale: { x: enlarge, y: enlarge }, duration: dur })
+			.then(() => { return this._stackList.animate({ scale: { x: orig, y: orig }, duration: dur }); })
+			.then(() => { return this._stackDate.animate({ scale: { x: enlarge, y: enlarge }, duration: dur }); })
+			.then(() => { return this._stackDate.animate({ scale: { x: orig, y: orig }, duration: dur }); });
 	}
 
 	/* SegmentedBar logic START */

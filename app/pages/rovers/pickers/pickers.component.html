@@ -9,7 +9,7 @@
             </SegmentedBar>
         </StackLayout>
     
-        <StackLayout row="1" class="m-t-10" (loaded)="onStackDateLoaded($event)">
+        <StackLayout row="1" class="m-t-10" (loaded)="onStackDateLoaded($event, 1, 1.4, 300)">
             <Label class="text-center font-weight-bold" [text]="'Select Date for ' + selectedRover" textWrap="true"></Label>
             <DatePicker (loaded)="onDatePickerLoaded($event)" 
                         (dayChange)="onDayChanged($event)" 
