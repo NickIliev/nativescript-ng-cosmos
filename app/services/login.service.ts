@@ -8,6 +8,7 @@ export class LoginService {
 
     constructor(private _appCenter: AppCenter) { }
 
+
     login(routerExtensions: any) {
         if (appSettings.getBoolean("isLogged")) { 
             let username = appSettings.getString("username");

@@ -1,1 +1,5 @@
-{"appId":"org.nativescript.cosmosng","minSdkVersion":null,"targetSdkVersion":null}
+{
+    "appId": "org.nativescript.cosmosng",
+    "minSdkVersion": 19,
+    "targetSdkVersion": 25
+}
