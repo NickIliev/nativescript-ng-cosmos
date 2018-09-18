@@ -77,6 +77,7 @@ export class AsteroidsComponent {
             },
             error => {
                 if (error.status >= 500) {
+                    alert("Service temporary down!");
                     console.log("Service temporary DOWN!");
                 }
             }
