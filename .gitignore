@@ -35,3 +35,8 @@ startup-times.md
 
 # Others
 package-lock.json
+test-results.xml
+e2e/reports
+verify-report
+e2e/**/*.js
+app/App_Resources/iOS/GoogleService-Info.plist
