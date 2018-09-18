@@ -22,12 +22,15 @@ export const routerConfig = [
         NativeScriptRouterModule,
         NativeScriptRouterModule.forChild(routerConfig)
     ],
-    declarations: [RoversComponent, PhotoDetailComponent, PickersComponent, RoversToolbarComponent],
+    declarations: [
+        RoversComponent,
+        PhotoDetailComponent,
+        PickersComponent,
+        RoversToolbarComponent
+    ],
     providers: [RoverPhotosService, ToolbarHelper],
-    schemas: [
-        NO_ERRORS_SCHEMA
-    ]
+    schemas: [NO_ERRORS_SCHEMA]
 })
 export class RoversModule {
-    constructor() { }
+    constructor() {}
 }

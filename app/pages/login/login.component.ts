@@ -24,7 +24,12 @@ export class LoginComponent implements AfterViewInit {
     public loginText: string = "No Pass Login";
     public title: string;
 
-    constructor(private _page: Page, private _routerExtensions: RouterExtensions, private _apodService: ApodService, private _loginService: LoginService) {
+    constructor(
+        private _page: Page,
+        private _routerExtensions: RouterExtensions,
+        private _apodService: ApodService,
+        private _loginService: LoginService
+    ) {
         if (isAndroid) {
             this._page.actionBarHidden = true;
         }
@@ -52,7 +57,13 @@ export class LoginComponent implements AfterViewInit {
         this._loginService.google(this._routerExtensions);
     }
 
-    public onViewLoaded(args, translateFromX, translateToX, translateFromY, translateToY) {
+    public onViewLoaded(
+        args,
+        translateFromX,
+        translateToX,
+        translateFromY,
+        translateToY
+    ) {
         let view = args.object;
         translateViewByXandYwithDurationAndCurve(
             view,
@@ -61,12 +72,13 @@ export class LoginComponent implements AfterViewInit {
             translateFromY,
             translateToY,
             1200,
-            "easeOut");
+            "easeOut"
+        );
     }
 
     private initData() {
-        this._apodService.getData()
-            .subscribe((result) => {
+        this._apodService.getData().subscribe(
+            result => {
                 if (result["media_type"] === "image") {
                     this.backgroundImage = result["url"]; // or bigger hdurl
                     this.title = result["title"];
@@ -74,9 +86,11 @@ export class LoginComponent implements AfterViewInit {
                 } else {
                     this.backgroundImage = "res://background";
                 }
-            }, (error) => {
+            },
+            error => {
                 console.log("Server Status Code: " + error.status);
                 // TODO handle error status codes with appropriate error UI
-            });
+            }
+        );
     }
 }

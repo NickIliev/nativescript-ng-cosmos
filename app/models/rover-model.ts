@@ -1,5 +1,4 @@
 export class RoverPhoto {
-
     public id: number;
     public sol: number;
     public cameraId: number;
@@ -9,14 +8,16 @@ export class RoverPhoto {
     public imageUri: string;
     public earthDate: string;
 
-    constructor(id: number,
+    constructor(
+        id: number,
         sol: number,
         cameraId: number,
         cameraName: string,
         cameraRoverId: number,
         cameraFullName: string,
         imageUri: string,
-        earthDate: string) {
+        earthDate: string
+    ) {
         this.id = id;
         this.sol = sol;
         this.cameraId = cameraId;

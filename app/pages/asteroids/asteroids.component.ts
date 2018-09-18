@@ -9,12 +9,11 @@ import { AsteroidItem, AsteroidsApiData } from "../../models//asteroids-model";
 import { AsteroidsService } from "../../services/asteroids.service";
 
 @Component({
-    selector: "ns-asteroids",
+    selector: "cosmos-asteroids",
     moduleId: module.id,
     templateUrl: "./asteroids.component.html",
     styleUrls: ["./asteroids.component.css"]
 })
-
 export class AsteroidsComponent {
     asteroidItems: RxObservable<Array<AsteroidItem>>;
     asteroidCount: number;
@@ -24,7 +23,10 @@ export class AsteroidsComponent {
     private _tempArr: Array<AsteroidItem> = [];
     private _subscr: any;
 
-    constructor(private _page: Page, private _asteroidsService: AsteroidsService) {
+    constructor(
+        private _page: Page,
+        private _asteroidsService: AsteroidsService
+    ) {
         if (isAndroid) {
             this._page.actionBarHidden = true;
         }
@@ -33,9 +35,8 @@ export class AsteroidsComponent {
         this.pageTitle = "Nearby ASTEROIDS Checker";
         this.isAscending = false; // Used for proximity sort
 
-        this._asteroidsService.getAsteroidsData()
-            .subscribe((result: AsteroidsApiData) => {
-
+        this._asteroidsService.getAsteroidsData().subscribe(
+            (result: AsteroidsApiData) => {
                 this.asteroidCount = result.element_count;
                 // for each date in the seven days period ahead..
                 for (let key in result.near_earth_objects) {
@@ -55,8 +56,14 @@ export class AsteroidsComponent {
                                 asteroid.close_approach_data
                             );
 
-                            newAsteroid.close_approach_data[0].relative_velocity.kilometers_per_hour = parseInt(asteroid.close_approach_data[0].relative_velocity.kilometers_per_hour);
-                            newAsteroid.close_approach_data[0].miss_distance.kilometers = parseInt(asteroid.close_approach_data[0].miss_distance.kilometers);
+                            newAsteroid.close_approach_data[0].relative_velocity.kilometers_per_hour = parseInt(
+                                asteroid.close_approach_data[0]
+                                    .relative_velocity.kilometers_per_hour
+                            );
+                            newAsteroid.close_approach_data[0].miss_distance.kilometers = parseInt(
+                                asteroid.close_approach_data[0].miss_distance
+                                    .kilometers
+                            );
 
                             this._tempArr.push(newAsteroid);
                         });
@@ -67,12 +74,13 @@ export class AsteroidsComponent {
                     this._subscr = subscriber;
                     subscriber.next(this._tempArr);
                 });
-
-            }, error => {
+            },
+            error => {
                 if (error.status >= 500) {
                     console.log("Service temporary DOWN!");
                 }
-            });
+            }
+        );
     }
 
     proximitySort() {
@@ -86,11 +94,14 @@ export class AsteroidsComponent {
     }
 
     sortProximityAscending() {
-        //  IMPORTNAT: TheN NASA API is providng the kilometers as a string value!!! 
+        //  IMPORTNAT: TheN NASA API is providng the kilometers as a string value!!!
         // FIX the above so tht the sorting would work as expected!!!
         this.asteroidItems.forEach(arr => {
             arr.sort((a, b) => {
-                return a.close_approach_data[0].miss_distance.kilometers < b.close_approach_data[0].miss_distance.kilometers ? 1 : -1;
+                return a.close_approach_data[0].miss_distance.kilometers <
+                    b.close_approach_data[0].miss_distance.kilometers
+                    ? 1
+                    : -1;
             });
         });
     }
@@ -98,7 +109,10 @@ export class AsteroidsComponent {
     sortProximityDescending() {
         this.asteroidItems.forEach(arr => {
             arr.sort((a, b) => {
-                return a.close_approach_data[0].miss_distance.kilometers < b.close_approach_data[0].miss_distance.kilometers ? -1 : 1;
+                return a.close_approach_data[0].miss_distance.kilometers <
+                    b.close_approach_data[0].miss_distance.kilometers
+                    ? -1
+                    : 1;
             });
         });
     }
@@ -109,10 +123,14 @@ export class AsteroidsComponent {
         // TODO create iOS logic
         shareText(
             "Asteroid " +
-            this._tempArr[index].name +
-            " in close proximity with Earth on " +
-            this._tempArr[index].close_approach_data[0].close_approach_date.toString() +
-            ". Reported by 'Cosmos Databank' for Android", "Asteriod Proximity Alert!");
+                this._tempArr[index].name +
+                " in close proximity with Earth on " +
+                this._tempArr[
+                    index
+                ].close_approach_data[0].close_approach_date.toString() +
+                ". Reported by 'Cosmos Databank' for Android",
+            "Asteriod Proximity Alert!"
+        );
     }
 
     isAstreroidLarge(sizeKm) {

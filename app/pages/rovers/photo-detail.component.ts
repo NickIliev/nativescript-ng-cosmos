@@ -16,10 +16,13 @@ import { ToolbarHelper } from "../../shared/toolbar-helper";
     styleUrls: ["./photo-detail.component.css"]
 })
 export class PhotoDetailComponent implements OnInit {
-
     photo: RoverPhoto;
 
-    constructor(private _route: ActivatedRoute, private _page: Page, private _toolbarHelper: ToolbarHelper) {
+    constructor(
+        private _route: ActivatedRoute,
+        private _page: Page,
+        private _toolbarHelper: ToolbarHelper
+    ) {
         if (isAndroid) {
             this._page.actionBarHidden = true;
         }

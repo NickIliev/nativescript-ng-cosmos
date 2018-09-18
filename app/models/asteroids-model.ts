@@ -1,9 +1,14 @@
+// tslint:disable
 export class AsteroidsApiData {
     links: Link;
     element_count: number;
     near_earth_objects: AsteroidsOnDate;
 
-    constructor(links: Link, element_count: number, near_earth_objects: AsteroidsOnDate) {
+    constructor(
+        links: Link,
+        element_count: number,
+        near_earth_objects: AsteroidsOnDate
+    ) {
         this.links = links;
         this.element_count = element_count;
         this.near_earth_objects = near_earth_objects;
@@ -32,7 +37,7 @@ export class AsteroidItem {
         absolute_magnitude_h: number,
         estimated_diameter: EstimatedDiameter,
         is_potentially_hazardous_asteroid: boolean,
-        close_approach_data: Array<ApproachDate>,
+        close_approach_data: Array<ApproachDate>
     ) {
         this.links = links;
         this.neo_reference_id = neo_reference_id;

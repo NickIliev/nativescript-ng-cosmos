@@ -21,8 +21,6 @@ export const routerConfig = [
     ],
     declarations: [AsteroidsComponent],
     providers: [AsteroidsService],
-    schemas: [
-        NO_ERRORS_SCHEMA
-    ]
+    schemas: [NO_ERRORS_SCHEMA]
 })
-export class AsteroidsModule { }
+export class AsteroidsModule {}
