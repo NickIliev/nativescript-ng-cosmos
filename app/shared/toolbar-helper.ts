@@ -9,15 +9,18 @@ import * as enums from "tns-core-modules/ui/enums";
 import { alert } from "tns-core-modules/ui/dialogs/dialogs";
 import * as app from "tns-core-modules/application";
 
-
 import {
-    write as traceWrite, categories as traceCategories, messageType as traceMessageType
+    write as traceWrite,
+    categories as traceCategories,
+    messageType as traceMessageType
 } from "tns-core-modules/trace";
-import { getNativeApplication, android as androidApp } from "tns-core-modules/application";
+import {
+    getNativeApplication,
+    android as androidApp
+} from "tns-core-modules/application";
 import { FileSystemAccess } from "tns-core-modules/file-system/file-system-access";
 
 export class ToolbarHelper {
-
     setPrevousDay(lastLoadedDate: Date) {
         lastLoadedDate.setDate(lastLoadedDate.getDate() - 1); // previous day
     }
@@ -44,8 +47,12 @@ export class ToolbarHelper {
         fromUrl(url).then(imageSource => {
             if (isAndroid) {
                 let androidDownloadsPath = android.os.Environment.getExternalStoragePublicDirectory(
-                    android.os.Environment.DIRECTORY_PICTURES).toString();
-                cosmosFolderPath = path.join(androidDownloadsPath, "CosmosDatabank");
+                    android.os.Environment.DIRECTORY_PICTURES
+                ).toString();
+                cosmosFolderPath = path.join(
+                    androidDownloadsPath,
+                    "CosmosDatabank"
+                );
 
                 let folder: Folder = Folder.fromPath(cosmosFolderPath);
                 let myPath: string = path.join(cosmosFolderPath, fileName);
@@ -62,7 +69,10 @@ export class ToolbarHelper {
             } else if (isIOS) {
                 // TODO : does this work? - where are the images ?
                 let iosDownloadPath = knownFolders.documents();
-                cosmosFolderPath = path.join(iosDownloadPath.path, "CosmosDataBank");
+                cosmosFolderPath = path.join(
+                    iosDownloadPath.path,
+                    "CosmosDataBank"
+                );
 
                 let folder = Folder.fromPath(cosmosFolderPath);
                 let myPath = path.join(cosmosFolderPath, fileName);
@@ -77,7 +87,9 @@ export class ToolbarHelper {
     }
 
     broadCastToAndroidPhotos(imageFile) {
-        const mediaScanIntent = new android.content.Intent(android.content.Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        const mediaScanIntent = new android.content.Intent(
+            android.content.Intent.ACTION_MEDIA_SCANNER_SCAN_FILE
+        );
         const contentUri = android.net.Uri.fromFile(imageFile);
         mediaScanIntent.setData(contentUri);
         app.android.foregroundActivity.sendBroadcast(mediaScanIntent);
@@ -97,7 +109,9 @@ export class ToolbarHelper {
         // Android only feature!!
         if (isAndroid) {
             fromUrl(url).then(imageSource => {
-                let wallpaperManager = android.app.WallpaperManager.getInstance(ad.getApplicationContext());
+                let wallpaperManager = android.app.WallpaperManager.getInstance(
+                    ad.getApplicationContext()
+                );
                 try {
                     wallpaperManager.setBitmap(imageSource.android);
                 } catch (error) {
@@ -110,44 +124,70 @@ export class ToolbarHelper {
     }
 
     dateToString(date: Date) {
-        return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+        return (
+            date.getFullYear() +
+            "-" +
+            (date.getMonth() + 1) +
+            "-" +
+            date.getDate()
+        );
     }
 
     private createFileName(url: string): string {
         let fileName = url.substring(url.lastIndexOf("/") + 1);
         let n = fileName.indexOf(".");
-        return fileName = fileName.substring(0, n !== -1 ? n : fileName.length) + ".jpeg";
+        return (fileName =
+            fileName.substring(0, n !== -1 ? n : fileName.length) + ".jpeg");
     }
 
     openFile(filePath: string): boolean {
         const context = ad.getApplicationContext();
         try {
-            if (this.isExternalStorageAvailable() && !this.isExternalStorageReadOnly()) {
+            if (
+                this.isExternalStorageAvailable() &&
+                !this.isExternalStorageReadOnly()
+            ) {
                 const fsa = new FileSystemAccess();
                 const mimeTypeMap = android.webkit.MimeTypeMap.getSingleton();
                 const mimeType = mimeTypeMap.getMimeTypeFromExtension(
-                    fsa.getFileExtension(filePath).replace(".", "").toLowerCase());
-                const intent = new android.content.Intent(android.content.Intent.ACTION_VIEW);
-                intent.setDataAndType(android.net.Uri.fromFile(new java.io.File(filePath)), mimeType);
+                    fsa
+                        .getFileExtension(filePath)
+                        .replace(".", "")
+                        .toLowerCase()
+                );
+                const intent = new android.content.Intent(
+                    android.content.Intent.ACTION_VIEW
+                );
+                intent.setDataAndType(
+                    android.net.Uri.fromFile(new java.io.File(filePath)),
+                    mimeType
+                );
 
-                context.startActivity(android.content.Intent.createChooser(intent, "Open File..."));
+                context.startActivity(
+                    android.content.Intent.createChooser(intent, "Open File...")
+                );
 
                 return true;
             }
         } catch (e) {
-            traceWrite("Error in openFile", traceCategories.Error, traceMessageType.error);
+            traceWrite(
+                "Error in openFile",
+                traceCategories.Error,
+                traceMessageType.error
+            );
         }
         return false;
     }
 
     isExternalStorageReadOnly(): boolean {
         const extStorageState = android.os.Environment.getExternalStorageState();
-        if (android.os.Environment.MEDIA_MOUNTED_READ_ONLY === extStorageState) {
+        if (
+            android.os.Environment.MEDIA_MOUNTED_READ_ONLY === extStorageState
+        ) {
             return true;
         }
         return false;
     }
-
 
     isExternalStorageAvailable(): boolean {
         const extStorageState = android.os.Environment.getExternalStorageState();
@@ -156,6 +196,4 @@ export class ToolbarHelper {
         }
         return false;
     }
-
 }
-

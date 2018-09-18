@@ -1,5 +1,5 @@
+// tslint:disable
 export class ApodItem {
-
     public copyright: string;
     public date: string;
     public explanation: string;
@@ -9,14 +9,16 @@ export class ApodItem {
     public title: string;
     public url: string;
 
-    constructor(copyright: string,
+    constructor(
+        copyright: string,
         date: string,
         explanation: string,
         hdurl: string,
         mediaType: string,
         serviceVersion: string,
         title: string,
-        url: string) {
+        url: string
+    ) {
         this.copyright = copyright;
         this.date = date;
         this.explanation = explanation;

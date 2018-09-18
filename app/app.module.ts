@@ -28,13 +28,10 @@ registerElement("CardView", () => require("nativescript-cardview").CardView);
         NativeScriptUISideDrawerModule
     ],
     declarations: [AppComponent, LoginComponent, MainComponent],
-    providers: [
-        ApodService,
-        { provide: AppCenter, useValue: appCenter }
-    ],
+    providers: [ApodService, { provide: AppCenter, useValue: appCenter }],
     schemas: [NO_ERRORS_SCHEMA]
 })
 /*
 Pass your application module to the bootstrapModule function located in main.ts to start your app
 */
-export class AppModule { }
+export class AppModule {}

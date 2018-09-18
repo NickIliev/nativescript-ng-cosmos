@@ -3,11 +3,10 @@ import { NativeScriptCommonModule } from "nativescript-angular/common";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
 import { InfoComponent } from "./info.component";
 
-export const routerConfig =  [
+export const routerConfig = [
     { path: "", redirectTo: "info", pathMatch: "full" },
     { path: "info", component: InfoComponent }
 ];
-
 
 @NgModule({
     imports: [
@@ -16,10 +15,8 @@ export const routerConfig =  [
         NativeScriptRouterModule.forChild(routerConfig)
     ],
     declarations: [InfoComponent],
-    schemas: [
-        NO_ERRORS_SCHEMA
-    ]
+    schemas: [NO_ERRORS_SCHEMA]
 })
 export class InfoModule {
-    constructor() { }
+    constructor() {}
 }

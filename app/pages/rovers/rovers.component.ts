@@ -11,13 +11,12 @@ import { RoverPhotosService } from "../../services/rover.service";
 import { Observable as RxObservable } from "rxjs";
 
 @Component({
-    selector: "rovers",
+    selector: "cosmos-rovers",
     moduleId: module.id,
     templateUrl: "./rovers.component.html",
     styleUrls: ["./rovers.component.css"]
 })
 export class RoversComponent implements OnInit, AfterViewInit {
-
     roverPhotos: RxObservable<Array<RoverPhoto>>;
     day: number;
     month: number;
@@ -32,7 +31,8 @@ export class RoversComponent implements OnInit, AfterViewInit {
         private _roverService: RoverPhotosService,
         private _page: Page,
         private _router: RouterExtensions,
-        private _activatedRoute: ActivatedRoute) {
+        private _activatedRoute: ActivatedRoute
+    ) {
         if (isAndroid) {
             this._page.actionBarHidden = true;
         }
@@ -50,33 +50,58 @@ export class RoversComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit() {
         this._pageIndex = 1;
-        this.extractData(this.rover, this.year, this.month, this.day, this._pageIndex);
+        this.extractData(
+            this.rover,
+            this.year,
+            this.month,
+            this.day,
+            this._pageIndex
+        );
     }
 
-    private extractData(rover: string, year: number, month: number, day: number, _pageIndex: number) {
-        this._roverService.getPhotosWithDateAndPageIndex(rover, year, month, day, _pageIndex)
-            .subscribe((itemsList) => {
-                if (itemsList.length === 0) {
-                    alert("No availabel photos for the selected date! Please choose different date from the selection page!")
-                        .then(() => {
+    private extractData(
+        rover: string,
+        year: number,
+        month: number,
+        day: number,
+        _pageIndex: number
+    ) {
+        this._roverService
+            .getPhotosWithDateAndPageIndex(rover, year, month, day, _pageIndex)
+            .subscribe(
+                itemsList => {
+                    if (itemsList.length === 0) {
+                        alert(
+                            // tslint:disable-next-line
+                            "No availabel photos for the selected date! Please choose different date from the selection page!"
+                        ).then(() => {
                             this._router.back();
                         });
+                    }
+
+                    this._tempArr = itemsList;
+
+                    this.roverPhotos = RxObservable.create(subscriber => {
+                        this._subscr = subscriber;
+                        subscriber.next(this._tempArr);
+                    });
+                },
+                error => {
+                    // console.log(error);
                 }
-
-                this._tempArr = itemsList;
-
-                this.roverPhotos = RxObservable.create(subscriber => {
-                    this._subscr = subscriber;
-                    subscriber.next(this._tempArr);
-                });
-            }, (error) => {
-                // console.log(error);
-            });
+            );
     }
 
     public onLoadMoreItemsRequested(args) {
-        this._roverService.getPhotosWithDateAndPageIndex(this.rover, this.year, this.month, this.day, ++this._pageIndex)
-            .subscribe((itemsList) => {
+        this._roverService
+            .getPhotosWithDateAndPageIndex(
+                this.rover,
+                this.year,
+                this.month,
+                this.day,
+                ++this._pageIndex
+            )
+            .subscribe(itemsList => {
                 itemsList.forEach(element => {
                     this._tempArr.push(element);
                 });

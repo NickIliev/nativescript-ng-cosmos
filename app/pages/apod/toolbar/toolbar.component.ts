@@ -1,14 +1,14 @@
 import { Component, Output, EventEmitter } from "@angular/core";
 
 @Component({
-    selector: "toolbar",
+    selector: "cosmos-toolbar",
     moduleId: module.id,
     templateUrl: "./toolbar.component.html",
     styleUrls: ["./toolbar.component.css"]
 })
-
 export class ToolbarComponent {
-    @Output() notify: EventEmitter<string> = new EventEmitter<string>();
+    @Output()
+    notify: EventEmitter<string> = new EventEmitter<string>();
 
     goToPrevousDay() {
         this.notify.emit("goToPrevousDay");

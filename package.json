@@ -7,6 +7,9 @@
     "id": "org.nativescript.curiosity",
     "tns-android": {
       "version": "4.2.0"
+    },
+    "tns-ios": {
+      "version": "4.2.0"
     }
   },
   "dependencies": {
@@ -34,9 +37,11 @@
   "devDependencies": {
     "@angular/compiler-cli": "~6.1.7",
     "@ngtools/webpack": "~6.2.0",
+    "codelyzer": "^4.4.4",
     "nativescript-dev-typescript": "~0.7.3",
     "nativescript-dev-webpack": "^0.17.0-2018-09-14-01",
     "tns-platform-declarations": "^4.2.0",
+    "tslint": "^5.11.0",
     "typescript": "~2.7.2"
   },
   "scripts": {

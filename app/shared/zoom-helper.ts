@@ -1,8 +1,16 @@
-import { GestureEventData, PinchGestureEventData, PanGestureEventData } from "tns-core-modules/ui/gestures";
+import {
+    GestureEventData,
+    PinchGestureEventData,
+    PanGestureEventData
+} from "tns-core-modules/ui/gestures";
 import { View } from "tns-core-modules/ui/core/view";
 
-export function onPan(args: PanGestureEventData, prevDeltaX: number, prevDeltaY: number, viewItem: View) {
-
+export function onPan(
+    args: PanGestureEventData,
+    prevDeltaX: number,
+    prevDeltaY: number,
+    viewItem: View
+) {
     if (args.state === 1) {
         prevDeltaX = 0;
         prevDeltaY = 0;
@@ -15,8 +23,11 @@ export function onPan(args: PanGestureEventData, prevDeltaX: number, prevDeltaY:
     }
 }
 
-export function onPinch(args: PinchGestureEventData, viewItem: View, startScale: number) {
-
+export function onPinch(
+    args: PinchGestureEventData,
+    viewItem: View,
+    startScale: number
+) {
     if (args.state === 1) {
         const newOriginX = args.getFocusX() - viewItem.translateX;
         const newOriginY = args.getFocusY() - viewItem.translateY;
@@ -24,8 +35,10 @@ export function onPinch(args: PinchGestureEventData, viewItem: View, startScale:
         const oldOriginX = viewItem.originX * viewItem.getMeasuredWidth();
         const oldOriginY = viewItem.originY * viewItem.getMeasuredHeight();
 
-        viewItem.translateX += (oldOriginX - newOriginX) * (1 - viewItem.scaleX);
-        viewItem.translateY += (oldOriginY - newOriginY) * (1 - viewItem.scaleY);
+        viewItem.translateX +=
+            (oldOriginX - newOriginX) * (1 - viewItem.scaleX);
+        viewItem.translateY +=
+            (oldOriginY - newOriginY) * (1 - viewItem.scaleY);
 
         viewItem.originX = newOriginX / viewItem.getMeasuredWidth();
         viewItem.originY = newOriginY / viewItem.getMeasuredHeight();

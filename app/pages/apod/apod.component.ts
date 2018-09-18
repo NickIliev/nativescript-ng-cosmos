@@ -35,7 +35,11 @@ export class ApodComponent {
     dock: View;
     scroll: ScrollView;
 
-    constructor(private _apodService: ApodService, private _page: Page, private _toolbarHelper: ToolbarHelper) {
+    constructor(
+        private _apodService: ApodService,
+        private _page: Page,
+        private _toolbarHelper: ToolbarHelper
+    ) {
         if (isAndroid) {
             this._page.actionBarHidden = true;
         }
@@ -60,7 +64,7 @@ export class ApodComponent {
         // on App resume check if image is already loaded or not
         this.image.visibility = !this.image.isLoading ? "visible" : "collapse";
 
-        this.image.on("isLoadingChange", (params) => {
+        this.image.on("isLoadingChange", params => {
             this.scroll.scrollToHorizontalOffset(0, true);
             this.scroll.scrollToVerticalOffset(0, true);
 
@@ -130,7 +134,9 @@ export class ApodComponent {
         let isValideDate = this._toolbarHelper.setNextDay(this.lastLoadedDate);
 
         if (isValideDate && this.lastLoadedDate <= new Date()) {
-            this.extractData(this._toolbarHelper.dateToString(this.lastLoadedDate));
+            this.extractData(
+                this._toolbarHelper.dateToString(this.lastLoadedDate)
+            );
         } else {
             let options = {
                 title: "No Photo Available!",
@@ -140,14 +146,16 @@ export class ApodComponent {
             // show warnig if the user request photos from future date - disable the next button here
             alert(options).then(() => {
                 this.lastLoadedDate = new Date();
-                this.extractData(this._toolbarHelper.dateToString(this.lastLoadedDate));
+                this.extractData(
+                    this._toolbarHelper.dateToString(this.lastLoadedDate)
+                );
             });
         }
     }
 
     private initData() {
-        this._apodService.getData()
-            .subscribe((result) => {
+        this._apodService.getData().subscribe(
+            result => {
                 if (result["media_type"] === "image") {
                     this.item = new ApodItem(
                         result["copyright"],
@@ -165,27 +173,40 @@ export class ApodComponent {
                     // TODO: implement the logic for YouTube videos here
                     this.lastLoadedDate = new Date(result["date"]);
                     this._toolbarHelper.setPrevousDay(this.lastLoadedDate);
-                    this.extractData(this._toolbarHelper.dateToString(this.lastLoadedDate));
-                } else if (result["media_type"] !== "image" && !this.direction) {
+                    this.extractData(
+                        this._toolbarHelper.dateToString(this.lastLoadedDate)
+                    );
+                } else if (
+                    result["media_type"] !== "image" &&
+                    !this.direction
+                ) {
                     // TODO: implement the logic for YouTube videos here
                     this.lastLoadedDate = new Date(result["date"]);
-                    let isValideDate = this._toolbarHelper.setNextDay(this.lastLoadedDate);
+                    let isValideDate = this._toolbarHelper.setNextDay(
+                        this.lastLoadedDate
+                    );
                     if (isValideDate) {
-                        this.extractData(this._toolbarHelper.dateToString(this.lastLoadedDate));
+                        this.extractData(
+                            this._toolbarHelper.dateToString(
+                                this.lastLoadedDate
+                            )
+                        );
                     } else {
                         return;
                     }
                 } else {
                     return;
                 }
-            }, (error) => {
+            },
+            error => {
                 console.log("Server Status Code: " + error.status);
-            });
+            }
+        );
     }
 
     private extractData(date: string) {
-        this._apodService.getDataWithCustomDate(date)
-            .subscribe((result) => {
+        this._apodService.getDataWithCustomDate(date).subscribe(
+            result => {
                 if (result["media_type"] === "image") {
                     this.item = new ApodItem(
                         result["copyright"],
@@ -200,20 +221,33 @@ export class ApodComponent {
                 } else if (result["media_type"] !== "image" && this.direction) {
                     // TODO: implement the logic for YouTube videos here
                     this._toolbarHelper.setPrevousDay(this.lastLoadedDate);
-                    this.extractData(this._toolbarHelper.dateToString(this.lastLoadedDate));
-                } else if (result["media_type"] !== "image" && !this.direction) {
+                    this.extractData(
+                        this._toolbarHelper.dateToString(this.lastLoadedDate)
+                    );
+                } else if (
+                    result["media_type"] !== "image" &&
+                    !this.direction
+                ) {
                     // TODO: implement the logic for YouTube videos here
-                    let isValideDate = this._toolbarHelper.setNextDay(this.lastLoadedDate);
+                    let isValideDate = this._toolbarHelper.setNextDay(
+                        this.lastLoadedDate
+                    );
                     if (isValideDate) {
-                        this.extractData(this._toolbarHelper.dateToString(this.lastLoadedDate));
+                        this.extractData(
+                            this._toolbarHelper.dateToString(
+                                this.lastLoadedDate
+                            )
+                        );
                     } else {
                         return;
                     }
                 } else {
                     return;
                 }
-            }, (error) => {
+            },
+            error => {
                 console.log("Server Status Code: " + error.status);
-            });
+            }
+        );
     }
 }

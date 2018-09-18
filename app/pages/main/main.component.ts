@@ -32,11 +32,11 @@ export class MainComponent implements AfterViewInit {
 
         (<any>this._page).scrollableContent = false;
 
-        this._route.activatedRoute.pipe(
-            switchMap(activatedRoute => activatedRoute.queryParams)
-        ).forEach((params) => {
-            this.username = params["username"];
-        });
+        this._route.activatedRoute
+            .pipe(switchMap(activatedRoute => activatedRoute.queryParams))
+            .forEach(params => {
+                this.username = params["username"];
+            });
     }
 
     ngAfterViewInit() {
@@ -49,7 +49,13 @@ export class MainComponent implements AfterViewInit {
     }
 
     /* TODO: Test animation for all CardViews */
-    onViewLoaded(args, translateFromX, translateToX, translateFromY, translateToY) {
+    onViewLoaded(
+        args,
+        translateFromX,
+        translateToX,
+        translateFromY,
+        translateToY
+    ) {
         let view = args.object;
         translateViewByXandYwithDurationAndCurve(
             view,
@@ -58,6 +64,7 @@ export class MainComponent implements AfterViewInit {
             translateFromY,
             translateToY,
             600,
-            "easeOut");
+            "easeOut"
+        );
     }
 }

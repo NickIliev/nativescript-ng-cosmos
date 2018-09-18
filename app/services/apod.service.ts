@@ -5,19 +5,24 @@ import { getApiKey } from "../shared/nasa-api";
 
 @Injectable()
 export class ApodService {
-    NASA_API_KEY: string;
+  NASA_API_KEY: string;
 
-    constructor(private _http: HttpClient) { 
-        this.NASA_API_KEY = getApiKey();
-    }
+  constructor(private _http: HttpClient) {
+    this.NASA_API_KEY = getApiKey();
+  }
 
-    getData() {
-        return this._http.get("https://api.nasa.gov/planetary/apod?api_key="  + this.NASA_API_KEY)
-    }
+  getData() {
+    return this._http.get(
+      "https://api.nasa.gov/planetary/apod?api_key=" + this.NASA_API_KEY
+    );
+  }
 
-    getDataWithCustomDate(date: string) {
-        // For Example: date: string = "2017-07-25";
-        const URL = "https://api.nasa.gov/planetary/apod?api_key=" + this.NASA_API_KEY + "&date=";
-        return this._http.get(URL + date)
-    }
+  getDataWithCustomDate(date: string) {
+    // For Example: date: string = "2017-07-25";
+    const URL =
+      "https://api.nasa.gov/planetary/apod?api_key=" +
+      this.NASA_API_KEY +
+      "&date=";
+    return this._http.get(URL + date);
+  }
 }
