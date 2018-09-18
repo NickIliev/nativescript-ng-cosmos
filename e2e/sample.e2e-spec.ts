@@ -32,14 +32,33 @@ describe("sample scenario", () => {
         assert.isTrue(astronomicalDayElement != null && (await astronomicalDayElement.isDisplayed()));
     });
 
-    it("open sidedrawer menu", async () => {
+    const sideDrawerBtn = () => {
         const sideDrawerLocator = "android.support.v7.widget.LinearLayoutCompat";
-        const sideDrawerBtn = (await driver.findElementByClassName(sideDrawerLocator));
-        await sideDrawerBtn.click();
-        const sideDrawer = (await driver.findElementByClassName(sideDrawerLocator));
-        assert.isTrue(await sideDrawer.isDisplayed());
+        return driver.findElementByClassName(sideDrawerLocator);
+    }
 
+    it("open sidedrawer menu", async () => {
+        await (await sideDrawerBtn()).click();
         const showSideDrawerResult = await driver.compareScreen("side-drawer-displayed", 5, 0.01);
+        assert.isTrue(showSideDrawerResult);
+    });
+
+    it("close sidedrawer menu", async () => {
+        await (await sideDrawerBtn()).click();
+        const showSideDrawerResult = await driver.compareScreen("side-drawer-closed", 5, 0.01);
+        assert.isTrue(showSideDrawerResult);
+    });
+
+    it("navigate to photo of the day and back", async () => {
+        await (await sideDrawerBtn()).click();
+        await (await driver.findElementByText("Photo of the day", SearchOptions.contains)).click();
+        const buttons = await driver.findElementsByClassName(driver.locators.button);
+
+        assert.isTrue(buttons.length >= 5);
+
+        await driver.navBack();
+
+        const showSideDrawerResult = await driver.compareScreen("side-drawer-closed", 5, 0.01);
         assert.isTrue(showSideDrawerResult);
     });
 });
