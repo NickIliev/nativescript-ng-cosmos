@@ -1,5 +1,5 @@
 {
     "appId": "org.nativescript.cosmosng",
     "minSdkVersion": 19,
-    "targetSdkVersion": 25
+    "targetSdkVersion": 26
 }

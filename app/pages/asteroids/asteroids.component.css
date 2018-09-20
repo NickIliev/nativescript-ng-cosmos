@@ -16,3 +16,30 @@ Label {
     padding-left: 8;
     font-size:12;
 }
+
+.sort-menu {
+    border-radius: 10;
+    border-width: 1;
+    border-color: #282a2a;
+    opacity: 0.8;
+}
+
+.sort-labels {
+    border-radius: 10;
+    border-color: #BCBCBC;
+    border-width: 1;
+    font-family: "Nasalization";
+    font-size: 12;
+    margin: 4;
+    padding: 8;
+    text-align: center;
+}
+
+.share-label {
+    opacity: 0.6;
+    width: 40;
+    height: 40;
+    border-radius: 20;
+    background-color:#1b1d1d;
+    color: #E8EAEB;
+}
