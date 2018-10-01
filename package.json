@@ -6,10 +6,7 @@
   "nativescript": {
     "id": "org.nativescript.curiosity",
     "tns-android": {
-      "version": "4.2.0"
-    },
-    "tns-ios": {
-      "version": "4.2.0"
+      "version": "5.0.0-2018-09-28-195532-01"
     }
   },
   "dependencies": {
@@ -21,7 +18,7 @@
     "@angular/platform-browser": "~6.1.7",
     "@angular/platform-browser-dynamic": "~6.1.7",
     "@angular/router": "~6.1.7",
-    "nativescript-angular": "^6.1.0",
+    "nativescript-angular": "next",
     "nativescript-app-center": "^1.0.3",
     "nativescript-cardview": "^3.1.1",
     "nativescript-permissions": "^1.2.3",
@@ -31,7 +28,7 @@
     "nativescript-ui-sidedrawer": "^4.3.0",
     "reflect-metadata": "~0.1.8",
     "rxjs": "^6.0.0",
-    "tns-core-modules": "^4.2.1",
+    "tns-core-modules": "next",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
@@ -39,7 +36,7 @@
     "@ngtools/webpack": "~6.2.0",
     "codelyzer": "^4.4.4",
     "nativescript-dev-typescript": "~0.7.4",
-    "nativescript-dev-webpack": "^0.16.1",
+    "nativescript-dev-webpack": "next",
     "tns-platform-declarations": "^4.2.1",
     "tslint": "^5.11.0",
     "typescript": "~2.7.2"

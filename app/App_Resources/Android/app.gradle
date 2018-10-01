@@ -8,18 +8,16 @@ android {
     multiDexEnabled true
     applicationId = "org.nativescript.curiosity"  
     minSdkVersion 19
-    targetSdkVersion 26
+    targetSdkVersion 27
   }  
   aaptOptions {  
     additionalParameters "--no-version-vectors"  
   }
-
-  project.ext {
-    googlePlayServicesVersion = "15.0.1"
-  } 
 
   dexOptions {
     jumboMode true
     javaMaxHeapSize "4g"
   }
 } 
+
+project.ext.googlePlayServicesVersion = "15.0.1"
