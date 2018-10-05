@@ -6,31 +6,31 @@
     </ActionItem>
 </ActionBar>
 
-<ScrollView>
-    <StackLayout class="sidedrawer-content">
+<ScrollView class="sidedrawer-content">
+    <StackLayout>
 
-        <CardView elevation="40" radius="40" margin="10" class="cardview" (loaded)="onViewLoaded($event, -400, 0, -300, 0)">
+        <CardView elevation="40" radius="40" margin="10" class="cardview" (loaded)="onViewLoaded($event, -400, 0, -100, 0)" iosOverflowSafeArea="false">
             <GridLayout rows="160" columns="3*, 4*" [nsRouterLink]="['/apod']">
                 <Image row="0" col="1" src="~/images/cosmos.jpg" stretch="aspectFill" (loaded)="onViewLoaded($event, 400, 0, 0, 0)"></Image>
                 <Label row="0" col="0" [text]="apodTitle" textWrap="true" class="text-left p-l-8 p-r-8" verticalAlignment="center"></Label>
             </GridLayout>
         </CardView>
 
-        <CardView elevation="40" radius="40" margin="10" class="cardview" (loaded)="onViewLoaded($event, 400, 0, -100, 0)">
+        <CardView elevation="40" radius="40" margin="10" class="cardview" (loaded)="onViewLoaded($event, 400, 0, -100, 0)" iosOverflowSafeArea="false">
             <GridLayout rows="160" columns="4*, 3*" [nsRouterLink]="['/asteroids']">
                 <Image row="0" col="0" src="~/images/aste.jpg" stretch="aspectFill" (loaded)="onViewLoaded($event, -400, 0, 0, 0)"></Image>
                 <Label row="0" col="1" [text]="asteroidTitle" textWrap="true" class="text-right p-l-8 p-r-8" verticalAlignment="center"></Label>
             </GridLayout>
         </CardView>
 
-        <CardView elevation="40" radius="40" margin="10" class="cardview" (loaded)="onViewLoaded($event, -400, 0, -100, 0)">
+        <CardView elevation="40" radius="40" margin="10" class="cardview" (loaded)="onViewLoaded($event, -400, 0, -100, 0)" iosOverflowSafeArea="false">
             <GridLayout rows="160" columns="3*, 4*" [nsRouterLink]="['/rovers']">
                 <Image row="0" col="1" src="~/images/rover.jpg" stretch="aspectFill" (loaded)="onViewLoaded($event, 400, 0, 0, 0)"></Image>
                 <Label row="0" col="0" [text]="roversTitle" textWrap="true" class="text-left p-l-8 p-r-8" verticalAlignment="center"></Label>
             </GridLayout>
         </CardView>
 
-        <CardView elevation="40" radius="40" margin="10" class="cardview" (loaded)="onViewLoaded($event, 400, 0, -100, 0)">
+        <CardView elevation="40" radius="40" margin="10" class="cardview" (loaded)="onViewLoaded($event, 400, 0, -100, 0)" iosOverflowSafeArea="false">
             <GridLayout rows="160" columns="4*, 3*" [nsRouterLink]="['/info']">
                 <Image row="0" col="0" src="res://logo" stretch="aspectFill" (loaded)="onViewLoaded($event, -400, 0, 0, 0)"></Image>
                 <Label row="0" col="1" [text]="detailsTitle" textWrap="true" class="text-right p-l-8 p-r-8" verticalAlignment="center"></Label>

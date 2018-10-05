@@ -14,7 +14,7 @@
             </FormattedString>
         </Button>
 
-        <GridLayout dock="right" rows="*, *" class="m-r-8 m-t-8 m-b-8" (loaded)="onViewLoaded($event, -200, 0, 200, 0)">
+        <GridLayout dock="right" rows="*, *" class="m-r-8 m-t-8 m-b-8" (loaded)="onViewLoaded($event, -200, 0, 200, 0)" iosOverflowSafeArea="false">
             <Button row="0" text="G+" (tap)="google()" class="m-b-4"></Button>
             <Button row="1" text="f" (tap)="facebook()" class="m-t-4"></Button>
         </GridLayout> 
