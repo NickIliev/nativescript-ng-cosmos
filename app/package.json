@@ -4,7 +4,7 @@
     "markingMode": "none"
   },
   "main": "main.js",
-  "name": "tns-template-hello-world-ng",
+  "name": "nativescript-ng-cosmos",
   "version": "3.1.2",
   "discardUncaughtJsExceptions": true
 }

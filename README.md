@@ -42,3 +42,20 @@ npm i
 tns platform add ios
 tns run ios --bundle --env.uglify --env.aot 
 ```
+
+**E2e tests**
+
+#### Prerequisites
+- Create android emulator with the right resolution for testing:
+```
+$ echo yes | $ANDROID_HOME/tools/bin/sdkmanager "build-tools;28.0.1"
+$ echo yes | $ANDROID_HOME/tools/bin/sdkmanager "system-images;android-28;google_apis;x86"
+$ echo no | $ANDROID_HOME/tools/bin/avdmanager create avd -n Emulator-Api28-Google -k "system-images;android-28;google_apis;x86" -b google_apis/x86 -c 900M -f
+$ find ~/.android/avd -type f -name 'config.ini' -exec bash -c 'echo $0 && echo "hw.lcd.density=240" | tee -a $0 && echo "skin.name=480x800" | tee -a $0 && echo "hw.gpu.enabled=yes"  | tee -a $0 && echo "hw.keyboard=no" | tee -a $0 && cat $0 '  {} \;
+```
+```
+$ npm run e2e -- --runType android28 --reuseDevice
+```
+```
+$ npm run e2e -- --runType iPhoneXR --reuseDevice
+```
