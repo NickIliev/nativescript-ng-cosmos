@@ -101,10 +101,8 @@ describe("sample scenario", () => {
         await driver.sleep(3000);
 
         const buttons = await driver.findElementsByClassName(driver.locators.button);
-        const jupeter = await driver.findElementByText("Jupiter", SearchOptions.contains);
 
         assert.isTrue(buttons.length >= 5);
-        assert.isTrue(await jupeter.isDisplayed());
         await driver.navBack();
 
         const showSideDrawerResult = await driver.compareScreen("side-drawer-closed", 5, 0.01);
