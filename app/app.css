@@ -10,9 +10,14 @@ ActionBar {
     background-color: #343838;
 }
 
+/* this global color style will affect the dialogs */
 Label {
-    color: #BCBCBC;
-    font-size: 14;
+    color: #343838;
+}
+
+/* this global color style will affect the dialogs */
+Button {
+    color: #343838;
 }
 
 .fa {

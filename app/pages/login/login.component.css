@@ -22,11 +22,11 @@ Button {
     padding: 0 16 0 16;
 }
 
-Button:highlighted {
+Button:active {
     background-color:#E8EAEB;
     color: #1b1d1d;
 }
 
 Label {
-    color: whitesmoke;
+    color: #E8EAEB;
 }
