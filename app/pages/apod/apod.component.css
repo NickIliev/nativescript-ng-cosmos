@@ -3,10 +3,14 @@ ActivityIndicator {
     height: 150;
 }
 
-.date {
-    horizontal-align: center;
-    font-size: 12;
-    opacity: 0.8;
+.dock {
+    background-color: transparent;
+    vertical-align: bottom;
+}
+
+Label {
+    color: #BCBCBC;
+    font-family: "Nasalization";
 }
 
 .title {
@@ -19,13 +23,10 @@ ActivityIndicator {
     text-align: left;
 }
 
-.dock {
-    background-color: transparent;
-}
-
-.action-bar-title {
-    color: #BCBCBC;
-    font-family: "Nasalization";
-    font-size: 18;
-    text-align: center;
+.date {
+    horizontal-align: center;
+    font-size: 12;
+    opacity: 0.8;
+    padding-top: 10;
+    padding-bottom: 40;
 }

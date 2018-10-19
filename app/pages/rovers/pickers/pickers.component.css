@@ -15,6 +15,10 @@ DatePicker, Label, Segmentedbar {
     width: 90%;
 }
 
+DatePicker {
+    color: #282a2a;
+}
+
 Label {
     background-color: #282a2a;
     border-radius: 20 20 0 0;
@@ -23,7 +27,6 @@ Label {
 
 SegmentedBar {
     background-color: #BCBCBC;
-
     color: #282a2a;
     font-size: 10;
     font-weight: bold;
@@ -37,5 +40,6 @@ DatePicker {
 Button {
     background-color: #282a2a;
     border-radius: 20;
+    color: #E8EAEB;
     width: 90%;
 }

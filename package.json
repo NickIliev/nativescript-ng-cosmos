@@ -5,11 +5,11 @@
   "repository": "<fill-your-repository-here>",
   "nativescript": {
     "id": "org.nativescript.curiosity",
-    "tns-android": {
-      "version": "5.0.0-2018-09-28-195532-01"
-    },
     "tns-ios": {
-      "version": "4.3.0-2018-09-28-125108-01"
+      "version": "5.0.0-2018-10-08-180008-01"
+    },
+    "tns-android": {
+      "version": "5.0.0-rc-2018-10-18-172901-01"
     }
   },
   "dependencies": {
@@ -25,10 +25,10 @@
     "nativescript-app-center": "^1.0.3",
     "nativescript-cardview": "^3.1.1",
     "nativescript-permissions": "^1.2.3",
-    "nativescript-plugin-firebase": "^7.1.2",
+    "nativescript-plugin-firebase": "^7.1.6",
     "nativescript-social-share": "^1.5.1",
     "nativescript-theme-core": "^1.0.4",
-    "nativescript-ui-sidedrawer": "^4.3.0",
+    "nativescript-ui-sidedrawer": "^4.3.1",
     "reflect-metadata": "~0.1.8",
     "rxjs": "^6.0.0",
     "tns-core-modules": "next",
@@ -46,8 +46,8 @@
     "mocha-multi": "~1.0.0",
     "nativescript-dev-appium": "^4.1.0-2018-10-11-01",
     "nativescript-dev-typescript": "~0.7.3",
-    "nativescript-dev-webpack": "^0.16.1",
-    "tns-platform-declarations": "^4.2.0",
+    "nativescript-dev-webpack": "^0.16.2",
+    "tns-platform-declarations": "^4.2.1",
     "tslint": "^5.11.0",
     "typescript": "~2.7.2"
   },
