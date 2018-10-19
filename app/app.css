@@ -1,5 +1,3 @@
-@import '~nativescript-theme-core/css/core.light.css';
-
 Page {
     background-color: #343838;   
     color: #BCBCBC;
@@ -23,6 +21,8 @@ Button {
 .fa {
     font-family: "FontAwesome";
 }
+
+@import '~nativescript-theme-core/css/core.light.css';
 
 /*
 http://www.colourlovers.com/palette/482774/dream_magnet

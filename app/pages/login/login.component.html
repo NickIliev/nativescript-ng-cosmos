@@ -8,8 +8,8 @@
     <DockLayout height="20%" verticalAlignment="bottom">
 
         <Button width="70%" dock="left" (tap)="login()" class="m-8" (loaded)="onViewLoaded($event, 200, 0, 200, 0)">
-            <FormattedString>
-                <Span [text]="loginText + '\n'" fontSize="28"></Span>
+            <FormattedString style="background-color: transparent">
+                <Span [text]="loginText + '\n'" fontSize="28" textWrap="true"></Span>
                 <Span [text]="descText" fontSize="12" ></Span>
             </FormattedString>
         </Button>
