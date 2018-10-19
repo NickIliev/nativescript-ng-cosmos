@@ -6,6 +6,7 @@ Page {
 
 ActionBar {
     background-color: #343838;
+    color: #BCBCBC;
 }
 
 /* this global color style will affect the dialogs */

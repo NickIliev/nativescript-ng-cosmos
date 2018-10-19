@@ -1,31 +1,52 @@
-<ScrollView>
-    <StackLayout class="m-8">
-        <GridLayout rows="*, *, *" columns="*" class="p-8">
-            <Label row="0" text="Powered by" textWrap="true"></Label>
-            <Label row="1" text="NativeScript" textWrap="true"></Label>
-            <Label row="2" text="NASA Open APIs" textWrap="true"></Label>
+<ScrollView class="background">
+    <StackLayout>
+        <GridLayout rows="*, *, *" columns="*" margin="10">
+            <Label row="0" text="Powered by" fontSize="10" opacity="0.9"></Label>
+            <Label row="1" text="NativeScript" (tap)="onNativeScriptTap()" class="m-t-8"></Label>
+            <Label row="2" text="NASA Open APIs" (tap)="onNasaTap()" class="m-t-8"></Label>
         </GridLayout>
 
-        <GridLayout rows="auto, auto, auto, auto, auto, auto, auto" columns="auto, *">
-            <Label row="0" col="0" colSpan="2" editable="false" text="Astronomical Photo of the Day" textWrap="true" class="p-l-16 p-t-8 text-left"></Label>
-            <Label row="1" col="0" colSpan="2" text="Icons legend" fontSize="10" color="gray" class="p-l-16  text-left" textWrap="true"></Label>
+        <CardView elevation="40" radius="10" margin="10" class="cardview">
+            <GridLayout rows="auto, auto, auto, auto, auto, auto, auto, auto, auto">
+                <Label row="0" text="Astronomical Photo of the Day" textWrap="true" class="p-l-8 p-t-16 p-r-8 text-left"></Label>
+                
+                <Label row="1" [text]="description" textWrap="true" class="p-l-8 p-t-8 p-r-8 text-left" fontSize="12"></Label>
+                
+                <GridLayout row="2" columns="50, *">
+                    <Button col="0" text="Icons" width="50" height="30" fontSize="12" opacity="0.9" class="btn nas"></Button>
+                    <Label col="1" text="Action" fontSize="12" opacity="0.9" class="text-left"></Label>
+                </GridLayout>
+                <GridLayout row="3" columns="50, *">
+                    <Button col="0" text="&#xf053;" width="50" height="50" class="fa btn nav"></Button>
+                    <Label col="1" text="go to previous data" textWrap="true"></Label>
+                </GridLayout>
+                <GridLayout row="4" columns="50, *">
+                    <Button col="0" text="&#xf019;" width="50" height="50" class="fa btn nav"></Button>
+                    <Label col="1" text="downolad and save HD image" textWrap="true"></Label>
+                </GridLayout>
+                <GridLayout row="5" columns="50, *">
+                    <Button col="0" text="&#xf108;" width="50" height="50" class="fa btn nav"></Button>
+                    <Label col="1" text="set HD photo as wallpaper (Android only)" textWrap="true"></Label>
+                </GridLayout>
+                <GridLayout row="6" columns="50, *">
+                    <Button col="0" text="&#xf1e0;" width="50" height="50" class="fa btn nav"></Button>
+                    <Label col="1" text="share HD photo" textWrap="true"></Label>
+                </GridLayout>
+                <GridLayout row="7" columns="50, *">
+                    <Button col="0" text="&#xf054;" width="50" height="50" class="fa btn nav"></Button>
+                    <Label col="1" text="go to next date" textWrap="true"></Label>
+                </GridLayout>
+                <GridLayout row="8" rows="30" columns="*, *">
+                    <Button col="0" text="Open APOD section" (tap)="onApodLink()" class="btn nas" opacity="0.8" fontSize="12"></Button>
+                    <Button col="1" text="Visit Offficial site" (tap)="onApodURL()" class="btn nas" opacity="0.8" fontSize="12"></Button>
+                </GridLayout>
+            </GridLayout>
+        </CardView>
 
-            <Button row="2" col="0" text="&#xf053;" width="50" height="50" class="fa btn nav text-center"></Button>
-            <Label row="2" col="1" editable="false" text="go to previous data" textWrap="true" verticalAlignment="center"></Label>
-
-            <Button row="3" col="0" text="&#xf019;" width="50" height="50" class="fa btn nav text-center"></Button>
-            <Label row="3" col="1" editable="false" text="downolad and save HD image" textWrap="true" verticalAlignment="center"></Label>
-
-            <Button row="4" col="0" text="&#xf108;" width="50" height="50" class="fa btn nav text-center"></Button>
-            <Label row="4" col="1" editable="false" text="set HD photo as wallpaper (Android only)" textWrap="true" verticalAlignment="center"></Label>
-
-            <Button row="5" col="0" text="&#xf1e0;" width="50" height="50" class="fa btn nav text-center"></Button>
-            <Label row="5" col="1" editable="false" text="share HD photo" textWrap="true" verticalAlignment="center"></Label>
-
-            <Button row="6" col="0" text="&#xf054;" width="50" height="50" class="fa btn nav text-center"></Button>
-            <Label row="6" col="1" editable="false" text="go to next date" textWrap="true" verticalAlignment="center"></Label>
-        </GridLayout>
-
-        <Label text="Created by NickIliev" textWrap="true" class="p-8"></Label>
+        <CardView elevation="40" radius="10" margin="0 10 10 10" class="cardview" iosOverflowSafeArea="false">    
+            <GridLayout rows="auto" columns="*">
+                <Label row="0" text="Created by NickIliev" textWrap="true" class="p-l-16 p-t-8 p-b-8"></Label>
+            </GridLayout>
+        </CardView>
     </StackLayout>
 </ScrollView>
