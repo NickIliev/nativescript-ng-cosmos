@@ -85,11 +85,9 @@ export class AppComponent implements OnInit, AfterViewInit {
                     appSettings.setString("username", "");
                 }
             }
-        }).then(
-            instance => {
+        }).then(instance => {
                 console.log("firebase.init done");
-            },
-            error => {
+            }, error => {
                 console.log(`firebase.init error: ${error}`);
             }
         );

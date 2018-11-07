@@ -25,13 +25,13 @@
     "nativescript-app-center": "^1.0.3",
     "nativescript-cardview": "^3.1.1",
     "nativescript-permissions": "^1.2.3",
-    "nativescript-plugin-firebase": "^7.1.6",
+    "nativescript-plugin-firebase": "^7.3.0",
     "nativescript-social-share": "^1.5.1",
     "nativescript-theme-core": "^1.0.4",
-    "nativescript-ui-sidedrawer": "^4.3.1",
+    "nativescript-ui-sidedrawer": "^5.0.0",
     "reflect-metadata": "~0.1.8",
     "rxjs": "^6.3.3",
-    "tns-core-modules": "next",
+    "tns-core-modules": "5.0.1",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
@@ -49,7 +49,7 @@
     "nativescript-dev-webpack": "^0.18.0-2018-11-05-214332-01",
     "tns-platform-declarations": "^4.2.1",
     "tslint": "^5.11.0",
-    "typescript": "~3.1.1"
+    "typescript": "^3.1.6"
   },
   "scripts": {
     "tslint": "tslint -p tsconfig.json",
