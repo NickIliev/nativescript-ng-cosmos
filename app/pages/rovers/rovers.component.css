@@ -10,6 +10,11 @@
 
 .card-grid {
     border-radius:20;
+    color: #BCBCBC;
+}
+
+.card-grid Label {
+    color: #BCBCBC;
 }
 
 .list-view {

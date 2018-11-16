@@ -113,7 +113,6 @@ export class RoversComponent implements OnInit, AfterViewInit {
     public onItemTap(args: ItemEventData) {
         let index = args.index;
         let photo = this._tempArr[index];
-
         this._router.navigate(["/rovers/photo"], {
             replaceUrl: false,
             queryParams: {
