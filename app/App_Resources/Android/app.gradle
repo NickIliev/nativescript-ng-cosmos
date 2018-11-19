@@ -4,6 +4,8 @@
 
 android {  
   defaultConfig {  
+    buildToolsVersion "28.0.3"
+    compileSdkVersion 28
     generatedDensities = []
     multiDexEnabled true
     applicationId = "org.nativescript.curiosity"  

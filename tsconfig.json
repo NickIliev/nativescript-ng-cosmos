@@ -4,9 +4,11 @@
         "target": "es5",
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
+        "esModuleInterop": true,
         "noEmitHelpers": true,
         "noEmitOnError": true,
         "pretty": true,
+        "resolveJsonModule": true,
         "skipLibCheck": true,
         "lib": [
             "es6",
