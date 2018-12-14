@@ -6,10 +6,7 @@
   "nativescript": {
     "id": "org.nativescript.curiosity",
     "tns-android": {
-      "version": "5.0.0"
-    },
-    "tns-ios": {
-      "version": "5.0.0"
+      "version": "5.1.0"
     }
   },
   "dependencies": {
@@ -21,17 +18,17 @@
     "@angular/platform-browser": "~7.0.0",
     "@angular/platform-browser-dynamic": "~7.0.0",
     "@angular/router": "~7.0.0",
-    "nativescript-angular": "^7.0.0",
+    "nativescript-angular": "next",
     "nativescript-app-center": "^1.0.3",
     "nativescript-cardview": "^3.1.1",
     "nativescript-permissions": "^1.2.3",
-    "nativescript-plugin-firebase": "^7.4.2",
+    "nativescript-plugin-firebase": "^7.4.6",
     "nativescript-social-share": "^1.5.1",
     "nativescript-theme-core": "^1.0.4",
-    "nativescript-ui-sidedrawer": "^5.0.0",
+    "nativescript-ui-sidedrawer": "^5.0.1",
     "reflect-metadata": "~0.1.8",
     "rxjs": "^6.3.3",
-    "tns-core-modules": "~5.0.2",
+    "tns-core-modules": "next",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
@@ -45,11 +42,11 @@
     "mocha-junit-reporter": "~1.17.0",
     "mocha-multi": "~1.0.0",
     "nativescript-dev-appium": "^4.1.0-2018-10-11-01",
-    "nativescript-dev-typescript": "~0.7.6",
-    "nativescript-dev-webpack": "^0.18.0",
-    "tns-platform-declarations": "^5.0.2",
+    "nativescript-dev-typescript": "~0.7.8",
+    "nativescript-dev-webpack": "next",
+    "tns-platform-declarations": "^5.0.5",
     "tslint": "^5.11.0",
-    "typescript": "~3.1.1"
+    "typescript": "~3.1.6"
   },
   "scripts": {
     "tslint": "tslint -p tsconfig.json",
