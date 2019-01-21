@@ -6,7 +6,7 @@
   "nativescript": {
     "id": "org.nativescript.curiosity",
     "tns-android": {
-      "version": "5.1.0"
+      "version": "5.2.0-2019-01-18-142200-05"
     }
   },
   "dependencies": {
@@ -29,7 +29,7 @@
     "nativescript-ui-sidedrawer": "^5.0.1",
     "reflect-metadata": "~0.1.8",
     "rxjs": "^6.3.3",
-    "tns-core-modules": "next",
+    "tns-core-modules": "^5.2.1-next-2019-01-17-213118-01",
     "zone.js": "^0.8.4"
   },
   "devDependencies": {
@@ -43,8 +43,8 @@
     "mocha-junit-reporter": "~1.17.0",
     "mocha-multi": "~1.0.0",
     "nativescript-dev-appium": "^4.1.0-2018-10-11-01",
-    "nativescript-dev-typescript": "~0.7.9",
-    "nativescript-dev-webpack": "next",
+    "nativescript-dev-typescript": "^0.7.10-next-2019-01-07-183215-03",
+    "nativescript-dev-webpack": "^0.19.1-next-2019-01-14-120258-01",
     "tns-platform-declarations": "~5.1.2",
     "tslint": "^5.11.0",
     "typescript": "~3.1.1"
@@ -52,6 +52,9 @@
   "scripts": {
     "tslint": "tslint -p tsconfig.json",
     "e2e": "node ./node_modules/nativescript-dev-appium/check-dev-deps.js &&  tsc -p e2e  &&  mocha --opts ./e2e/config/mocha.opts ",
-    "e2e-watch": "tsc -p e2e --watch"
+    "e2e-watch": "tsc -p e2e --watch",
+    "update-app-ng-deps": "update-app-ng-deps",
+    "ns-verify-bundle": "ns-verify-bundle",
+    "update-ns-webpack": "update-ns-webpack"
   }
 }
