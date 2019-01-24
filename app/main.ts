@@ -45,4 +45,6 @@ if (androidApp) {
 initializeLoggers();
 enableProdMode();
 
+console.log("After enableProdMode");
+
 platformNativeScriptDynamic().bootstrapModule(AppModule);
