@@ -8,6 +8,7 @@
 
 <ScrollView class="background">
     <StackLayout>
+        
         <CardView elevation="40" radius="40" margin="10" class="cardview" (loaded)="onViewLoaded($event, -400, 0, -100, 0)" >
             <GridLayout rows="160" columns="3*, 4*" [nsRouterLink]="['/apod']">
                 <Image row="0" col="1" src="~/images/cosmos.jpg" stretch="aspectFill" (loaded)="onViewLoaded($event, 400, 0, 0, 0)"></Image>
