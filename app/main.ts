@@ -1,4 +1,4 @@
-import "reflect-metadata"; // fixes https://github.com/NativeScript/nativescript-dev-webpack/issues/660
+// import "reflect-metadata"; // fixes https://github.com/NativeScript/nativescript-dev-webpack/issues/660
 
 import { enableProdMode } from "@angular/core";
 
