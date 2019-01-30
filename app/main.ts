@@ -1,12 +1,11 @@
 // import "reflect-metadata"; // fixes https://github.com/NativeScript/nativescript-dev-webpack/issues/660
-
+import { platformNativeScriptDynamic } from "nativescript-angular/platform";
 import { enableProdMode } from "@angular/core";
 
 import { AppModule } from "./app.module";
 import { initializeLoggers } from "./shared/app-center-initializer";
 
 const firebase = require("nativescript-plugin-firebase");
-import { platformNativeScriptDynamic } from "nativescript-angular/platform";
 
 import {
   android as androidApp,
