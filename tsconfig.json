@@ -10,6 +10,7 @@
         "pretty": true,
         "resolveJsonModule": true,
         "skipLibCheck": true,
+        "outDir": "./app/dist",
         "lib": [
             "es6",
             "dom",

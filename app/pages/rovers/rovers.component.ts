@@ -1,5 +1,3 @@
-import { AfterViewInit, Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
 import { RouterExtensions } from "nativescript-angular/router";
 import { isAndroid } from "tns-core-modules/platform";
 import { alert } from "tns-core-modules/ui/dialogs";
@@ -9,6 +7,9 @@ import { Page } from "tns-core-modules/ui/page";
 import { RoverPhoto } from "../../models/rover-model";
 import { RoverPhotosService } from "../../services/rover.service";
 import { Observable as RxObservable } from "rxjs";
+
+import { AfterViewInit, Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
     selector: "cosmos-rovers",

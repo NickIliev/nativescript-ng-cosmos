@@ -1,4 +1,3 @@
-import { Component } from "@angular/core";
 import { RouterExtensions } from "nativescript-angular/router";
 import { isAndroid } from "tns-core-modules/platform";
 import { Page } from "tns-core-modules/ui/page";
@@ -8,6 +7,7 @@ import {
     SegmentedBar,
     SegmentedBarItem
 } from "tns-core-modules/ui/segmented-bar";
+import { Component } from "@angular/core";
 
 @Component({
     selector: "cosmos-pickers",

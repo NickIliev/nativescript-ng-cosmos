@@ -1,5 +1,5 @@
-import { NgModule } from "@angular/core";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
+import { NgModule } from "@angular/core";
 import { Routes } from "@angular/router";
 import { MainComponent } from "./pages/main/main.component";
 import { LoginComponent } from "./pages/login/login.component";

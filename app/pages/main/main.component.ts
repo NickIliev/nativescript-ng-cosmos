@@ -1,12 +1,12 @@
-import { AfterViewInit, Component } from "@angular/core";
+
 import { PageRoute } from "nativescript-angular/router";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import { getRootView } from "tns-core-modules/application";
 import { Page } from "tns-core-modules/ui/page";
 import { isAndroid, isIOS } from "tns-core-modules/platform";
 import { switchMap } from "rxjs/operators";
-
 import { translateViewByXandYwithDurationAndCurve } from "../../shared/animations-helper";
+import { AfterViewInit, Component } from "@angular/core";
 
 @Component({
     selector: "cosmos-details",

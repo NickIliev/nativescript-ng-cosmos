@@ -1,10 +1,3 @@
-import {
-    AfterViewInit,
-    ChangeDetectorRef,
-    Component,
-    OnInit,
-    ViewChild
-} from "@angular/core";
 import { RouterExtensions } from "nativescript-angular/router";
 import { requestPermission } from "nativescript-permissions";
 import {
@@ -16,6 +9,14 @@ import { RadSideDrawerComponent } from "nativescript-ui-sidedrawer/angular";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as appSettings from "tns-core-modules/application-settings";
 import { isAndroid } from "tns-core-modules/platform";
+
+import {
+    AfterViewInit,
+    ChangeDetectorRef,
+    Component,
+    OnInit,
+    ViewChild
+} from "@angular/core";
 
 @Component({
     selector: "cosmos-app",
