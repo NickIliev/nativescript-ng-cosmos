@@ -1,13 +1,12 @@
-import { AfterViewInit, Component } from "@angular/core";
 import { RouterExtensions } from "nativescript-angular/router";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import { getRootView } from "tns-core-modules/application";
 import { isAndroid } from "tns-core-modules/platform";
 import { Page } from "tns-core-modules/ui/page";
-
 import { ApodService } from "../../services/apod.service";
 import { LoginService } from "../../services/login.service";
 import { translateViewByXandYwithDurationAndCurve } from "../../shared/animations-helper";
+import { AfterViewInit, Component } from "@angular/core";
 
 @Component({
     selector: "cosmos-login",

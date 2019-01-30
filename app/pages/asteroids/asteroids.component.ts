@@ -1,12 +1,12 @@
-import { Component } from "@angular/core";
+
 import { shareText } from "nativescript-social-share";
 import { isAndroid } from "tns-core-modules/platform";
 import { Page } from "tns-core-modules/ui/page";
 import { Observable as RxObservable } from "rxjs";
 import { map } from "rxjs/operators";
-
 import { AsteroidItem, AsteroidsApiData } from "../../models//asteroids-model";
 import { AsteroidsService } from "../../services/asteroids.service";
+import { Component } from "@angular/core";
 
 @Component({
     selector: "cosmos-asteroids",

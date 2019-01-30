@@ -1,4 +1,3 @@
-import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
 import { NativeScriptCommonModule } from "nativescript-angular/common";
 import { RoverPhotosService } from "../../services/rover.service";
@@ -7,6 +6,9 @@ import { PhotoDetailComponent } from "./photo-detail.component";
 import { ToolbarHelper } from "../../shared/toolbar-helper";
 import { PickersComponent } from "./pickers/pickers.component";
 import { RoversToolbarComponent } from "./toolbar/toolbar.component";
+
+import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
+
 export const routerConfig = [
     {
         path: "",

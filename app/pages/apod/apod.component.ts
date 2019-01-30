@@ -1,4 +1,3 @@
-import { Component } from "@angular/core";
 import { ActivityIndicator } from "tns-core-modules/ui/activity-indicator";
 import { View } from "tns-core-modules/ui/core/view";
 import { alert, confirm, ConfirmOptions } from "tns-core-modules/ui/dialogs";
@@ -6,10 +5,10 @@ import { Image } from "tns-core-modules/ui/image";
 import { Page } from "tns-core-modules/ui/page";
 import { isAndroid } from "tns-core-modules/platform";
 import { ScrollView } from "tns-core-modules/ui/scroll-view";
-
 import { ApodItem } from "../../models/apod-model";
 import { ApodService } from "../../services/apod.service";
 import { ToolbarHelper } from "../../shared/toolbar-helper";
+import { Component } from "@angular/core";
 
 @Component({
     selector: "cosmos-items",
