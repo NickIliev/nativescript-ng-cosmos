@@ -9,6 +9,7 @@ import { Component } from "@angular/core";
 })
 export class HubbleComponent {
     latestNews: Array<News> = [];
+    isExpanded: boolean = false;
 
     constructor(private _hubbleService: HubbleService) {
         this._hubbleService.getNews().subscribe(result => {
@@ -24,11 +25,16 @@ export class HubbleComponent {
                         newsRelease["abstract"],
                         newsRelease["mission"],
                         newsRelease["thumbnail"],
-                        newsRelease["publication"]);
+                        newsRelease["publication"],
+                        false);
 
                     this.latestNews.push(new News(singleNews["news_id"], singleNews["name"], release));
                 })
             })
         })
+    }
+
+    onExpand(index) {
+        this.latestNews[index].release.isExpanded = !this.latestNews[index].release.isExpanded;
     }
 }

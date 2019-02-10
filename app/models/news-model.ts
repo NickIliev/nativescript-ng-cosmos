@@ -18,8 +18,9 @@ export class NewsRelease {
     mission: string;
     thumbnail: string; 
     publication: string;
+    isExpanded: boolean;
 
-    constructor(news_id: string, name: string, url: string, abstract: string, mission: string, thumbnail: string, publication: string) {
+    constructor(news_id: string, name: string, url: string, abstract: string, mission: string, thumbnail: string, publication: string, isExpanded: boolean) {
         this.news_id = news_id;
         this.name = name;
         this.url = url;
@@ -27,6 +28,7 @@ export class NewsRelease {
         this.mission = mission;
         this.thumbnail = thumbnail;
         this.publication = new Date(publication).toLocaleDateString();
+        this.isExpanded = isExpanded;
     }
 }
 

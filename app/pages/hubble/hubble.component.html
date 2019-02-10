@@ -14,7 +14,10 @@
                     <Label [text]="news.name" class="h3" marginLeft="8" marginRight="8" textWrap="true" textAlignment="center"></Label>
                     <!-- <Label [text]="news.release.url" class="h4" textAlignment="center"></Label> -->
                     <Image [src]="news.release.thumbnail" marginTop="8" stretch="aspectFill"></Image>
-                    <Label [text]="news.release.abstract" textWrap="true" margin="8"></Label>
+                    <StackLayout>
+                        <Label [text]="news.release.isExpanded ? 'hide' : 'see the whole story'" (tap)="onExpand(i)" class="h4 m-l-16"></Label>
+                        <Label [text]="news.release.abstract" [textWrap]="news.release.isExpanded ? true : false" margin="8"></Label>
+                    </StackLayout>
                     <Label [text]="'Published on ' + news.release.publication" class="h4" margin="8"></Label>
                     <Label [text]="news.release.mission + ' mission'" class="h4" textAlignment="center" margin="8"></Label>
                 </StackLayout>
