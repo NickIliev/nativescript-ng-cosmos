@@ -23,6 +23,10 @@ const routes: Routes = [
     {
         path: "asteroids",
         loadChildren: "./pages/asteroids/asteroids.module#AsteroidsModule"
+    },
+    {
+        path: "hubble",
+        loadChildren: "./pages/hubble/hubble.module#HubbleModule"
     }
 ];
 

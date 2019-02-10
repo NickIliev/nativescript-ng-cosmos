@@ -2,7 +2,7 @@ import { ApodItem } from "../models/apod-model";
 
 import { ImageSource, fromUrl } from "tns-core-modules/image-source";
 import { isAndroid, isIOS } from "tns-core-modules/platform";
-import { shareImage } from "nativescript-social-share";
+import { shareImage, shareText } from "nativescript-social-share";
 import { ad } from "tns-core-modules/utils/utils";
 import { File, Folder, path, knownFolders } from "tns-core-modules/file-system";
 import * as enums from "tns-core-modules/ui/enums";
@@ -80,7 +80,6 @@ export class ToolbarHelper {
 
                 if (!exists) {
                     let saved = imageSource.saveToFile(myPath, "jpeg");
-                    console.log("saved: " + saved);
                 }
             }
         });

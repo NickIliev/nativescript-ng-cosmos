@@ -19,6 +19,7 @@ export class MainComponent implements AfterViewInit {
     asteroidTitle: string;
     roversTitle: string;
     detailsTitle: string;
+    hubbleTitle: string;
     isAndroid: boolean = isAndroid;
     isIos: boolean = isIOS;
     username: string;
@@ -29,6 +30,7 @@ export class MainComponent implements AfterViewInit {
         this.asteroidTitle = "Asteroids\n Proximity\n Checker";
         this.roversTitle = "Mars Rovers \nPhotos \nDatabank";
         this.detailsTitle = "About\n Cosmos Databank\n Application";
+        this.hubbleTitle = "Hubble\n Telescope\n News";
 
         (<any>this._page).scrollableContent = false;
 
@@ -38,6 +40,7 @@ export class MainComponent implements AfterViewInit {
                 this.username = params["username"];
             });
     }
+
 
     ngAfterViewInit() {
         this.drawer = <RadSideDrawer>getRootView();

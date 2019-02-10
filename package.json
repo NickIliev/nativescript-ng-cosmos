@@ -6,10 +6,7 @@
     "nativescript": {
         "id": "org.nativescript.curiosity",
         "tns-android": {
-            "version": "5.2.0-2019-01-18-142200-05"
-        },
-        "tns-ios": {
-            "version": "5.1.1"
+            "version": "5.2.0-rc-2019-02-08-174144-03"
         }
     },
     "dependencies": {
@@ -32,7 +29,7 @@
         "nativescript-ui-sidedrawer": "^5.1.0",
         "reflect-metadata": "~0.1.8",
         "rxjs": "^6.3.3",
-        "tns-core-modules": "next",
+        "tns-core-modules": "^5.2.0-rc-2019-02-08-185204-07",
         "zone.js": "^0.8.4"
     },
     "devDependencies": {

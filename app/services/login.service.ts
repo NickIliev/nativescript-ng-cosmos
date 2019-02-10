@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { AppCenter } from "nativescript-app-center";
 import {
-    login as fbLogin,
+    login as providerLogin,
     LoginType,
     User
 } from "nativescript-plugin-firebase";
@@ -59,32 +59,31 @@ export class LoginService {
                 }
             });
         } else {
-            fbLogin({
+            providerLogin({
                 type: LoginType.FACEBOOK,
                 facebookOptions: {
                     // defaults to ['public_profile', 'email']
                     scope: ["public_profile", "email"]
                 }
+            }).then((user) => {
+                this._appCenter.trackEvent("Facebook Login", [
+                    { key: "user", value: user.name }
+                ]);
+
+                appSettings.setBoolean("isLogged", true);
+                appSettings.setString("username", user.name);
+
+                routerExtensions.navigate(["/main"], {
+                    clearHistory: true,
+                    transition: {
+                        name: "fade",
+                        duration: 300
+                    },
+                    queryParams: {
+                        username: user.name
+                    }
+                });
             })
-                .then(user => {
-                    this._appCenter.trackEvent("Facebook Login", [
-                        { key: "user", value: user.name }
-                    ]);
-
-                    appSettings.setBoolean("isLogged", true);
-                    appSettings.setString("username", user.name);
-
-                    routerExtensions.navigate(["/main"], {
-                        clearHistory: true,
-                        transition: {
-                            name: "fade",
-                            duration: 300
-                        },
-                        queryParams: {
-                            username: user.name
-                        }
-                    });
-                })
                 .catch(err => {
                     // console.log(err);
                 });
@@ -109,29 +108,28 @@ export class LoginService {
                 }
             });
         } else {
-            fbLogin({
+            providerLogin({
                 type: LoginType.GOOGLE
-            }).then(
-                result => {
-                    let user: User = result;
-                    this._appCenter.trackEvent("Google Login", [
-                        { key: "user", value: user.name }
-                    ]);
+            }).then((result) => {
+                let user: User = result;
+                this._appCenter.trackEvent("Google Login", [
+                    { key: "user", value: user.name }
+                ]);
 
-                    appSettings.setBoolean("isLogged", true);
-                    appSettings.setString("username", user.name);
+                appSettings.setBoolean("isLogged", true);
+                appSettings.setString("username", user.name);
 
-                    routerExtensions.navigate(["/main"], {
-                        clearHistory: true,
-                        transition: {
-                            name: "fade",
-                            duration: 300
-                        },
-                        queryParams: {
-                            username: user.name
-                        }
-                    });
-                },
+                routerExtensions.navigate(["/main"], {
+                    clearHistory: true,
+                    transition: {
+                        name: "fade",
+                        duration: 300
+                    },
+                    queryParams: {
+                        username: user.name
+                    }
+                });
+            },
                 errorMessage => {
                     // console.log(errorMessage);
                 }
