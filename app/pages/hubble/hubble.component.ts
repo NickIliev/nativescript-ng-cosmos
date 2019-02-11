@@ -1,17 +1,24 @@
-import { HubbleNewsApiData, News, NewsRelease } from "../../models/news-model";
+import { News, NewsRelease } from "../../models/news-model";
 import { HubbleService } from "../../services/hubble.service";
 import { Component } from "@angular/core";
+import { Page }  from "tns-core-modules/ui/page";
+import { isAndroid } from "tns-core-modules/platform";
 
 @Component({
     selector: "hubble-news",
     moduleId: module.id,
-    templateUrl: "./hubble.component.html"
+    templateUrl: "./hubble.component.html",
+    styleUrls:["hubble.component.css"]
 })
 export class HubbleComponent {
     latestNews: Array<News> = [];
     isExpanded: boolean = false;
 
-    constructor(private _hubbleService: HubbleService) {
+    constructor(private _hubbleService: HubbleService, private _page: Page) {
+        if (isAndroid) {
+            this._page.actionBarHidden = true;
+        }
+
         this._hubbleService.getNews().subscribe(result => {
             (<Array<News>>result).forEach(singleNews => {
                 let release: any;

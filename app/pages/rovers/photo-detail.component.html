@@ -1,15 +1,15 @@
-<GridLayout>
+<GridLayout class="background">
     <ScrollView>
         <CardView elevation="40" radius="40" margin="10" class="cardview">
             <StackLayout>
                 <Image [src]="photo.imageUri" stretch="aspectFill"></Image>
-                <Label [text]="'Photo ID: ' + photo.id" class="p-10" textWrap="true"></Label>
-                <Label [text]="'Camera: ' + photo.cameraFullName" class="p-b-10 p-l-10 p-r-10" textWrap="true"></Label>
-                <Label [text]="'Taken on ' + photo.earthDate" class="p-b-10 p-l-10 p-r-10" textWrap="true"></Label>
+                <Label [text]="'Photo ID: ' + photo.id" textWrap="true"></Label>
+                <Label [text]="'Camera: ' + photo.cameraFullName" textWrap="true"></Label>
+                <Label [text]="'Taken on ' + photo.earthDate"  textWrap="true"></Label>
             </StackLayout>
         </CardView>
     </ScrollView>
-    <DockLayout stretchLastChild="true" class="dock" verticalAlignment="bottom">
+    <DockLayout class="dock" verticalAlignment="bottom">
         <cosmos-rovers-toolbar (notify)="onNotify($event)"></cosmos-rovers-toolbar>
     </DockLayout>
 </GridLayout>

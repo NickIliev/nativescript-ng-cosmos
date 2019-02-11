@@ -9,6 +9,9 @@ import { RadSideDrawerComponent } from "nativescript-ui-sidedrawer/angular";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as appSettings from "tns-core-modules/application-settings";
 import { isAndroid } from "tns-core-modules/platform";
+import { Button } from "tns-core-modules/ui/button";
+import { EventData } from "tns-core-modules/data/observable";
+import { translateViewByXandYwithDurationAndCurve } from "./shared/animations-helper";
 
 import {
     AfterViewInit,
@@ -25,6 +28,7 @@ import {
 })
 export class AppComponent implements OnInit, AfterViewInit {
     private _drawer: RadSideDrawer;
+    private _btn: Button;
 
     @ViewChild(RadSideDrawerComponent)
     drawerComponent: RadSideDrawerComponent;
@@ -59,13 +63,13 @@ export class AppComponent implements OnInit, AfterViewInit {
             // Optionally pass in properties for database, authentication and cloud messaging,
             // see their respective docs.
             onMessageReceivedCallback: (message: any) => {
-                console.log(`Title: ${message.title}`);
-                console.log(`Body: ${message.body}`);
+                // console.log(`Title: ${message.title}`);
+                // console.log(`Body: ${message.body}`);
                 // if your server passed a custom property called 'foo', then do this:
-                console.log(`Value of 'foo': ${message.data.foo}`);
+                // console.log(`Value of 'foo': ${message.data.foo}`);
             },
             onPushTokenReceivedCallback: function(token) {
-                console.log("Firebase push token: " + token);
+                // console.log("Firebase push token: " + token);
             },
 
             // optional but useful to immediately re-logon the user when he re-visits your app
@@ -97,6 +101,43 @@ export class AppComponent implements OnInit, AfterViewInit {
             // may be null if not known yet
             // console.log("Current push token: " + token);
         });
+    }
+
+    onViewLoaded(args: EventData) {
+        let btn = args.object as Button;
+        let startingPointY: number = 0;
+        setTimeout(() => {
+            startingPointY = btn.getLocationRelativeTo(btn.parent as any).y;
+        }, 200);
+
+        this._drawer.on("drawerOpening",() => {
+
+            translateViewByXandYwithDurationAndCurve(
+                btn, // view
+                0, // from X
+                0, // to X
+                -300 + (startingPointY * 2), // from Y
+                0, // to Y
+                500, // ms
+                "easeOut"
+                )
+        })
+
+        this._drawer.on("drawerClosing",() => {
+            translateViewByXandYwithDurationAndCurve(
+                btn, // view
+                0, // from X
+                0, // to X
+                0, // from Y
+                -300 + (startingPointY * 4), // to Y
+                500, // ms
+                "easeIn"
+                )
+        })
+    }
+
+    onDrawerLoaded(args: EventData) {
+        this._drawer = args.object as RadSideDrawer;
     }
 
     ngAfterViewInit() {

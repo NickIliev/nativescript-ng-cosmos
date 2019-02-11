@@ -1,17 +1,16 @@
-.cardview {
-    background-color: #343838;
+
+Label {
+    color: #BCBCBC;
+    font-size: 18;
+    vertical-align: middle;
+}
+
+.drawer-icon {
+    font-size: 24;
+    padding: 0 16 0 16;
 }
 
 .cardview Label {
     color: #BCBCBC;
     font-size: 14;
-}
-
-.action-bar-title {
-    color: #BCBCBC;
-    font-size: 18;
-}
-
-.background {
-    background-color: #282a2a;
 }

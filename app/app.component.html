@@ -1,16 +1,15 @@
-
 <RadSideDrawer>
-    
-    <StackLayout tkDrawerContent class="sidedrawer-content">
-        <Label text="Home" (tap)="navigateTo('/main', false)" textWrap="true"></Label>
-        <Label text="Photo of the Day" (tap)="navigateTo('/apod', false)" textWrap="true"></Label>
-        <Label text="Asteroids Proximity Checker" (tap)="navigateTo('/asteroids', false)" textWrap="true"></Label>
-        <Label text="Mars Rovers Photos" (tap)="navigateTo('/rovers', false)" textWrap="true"></Label>
-        <Label text="Hubble Telescope News" (tap)="navigateTo('/hubble', false)" textWrap="true"></Label>
-        <Label text="Details" (tap)="navigateTo('/info', false)" textWrap="true"></Label>
-        <Label *ngIf="isUserLogged" text="Logout" (tap)="firebaseLogout()" textWrap="true"></Label>
-    </StackLayout>
+    <ScrollView tkDrawerContent>
+        <StackLayout class="sidedrawer-content">
+            <Button (loaded)="onViewLoaded($event)" text="Home" (tap)="navigateTo('/main', false)" textWrap="true"></Button>
+            <Button (loaded)="onViewLoaded($event)" text="Photo of the Day" (tap)="navigateTo('/apod', false)" textWrap="true"></Button>
+            <Button (loaded)="onViewLoaded($event)" text="Asteroids Proximity Checker" (tap)="navigateTo('/asteroids', false)" textWrap="true"></Button>
+            <Button (loaded)="onViewLoaded($event)" text="Mars Rovers Photos" (tap)="navigateTo('/rovers', false)" textWrap="true"></Button>
+            <Button (loaded)="onViewLoaded($event)" text="Hubble Telescope News" (tap)="navigateTo('/hubble', false)" textWrap="true"></Button>
+            <Button (loaded)="onViewLoaded($event)" text="Details" (tap)="navigateTo('/info', false)" textWrap="true"></Button>
+            <Button (loaded)="onViewLoaded($event)" *ngIf="isUserLogged" text="Logout" (tap)="firebaseLogout()" textWrap="true"></Button>
+        </StackLayout>
+    </ScrollView>
 
     <page-router-outlet tkMainContent></page-router-outlet>
-
 </RadSideDrawer>

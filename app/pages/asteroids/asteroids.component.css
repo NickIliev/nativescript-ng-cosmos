@@ -1,37 +1,14 @@
-Label {
-    color: #BCBCBC;
-}
-
 .list-view {
-    background-color: #343838;
-}
-
-.card {
-    background-color:#282a2a;
-    margin: 0 8 8 8;
-}
-
-
-.card Label {
-    padding-left: 8;
-    font-size:12;
-}
-
-.sort-menu {
-    border-radius: 10;
-    border-width: 1;
-    border-color: #282a2a;
-    opacity: 0.8;
+    background-color: #282a2a;
 }
 
 .sort-labels {
     border-radius: 10;
     border-color: #BCBCBC;
     border-width: 1;
-    font-family: "Nasalization";
-    font-size: 12;
-    margin: 4;
-    padding: 8;
+    margin: 0 4 0 4;
+    opacity: 0.8;
+    padding: 4;
     text-align: center;
 }
 
@@ -42,4 +19,15 @@ Label {
     border-radius: 20;
     background-color:#1b1d1d;
     color: #E8EAEB;
+}
+
+Label {
+    color: #BCBCBC;
+    font-size: 12;
+    margin: 4;
+}
+
+Label.title {
+    margin: 0 8 0 4;
+    font-size: 18;
 }
