@@ -1,11 +1,25 @@
 .card {
     margin: 8 8 0 8;
+    padding: 8;
+    background-color: #343838;
 }
 
 .card Label {
     margin: 8 8 0 8;
+    color: #BCBCBC;
+    vertical-align: middle;
+}
+
+.content {
+    font-size: 14;
 }
 
 .card Image {
     margin: 8 0 0 0;
 }
+
+.list-view {
+    margin: 8 8 0 8;
+    background-color: #282a2a;
+}
+

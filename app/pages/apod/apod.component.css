@@ -6,6 +6,7 @@ ActivityIndicator {
 .dock {
     background-color: transparent;
     vertical-align: bottom;
+    horizontal-align: center;
 }
 
 Label {

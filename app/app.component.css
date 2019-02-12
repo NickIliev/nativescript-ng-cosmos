@@ -2,6 +2,10 @@
     background-color: #282a2a;
 } */
 
+.sidedrawer-content {
+    background-color: transparent;
+}
+
 .sidedrawer-content > Button {
     background-color: #343838;
     border-radius: 10;
