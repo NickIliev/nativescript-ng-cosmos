@@ -6,7 +6,9 @@ import { Page } from "tns-core-modules/ui/page";
 import { ApodService } from "../../services/apod.service";
 import { LoginService } from "../../services/login.service";
 import { translateViewByXandYwithDurationAndCurve } from "../../shared/animations-helper";
-import { AfterViewInit, Component } from "@angular/core";
+import { AfterViewInit, Component, OnInit } from "@angular/core";
+
+import * as appSettings from "tns-core-modules/application-settings";
 
 @Component({
     selector: "cosmos-login",
@@ -15,7 +17,7 @@ import { AfterViewInit, Component } from "@angular/core";
     styleUrls: ["./login.component.css"],
     providers: [LoginService]
 })
-export class LoginComponent implements AfterViewInit {
+export class LoginComponent implements AfterViewInit, OnInit {
     public backgroundImage: string = "res://background";
     public date: string;
     public descText: string = "100% free access";
@@ -34,6 +36,13 @@ export class LoginComponent implements AfterViewInit {
         }
 
         this.initData();
+    }
+
+    ngOnInit() {
+        // if the user is logged in
+        // console.log(appSettings.getString("uid"));
+        // console.log(appSettings.getString("username"));
+        // console.log(appSettings.getString("userPicture"));
     }
 
     ngAfterViewInit() {

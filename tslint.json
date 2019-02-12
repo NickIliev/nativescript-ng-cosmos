@@ -19,8 +19,8 @@
         "use-output-property-decorator": true,
         "use-host-property-decorator": true,
         "no-attribute-parameter-decorator": true,
-        "no-input-rename": true,
-        "no-output-rename": true,
+        "no-input-rename": false,
+        "no-output-rename": false,
         "use-life-cycle-interface": true,
         "use-pipe-transform-interface": true,
         "component-class-suffix": true,
@@ -55,7 +55,7 @@
         "ban": false,
         "curly": true,
         "no-arg": true,
-        "no-bitwise": true,
+        "no-bitwise": false,
         "no-conditional-assignment": true,
         "no-console": [
             true,
@@ -89,7 +89,7 @@
         ],
         "max-line-length": [
             true,
-            120
+            160
         ],
         "no-require-imports": false,
         "no-trailing-whitespace": true,
