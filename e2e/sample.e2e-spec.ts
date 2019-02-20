@@ -1,10 +1,10 @@
-import { AppiumDriver, createDriver, SearchOptions } from "nativescript-dev-appium";
+import { AppiumDriver, createDriver, SearchOptions, Point } from "nativescript-dev-appium";
 import { assert } from "chai";
-import { wait } from "nativescript-dev-appium/lib/utils";
 
 describe("sample scenario", () => {
     const defaultWaitTime = 5000;
     let driver: AppiumDriver;
+    let sideDrawerBtnRect: Point;
 
     before(async () => {
         driver = await createDriver();
@@ -21,23 +21,15 @@ describe("sample scenario", () => {
         }
     });
 
-    it("no pass login", async () => {
-        const allowCameraBtn = (await driver.findElementByTextIfExists("Allow"))
-        if (allowCameraBtn) {
-            await allowCameraBtn.click();
-        }
-        await (await driver.findElementByText("No Pass Login", SearchOptions.contains)).click();
-
-        const astronomicalDayElement = await driver.findElementByText("Astronomical", SearchOptions.contains);
-
-        assert.isTrue(astronomicalDayElement != null && (await astronomicalDayElement.isDisplayed()));
-    });
-
     const openSidedrawer = async () => {
         if (driver.isAndroid) {
-            const sideDrawerLocator = "android.support.v7.widget.LinearLayoutCompat";
-            const btn = await driver.findElementByClassName(sideDrawerLocator);
-            await btn.click();
+            if (!sideDrawerBtnRect) {
+                const btnSideDrawer = await driver.findElementByText("COSMOS Databank");
+                const sideDrawerRect = await btnSideDrawer.getRectangle();
+                const displaySize = await driver.driver.getWindowSize();
+                sideDrawerBtnRect = new Point(displaySize.width - 10, sideDrawerRect.y + sideDrawerRect.height / 2);
+            }
+            await driver.clickPoint(sideDrawerBtnRect.x, sideDrawerBtnRect.y);
         } else {
             try {
                 driver.touchAction
@@ -56,9 +48,7 @@ describe("sample scenario", () => {
 
     const closeSidedrawer = async () => {
         if (driver.isAndroid) {
-            const sideDrawerLocator = "android.support.v7.widget.LinearLayoutCompat";
-            const btn = await driver.findElementByClassName(sideDrawerLocator);
-            await btn.click();
+            await driver.clickPoint(sideDrawerBtnRect.x, sideDrawerBtnRect.y);
         } else {
             try {
                 driver.touchAction
@@ -71,6 +61,18 @@ describe("sample scenario", () => {
 
         }
     }
+
+    it("no pass login", async () => {
+        const allowCameraBtn = (await driver.findElementByTextIfExists("Allow"))
+        if (allowCameraBtn) {
+            await allowCameraBtn.click();
+        }
+        await (await driver.findElementByText("No Pass Login", SearchOptions.contains)).click();
+
+        const astronomicalDayElement = await driver.findElementByText("Astronomical", SearchOptions.contains);
+
+        assert.isTrue(astronomicalDayElement != null && (await astronomicalDayElement.isDisplayed()));
+    });
 
     it("open sidedrawer menu", async () => {
         await openSidedrawer();

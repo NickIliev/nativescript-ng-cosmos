@@ -45,7 +45,7 @@
         "mocha": "~5.1.0",
         "mocha-junit-reporter": "~1.17.0",
         "mocha-multi": "~1.0.0",
-        "nativescript-dev-appium": "^4.1.0-2018-10-11-01",
+        "nativescript-dev-appium": "^5.0.0",
         "nativescript-dev-typescript": "next",
         "nativescript-dev-webpack": "next",
         "tns-platform-declarations": "~5.1.2",
