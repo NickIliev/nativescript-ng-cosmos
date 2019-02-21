@@ -1,16 +1,14 @@
-.cardview {
-    background-color: #343838;
-}
-
-.cardview Label {
-    color: #BCBCBC;
-    font-size: 14;
-}
-
 Button {
     color: #343838;
 }
 
+Label {
+    color: #BCBCBC;
+    font-family: "Nasalization";
+}
+
 .dock {
     background-color: transparent;
+    margin: 8;
+    vertical-align: bottom;
 }

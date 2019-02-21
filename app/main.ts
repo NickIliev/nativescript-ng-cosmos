@@ -5,7 +5,9 @@ import { platformNativeScriptDynamic } from "nativescript-angular/platform";
 
 import { AppModule } from "./app.module";
 import { initializeLoggers } from "./shared/app-center-initializer";
-const firebase = require("nativescript-plugin-firebase");
+
+require("nativescript-plugin-firebase");
+
 import {
     android as androidApp,
     AndroidApplication,
@@ -44,7 +46,5 @@ if (androidApp) {
 
 initializeLoggers();
 enableProdMode();
-
-console.log("After enableProdMode");
 
 platformNativeScriptDynamic().bootstrapModule(AppModule);

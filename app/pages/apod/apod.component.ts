@@ -51,10 +51,17 @@ export class ApodComponent {
         // this.dock.translateY = 60;
         this.dock.translateY = 100;
         this.dock.translateX = 50;
-        this.dock.animate({
-            translate: { x: 0, y: -10 },
-            duration: 1000
-        });
+        if (isAndroid) {
+            this.dock.animate({
+                translate: { x: 0, y: -10 },
+                duration: 1000
+            });
+        } else {
+            this.dock.animate({
+                translate: { x: 0, y: 20 },
+                duration: 1000
+            });
+        }
     }
 
     onImageLoaded(args) {
@@ -217,6 +224,8 @@ export class ApodComponent {
                         result["title"],
                         result["url"]
                     );
+
+                    this.scroll.scrollToHorizontalOffset(0, true);
                 } else if (result["media_type"] !== "image" && this.direction) {
                     // TODO: implement the logic for YouTube videos here
                     this._toolbarHelper.setPrevousDay(this.lastLoadedDate);

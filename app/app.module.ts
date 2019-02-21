@@ -1,14 +1,12 @@
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
-
 import { registerElement } from "nativescript-angular/element-registry";
 import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
 import { NativeScriptModule } from "nativescript-angular/nativescript.module";
-
 import { AppCenter } from "nativescript-app-center";
 import { NativeScriptUISideDrawerModule } from "nativescript-ui-sidedrawer/angular";
-
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app.routing";
+import { AppService } from "./app.service";
 import { LoginComponent } from "./pages/login/login.component";
 import { MainComponent } from "./pages/main/main.component";
 import { ApodService } from "./services/apod.service";
@@ -25,7 +23,7 @@ registerElement("CardView", () => require("nativescript-cardview").CardView);
         NativeScriptUISideDrawerModule
     ],
     declarations: [AppComponent, LoginComponent, MainComponent],
-    providers: [ApodService, { provide: AppCenter, useValue: appCenter }],
+    providers: [ApodService, AppService, { provide: AppCenter, useValue: appCenter }],
     schemas: [NO_ERRORS_SCHEMA]
 })
 /*

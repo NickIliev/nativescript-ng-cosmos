@@ -1,31 +1,40 @@
 import { Injectable } from "@angular/core";
 import { AppCenter } from "nativescript-app-center";
 import {
-    login as fbLogin,
+    login as providerLogin,
     LoginType,
     User
 } from "nativescript-plugin-firebase";
-import * as appSettings from "tns-core-modules/application-settings";
+import { getBoolean, getString, setBoolean, setString } from "tns-core-modules/application-settings";
 
 @Injectable()
 export class LoginService {
     constructor(private _appCenter: AppCenter) { }
 
+    private authenticateAction(routerExtensions: any, uid: string, username: string, userPicture: string) {
+        routerExtensions.navigate(["/main"], {
+            clearHistory: true,
+            transition: {
+                name: "fade",
+                duration: 300
+            },
+            queryParams: {
+                uid: (uid || ""),
+                username: (username || ""),
+                userPicture: (userPicture || "")
+            }
+        });
+    }
+
     login(routerExtensions: any) {
-        if (appSettings.getBoolean("isLogged")) {
-            let username = appSettings.getString("username");
+        if (getBoolean("isLogged")) {
+            let uid = getString("uid");
+            let username = getString("username");
+            let userPicture = getString("userPicture");
+
             this._appCenter.trackEvent("Login", [{ key: "user", value: username }]);
 
-            routerExtensions.navigate(["/main"], {
-                clearHistory: true,
-                transition: {
-                    name: "fade",
-                    duration: 300
-                },
-                queryParams: {
-                    username: username
-                }
-            });
+            this.authenticateAction(routerExtensions, uid, username, userPicture);
         } else {
             this._appCenter.trackEvent("Anonymous Login", [
                 { key: "user", value: "Anonymous" }
@@ -42,100 +51,80 @@ export class LoginService {
     }
 
     facebook(routerExtensions: any) {
-        if (appSettings.getBoolean("isLogged")) {
-            let username = appSettings.getString("username");
+        if (getBoolean("isLogged")) {
+            let uid = getString("uid");
+            let username = getString("username");
+            let userPicture = getString("userPicture");
+
             this._appCenter.trackEvent("Facebook Login", [
                 { key: "user", value: username }
             ]);
 
-            routerExtensions.navigate(["/main"], {
-                clearHistory: true,
-                transition: {
-                    name: "fade",
-                    duration: 300
-                },
-                queryParams: {
-                    username: username
-                }
-            });
+            this.authenticateAction(routerExtensions, uid, username, userPicture);
         } else {
-            fbLogin({
+            providerLogin({
                 type: LoginType.FACEBOOK,
                 facebookOptions: {
                     // defaults to ['public_profile', 'email']
                     scope: ["public_profile", "email"]
                 }
-            })
-                .then(user => {
-                    this._appCenter.trackEvent("Facebook Login", [
-                        { key: "user", value: user.name }
-                    ]);
+            }).then((result) => {
+                let user: User = result;
+                this._appCenter.trackEvent("Facebook Login", [
+                    { key: "user", value: user.name }
+                ]);
 
-                    appSettings.setBoolean("isLogged", true);
-                    appSettings.setString("username", user.name);
+                setBoolean("isLogged", true);
+                setString("uid", user.uid);
+                setString("username", user.name);
+                setString("userPicture", user.additionalUserInfo.profile["picture"]["data"]["url"]);
 
-                    routerExtensions.navigate(["/main"], {
-                        clearHistory: true,
-                        transition: {
-                            name: "fade",
-                            duration: 300
-                        },
-                        queryParams: {
-                            username: user.name
-                        }
-                    });
-                })
-                .catch(err => {
-                    // console.log(err);
-                });
+                this.authenticateAction(
+                    routerExtensions,
+                    user.uid,
+                    user.name,
+                    user.additionalUserInfo.profile["picture"]["data"]["url"]
+                );
+            }).catch((errorMessage) => {
+                // console.log(errorMessage);
+            });
         }
     }
 
     google(routerExtensions: any) {
-        if (appSettings.getBoolean("isLogged")) {
-            let username = appSettings.getString("username");
+        if (getBoolean("isLogged")) {
+            let uid = getString("uid");
+            let username = getString("username");
+            let userPicture = getString("userPicture");
+
             this._appCenter.trackEvent("Google Login", [
                 { key: "user", value: username }
             ]);
 
-            routerExtensions.navigate(["/main"], {
-                clearHistory: true,
-                transition: {
-                    name: "fade",
-                    duration: 300
-                },
-                queryParams: {
-                    username: username
-                }
-            });
+            this.authenticateAction(routerExtensions, uid, username, userPicture);
         } else {
-            fbLogin({
+            providerLogin({
                 type: LoginType.GOOGLE
-            }).then(
-                result => {
-                    let user: User = result;
-                    this._appCenter.trackEvent("Google Login", [
-                        { key: "user", value: user.name }
-                    ]);
+            }).then((result) => {
+                let user: User = result;
+                this._appCenter.trackEvent("Google Login", [
+                    { key: "user", value: user.name }
+                ]);
 
-                    appSettings.setBoolean("isLogged", true);
-                    appSettings.setString("username", user.name);
+                setBoolean("isLogged", true);
+                setString("uid", user.uid);
+                setString("username", user.name);
+                setString("userPicture", user.additionalUserInfo.profile["picture"]["data"]["url"]);
 
-                    routerExtensions.navigate(["/main"], {
-                        clearHistory: true,
-                        transition: {
-                            name: "fade",
-                            duration: 300
-                        },
-                        queryParams: {
-                            username: user.name
-                        }
-                    });
-                },
-                errorMessage => {
-                    // console.log(errorMessage);
-                }
-            );
+                this.authenticateAction(
+                    routerExtensions,
+                    user.uid,
+                    user.name,
+                    user.additionalUserInfo.profile["picture"]["data"]["url"]
+                );
+            }).catch((errorMessage) => {
+                // console.log(errorMessage);
+            });
         }
     }
 }

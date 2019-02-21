@@ -7,6 +7,7 @@ import { map } from "rxjs/operators";
 import { AsteroidItem, AsteroidsApiData } from "../../models//asteroids-model";
 import { AsteroidsService } from "../../services/asteroids.service";
 import { Component } from "@angular/core";
+import { on, orientationChangedEvent, OrientationChangedEventData } from "tns-core-modules/application";
 
 @Component({
     selector: "cosmos-asteroids",
@@ -15,6 +16,8 @@ import { Component } from "@angular/core";
     styleUrls: ["./asteroids.component.css"]
 })
 export class AsteroidsComponent {
+
+    isPortrait: boolean = false;
 
     asteroidItems: RxObservable<Array<AsteroidItem>>;
     asteroidCount: number;
@@ -32,6 +35,16 @@ export class AsteroidsComponent {
         if (isAndroid) {
             this._page.actionBarHidden = true;
         }
+
+        on(orientationChangedEvent, (args: OrientationChangedEventData) => {
+            let orientation = args.newValue;
+            console.log(`orientation ${orientation}`);
+            if (orientation === "portrait") {
+                this.isPortrait = true;
+            } else {
+                this.isPortrait = false;
+            }
+        });
 
         this.asteroidCount = 0;
         this.pageTitle = "Nearby ASTEROIDS Checker";

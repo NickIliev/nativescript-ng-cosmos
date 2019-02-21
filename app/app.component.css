@@ -1,14 +1,42 @@
-.sidedrawer-content {
+/* .sidedrawer-content {
     background-color: #282a2a;
+} */
+
+.sidedrawer-content {
+    background-color: transparent;
 }
 
-.sidedrawer-content > Label {
+.sidedrawer-content > Button {
     background-color: #343838;
     border-radius: 10;
     color: #BCBCBC;
     font-family: "Nasalization";
-    font-size: 14;
-    margin: 8;
-    padding: 16;
+    margin: 4 16 0 16;
+    padding: 8;
     text-align: center;
 }
+
+.sidedrawer-content > Button:active {
+    background-color: #BCBCBC;
+    color: #343838;
+    border-color: #343838;
+    border-width: 1;
+}
+
+/*
+http://www.colourlovers.com/palette/482774/dream_magnet
+#343838 (main lightest gray - action-bar bg / dialogs color / main cardview bg / sidedrawer buttons bg
+            - asteroids list bg / info cardview bg / rovers listview bg 
+            - rovers-detais cardview bg / rovers-details button color)
+
+#282a2a (mid gray - siderawer background / main bg / border/ toolbar color
+            - asteroids cardview bg / asteroids border / info bg / rovers cardview bg
+            - pickers title bg / pickers sg color )
+
+#BCBCBC (very light whitish gray - action-bar color / cardview color/ sidedrawer buttons color
+            - apod color / asteroids color / main color  / 
+            - pickers seg bg/ pickers title color)
+
+#1b1d1d (darkest gray - login + toolbar buttons non-highlighted bg&color) 
+#E8EAEB (contrast white - login + toolbar buttons highlighted bg&colo / login TITLE color)        
+*/

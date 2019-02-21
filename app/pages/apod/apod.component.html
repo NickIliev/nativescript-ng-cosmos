@@ -6,15 +6,17 @@
         </StackLayout>
     </ActionItem>
 </ActionBar>
-<GridLayout>
+<GridLayout class="background">
     <ScrollView (loaded)="onScrollLoaded($event)">
-        <StackLayout class="p-b-16">
-            <ActivityIndicator (loaded)="onIndicatorLoaded($event)" class="m-t-30 m-b-20"></ActivityIndicator>
-            <Image (loaded)="onImageLoaded($event)" [src]="item.url"> </Image>
-            <Label [text]="item.title" class="title p-10" textWrap="true"></Label>
-            <Label [text]="item.explanation" class="description p-b-10 p-l-10 p-r-10" textWrap="true"></Label>
-            <Label [text]="item.date" class="date" textWrap="true"></Label>
-        </StackLayout>
+        <CardView elevation="40" radius="40" class="cardview">
+            <StackLayout class="p-b-16">
+                <ActivityIndicator (loaded)="onIndicatorLoaded($event)" class="m-t-30 m-b-20"></ActivityIndicator>
+                <Image (loaded)="onImageLoaded($event)" [src]="item.url"> </Image>
+                <Label [text]="item.title" class="title p-10" textWrap="true"></Label>
+                <Label [text]="item.explanation" class="description p-b-10 p-l-10 p-r-10" textWrap="true"></Label>
+                <Label [text]="item.date" class="date" textWrap="true"></Label>
+            </StackLayout>
+        </CardView>
     </ScrollView>
     <DockLayout class="dock" (loaded)="onDockLoaded($event)" iosOverflowSafeArea="false">
         <cosmos-toolbar (notify)="onNotify($event)"></cosmos-toolbar>

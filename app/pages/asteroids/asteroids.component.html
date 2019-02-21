@@ -1,22 +1,30 @@
-<GridLayout rows="auto, auto, auto,  *" columns="*">
-  <Label row="0" [text]="pageTitle" class="h3 text-center p-4  m-l-15 m-r-15" textWrap="true"></Label>
-  <Label row="1" [text]="asteroidCount + ' asteroids passing nearby in the next 7 days'" class="h4 text-center m-l-15 m-r-15" textWrap="true"></Label>
-  <StackLayout row="2" class="sort-menu">
-    <Label text="Sort by" textWrap="true" horizontalAlignment="center" fontSize="10"></Label>
-    
-    <GridLayout columns="*, *, *" width="100%">
-      <Label col="0" [text]="isAscending ? 'Prozimity (D)' : 'Prozimity (A)'" (tap)="sortByProximity()" class="sort-labels"></Label>
-      <Label col="1" [text]="isSizeAscending ? 'Size (D)' : 'Size (A)'" (tap)="sortBySize()" class="sort-labels"></Label>
-      <Label col="2" text="Danger" (tap)="sortByDanger()" class="sort-labels"></Label>  
-    </GridLayout>
-  </StackLayout>
+<GridLayout rows="auto, auto, *" columns="*" class="background">
+  <CardView row="0" elevation="40" radius="40" class="cardview">
+    <StackLayout>
+      <Label [text]="pageTitle" class="title" textWrap="true" textAlignment="center"></Label>
+      <Label [text]="asteroidCount + ' asteroids passing nearby\n (7-days forecast)'" textAlignment="center"
+        textWrap="true"></Label>
+    </StackLayout>
+  </CardView>
 
-  <ListView row="3" [items]="asteroidItems | async" class="list-view" separatorColor="#343838">
+  <CardView row="1" elevation="40" radius="40" class="cardview">
+    <StackLayout>
+      <Label text="Sort by" textWrap="true" marginTop="0" marginLeft="16"></Label>
+      <GridLayout columns="*, *, *" width="100%">
+        <Label col="0" [text]="isAscending ? 'Prozimity (D)' : 'Prozimity (A)'" (tap)="sortByProximity()"
+          class="sort-labels"></Label>
+        <Label col="1" [text]="isSizeAscending ? 'Size (D)' : 'Size (A)'" (tap)="sortBySize()"
+          class="sort-labels"></Label>
+        <Label col="2" text="Danger" (tap)="sortByDanger()" class="sort-labels"></Label>
+      </GridLayout>
+    </StackLayout>
+  </CardView>
+
+  <ListView row="2" [items]="asteroidItems | async" class="list-view" separatorColor="#282a2a">
     <ng-template let-asteroid="item" let-i="index">
 
       <!-- Optimize and simplify the tempalte to achive max performance!  -->
-      <CardView elevation="40" radius="40" class="card">
-
+      <CardView elevation="40" radius="40" class="cardview">
         <GridLayout columns="2*, 5*">
 
           <GridLayout col="0">
@@ -36,25 +44,28 @@
               <Label text="Size (km)" opacity="0.8" textWrap="true"></Label>
               <StackLayout orientation="horizontal">
                 <Label text="min: " opacity="0.8"></Label>
-                <Label [text]="asteroid.estimated_diameter.kilometers.estimated_diameter_min | number:'1.1-1'" ></Label>
+                <Label [text]="asteroid.estimated_diameter.kilometers.estimated_diameter_min | number:'1.1-1'"></Label>
               </StackLayout>
               <StackLayout orientation="horizontal">
                 <Label text="max: " opacity="0.8"></Label>
-                <Label [text]="asteroid.estimated_diameter.kilometers.estimated_diameter_max | number:'1.0-1'" ></Label>
+                <Label [text]="asteroid.estimated_diameter.kilometers.estimated_diameter_max | number:'1.0-1'"></Label>
               </StackLayout>
             </StackLayout>
           </GridLayout>
 
           <StackLayout col="1" width="100%" textAlignment="center">
             <Label [text]="'VAsteroid Name    : ' + asteroid.name"></Label>
-            <Label [text]="'Is it Dangerous?  : ' + (asteroid.is_potentially_hazardous_asteroid ? 'Yes!' : 'Nope')" [color]="asteroid.is_potentially_hazardous_asteroid ? 'orangered' : 'lightseagreen'"></Label>
+            <Label [text]="'Is it Dangerous?  : ' + (asteroid.is_potentially_hazardous_asteroid ? 'Yes!' : 'Nope')"
+              [color]="asteroid.is_potentially_hazardous_asteroid ? 'orangered' : 'lightseagreen'"></Label>
             <Label [text]="'Approach Date     : ' + asteroid.close_approach_data[0].close_approach_date"></Label>
-            <Label [text]="'Velocity (km/h)   : ' + asteroid.close_approach_data[0].relative_velocity.kilometers_per_hour"></Label>
+            <Label
+              [text]="'Velocity (km/h)   : ' + asteroid.close_approach_data[0].relative_velocity.kilometers_per_hour"></Label>
             <Label [text]="'Miss Distance (km): ' + asteroid.close_approach_data[0].miss_distance.kilometers"></Label>
             <Label [text]="'Orbiting Body     : ' + asteroid.close_approach_data[0].orbiting_body"></Label>
           </StackLayout>
-          <DockLayout col="1"  verticalAlignment="bottom" horizontalAlignment="right">
-              <Button text="&#xf1e0;" class="fa-solid share-label" (tap)="onShare(i)" ></Button>
+
+          <DockLayout col="1" verticalAlignment="bottom" horizontalAlignment="right">
+            <Button text="&#xf1e0;" class="fa-solid share-label" (tap)="onShare(i)"></Button>
           </DockLayout>
         </GridLayout>
       </CardView>
