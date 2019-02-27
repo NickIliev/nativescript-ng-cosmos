@@ -1,6 +1,6 @@
 <!-- Remove the outer GridLayout once https://github.com/NativeScript/nativescript-angular/issues/1203 is resolved! -->
 <GridLayout  class="background">
-    <ListView [items]="latestNews" class="list-view" separatorColor="#343838">
+    <ListView [items]="latestNews" (loaded)="onListViewLoaded($event)" class="list-view" separatorColor="#343838">
         <ng-template let-news="item" let-i="index">
             <CardView elevation="40" radius="40" class="card">
                 <StackLayout>
@@ -9,12 +9,9 @@
                     <Image *ngIf="isAndroid" [src]="news.release.thumbnail" loadMode="async" stretch="aspectFill"></Image>
                     <Image *ngIf="!isAndroid" [src]="news.release.thumbnail" height="200" loadMode="async" stretch="aspectFill"></Image>
 
-                    <StackLayout *ngIf="isAndroid">
+                    <StackLayout >
                         <Label [text]="news.release.isExpanded ? 'hide' : 'see the whole story'" (tap)="onExpand(i)" class="h4" opacity="0.7"></Label>
                         <Label [text]="news.release.abstract" [textWrap]="news.release.isExpanded ? true : false"></Label>
-                    </StackLayout>
-                    <StackLayout *ngIf="!isAndroid">
-                        <Label [text]="news.release.abstract" class="content" [textWrap]="true"></Label>
                     </StackLayout>
 
                     <StackLayout orientation="horizontal">
