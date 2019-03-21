@@ -1,10 +1,8 @@
 <ActionBar title="">
-    <GridLayout columns="*, auto">        
-        <Label col="0" text="COSMOS Databank" class="action-bar-title" horizontalAlignment="center"></Label>
-        <Label col="1" class="fa-solid drawer-icon" horizontalAlignment="center" text="&#xf0c9;" textWrap="true" (tap)="toggleDrawer()" ></Label>    
+    <GridLayout columns="*" width="100%">        
+        <Label col="0" text="COSMOS" class="text-center"></Label>
+        <Label col="0" text="&#xf0c9;" textWrap="true" (tap)="toggleDrawer()" class="fa-solid drawer-icon text-left"></Label>   
     </GridLayout>
-    <!-- <ActionItem (tap)="toggleDrawer()" ios.systemIcon="9" ios.position="right" android.systemIcon="ic_menu_more" android.position="actionBar">
-    </ActionItem> -->
 </ActionBar>
 
 <ScrollView class="background">
