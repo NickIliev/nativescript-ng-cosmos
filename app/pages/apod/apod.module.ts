@@ -9,7 +9,7 @@ import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 
 registerElement(
     "circularProgressBar",
-    () => require("ui/layouts/stack-layout").StackLayout
+    () => require("tns-core-modules/ui/layouts/stack-layout").StackLayout
 );
 
 export const routerConfig = [
