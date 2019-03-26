@@ -1,6 +1,7 @@
-<RadSideDrawer >
-    <ScrollView tkDrawerContent>
-        <StackLayout class="sidedrawer-content" backgroundColor="transparent">
+<RadSideDrawer (loaded)="onRadLoaded($event)">
+    <ScrollView tkDrawerContent backgroundColor="transparent">
+
+        <StackLayout class="sidedrawer-content">
             <Button (loaded)="onViewLoaded($event)" text="Home" (tap)="navigateTo('/main', false)" textWrap="true"></Button>
             <Button (loaded)="onViewLoaded($event)" text="Photo of the Day" (tap)="navigateTo('/apod', false)" textWrap="true"></Button>
             <Button (loaded)="onViewLoaded($event)" text="Asteroids Proximity Checker" (tap)="navigateTo('/asteroids', false)" textWrap="true"></Button>

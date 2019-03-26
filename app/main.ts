@@ -33,10 +33,10 @@ if (androidApp) {
             new com.google.android.gms.security.ProviderInstaller.ProviderInstallListener(
                 {
                     onProviderInstalled: () => {
-                        console.log("Provider Installed!");
+                        // console.log("Provider Installed!");
                     },
                     onProviderInstallFailed: (errorCode, intent) => {
-                        console.log("Error: " + errorCode);
+                        // console.log("Error: " + errorCode);
                     }
                 }
             )
