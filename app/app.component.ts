@@ -16,7 +16,7 @@ import {
 import { RadSideDrawerComponent } from "nativescript-ui-sidedrawer/angular";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import { setBoolean, setString } from "tns-core-modules/application-settings";
-import { isAndroid } from "tns-core-modules/platform";
+import { isAndroid, isIOS } from "tns-core-modules/platform";
 import { Button } from "tns-core-modules/ui/button";
 import { EventData } from "tns-core-modules/data/observable";
 import { translateViewByXandYwithDurationAndCurve } from "./shared/animations-helper";
@@ -55,15 +55,16 @@ export class AppComponent implements OnInit, AfterViewInit {
     onRadLoaded(args) {
         let drawer = args.object as RadSideDrawer;
 
-        let tkDrawer = drawer.nativeViewProtected.defaultSideDrawer;
+        if (isIOS) {
+            /* Make RadSidweDrawer transparent on iOS */
+            let tkDrawer = drawer.nativeViewProtected.defaultSideDrawer;
+            tkDrawer.style.shadowMode = TKSideDrawerShadowModeHostview;
+            // tkDrawer.style.shadowOffset = CGSizeMake(-2, -0.5);
+            // tkDrawer.style.shadowRadius = 50;
+            // tkDrawer.fill = TKSolidFill.solidFillWithColor(new Color(0,0,0,0).ios)
+            // tkDrawer.style.blurType = TKSideDrawerBlurTypeNone;
+        }
 
-
-        tkDrawer.style.shadowMode = TKSideDrawerShadowModeHostview;
-        // tkDrawer.style.shadowOffset = CGSizeMake(-2, -0.5);
-        // tkDrawer.style.shadowRadius = 50;
-
-        // tkDrawer.fill = TKSolidFill.solidFillWithColor(new Color(0,0,0,0).ios)
-        // tkDrawer.style.blurType = TKSideDrawerBlurTypeNone;
     }
 
     ngOnInit() {
