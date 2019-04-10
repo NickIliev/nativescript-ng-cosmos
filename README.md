@@ -1,24 +1,29 @@
-# The Cosmos Databank Applicaiton
+# The Cosmos Databank Application
 POC application powered by NativeScript + Angular-2 and using Angular HTTP and NASA API.
 
 [Install Cosmos Databank from Google Play Store](https://play.google.com/store/apps/details?id=org.nativescript.curiosity&hl=bg) or use the instructions below to create a local build.
 
 Main sections:
 
-- Astronomical Photo of the Day (APOD).
+- **Astronomical Photo of the Day (APOD).**
 
 Daily selection of great astronomical photos.
 
-- Asteroids Proximity Checker.
+- **Asteroids Proximity Checker.**
 
 Weekly list of the closest known asteroids orbiting near the Earth.
 
-- Mars Rovers Photo Gallery.
+- **Mars Rovers Photo Gallery.**
 
 Over 500k (five hundred thousand!) photos made from Opportunty, Spirit and Curiosity rovers of the Mars environment.
 
+- **Hubble News Feed**
+
+Astronomical news feed from the Hubble space telescope.
+
+
 ## Requirements
-- NativeScript 3.x.x.
+- NativeScript 5.x.x.
 - Android (API 19 and above) or iOS device or emulator.
 
 ## Instructions
