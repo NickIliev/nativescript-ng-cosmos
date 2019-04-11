@@ -71,18 +71,18 @@ export class LoginService {
             }).then((result) => {
                 let user: User = result;
                 this._appCenter.trackEvent("Facebook Login", [
-                    { key: "user", value: user.name }
+                    { key: "user", value: user.displayName }
                 ]);
 
                 setBoolean("isLogged", true);
                 setString("uid", user.uid);
-                setString("username", user.name);
+                setString("username", user.displayName);
                 setString("userPicture", user.additionalUserInfo.profile["picture"]["data"]["url"]);
 
                 this.authenticateAction(
                     routerExtensions,
                     user.uid,
-                    user.name,
+                    user.displayName,
                     user.additionalUserInfo.profile["picture"]["data"]["url"]
                 );
             }).catch((errorMessage) => {
@@ -108,18 +108,18 @@ export class LoginService {
             }).then((result) => {
                 let user: User = result;
                 this._appCenter.trackEvent("Google Login", [
-                    { key: "user", value: user.name }
+                    { key: "user", value: user.displayName }
                 ]);
 
                 setBoolean("isLogged", true);
                 setString("uid", user.uid);
-                setString("username", user.name);
+                setString("username", user.displayName);
                 setString("userPicture", user.additionalUserInfo.profile["picture"]["data"]["url"]);
 
                 this.authenticateAction(
                     routerExtensions,
                     user.uid,
-                    user.name,
+                    user.displayName,
                     user.additionalUserInfo.profile["picture"]["data"]["url"]
                 );
             }).catch((errorMessage) => {
