@@ -41,3 +41,4 @@ verify-report
 e2e/**/*.js
 e2e/reports
 app/App_Resources/iOS/GoogleService-Info.plist
+mochawesome-report

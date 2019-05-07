@@ -1,16 +1,16 @@
-import { AppiumDriver, createDriver, SearchOptions, Point } from "nativescript-dev-appium";
+import { AppiumDriver, createDriver, SearchOptions, Point, nsCapabilities } from "nativescript-dev-appium";
 import { assert } from "chai";
 
-describe("sample scenario", () => {
-    const defaultWaitTime = 5000;
+describe("sample scenario", async function () {
     let driver: AppiumDriver;
     let sideDrawerBtnRect: Point;
 
-    before(async () => {
+    before(async function () {
+        nsCapabilities.testReporter.context = this;
         driver = await createDriver();
     });
 
-    after(async () => {
+    after(async function () {
         await driver.quit();
         console.log("Quit driver!");
     });
@@ -21,7 +21,7 @@ describe("sample scenario", () => {
         }
     });
 
-    const openSidedrawer = async () => {
+    const openSidedrawer = async function () {
         if (driver.isAndroid) {
             if (!sideDrawerBtnRect) {
                 const btnSideDrawer = await driver.findElementByText("COSMOS Databank");
@@ -46,7 +46,7 @@ describe("sample scenario", () => {
         }
     }
 
-    const closeSidedrawer = async () => {
+    const closeSidedrawer = async function () {
         if (driver.isAndroid) {
             await driver.clickPoint(sideDrawerBtnRect.x, sideDrawerBtnRect.y);
         } else {
@@ -62,7 +62,7 @@ describe("sample scenario", () => {
         }
     }
 
-    it("no pass login", async () => {
+    it("no pass login", async function () {
         const allowCameraBtn = (await driver.findElementByTextIfExists("Allow"))
         if (allowCameraBtn) {
             await allowCameraBtn.click();
@@ -74,23 +74,23 @@ describe("sample scenario", () => {
         assert.isTrue(astronomicalDayElement != null && (await astronomicalDayElement.isDisplayed()));
     });
 
-    it("open sidedrawer menu", async () => {
+    it("open sidedrawer menu", async function () {
         await openSidedrawer();
         const showSideDrawerResult = await driver.compareScreen("side-drawer-displayed", 5, 0.01);
         assert.isTrue(showSideDrawerResult);
     });
 
-    it("close sidedrawer menu", async () => {
+    it("close sidedrawer menu", async function () {
         await closeSidedrawer();
         const showSideDrawerResult = await driver.compareScreen("side-drawer-closed", 5, 0.01);
         assert.isTrue(showSideDrawerResult);
     });
 
-    it("navigate to photo of the day and back", async () => {
+    it("navigate to photo of the day and back", async function () {
         await openSidedrawer();
         await driver.sleep(5000);
 
-        const navToPhotoOfTheDay = async () => {
+        const navToPhotoOfTheDay = async function () {
             if (driver.isAndroid) {
                 (await driver.findElementByText("Photo of the day")).click();
             } else {
