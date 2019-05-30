@@ -20,11 +20,10 @@ import { isAndroid, isIOS } from "tns-core-modules/platform";
 import { Button } from "tns-core-modules/ui/button";
 import { EventData } from "tns-core-modules/data/observable";
 import { translateViewByXandYwithDurationAndCurve } from "./shared/animations-helper";
-import { Color } from "tns-core-modules/color";
 
 declare let TKSideDrawerShadowModeHostview: any;
-declare let TKSideDrawerBlurTypeNone: any;
-declare let TKSolidFill: any;
+// declare let TKSideDrawerBlurTypeNone: any;
+// declare let TKSolidFill: any;
 
 @Component({
     selector: "cosmos-app",
@@ -32,7 +31,7 @@ declare let TKSolidFill: any;
     styleUrls: ["./app.component.css"]
 })
 export class AppComponent implements OnInit, AfterViewInit {
-    @ViewChild(RadSideDrawerComponent) drawerComponent: RadSideDrawerComponent;
+    @ViewChild(RadSideDrawerComponent, { static: false }) drawerComponent: RadSideDrawerComponent;
     private _drawer: RadSideDrawer;
     isUserLogged: boolean = false; // hide & show LOGOUT button option
 
