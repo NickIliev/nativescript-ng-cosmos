@@ -90,7 +90,7 @@ module.exports = env => {
 
     const ngCompilerPlugin = new AngularCompilerPlugin({
         hostReplacementPaths: nsWebpack.getResolver([platform, "tns"]),
-        platformTransformers: ngCompilerTransformers.map(t => t(() => ngCompilerPlugin, resolve(appFullPath, entryModule))),
+        platformTransformers: ngCompilerTransformers.map(t => t(() => ngCompilerPlugin, resolve(appFullPath, entryModule), projectRoot)),
         mainPath: join(appFullPath, entryModule),
         tsConfigPath: join(__dirname, tsConfigName),
         skipCodeGeneration: !aot,
@@ -259,7 +259,6 @@ module.exports = env => {
             new CleanWebpackPlugin([`${dist}/**/*`]),
             // Copy assets to out dir. Add your own globs as needed.
             new CopyWebpackPlugin([
-                { from: { glob: "settings.json"} }, // HERE
                 { from: { glob: "fonts/**" } },
                 { from: { glob: "**/*.jpg" } },
                 { from: { glob: "**/*.png" } },
