@@ -1,1 +1,5 @@
-{"appId":"org.nativescript.curiosity","minSdkVersion":null,"targetSdkVersion":null}
+{
+    "appId": "org.nativescript.curiosity",
+    "minSdkVersion": 19,
+    "targetSdkVersion": 28
+}

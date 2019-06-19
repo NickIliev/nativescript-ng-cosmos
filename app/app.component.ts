@@ -32,7 +32,7 @@ declare let TKSolidFill: any;
     styleUrls: ["./app.component.css"]
 })
 export class AppComponent implements OnInit, AfterViewInit {
-    @ViewChild(RadSideDrawerComponent) drawerComponent: RadSideDrawerComponent;
+    @ViewChild(RadSideDrawerComponent, {static: false}) drawerComponent: RadSideDrawerComponent;
     private _drawer: RadSideDrawer;
     isUserLogged: boolean = false; // hide & show LOGOUT button option
 

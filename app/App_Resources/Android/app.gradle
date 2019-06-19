@@ -10,7 +10,7 @@ android {
     multiDexEnabled true
     applicationId = "org.nativescript.curiosity"  
     minSdkVersion 19
-    targetSdkVersion 27
+    targetSdkVersion 28
   }  
   aaptOptions {  
     additionalParameters "--no-version-vectors"  

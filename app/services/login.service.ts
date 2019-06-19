@@ -3,7 +3,8 @@ import { AppCenter } from "nativescript-app-center";
 import {
     login as providerLogin,
     LoginType,
-    User
+    User,
+    FirebaseFacebookLoginOptions
 } from "nativescript-plugin-firebase";
 import { getBoolean, getString, setBoolean, setString } from "tns-core-modules/application-settings";
 
@@ -62,12 +63,14 @@ export class LoginService {
 
             this.authenticateAction(routerExtensions, uid, username, userPicture);
         } else {
+            let myFirebaseOptions: FirebaseFacebookLoginOptions = {
+                // defaults to ['public_profile', 'email']
+                scopes: ["public_profile", "email"]
+            }
+
             providerLogin({
                 type: LoginType.FACEBOOK,
-                facebookOptions: {
-                    // defaults to ['public_profile', 'email']
-                    scope: ["public_profile", "email"]
-                }
+                facebookOptions: myFirebaseOptions
             }).then((result) => {
                 let user: User = result;
                 this._appCenter.trackEvent("Facebook Login", [
