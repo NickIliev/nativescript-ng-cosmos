@@ -31,11 +31,9 @@ declare let TKSideDrawerShadowModeHostview: any;
     styleUrls: ["./app.component.css"]
 })
 export class AppComponent implements OnInit, AfterViewInit {
-<<<<<<< HEAD
+
     @ViewChild(RadSideDrawerComponent, {static: false}) drawerComponent: RadSideDrawerComponent;
-=======
-    @ViewChild(RadSideDrawerComponent, { static: false }) drawerComponent: RadSideDrawerComponent;
->>>>>>> 33b0226d2f2e362eaa631c4c052b8c538168e8ca
+
     private _drawer: RadSideDrawer;
     isUserLogged: boolean = false; // hide & show LOGOUT button option
 
