@@ -81,7 +81,6 @@ export class RoversComponent implements OnInit, AfterViewInit {
                     }
 
                     this._tempArr = itemsList;
-
                     this.roverPhotos = RxObservable.create(subscriber => {
                         this._subscr = subscriber;
                         subscriber.next(this._tempArr);

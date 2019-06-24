@@ -8,15 +8,17 @@ lib/
 node_modules/*
 platforms/*
 hooks/*
+.migration_backup
 
 # Transpiled source files
 /app/**/*.js
 /app/**/*.map
 
-# Keystores
-/keystore/
+# Keystores and Build files
 *.apk
+*.aab
 *.ipa
+/keystore/
 *.jks
 native-nick-release-key.jks
 my-release-key.jks
