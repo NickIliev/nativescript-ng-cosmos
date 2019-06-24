@@ -5,8 +5,11 @@
   "repository": "<fill-your-repository-here>",
   "nativescript": {
     "id": "org.nativescript.curiosity",
+    "tns-ios": {
+      "version": "6.0.0-2019-06-10-154118-03"
+    },
     "tns-android": {
-      "version": "5.4.0"
+      "version": "6.0.0-2019-06-11-172137-01"
     }
   },
   "dependencies": {
@@ -26,10 +29,10 @@
     "nativescript-plugin-firebase": "^9.0.1",
     "nativescript-social-share": "^1.5.2",
     "nativescript-theme-core": "^1.0.6",
-    "nativescript-ui-sidedrawer": "^6.0.0",
+    "nativescript-ui-sidedrawer": "7.0.0-androidx-110619",
     "reflect-metadata": "~0.1.13",
     "rxjs": "^6.5.2",
-    "tns-core-modules": "~5.4.2",
+    "tns-core-modules": "6.0.0-next-2019-06-20-155941-01",
     "zone.js": "^0.9.1"
   },
   "devDependencies": {
@@ -42,11 +45,10 @@
     "mocha": "~5.2.0",
     "mochawesome": "~3.1.2",
     "nativescript-dev-appium": "next",
-    "nativescript-dev-typescript": "~0.10.0",
-    "nativescript-dev-webpack": "~0.24.1",
+    "nativescript-dev-webpack": "0.25.0-next-2019-06-21-150426-03",
     "tns-platform-declarations": "~5.4.2",
     "tslint": "^5.11.0",
-    "typescript": "~3.4.5"
+    "typescript": "3.4.1"
   },
   "scripts": {
     "tslint": "tslint -p tsconfig.json",
