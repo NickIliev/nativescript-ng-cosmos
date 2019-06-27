@@ -11,7 +11,7 @@ android {
     compileSdkVersion 28
     generatedDensities = []
     multiDexEnabled true
-    minSdkVersion 21
+    minSdkVersion 19
     targetSdkVersion 28
     ndk {
       abiFilters.clear() // ABI Splits related code - I need NDK 17rc1 to ensure proper ABI splits creation
