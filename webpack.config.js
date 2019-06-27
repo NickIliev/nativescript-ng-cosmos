@@ -308,6 +308,9 @@ module.exports = env => {
             ],
             projectRoot,
             webpackConfig: config,
+            targetArchs: ["arm", "arm64", "ia32"],
+            useLibs: true,
+            androidNdkPath: "/Library/android-sdk-macosx/ndk-bundle"
         }));
     }
 

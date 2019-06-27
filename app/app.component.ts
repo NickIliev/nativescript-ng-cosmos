@@ -73,13 +73,14 @@ export class AppComponent implements OnInit, AfterViewInit {
             // Optionally pass in properties for database, authentication and cloud messaging,
             // see their respective docs.
             onMessageReceivedCallback: (message: any) => {
-                // console.log(`Title: ${message.title}`);
-                // console.log(`Body: ${message.body}`);
+                console.log(`Title: ${message.title}`);
+                console.log(`Body: ${message.body}`);
                 // if your server passed a custom property called 'foo', then do this:
-                // console.log(`Value of 'foo': ${message.data.foo}`);
+                console.log(`Value of 'foo': ${message.data.foo}`);
             },
-            onPushTokenReceivedCallback: function (token) {
-                // console.log("Firebase push token: " + token);
+            onPushTokenReceivedCallback: (token) => {
+               console.log("Firebase push token: " + token);
+               setString("device_token", token);
             },
 
             // optional but useful to immediately re-logon the user when he re-visits your app
@@ -101,7 +102,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
         getCurrentPushToken().then((token: string) => {
             // may be null if not known yet
-            // console.log("Current push token: " + token);
+            console.log("Current push token: " + token);
         });
     }
 
