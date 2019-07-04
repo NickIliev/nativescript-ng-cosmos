@@ -26,8 +26,7 @@ export class HubbleComponent {
         this._hubbleService.getNews().subscribe(result => {
             (<Array<News>>result).forEach(singleNews => {
                 let release: any;
-
-                this._hubbleService.getRelease("http://hubblesite.org/api/v3/news_release/" + singleNews["news_id"])
+                this._hubbleService.getRelease("https://hubblesite.org/api/v3/news_release/" + singleNews["news_id"])
                 .subscribe(newsRelease => {
                     release = new NewsRelease(
                         newsRelease["name_id"],
@@ -35,10 +34,9 @@ export class HubbleComponent {
                         newsRelease["url"],
                         newsRelease["abstract"],
                         newsRelease["mission"],
-                        newsRelease["thumbnail"],
+                        "https:" + newsRelease["thumbnail"],
                         newsRelease["publication"],
                         false);
-
                     this.latestNews.push(new News(singleNews["news_id"], singleNews["name"], release));
                 });
             });

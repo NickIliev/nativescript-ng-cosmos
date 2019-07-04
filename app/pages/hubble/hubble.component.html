@@ -7,7 +7,7 @@
                     <Label [text]="news.name" class="h2" textWrap="true"></Label>
                     <!-- <Label [text]="news.release.url" class="h4" textAlignment="center"></Label> -->
                     <Image *ngIf="isAndroid" [src]="news.release.thumbnail" loadMode="async" stretch="aspectFill"></Image>
-                    <Image *ngIf="!isAndroid" [src]="news.release.thumbnail" height="200" loadMode="async" stretch="aspectFill"></Image>
+                    <Image *ngIf="!isAndroid" [src]="news.release.thumbnail" loadMode="async" stretch="aspectFit"></Image>
 
                     <StackLayout >
                         <Label [text]="news.release.isExpanded ? 'hide' : 'see the whole story'" (tap)="onExpand(i)" class="h4" opacity="0.7"></Label>

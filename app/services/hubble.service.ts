@@ -9,8 +9,8 @@ export class HubbleService {
     RELEASE_URL: string;
 
     constructor(private _http: HttpClient) {
-        this.API_URL = "http://hubblesite.org/api/v3/news";
-        this.RELEASE_URL = "http://hubblesite.org/news_release/news/";
+        this.API_URL = "https://hubblesite.org/api/v3/news";
+        this.RELEASE_URL = "https://hubblesite.org/news_release/news/";
     }
 
     getRelease(releaseUrl: string) {
