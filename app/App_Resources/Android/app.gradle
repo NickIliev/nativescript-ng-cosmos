@@ -13,42 +13,42 @@ android {
     multiDexEnabled true
     minSdkVersion 19
     targetSdkVersion 28
-    ndk {
-      abiFilters.clear() // ABI Splits related code - I need NDK 17rc1 to ensure proper ABI splits creation
-    }
+    // ndk {
+    //   abiFilters.clear() // ABI Splits related code - I need NDK 17rc1 to ensure proper ABI splits creation
+    // }
   }  
 
-  // ABI Splits related code
-  splits {
+  // // ABI Splits related code
+  // splits {
 
-    // Configures multiple APKs based on Applicaiton Binary Interfaces (ABI)
-    abi {
-      enable true // enables the ABIs split mechanism
-      reset() // Clears the default list from all ABIs to no ABIs
-      include 'arm64-v8a', 'armeabi-v7a', 'x86' // Spcifies a list of ABIs Gradle should createa APKs for.
-      universalApk true // false to skip generting the universal APK
-    }
-  } 
+  //   // Configures multiple APKs based on Applicaiton Binary Interfaces (ABI)
+  //   abi {
+  //     enable true // enables the ABIs split mechanism
+  //     reset() // Clears the default list from all ABIs to no ABIs
+  //     include 'arm64-v8a', 'armeabi-v7a', 'x86' // Spcifies a list of ABIs Gradle should createa APKs for.
+  //     universalApk true // false to skip generting the universal APK
+  //   }
+  // } 
 
-  // ABI Splits related code
-  sourceSets {
-      main {
-          jniLibs.srcDirs = ["$projectDir/libs/jni", "$projectDir/snapshot-build/build/ndk-build/libs"]
-      }
-  }
+  // // ABI Splits related code
+  // sourceSets {
+  //     main {
+  //         jniLibs.srcDirs = ["$projectDir/libs/jni", "$projectDir/snapshot-build/build/ndk-build/libs"]
+  //     }
+  // }
 
-  // ABI Splits related code - Different version codes (so I could upload the different splits to Google Console)
-  project.ext.abiCodes = ['armeabi-v7a': 1, 'arm64-v8a': 2, 'x86': 3].withDefault{0}
+  // // ABI Splits related code - Different version codes (so I could upload the different splits to Google Console)
+  // project.ext.abiCodes = ['armeabi-v7a': 1, 'arm64-v8a': 2, 'x86': 3].withDefault{0}
 
-  android.applicationVariants.all { variant ->
-      variant.outputs.each { output ->
-          def baseAbiVersionCode = project.ext.abiCodes.get(output.getFilter("ABI"), 0)
+  // android.applicationVariants.all { variant ->
+  //     variant.outputs.each { output ->
+  //         def baseAbiVersionCode = project.ext.abiCodes.get(output.getFilter("ABI"), 0)
 
-          if (baseAbiVersionCode != null) {
-              output.versionCodeOverride = baseAbiVersionCode * 100000 + variant.versionCode
-          }
-      }
-  }
+  //         if (baseAbiVersionCode != null) {
+  //             output.versionCodeOverride = baseAbiVersionCode * 100000 + variant.versionCode
+  //         }
+  //     }
+  // }
 
   aaptOptions {  
     additionalParameters "--no-version-vectors"  
