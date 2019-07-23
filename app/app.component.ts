@@ -113,7 +113,7 @@ export class AppComponent implements OnInit, AfterViewInit {
         setTimeout(() => {
             // Get the different Y point for each sidedrawer button
             startingPointY = btn.getLocationRelativeTo(btn.parent as any).y;
-        }, 200);
+        }, 1);
 
         this._drawer.on("drawerOpening", () => {
             translateViewByXandYwithDurationAndCurve(

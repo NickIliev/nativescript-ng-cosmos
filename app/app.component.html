@@ -8,7 +8,7 @@
             <Button (loaded)="onViewLoaded($event)" text="Mars Rovers Photos" (tap)="navigateTo('/rovers', false)" textWrap="true"></Button>
             <Button (loaded)="onViewLoaded($event)" text="Hubble Telescope News" (tap)="navigateTo('/hubble', false)" textWrap="true"></Button>
             <Button (loaded)="onViewLoaded($event)" text="Details" (tap)="navigateTo('/info', false)" textWrap="true"></Button>
-            <Button (loaded)="onViewLoaded($event)"  *ngIf="isUserLogged" text="Logout" (tap)="firebaseLogout()" textWrap="true"></Button>
+            <Button (loaded)="onViewLoaded($event)" *ngIf="isUserLogged" text="Logout" (tap)="firebaseLogout()" textWrap="true"></Button>
         </StackLayout>
     </ScrollView>
 
