@@ -18,6 +18,8 @@ import { Component } from "@angular/core";
 export class PickersComponent {
     rovers: Array<string>;
     selectedRover: string;
+    desc: string = "";
+    allowedRange: string = "";
 
     private _today: Date;
     private _day: number;
@@ -61,8 +63,10 @@ export class PickersComponent {
             this.rovers = ["Opportunity", "Curiosity", "Spirit"];
         }
 
-        this._today = new Date();
-        this._today.setDate(this._today.getDate() - 2);
+        const date = new Date();
+        date.setDate(date.getDate() - 2);
+
+        this._today = date;
     }
 
     goToPhotos() {
@@ -75,6 +79,11 @@ export class PickersComponent {
                 year: this._year
             }
         });
+
+        // remember the chosen date & rover on navigation backwards
+        this.selectedRover = this.rovers[this._selectedIndex].toLowerCase();
+        this._today = new Date(this._year, this._month - 1, this._day + 1); // e.g. new Date(2018, 4 + 1, 9);
+        console.log(`goToPhotos this_today: ${this._today}`);
     }
 
     onStackListLoaded(args) {
@@ -150,7 +159,7 @@ export class PickersComponent {
             switch (this.selectedRover.toLowerCase()) {
                 case "opportunity":
                     this._datePicker.minDate = new Date(2004, 0, 26);
-                    this._datePicker.maxDate = today;
+                    this._datePicker.maxDate = new Date(2018, 4 + 1, 9);
 
                     // intial values for picker date and for the queryParams
                     this._datePicker.year = today.getUTCFullYear();
@@ -159,10 +168,13 @@ export class PickersComponent {
                     this._month = this._datePicker.month;
                     this._datePicker.day = today.getUTCDate();
                     this._day = this._datePicker.day;
+
+                    this.allowedRange = "Active: January 26th 2004 - June 9th 2018";
+                    this.desc = " Opportunity (MER-B), Mars Exploration Rover, launched on July 7, 2003 and landed on January 25, 2004. Opportunity surpassed the previous records for longevity at 5,352 sols (5498 Earth days from landing to mission end; 15 Earth years or 8 Martian years) and covered a total distance of 40.25 km (25.01 mi). The rover sent its last status on 10 June 2018 when a global 2018 Mars dust storm blocked the sunlight needed to recharge its batteries. After hundreds of attempts to reactivate the rover, NASA declared the mission complete on February 13, 2019.";
                     break;
                 case "curiosity":
                     this._datePicker.minDate = new Date(2012, 6 + 1, 6);
-                    this._datePicker.maxDate = today;
+                    this._datePicker.maxDate = new Date();
 
                     this._datePicker.year = today.getUTCFullYear();
                     this._year = this._datePicker.year;
@@ -170,6 +182,9 @@ export class PickersComponent {
                     this._month = this._datePicker.month;
                     this._datePicker.day = today.getUTCDate();
                     this._day = this._datePicker.day;
+
+                    this.allowedRange = "Active: August 7th 2007 - Present";
+                    this.desc = "Curiosity of the Mars Science Laboratory (MSL) mission by NASA, was launched November 26, 2011 and landed at the Aeolis Palus plain near Aeolis Mons (informally 'Mount Sharp') in Gale Crater on August 6, 2012. The Curiosity rover is still operational as of July 23, 2019.";
                     break;
                 case "spirit":
                     this._datePicker.minDate = new Date(2004, 0, 5);
@@ -181,6 +196,9 @@ export class PickersComponent {
                     this._month = this._datePicker.month;
                     this._datePicker.day = 2;
                     this._day = this._datePicker.day;
+
+                    this.allowedRange = "Active: January 5th 2004 - March 21th 2010";
+                    this.desc = "Spirit (MER-A), Mars Exploration Rover, launched on June 10, 2003, and landed on January 4, 2004. Nearly 6 years after the original mission limit, Spirit had covered a total distance of 7.73 km (4.80 mi) but its wheels became trapped in sand. The last communication received from the rover was on March 22, 2010, and NASA ceased attempts to re-establish communication on May 25, 2011.";
                     break;
                 default:
                     break;

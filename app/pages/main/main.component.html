@@ -7,36 +7,36 @@
 
 <ScrollView class="background">
     <StackLayout>
-        <CardView elevation="40" radius="40" class="cardview" (loaded)="onViewLoaded($event, -400, 0, -100, 0)"  [nsRouterLink]="['/apod']">
-            <GridLayout rows="160" columns="3*, 4*">
+        <CardView elevation="40" radius="40" class="cardview" (loaded)="onViewLoaded($event, -400, 0, -100, 0)">
+            <GridLayout rows="160" columns="3*, 4*" [nsRouterLink]="['/apod']">
                 <Image row="0" col="1" src="~/images/cosmos.jpg" stretch="aspectFill" (loaded)="onViewLoaded($event, 400, 0, 0, 0)"></Image>
                 <Label row="0" col="0" [text]="apodTitle" textWrap="true" class="text-left p-l-8 p-r-8" verticalAlignment="center"></Label>
             </GridLayout>
         </CardView>
 
-        <CardView elevation="40" radius="40" class="cardview" (loaded)="onViewLoaded($event, 400, 0, -100, 0)"  [nsRouterLink]="['/asteroids']">
-            <GridLayout rows="160" columns="4*, 3*">
+        <CardView elevation="40" radius="40" class="cardview" (loaded)="onViewLoaded($event, 400, 0, -100, 0)" >
+            <GridLayout rows="160" columns="4*, 3*" [nsRouterLink]="['/asteroids']">
                 <Image row="0" col="0" src="~/images/aste.jpg" stretch="aspectFill" (loaded)="onViewLoaded($event, -400, 0, 0, 0)"></Image>
                 <Label row="0" col="1" [text]="asteroidTitle" textWrap="true" class="text-right p-l-8 p-r-8" verticalAlignment="center"></Label>
             </GridLayout>
         </CardView>
 
-        <CardView elevation="40" radius="40" class="cardview" (loaded)="onViewLoaded($event, -400, 0, -100, 0)"  [nsRouterLink]="['/rovers']">
-            <GridLayout rows="160" columns="3*, 4*">
+        <CardView elevation="40" radius="40" class="cardview" (loaded)="onViewLoaded($event, -400, 0, -100, 0)" >
+            <GridLayout rows="160" columns="3*, 4*" [nsRouterLink]="['/rovers']">
                 <Image row="0" col="1" src="~/images/rover.jpg" stretch="aspectFill" (loaded)="onViewLoaded($event, 400, 0, 0, 0)"></Image>
                 <Label row="0" col="0" [text]="roversTitle" textWrap="true" class="text-left p-l-8 p-r-8" verticalAlignment="center"></Label>
             </GridLayout>
         </CardView>
 
-        <CardView elevation="40" radius="40" class="cardview" (loaded)="onViewLoaded($event, 400, 0, -100, 0)" [nsRouterLink]="['/hubble']">
-            <GridLayout rows="160" columns="4*, 3*">
+        <CardView elevation="40" radius="40" class="cardview" (loaded)="onViewLoaded($event, 400, 0, -100, 0)" >
+            <GridLayout rows="160" columns="4*, 3*" [nsRouterLink]="['/hubble']">
                 <Image row="0" col="0" src="~/images/hubble.jpg" stretch="aspectFill" (loaded)="onViewLoaded($event, -400, 0, 0, 0)"></Image>
                 <Label row="0" col="1" [text]="hubbleTitle" textWrap="true" class="text-right p-l-8 p-r-8" verticalAlignment="center"></Label>
             </GridLayout>
         </CardView>
 
-        <CardView elevation="40" radius="40" class="cardview" (loaded)="onViewLoaded($event, -400, 0, -100, 0)" [nsRouterLink]="['/info']" iosOverflowSafeArea="false">
-            <GridLayout rows="160" columns="3*, 4*">
+        <CardView elevation="40" radius="40" class="cardview" (loaded)="onViewLoaded($event, -400, 0, -100, 0)" iosOverflowSafeArea="false">
+            <GridLayout rows="160" columns="3*, 4*" [nsRouterLink]="['/info']">
                 <Image row="0" col="1" src="res://logo" stretch="aspectFill" (loaded)="onViewLoaded($event, 400, 0, 0, 0)"></Image>
                 <Label row="0" col="0" [text]="detailsTitle" textWrap="true" class="text-left p-l-8 p-r-8" verticalAlignment="center"></Label>
             </GridLayout>

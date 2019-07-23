@@ -11,7 +11,7 @@ GridLayout {
 }
 
 DatePicker, Label, Segmentedbar {
-    opacity: 0.82;
+    opacity: 0.9;
     width: 90%;
 }
 
@@ -21,8 +21,9 @@ DatePicker {
 
 Label {
     background-color: #282a2a;
-    border-radius: 20 20 0 0;
+    border-radius: 10 10 0 0;
     color: #BCBCBC;
+    padding: 8;
 }
 
 SegmentedBar {
