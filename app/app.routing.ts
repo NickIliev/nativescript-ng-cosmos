@@ -10,23 +10,23 @@ const routes: Routes = [
     { path: "main", component: MainComponent },
     {
         path: "info",
-        loadChildren: "./pages/info/info.module#InfoModule"
+        loadChildren: () => import("./pages/info/info.module").then(m => m.InfoModule)
     },
     {
         path: "apod",
-        loadChildren: "./pages/apod/apod.module#ApodModule",
+        loadChildren: () => import("./pages/apod/apod.module").then(m => m.ApodModule)
     },
     {
         path: "rovers",
-        loadChildren: "./pages/rovers/rovers.module#RoversModule"
+        loadChildren: () => import("./pages/rovers/rovers.module").then(m => m.RoversModule)
     },
     {
         path: "asteroids",
-        loadChildren: "./pages/asteroids/asteroids.module#AsteroidsModule"
+        loadChildren: () => import("./pages/asteroids/asteroids.module").then(m => m.AsteroidsModule)
     },
     {
         path: "hubble",
-        loadChildren: "./pages/hubble/hubble.module#HubbleModule"
+        loadChildren: () => import("./pages/hubble/hubble.module").then(m => m.HubbleModule)
     }
 ];
 
