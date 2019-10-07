@@ -20,10 +20,11 @@ import { isAndroid, isIOS } from "tns-core-modules/platform";
 import { Button } from "tns-core-modules/ui/button";
 import { EventData } from "tns-core-modules/data/observable";
 import { translateViewByXandYwithDurationAndCurve } from "./shared/animations-helper";
+import { Color } from "tns-core-modules/color";
 
 declare let TKSideDrawerShadowModeHostview: any;
-// declare let TKSideDrawerBlurTypeNone: any;
-// declare let TKSolidFill: any;
+declare let TKSideDrawerBlurTypeNone: any;
+declare let TKSolidFill: any;
 
 @Component({
     selector: "cosmos-app",
@@ -59,13 +60,13 @@ export class AppComponent implements OnInit, AfterViewInit {
         if (isIOS) {
             /* Make RadSidweDrawer transparent on iOS */
             let tkDrawer = drawer.nativeViewProtected.defaultSideDrawer;
-            tkDrawer.style.shadowMode = TKSideDrawerShadowModeHostview;
-            // tkDrawer.style.shadowOffset = CGSizeMake(-2, -0.5);
-            // tkDrawer.style.shadowRadius = 50;
-            // tkDrawer.fill = TKSolidFill.solidFillWithColor(new Color(0,0,0,0).ios)
-            // tkDrawer.style.blurType = TKSideDrawerBlurTypeNone;
-        }
 
+            tkDrawer.style.shadowMode = TKSideDrawerShadowModeHostview;
+            tkDrawer.style.shadowOffset = CGSizeMake(-2, -0.5);
+            tkDrawer.style.shadowRadius = 50;
+            tkDrawer.fill = TKSolidFill.solidFillWithColor(new Color(0,0,0,0).ios)
+            tkDrawer.style.blurType = TKSideDrawerBlurTypeNone;
+        }
     }
 
     ngOnInit() {
