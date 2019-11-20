@@ -7,6 +7,9 @@
     "id": "org.nativescript.curiosity",
     "tns-ios": {
       "version": "6.2.0"
+    },
+    "tns-android": {
+      "version": "6.2.0"
     }
   },
   "dependencies": {
