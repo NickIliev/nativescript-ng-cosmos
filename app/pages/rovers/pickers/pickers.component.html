@@ -1,6 +1,6 @@
-<ScrollView class="background">
+<ScrollView>
     <GridLayout rows="auto, auto, *, auto" verticalAlignment="middle">
-        <StackLayout row="0" class="m-t-10" (loaded)="onStackListLoaded($event)">
+        <StackLayout row="0" (loaded)="onStackListLoaded($event)">
             <Label class="text-center" text="Choose Rover" textWrap="true"></Label>
             <SegmentedBar [items]="mySegmentedBarItems" 
                           (loaded)="onSegmentedbarLoaded($event)" 
@@ -9,12 +9,19 @@
             </SegmentedBar>
         </StackLayout>
 
-        <GridLayout row="1" class="m-t-10" >
-            <Label [text]="desc" textWrap="true"></Label>
+        <GridLayout row="1" rows="auto, *, auto, auto, auto, auto, auto" class="m-t-8 desc">
+            <Label row="0" [text]="manifest_obj.photo_manifest.name" textWrap="true" class="h2"></Label>
+            <Label row="1" [text]="desc" textWrap="true"></Label>
+            <Label row="2" text="{{ 'Landing date: ' + manifest_obj.photo_manifest.landing_date }}" textWrap="true"></Label>
+            <Label row="3" text="{{ 'Launch date (from Earth): ' + manifest_obj.photo_manifest.launch_date }}" textWrap="true"></Label>
+            <Label row="4" text="{{ 'Mission status: ' + manifest_obj.photo_manifest.status }}" color="{{ manifest_obj.photo_manifest.status ? 'green' : 'orangered' }}" textWrap="true"></Label>
+            <Label row="5" text="{{ 'Total photos taken: ' + manifest_obj.photo_manifest.total_photos }}" textWrap="true"></Label>
+            <Label row="6" text="{{ 'Most recent active day (where photos exists): ' + manifest_obj.photo_manifest.max_date }}" textWrap="true"></Label>
         </GridLayout>
     
-        <StackLayout row="2" class="m-t-10" (loaded)="onStackDateLoaded($event, 1, 1.4, 300)">
-            <Label class="text-center font-weight-bold" [text]="'See Photos on Selected Date for ' + selectedRover + ' rover (' + allowedRange + ')'" textWrap="true"></Label>
+        <StackLayout row="2" class="m-t-8" (loaded)="onStackDateLoaded($event, 1, 1.4, 300)">
+            <Label class="text-center" opacity="0.8" [text]="'Select date and see Photos for ' + selectedRover + ' rover'" textWrap="true"></Label>
+            <Label class="text-center" text="{{ 'Most recent active day: ' + manifest_obj.photo_manifest.max_date }}" textWrap="true"></Label>
             <DatePicker (loaded)="onDatePickerLoaded($event)" 
                         (dayChange)="onDayChanged($event)" 
                         (monthChange)="onMonthChanged($event)" 
@@ -22,6 +29,6 @@
             </DatePicker>
         </StackLayout>
     
-        <Button row="3" class="text-center m-t-10 m-b-10" text="Show photos for selected date" (tap)="goToPhotos()"></Button>
+        <Button row="3" class="m-t-8 m-b-8 text-center" text="Show photos for a selected date" (tap)="goToPhotos()"></Button>
     </GridLayout>
 </ScrollView>
