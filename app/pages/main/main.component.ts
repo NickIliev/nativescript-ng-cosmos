@@ -1,12 +1,18 @@
-import { AppService } from "../../app.service";
+/* Angular & Rxjs */
+import { AfterViewInit, Component } from "@angular/core";
 import { PageRoute } from "nativescript-angular/router";
+import { switchMap } from "rxjs/operators";
+
+/* NativeScript modules & plugins */
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import { getRootView } from "tns-core-modules/application";
-import { Page } from "tns-core-modules/ui/page";
-import { switchMap } from "rxjs/operators";
-import { translateViewByXandYwithDurationAndCurve } from "../../shared/animations-helper";
-import { AfterViewInit, Component } from "@angular/core";
 import { getBoolean } from "tns-core-modules/application-settings";
+import { getConnectionType, startMonitoring, stopMonitoring, connectionType } from "tns-core-modules/connectivity";
+import { Page } from "tns-core-modules/ui/page";
+
+/* Shared */
+import { translateViewByXandYwithDurationAndCurve } from "../../shared/animations-helper";
+import { AppService } from "../../app.service";
 
 @Component({
     selector: "cosmos-details",
@@ -15,6 +21,9 @@ import { getBoolean } from "tns-core-modules/application-settings";
     styleUrls: ["./main.component.css"]
 })
 export class MainComponent implements AfterViewInit {
+    /* Connection */
+    connectionType: connectionType;
+
     /* Section titles */
     apodTitle: string;
     asteroidTitle: string;
@@ -48,6 +57,28 @@ export class MainComponent implements AfterViewInit {
             });
     }
 
+    ngOnInit(): void {
+        this.connectionType = getConnectionType();
+        switch (this.connectionType) {
+            case 0:
+                // Case none
+                alert("This applicaiton needs Internet connection to use the NASA servers for obtaining the in-app information. Please make sure you have an active Internet connection before using the application functionalities!");
+                break;
+            default:
+                break;
+        }
+
+        startMonitoring((cType) => {
+            switch (cType) {
+                case 0:
+                    // Case none
+                    alert("This applicaiton needs Internet connection to use the NASA servers for obtaining the in-app information. Please make sure you have an active Internet connection before using the application functionalities!");
+                    break;
+                default:
+                    break;
+            }
+        })
+    }
 
     ngAfterViewInit() {
         this.drawer = <RadSideDrawer>getRootView();
