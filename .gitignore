@@ -18,7 +18,9 @@ hooks/*
 *.apk
 *.aab
 *.ipa
-/keystore/
+keystore/*
+apks/*
+aab/*
 *.jks
 native-nick-release-key.jks
 my-release-key.jks
