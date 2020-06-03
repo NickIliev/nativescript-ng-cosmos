@@ -26,6 +26,8 @@ declare let TKSideDrawerShadowModeHostview: any;
 declare let TKSideDrawerBlurTypeNone: any;
 declare let TKSolidFill: any;
 
+import { EnvironmentManagerService } from "./services/environment.service";
+
 @Component({
     selector: "cosmos-app",
     templateUrl: "app.component.html",
@@ -39,6 +41,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     isUserLogged: boolean = false; // hide & show LOGOUT button option
 
     constructor(
+        private _enviromentManager: EnvironmentManagerService,
         private _changeDetectionRef: ChangeDetectorRef,
         private _routerExtensions: RouterExtensions,
         private _drawerService: AppService
@@ -52,6 +55,8 @@ export class AppComponent implements OnInit, AfterViewInit {
                 "android.permission.ACCESS_NETWORK_STATE"
             ], "I need these permissions");
         }
+
+        console.log(`>>>>>>>> _enviromentManager isDev: ${this._enviromentManager.isDev()}`)
     }
 
     onRadLoaded(args) {

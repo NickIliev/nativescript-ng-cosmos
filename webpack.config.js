@@ -18,12 +18,13 @@ const hashSalt = Date.now().toString();
 
 module.exports = env => {
     // Add your custom Activities, Services and other Android app components here.
-    const appComponents = [
+    const appComponents = env.appComponents || [];
+    appComponents.push(...[
         "tns-core-modules/ui/frame",
         "tns-core-modules/ui/frame/activity",
-    ];
+    ]);
 
-    const platform = env && (env.android && "android" || env.ios && "ios");
+    const platform = env && (env.android && "android" || env.ios && "ios" || env.platform);
     if (!platform) {
         throw new Error("You need to provide a target platform!");
     }
@@ -65,9 +66,8 @@ module.exports = env => {
     const hasRootLevelScopedModules = nsWebpack.hasRootLevelScopedModules({ projectDir: projectRoot });
     const hasRootLevelScopedAngular = nsWebpack.hasRootLevelScopedAngular({ projectDir: projectRoot });
     let coreModulesPackageName = "tns-core-modules";
-    const alias = {
-        '~': appFullPath
-    };
+    const alias = env.alias || {};
+    alias['~'] = appFullPath;
 
     const compilerOptions = getCompilerOptionsFromTSConfig(tsConfigPath);
     if (hasRootLevelScopedModules) {
@@ -84,7 +84,9 @@ module.exports = env => {
     const appResourcesFullPath = resolve(projectRoot, appResourcesPath);
     const entryModule = `${nsWebpack.getEntryModule(appFullPath, platform)}.ts`;
     const entryPath = `.${sep}${entryModule}`;
-    const entries = { bundle: entryPath };
+    const entries = env.entries || {};
+    entries.bundle = entryPath;
+
     const areCoreModulesExternal = Array.isArray(env.externals) && env.externals.some(e => e.indexOf("tns-core-modules") > -1);
     if (platform === "ios" && !areCoreModulesExternal) {
         entries["tns_modules/tns-core-modules/inspector_modules"] = "inspector_modules";
@@ -295,11 +297,15 @@ module.exports = env => {
             new webpack.DefinePlugin({
                 "global.TNS_WEBPACK": "true",
                 "process": "global.process",
+                'process.env': {
+                    'envtype': JSON.stringify(env && env.envtype ? env.envtype : "")
+                }
             }),
             // Remove all files from the out dir.
             new CleanWebpackPlugin(itemsToClean, { verbose: !!verbose }),
             // Copy assets to out dir. Add your own globs as needed.
             new CopyWebpackPlugin([
+                { from: { glob: "settings.json"} }, // HERE
                 { from: { glob: "fonts/**" } },
                 { from: { glob: "**/*.jpg" } },
                 { from: { glob: "**/*.png" } },

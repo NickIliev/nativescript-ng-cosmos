@@ -48,6 +48,10 @@ export class PickersComponent {
     constructor(private _page: Page, private _router: RouterExtensions, private _roverService: RoverPhotosService) {
         this._today = new Date(); // temp
 
+        this._year = this._today.getFullYear();
+        this._month = this._today.getMonth();
+        this._day = this._today.getDay();
+
         this._roverService.getCuriosityManifest().subscribe(manifest => {
             this.curiosity_obj = manifest;
             this.manifest_obj = this.curiosity_obj;
@@ -110,9 +114,10 @@ export class PickersComponent {
 
         // remember the chosen date & rover on navigation backwards
         this.selectedRover = this.rovers[this._selectedIndex].toLowerCase();
+        // console.log(`this._year ${this._year}, this._month - 1 ${this._month - 1}, this._day + 1 ${this._day + 1}`)
         this._today = new Date(this._year, this._month - 1, this._day + 1); // e.g. new Date(2018, 4 + 1, 9);
-        console.log(`goToPhotos this.selectedRover ${this.selectedRover}`); // TODO use this to change the default loaded rover
-        console.log(`goToPhotos this_today: ${this._today}`);
+        // console.log(`goToPhotos this.selectedRover ${this.selectedRover}`); // TODO use this to change the default loaded rover
+        // console.log(`goToPhotos this_today: ${this._today}`);
     }
 
     onStackListLoaded(args) {

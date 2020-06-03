@@ -12,6 +12,8 @@ import { MainComponent } from "./pages/main/main.component";
 import { ApodService } from "./services/apod.service";
 import { appCenter } from "./shared/app-center-initializer";
 
+import { EnvironmentManagerService } from "./services/environment.service"
+
 registerElement("CardView", () => require("nativescript-cardview").CardView);
 
 @NgModule({
@@ -23,7 +25,7 @@ registerElement("CardView", () => require("nativescript-cardview").CardView);
         NativeScriptUISideDrawerModule
     ],
     declarations: [AppComponent, LoginComponent, MainComponent],
-    providers: [ApodService, AppService, { provide: AppCenter, useValue: appCenter }],
+    providers: [ApodService, AppService, EnvironmentManagerService, { provide: AppCenter, useValue: appCenter }],
     schemas: [NO_ERRORS_SCHEMA]
 })
 /*
